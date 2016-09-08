@@ -35,8 +35,8 @@ public class FactoryPerson {
      *
      * @return a Guest
      */
-    public Person createGuest() {
-        return new PersonGuest();
+    public Person createPersonGuest() {
+        return new PersonGuest("Guest");
     }
 
     /**
@@ -44,8 +44,8 @@ public class FactoryPerson {
      *
      * @return a Chef
      */
-    public Person createChef() {
-        return new PersonChef();
+    public Person createPersonChef() {
+        return new PersonChef("Chef");
     }
 
 
@@ -54,8 +54,8 @@ public class FactoryPerson {
      *
      * @return a Waiter
      */
-    public Person createWaiter() {
-        return new PersonWaiter();
+    public Person createPersonWaiter() {
+        return new PersonWaiter("Waiter");
     }
 
     /**
