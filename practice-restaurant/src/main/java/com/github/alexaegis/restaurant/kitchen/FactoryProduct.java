@@ -31,14 +31,40 @@ public class FactoryProduct {
     }
 
     /**
-     * Creates a new Drink
+     * Creates a new Drink, Water
      *
-     * @return a Drink
+     * @return a Drink, Water
      */
-    public Product createDrink() {
-        return new ProductDrink();
+    public Product createDrinkWater() {
+        return new ProductDrinkWater("Water", 10, 100);
     }
 
+    /**
+     * Creates a new Food, Appetizer
+     *
+     * @return a Food, Appetizer
+     */
+    public Product createFoodAppetizer() {
+        return new ProductFoodAppetizer("Appetizer", 6, 400);
+    }
+
+    /**
+     * Creates a new Food, Main
+     *
+     * @return a Food, Main
+     */
+    public Product createFoodMain() {
+        return new ProductFoodMain("Main", 7, 800);
+    }
+
+    /**
+     * Creates a new Food, Dessert
+     *
+     * @return a Food, Dessert
+     */
+    public Product createFoodDessert() {
+        return new ProductFoodDessert("Dessert", 8, 600);
+    }
 
     /**
      * Overridden toString method

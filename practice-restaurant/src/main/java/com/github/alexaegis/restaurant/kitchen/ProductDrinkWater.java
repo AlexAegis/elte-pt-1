@@ -1,12 +1,12 @@
 package com.github.alexaegis.restaurant.kitchen;
 
-class ProductFood extends Product {
+class ProductDrinkWater extends ProductDrink {
 
-    ProductFood() {
+    ProductDrinkWater() {
 
     }
 
-    ProductFood(String name, int quality, int value) {
+    public ProductDrinkWater(String name, int quality, int value) {
         this.setName(name);
         this.setValue(value);
         this.setQuality(quality);
