@@ -1,38 +1,25 @@
 package com.github.alexaegis;
 
-import junit.framework.Test;
-import junit.framework.TestCase;
-import junit.framework.TestSuite;
+import org.junit.Before;
+import org.junit.Test;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
-/**
- * Unit test for simple App.
- */
-public class AppTest 
-    extends TestCase
-{
-    /**
-     * Create the test case
-     *
-     * @param testName name of the test case
-     */
-    public AppTest( String testName )
-    {
-        super( testName );
+import static org.junit.Assert.assertTrue;
+
+public class AppTest {
+
+    private Logger logger = LoggerFactory.getLogger(AppTest.class);
+
+    @Before
+    public void before() {
+        logger.info("jUnit before working");
     }
 
-    /**
-     * @return the suite of tests being tested
-     */
-    public static Test suite()
-    {
-        return new TestSuite( AppTest.class );
+    @Test
+    public void jUnitTest() {
+        assertTrue("jUnit assertion failed", true);
+        logger.info("jUnit working");
     }
 
-    /**
-     * Rigourous Test :-)
-     */
-    public void testApp()
-    {
-        assertTrue( true );
-    }
 }
