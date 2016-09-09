@@ -1,9 +1,5 @@
-package com.github.alexaegis.people;
+package com.github.alexaegis.restaurant.people;
 
-import com.github.alexaegis.restaurant.kitchen.FactoryProduct;
-import com.github.alexaegis.restaurant.kitchen.Product;
-import com.github.alexaegis.restaurant.people.FactoryPerson;
-import com.github.alexaegis.restaurant.people.Person;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;

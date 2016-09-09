@@ -1,7 +1,5 @@
-package com.github.alexaegis.kitchen;
+package com.github.alexaegis.restaurant.kitchen;
 
-import com.github.alexaegis.restaurant.kitchen.FactoryProduct;
-import com.github.alexaegis.restaurant.kitchen.Product;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;

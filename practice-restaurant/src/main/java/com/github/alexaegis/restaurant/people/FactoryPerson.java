@@ -69,12 +69,22 @@ public class FactoryPerson {
     }
 
     /**
+     * Overridden equals method
+     *
+     * @return true if its similar to the other object
+     */
+    @Override
+    public boolean equals(Object obj) {
+        return obj instanceof FactoryPerson && this.toString().equals(obj.toString());
+    }
+
+    /**
      * Overridden hashCode method
      *
      * @return the id of the factory
      */
     @Override
     public int hashCode() {
-        return super.hashCode();
+        return 30;
     }
 }
