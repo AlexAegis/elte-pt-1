@@ -18,13 +18,12 @@ public class AppTest {
 
     @Before
     public void before() {
-        logger.info("jUnit before working");
+
     }
 
     @org.junit.Test
     public void jUnitTest() {
         assertTrue("jUnit assertion failed", true);
-        logger.info("jUnit working");
     }
 
 }
