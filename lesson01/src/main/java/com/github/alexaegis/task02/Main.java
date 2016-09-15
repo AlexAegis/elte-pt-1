@@ -9,7 +9,9 @@ public class Main {
 	}
 
 	public static void main(String[] args) {
+
 		for (String a : args) {
+
 			long n = Long.parseLong(a);
 			System.out.print(n);
 			if(isPrime(n)) {
