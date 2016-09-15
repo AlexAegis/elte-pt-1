@@ -37,4 +37,16 @@ public enum Brackets {
 	public boolean isBracket(char a) {
 		return a == this.getOpening() || a == this.getClosing();
 	}
+
+	public static boolean isOpening(char a) {
+		return CURLY.getOpening() == a ||
+				NORMAL.getOpening() == a ||
+				SQUARE.getOpening() == a;
+	}
+
+	public static boolean isClosing(char a) {
+		return CURLY.getClosing() == a ||
+				NORMAL.getClosing() == a ||
+				SQUARE.getClosing() == a;
+	}
 }

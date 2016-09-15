@@ -25,21 +25,21 @@ public class BracketCheckerTest {
 	}
 
 	@Test
-	public void correctSequenceTest() {
+	public void correctSequenceTest() throws EmptyCharStackException {
 		this.stack.append('(')
 				.append(')');
 		assertTrue(new BracketChecker(this.stack).isCorrect());
 	}
 
 	@Test
-	public void incorrectPairTest() {
+	public void incorrectPairTest() throws EmptyCharStackException {
 		this.stack.append('(')
 				.append(']');
 		assertFalse(new BracketChecker(this.stack).isCorrect());
 	}
 
 	@Test
-	public void multipleCorrectNonInterlacingBracketsTest() {
+	public void multipleCorrectNonInterlacingBracketsTest() throws EmptyCharStackException {
 		this.stack.append('(')
 				.append(')')
 				.append('(')
@@ -48,7 +48,7 @@ public class BracketCheckerTest {
 	}
 
 	@Test
-	public void correctComplexSequenceTest() {
+	public void correctComplexSequenceTest() throws EmptyCharStackException {
 		this.stack.append('(')
 				.append('(')
 				.append(')')
@@ -59,7 +59,20 @@ public class BracketCheckerTest {
 	}
 
 	@Test
-	public void incorrectComplexSequenceTest() {
+	public void correctComplexSequence2Test() throws EmptyCharStackException {
+		this.stack.append('(')
+				.append('(')
+				.append(')')
+				.append('(')
+				.append(')')
+				.append('[')
+				.append(']')
+				.append(')');
+		assertTrue(new BracketChecker(this.stack).isCorrect());
+	}
+
+	@Test
+	public void incorrectComplexSequenceTest() throws EmptyCharStackException {
 		this.stack.append('(')
 				.append('(')
 				.append(')')
@@ -71,8 +84,13 @@ public class BracketCheckerTest {
 		assertFalse(new BracketChecker(this.stack).isCorrect());
 	}
 
+	@Test(expected = EmptyCharStackException.class)
+	public void emptyStackTest() throws EmptyCharStackException {
+		assertFalse(new BracketChecker(this.stack).isCorrect());
+	}
+
 	@Test
-	public void incorrectSequenceTest() {
+	public void incorrectSequenceTest() throws EmptyCharStackException {
 		this.stack.append(')')
 				.append('(');
 		assertFalse(new BracketChecker(this.stack).isCorrect());

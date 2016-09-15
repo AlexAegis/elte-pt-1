@@ -2,7 +2,7 @@ package com.github.alexaegis.homework;
 
 public class Main {
 
-	public static void main(String[] args) {
+	public static void main(String[] args) throws EmptyCharStackException {
 		Stack stack = new Stack();
 		stack.append('(').append(')');
 		System.out.println(stack.length());
