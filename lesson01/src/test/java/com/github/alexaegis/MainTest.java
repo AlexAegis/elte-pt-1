@@ -1,8 +1,5 @@
 package com.github.alexaegis;
 
-import junit.framework.Test;
-import junit.framework.TestCase;
-import junit.framework.TestSuite;
 import org.junit.Before;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -12,9 +9,9 @@ import static org.junit.Assert.assertTrue;
 /**
  * Unit test for simple Main.
  */
-public class AppTest {
+public class MainTest {
 
-    private Logger logger = LoggerFactory.getLogger(AppTest.class);
+    private Logger logger = LoggerFactory.getLogger(MainTest.class);
 
     @Before
     public void before() {
