@@ -85,13 +85,6 @@
       <scope>test</scope>
     </dependency>
 
-    <!-- RestAssured -->
-    <dependency>
-      <groupId>com.jayway.restassured</groupId>
-      <artifactId>rest-assured</artifactId>
-      <version>2.4.0</version>
-    </dependency>
-
     <!-- Loggers -->
 
     <!-- slf4j -->

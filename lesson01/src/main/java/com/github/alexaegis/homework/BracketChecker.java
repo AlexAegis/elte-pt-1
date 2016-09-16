@@ -1,7 +1,5 @@
 package com.github.alexaegis.homework;
 
-import java.util.EmptyStackException;
-
 public class BracketChecker {
 
 	private Stack stack;
