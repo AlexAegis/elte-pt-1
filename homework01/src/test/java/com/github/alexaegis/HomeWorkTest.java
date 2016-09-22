@@ -58,7 +58,7 @@ public class HomeWorkTest {
 
 	@Test
 	public void incorrectComplexSequenceTest() throws EmptyCharStackException {
-		assertTrue(new BracketChecker(new Stack("(()()(()(()())())))")).isCorrect());
+		assertFalse(new BracketChecker(new Stack("(()()(()(()())())))")).isCorrect());
 	}
 
 }

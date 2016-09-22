@@ -36,14 +36,11 @@ public class BracketChecker {
 
 				char last = this.temp.getAndRemoveLast();
 
-
-				if(!Brackets.NORMAL.isClosing(last) && Brackets.NORMAL.isOpening(current)) {
+				if(Brackets.NORMAL.isBracket(last) && Brackets.NORMAL.isBracket(current) && !(Brackets.NORMAL.isClosing(last) && Brackets.NORMAL.isOpening(current))) {
 					this.temp.append(last);
-				}
-				if(!Brackets.CURLY.isClosing(last) && Brackets.CURLY.isOpening(current)) {
+				} else if(Brackets.CURLY.isBracket(last) && Brackets.CURLY.isBracket(current) && !(Brackets.CURLY.isClosing(last) && Brackets.CURLY.isOpening(current))) {
 					this.temp.append(last);
-				}
-				if(!Brackets.SQUARE.isClosing(last) && Brackets.SQUARE.isOpening(current)) {
+				} else if(Brackets.SQUARE.isBracket(last) && Brackets.SQUARE.isBracket(current) && !(Brackets.SQUARE.isClosing(last) && Brackets.SQUARE.isOpening(current))) {
 					this.temp.append(last);
 				}
 
