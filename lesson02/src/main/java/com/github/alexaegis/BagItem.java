@@ -18,8 +18,9 @@ public class BagItem {
 		return multiplicity;
 	}
 
-	public void setMultiplicity(int multiplicity) {
+	public BagItem setMultiplicity(int multiplicity) {
 		this.multiplicity = multiplicity;
+		return this;
 	}
 
 	public BagItem addOccurence(int occurences) {
@@ -27,10 +28,11 @@ public class BagItem {
 		return this;
 	}
 
-	public void removeOccurence(int occurences) throws IllegalArgumentException {
+	public BagItem removeOccurence(int occurences) throws IllegalArgumentException {
 		if(occurences > this.multiplicity) {
 			throw new IllegalArgumentException();
 		}
+		return this;
 	}
 
 	@Override

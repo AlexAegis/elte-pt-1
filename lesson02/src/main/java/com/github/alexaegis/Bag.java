@@ -13,7 +13,7 @@ public class Bag {
 		return this;
 	}
 
-	public Bag add(int value, int multiplicity) {
+	private Bag add(int value, int multiplicity) {
 		if(contains(value)) {
 			BagItem bagItem = getBagItem(value);
 			bagItem.addOccurence(multiplicity);
@@ -34,7 +34,11 @@ public class Bag {
 	}
 
 	private Bag remove(int value, int i) {
-		getBagItem(value).removeOccurence(i);
+		if(getBagItem(value).getMultiplicity() == 1) {
+			this.container.remove(getBagItem(value));
+		} else {
+			getBagItem(value).removeOccurence(i);
+		}
 		return this;
 	}
 
@@ -59,6 +63,10 @@ public class Bag {
 		source.container.stream().forEach(bagItem -> {
 			target.add(bagItem.getValue(), bagItem.getMultiplicity());
 		});
+	}
+
+	public int length() {
+		return this.container.size();
 	}
 
 }
