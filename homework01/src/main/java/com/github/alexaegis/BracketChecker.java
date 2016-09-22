@@ -9,9 +9,9 @@ public class BracketChecker {
 
 	}
 
-	public BracketChecker(Stack stack) throws EmptyCharStackException {
+	public BracketChecker(Stack stack) throws EmptyStackException {
 		if (stack.isEmpty()) {
-			throw new EmptyCharStackException();
+			throw new EmptyStackException();
 		} else {
 			this.stack = stack;
 			this.temp = new Stack();

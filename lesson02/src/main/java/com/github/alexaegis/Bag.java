@@ -1,4 +1,4 @@
-package com.github.alexaegis.task01;
+package com.github.alexaegis;
 
 import java.util.HashSet;
 import java.util.Optional;
@@ -28,6 +28,16 @@ public class Bag {
 		return o.get();
 	}
 
+	public Bag remove(int value) {
+		remove(value, 1);
+		return this;
+	}
+
+	private Bag remove(int value, int i) {
+		getBagItem(value).removeOccurence(i);
+		return this;
+	}
+
 	private boolean contains(int value) {
 		Optional<BagItem> o = getWithValue(value);
 		return o.isPresent();
@@ -38,4 +48,17 @@ public class Bag {
 			return bi.getValue() == value;
 		}).findFirst();
 	}
+
+	public static Bag union(Bag a, Bag b) {
+		Bag result = new Bag();
+		copyBagItems(a,b);
+		return result;
+	}
+
+	private static void copyBagItems(Bag source, Bag target) {
+		source.container.stream().forEach(bagItem -> {
+			target.add(bagItem.getValue(), bagItem.getMultiplicity());
+		});
+	}
+
 }

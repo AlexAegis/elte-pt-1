@@ -1,63 +1,49 @@
 package com.github.alexaegis;
 
-import org.junit.After;
-import org.junit.Before;
 import org.junit.Test;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
 public class HomeWorkTest {
 
-	private Logger logger = LoggerFactory.getLogger(BracketCheckerTest.class);
-
-	@Before
-	public void before() {
-	}
-
-	@After
-	public void after() {
-	}
-
 	@Test
-	public void incorrectSingleRightTest() throws EmptyCharStackException {
+	public void incorrectSingleRightTest() throws EmptyStackException {
 		assertFalse(new BracketChecker(new Stack(")")).isCorrect());
 	}
 
 	@Test
-	public void incorrectSingleLeftTest() throws EmptyCharStackException {
+	public void incorrectSingleLeftTest() throws EmptyStackException {
 		assertFalse(new BracketChecker(new Stack("(")).isCorrect());
 	}
 
 	@Test
-	public void correctSingleTest() throws EmptyCharStackException {
+	public void correctSingleTest() throws EmptyStackException {
 		assertTrue(new BracketChecker(new Stack("()")).isCorrect());
 	}
 
 	@Test
-	public void incorrectPlusLeftTest() throws EmptyCharStackException {
+	public void incorrectPlusLeftTest() throws EmptyStackException {
 		assertFalse(new BracketChecker(new Stack("(()")).isCorrect());
 	}
 
 	@Test
-	public void correctNestedTest() throws EmptyCharStackException {
+	public void correctNestedTest() throws EmptyStackException {
 		assertTrue(new BracketChecker(new Stack("(())")).isCorrect());
 	}
 
 	@Test
-	public void incorrectNestedTest() throws EmptyCharStackException {
+	public void incorrectNestedTest() throws EmptyStackException {
 		assertFalse(new BracketChecker(new Stack("((())")).isCorrect());
 	}
 
 	@Test
-	public void correctComplexSequenceTest() throws EmptyCharStackException {
+	public void correctComplexSequenceTest() throws EmptyStackException {
 		assertTrue(new BracketChecker(new Stack("(()()(()(()())()))")).isCorrect());
 	}
 
 	@Test
-	public void incorrectComplexSequenceTest() throws EmptyCharStackException {
+	public void incorrectComplexSequenceTest() throws EmptyStackException {
 		assertFalse(new BracketChecker(new Stack("(()()(()(()())())))")).isCorrect());
 	}
 
