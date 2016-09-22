@@ -12,9 +12,7 @@ public class Main {
     }
 
     public static void main( String[] args ) throws Exception {
-		if(args.length != 0 && args[0].equals("homework")) {
-			com.github.alexaegis.homework.Main.main(args);
-		} else if (args.length != 0 && args[0].equals("task01")) {
+		if (args.length != 0 && args[0].equals("task01")) {
 			com.github.alexaegis.task01.Main.main(args);
 		} else if (args.length != 0 && args[0].equals("task02")) {
 			com.github.alexaegis.task02.Main.main(args);
