@@ -1,4 +1,4 @@
-package com.github.alexaegis;
+package com.github.alexaegis.bag;
 
 public class BagItem {
 
