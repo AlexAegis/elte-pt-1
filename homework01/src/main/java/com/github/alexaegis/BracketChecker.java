@@ -18,7 +18,7 @@ public class BracketChecker {
 		}
 	}
 
-	public boolean isCorrect() {
+        public boolean isCorrect() {
 
 		int len = this.stack.length();
 
