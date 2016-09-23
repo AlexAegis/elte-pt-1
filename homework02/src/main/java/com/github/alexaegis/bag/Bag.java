@@ -1,5 +1,8 @@
 package com.github.alexaegis.bag;
 
+import com.github.alexaegis.exceptions.NoSuchElementException;
+import com.github.alexaegis.shop.Product;
+
 import java.util.HashSet;
 import java.util.Optional;
 import java.util.Set;
@@ -8,49 +11,60 @@ public class Bag {
 
 	private Set<BagItem> container = new HashSet<>();
 
-	public Bag add(int value) {
-		add(value, 1);
+	public Bag add(Product product) {
+		add(product, 1);
 		return this;
 	}
 
-	private Bag add(int value, int multiplicity) {
-		if(contains(value)) {
-			BagItem bagItem = getBagItem(value);
-			bagItem.addOccurence(multiplicity);
+	private Bag add(Product product, int multiplicity) {
+		if(contains(product)) {
+			BagItem bagItem;
+			try {
+				bagItem = getBagItem(product);
+				bagItem.addOccurence(multiplicity);
+			} catch (NoSuchElementException e)  {
+				e.printStackTrace();
+			}
 		} else {
-			this.container.add(new BagItem(value, multiplicity));
+			this.container.add(new BagItem(product, multiplicity));
 		}
 		return this;
 	}
 
-	private BagItem getBagItem(int value) {
-		Optional<BagItem> o = getWithValue(value);
-		return o.get();
+	public Set<BagItem> getContainer() {
+		return this.container;
 	}
 
-	public Bag remove(int value) {
-		remove(value, 1);
+	private BagItem getBagItem(Product product) throws NoSuchElementException {
+		Optional<BagItem> o = getWithProduct(product);
+		if(o.isPresent()) {
+			return o.get();
+		} else {
+			throw new NoSuchElementException();
+		}
+	}
+
+	public Bag remove(Product product) throws NoSuchElementException {
+		remove(product, 1);
 		return this;
 	}
 
-	private Bag remove(int value, int i) {
-		if(getBagItem(value).getMultiplicity() == 1) {
-			this.container.remove(getBagItem(value));
+	private Bag remove(Product product, int i) throws NoSuchElementException {
+		if(getBagItem(product).getMultiplicity() == 1) {
+			this.container.remove(getBagItem(product));
 		} else {
-			getBagItem(value).removeOccurence(i);
+			getBagItem(product).removeOccurence(i);
 		}
 		return this;
 	}
 
-	private boolean contains(int value) {
-		Optional<BagItem> o = getWithValue(value);
+	private boolean contains(Product product) {
+		Optional<BagItem> o = getWithProduct(product);
 		return o.isPresent();
 	}
 
-	private Optional<BagItem> getWithValue(int value) {
-		return container.stream().filter(bi -> {
-			return bi.getValue() == value;
-		}).findFirst();
+	private Optional<BagItem> getWithProduct(Product product) {
+		return container.stream().filter(bi -> bi.getProduct().equals(product)).findFirst();
 	}
 
 	public static Bag union(Bag a, Bag b) {
@@ -61,13 +75,20 @@ public class Bag {
 	}
 
 	private static void copyBagItems(Bag source, Bag target) {
-		source.container.stream().forEach(bagItem -> {
-			target.add(bagItem.getValue(), bagItem.getMultiplicity());
-		});
+		source.container.forEach(bagItem ->
+				target.add(bagItem.getProduct(), bagItem.getMultiplicity()));
+	}
+
+	public int uniqueLength() {
+		return this.container.size();
 	}
 
 	public int length() {
-		return this.container.size();
+		int result = 0;
+		for (BagItem b : this.container) {
+			result += b.getMultiplicity();
+		}
+		return result;
 	}
 
 }

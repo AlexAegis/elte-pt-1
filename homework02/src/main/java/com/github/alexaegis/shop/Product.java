@@ -10,7 +10,7 @@ public abstract class Product {
 	}
 
 	public String getName() {
-		return name;
+		return this.name;
 	}
 
 	Product setName(String name) {
@@ -19,12 +19,20 @@ public abstract class Product {
 	}
 
 	public int getPrice() {
-		return price;
+		return this.price;
 	}
 
 	Product setPrice(int price) {
 		this.price = price;
 		return this;
+	}
+
+	@Override
+	public String toString() {
+		return "Product{" +
+				"name='" + this.name + '\'' +
+				", price=" + this.price +
+				'}';
 	}
 
 	@Override
@@ -39,15 +47,15 @@ public abstract class Product {
 
 		Product product = (Product) o;
 
-		return price == product.price && (name != null
-				? name.equals(product.name)
+		return this.price == product.price && (this.name != null
+				? this.name.equals(product.name)
 				: product.name == null);
 	}
 
 	@Override
 	public int hashCode() {
-		int result = name != null ? name.hashCode() : 0;
-		result = 31 * result + price;
+		int result = this.name != null ? this.name.hashCode() : 0;
+		result = 31 * result + this.price;
 		return result;
 	}
 }

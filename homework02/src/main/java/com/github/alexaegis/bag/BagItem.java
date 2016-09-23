@@ -1,17 +1,19 @@
 package com.github.alexaegis.bag;
 
+import com.github.alexaegis.shop.Product;
+
 public class BagItem {
 
-	private final int value;
+	private final Product product;
 	private int multiplicity;
 
-	public BagItem(int value, int multiplicity) {
-		this.value = value;
+	BagItem(Product product, int multiplicity) {
+		this.product = product;
 		this.multiplicity = multiplicity;
 	}
 
-	public int getValue() {
-		return value;
+	public Product getProduct() {
+		return product;
 	}
 
 	public int getMultiplicity() {
@@ -23,15 +25,16 @@ public class BagItem {
 		return this;
 	}
 
-	public BagItem addOccurence(int occurences) {
+	BagItem addOccurence(int occurences) {
 		this.multiplicity += occurences;
 		return this;
 	}
 
-	public BagItem removeOccurence(int occurences) throws IllegalArgumentException {
+	BagItem removeOccurence(int occurences) {
 		if(occurences > this.multiplicity) {
 			throw new IllegalArgumentException();
 		}
+		multiplicity -= occurences;
 		return this;
 	}
 
@@ -48,12 +51,12 @@ public class BagItem {
 
 		BagItem bagItem = (BagItem) o;
 
-		return this.value == bagItem.value;
+		return this.product.equals(bagItem.product);
 
 	}
 
 	@Override
 	public int hashCode() {
-		return this.value;
+		return this.product.hashCode();
 	}
 }
