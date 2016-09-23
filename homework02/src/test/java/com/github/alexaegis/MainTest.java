@@ -24,7 +24,6 @@ public class MainTest {
     @Test
     public void jUnitTest() {
         assertTrue("jUnit assertion failed", true);
-        new ArrayList<>();
     }
 
 }
