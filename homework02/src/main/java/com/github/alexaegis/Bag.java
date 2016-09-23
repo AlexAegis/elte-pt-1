@@ -4,9 +4,9 @@ import java.util.HashSet;
 import java.util.Optional;
 import java.util.Set;
 
-public class Bag {
+public class Bag<E> {
 
-	private Set<BagItem> container = new HashSet<>();
+	private Set<E> container = new HashSet<>();
 
 	public Bag add(int value) {
 		add(value, 1);
@@ -15,17 +15,17 @@ public class Bag {
 
 	private Bag add(int value, int multiplicity) {
 		if(contains(value)) {
-			BagItem bagItem = getBagItem(value);
-			bagItem.addOccurence(multiplicity);
+			E item = getItem(value);
+			item.addOccurence(multiplicity);
 		} else {
-			this.container.add(new BagItem(value, multiplicity));
+			this.container.add(new E(value, multiplicity)); // TODO
 		}
 		return this;
 	}
 
-	private BagItem getBagItem(int value) {
-		Optional<BagItem> o = getWithValue(value);
-		return o.get();
+	private E getItem(int value) {
+		Optional<E> o = getWithValue(value);
+		return o.isPresent() ? o.get() : null ;
 	}
 
 	public Bag remove(int value) {
@@ -34,35 +34,35 @@ public class Bag {
 	}
 
 	private Bag remove(int value, int i) {
-		if(getBagItem(value).getMultiplicity() == 1) {
-			this.container.remove(getBagItem(value));
+		if(getItem(value).getMultiplicity() == 1) {
+			this.container.remove(getItem(value));
 		} else {
-			getBagItem(value).removeOccurence(i);
+			getItem(value).removeOccurence(i);
 		}
 		return this;
 	}
 
 	private boolean contains(int value) {
-		Optional<BagItem> o = getWithValue(value);
+		Optional<E> o = getWithValue(value);
 		return o.isPresent();
 	}
 
-	private Optional<BagItem> getWithValue(int value) {
+	private Optional<E> getWithValue(int value) {
 		return container.stream().filter(bi -> {
 			return bi.getValue() == value;
 		}).findFirst();
 	}
 
 	public static Bag union(Bag a, Bag b) {
-		Bag result = new Bag();
-		copyBagItems(a,result);
-		copyBagItems(b,result);
+		Bag result = new Bag<>();
+		copyItems(a,result);
+		copyItems(b,result);
 		return result;
 	}
 
-	private static void copyBagItems(Bag source, Bag target) {
-		source.container.stream().forEach(bagItem -> {
-			target.add(bagItem.getValue(), bagItem.getMultiplicity());
+	private static void copyItems(Bag source, Bag target) {
+		source.container.stream().forEach(item -> {
+			target.add(item.getValue(), item.getMultiplicity());
 		});
 	}
 
