@@ -1,5 +1,6 @@
 package com.github.alexaegis;
 
+import com.github.alexaegis.bag.Bag;
 import org.junit.Test;
 
 import java.util.NoSuchElementException;

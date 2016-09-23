@@ -1,5 +1,6 @@
 package com.github.alexaegis;
 
+import com.github.alexaegis.bag.BagItem;
 import org.junit.Test;
 
 import static junit.framework.TestCase.assertFalse;

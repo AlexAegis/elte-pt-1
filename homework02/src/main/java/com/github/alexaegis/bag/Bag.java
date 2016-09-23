@@ -1,4 +1,4 @@
-package com.github.alexaegis;
+package com.github.alexaegis.bag;
 
 import java.util.HashSet;
 import java.util.Optional;
