@@ -2,10 +2,10 @@ package com.github.alexaegis.shop;
 
 public abstract class Product {
 
-	protected String name;
-	protected int price;
+	private String name;
+	private int price;
 
-	protected Product() {
+	Product() {
 
 	}
 
@@ -13,7 +13,7 @@ public abstract class Product {
 		return name;
 	}
 
-	protected Product setName(String name) {
+	Product setName(String name) {
 		this.name = name;
 		return this;
 	}
@@ -22,7 +22,7 @@ public abstract class Product {
 		return price;
 	}
 
-	protected Product setPrice(int price) {
+	Product setPrice(int price) {
 		this.price = price;
 		return this;
 	}
@@ -39,11 +39,9 @@ public abstract class Product {
 
 		Product product = (Product) o;
 
-		if (price != product.price) {
-			return false;
-		}
-
-		return name != null ? name.equals(product.name) : product.name == null;
+		return price == product.price && (name != null
+				? name.equals(product.name)
+				: product.name == null);
 	}
 
 	@Override
