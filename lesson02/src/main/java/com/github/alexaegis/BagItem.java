@@ -32,6 +32,7 @@ public class BagItem {
 		if(occurences > this.multiplicity) {
 			throw new IllegalArgumentException();
 		}
+		multiplicity -= occurences;
 		return this;
 	}
 

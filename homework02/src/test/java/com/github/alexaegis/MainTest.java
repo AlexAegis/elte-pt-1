@@ -7,11 +7,9 @@ import org.slf4j.LoggerFactory;
 
 import java.util.ArrayList;
 
+import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
-/**
- * Unit test for simple Main.
- */
 public class MainTest {
 
     private Logger logger = LoggerFactory.getLogger(MainTest.class);
@@ -23,7 +21,7 @@ public class MainTest {
 
     @Test
     public void jUnitTest() {
-        assertTrue("jUnit assertion failed", true);
+
     }
 
 }
