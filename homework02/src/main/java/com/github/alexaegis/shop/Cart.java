@@ -13,7 +13,7 @@ public class Cart {
 	}
 
 	public Cart add(Product product) {
-		this.bag.add(product);
+		this.add(product, 1);
 		return this;
 	}
 
@@ -23,11 +23,7 @@ public class Cart {
 	}
 
 	public Cart remove(Product product) {
-		try {
-			this.bag.remove(product);
-		} catch (NoSuchElementException e) {
-			e.printStackTrace();
-		}
+		this.remove(product, 1);
 		return this;
 	}
 
