@@ -17,9 +17,23 @@ public class Cart {
 		return this;
 	}
 
+	public Cart add(Product product, int n) {
+		this.bag.add(product, n);
+		return this;
+	}
+
 	public Cart remove(Product product) {
 		try {
 			this.bag.remove(product);
+		} catch (NoSuchElementException e) {
+			e.printStackTrace();
+		}
+		return this;
+	}
+
+	public Cart remove(Product product, int n) {
+		try {
+			this.bag.remove(product, n);
 		} catch (NoSuchElementException e) {
 			e.printStackTrace();
 		}

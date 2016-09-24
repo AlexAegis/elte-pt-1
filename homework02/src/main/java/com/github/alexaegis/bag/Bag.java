@@ -16,7 +16,7 @@ public class Bag {
 		return this;
 	}
 
-	private Bag add(Product product, int multiplicity) {
+	public Bag add(Product product, int multiplicity) {
 		if(contains(product)) {
 			BagItem bagItem;
 			try {
@@ -49,7 +49,7 @@ public class Bag {
 		return this;
 	}
 
-	private Bag remove(Product product, int i) throws NoSuchElementException {
+	public Bag remove(Product product, int i) throws NoSuchElementException {
 		if(getBagItem(product).getMultiplicity() == 1) {
 			this.container.remove(getBagItem(product));
 		} else {

@@ -22,7 +22,8 @@ public class Main {
 
 		Cart cart = CartFactory.getFactory().createCart();
 
-		cart.add(bread).add(milk);
+		cart.add(bread).add(milk).add(milk);
+		cart.remove(milk, 2);
 
 		logger.info("The carts total value: " + cart.value());
 
