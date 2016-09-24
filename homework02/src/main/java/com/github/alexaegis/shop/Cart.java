@@ -13,8 +13,7 @@ public class Cart {
 	}
 
 	public Cart add(Product product) {
-		this.add(product, 1);
-		return this;
+		return this.add(product, 1);
 	}
 
 	public Cart add(Product product, int n) {
@@ -23,8 +22,7 @@ public class Cart {
 	}
 
 	public Cart remove(Product product) {
-		this.remove(product, 1);
-		return this;
+		return this.remove(product, 1);
 	}
 
 	public Cart remove(Product product, int n) {

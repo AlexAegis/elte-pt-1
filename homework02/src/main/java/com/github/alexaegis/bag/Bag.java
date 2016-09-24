@@ -12,8 +12,7 @@ public class Bag {
 	private Set<BagItem> container = new HashSet<>();
 
 	public Bag add(Product product) {
-		add(product, 1);
-		return this;
+		return add(product, 1);
 	}
 
 	public Bag add(Product product, int multiplicity) {
@@ -45,8 +44,7 @@ public class Bag {
 	}
 
 	public Bag remove(Product product) throws NoSuchElementException {
-		remove(product, 1);
-		return this;
+		return remove(product, 1);
 	}
 
 	public Bag remove(Product product, int i) throws NoSuchElementException {
