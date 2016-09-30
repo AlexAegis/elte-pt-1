@@ -1,12 +1,13 @@
 package com.github.alexaegis;
 
 import org.junit.Test;
-import static org.junit.Assert.assertTrue;
+
+import static com.github.alexaegis.Main.main;
 
 public class MainTest {
 
     @Test
-    public void MainTest() {
-        assertTrue(true);
+    public void MainTest() throws Exception {
+        main(new String[]{});
     }
 }
