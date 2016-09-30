@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<diagram program="umlet" version="14.2">
+  <zoom_level>10</zoom_level>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>340</x>
+      <y>340</y>
+      <w>240</w>
+      <h>170</h>
+    </coordinates>
+    <panel_attributes>Student
+--
+- name : String
+- subjects : List&lt;Subject&gt;
+--
++ Student(String name)
+--
++ getName() : String
+- setName(String name) : void
++ getAverage() : double
++ addSubject(Subject subject) : void
+
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>190</x>
+      <y>60</y>
+      <w>210</w>
+      <h>170</h>
+    </coordinates>
+    <panel_attributes>SchoolClass
+--
+- name : String
+- students : List&lt;Students&gt;
+--
++ SchoolClass(String name)
+--
++ getName() : String
+- setName() : void
++ addStudent : void
++ getAverages() : double</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>40</x>
+      <y>340</y>
+      <w>220</w>
+      <h>170</h>
+    </coordinates>
+    <panel_attributes>Subject
+--
+- name : String
+- grade : int [1..5]
+--
++ Subject(String name, int grade)
+--
++ getName() : String
+- setName(String name) : void
++ getGrade() : int
+- setGrade(int grade) : void</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>390</x>
+      <y>100</y>
+      <w>70</w>
+      <h>260</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;-</panel_attributes>
+    <additional_attributes>50.0;240.0;50.0;10.0;10.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>250</x>
+      <y>340</y>
+      <w>110</w>
+      <h>70</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;-</panel_attributes>
+    <additional_attributes>10.0;10.0;50.0;10.0;50.0;50.0;90.0;50.0</additional_attributes>
+  </element>
+</diagram>
