@@ -34,6 +34,16 @@ public class Bag {
 		return this.container;
 	}
 
+	public Set<Product> getEntrySet() {
+		Set<Product> entrySet = new HashSet<>();
+		this.container.forEach(bagItem -> {
+			for (int i = 0; i < bagItem.getMultiplicity(); i++) {
+				entrySet.add(bagItem.getProduct());
+			}
+		});
+		return entrySet;
+	}
+
 	private BagItem getBagItem(Product product) throws NoSuchElementException {
 		Optional<BagItem> o = getWithProduct(product);
 		if(o.isPresent()) {
