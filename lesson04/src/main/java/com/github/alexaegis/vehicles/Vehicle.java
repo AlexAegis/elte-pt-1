@@ -23,4 +23,8 @@ public abstract class Vehicle {
     public void setFuelings(List<Integer> fuelings) {
         this.fuelings = fuelings;
     }
+
+    public int getFuelingsCount() {
+        return fuelings.size();
+    }
 }
