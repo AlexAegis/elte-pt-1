@@ -20,22 +20,6 @@ public class Student {
                 .orElseThrow(IllegalArgumentException::new);
     }
 
-    public static boolean aboveAverageStudents(double a, Student... students) {
-        return aboveAverageStudents(a, Arrays.asList(students));
-    }
-
-    public static boolean aboveAverageStudents(double a, List<Student> students) {
-        return students.stream().allMatch(s -> s.getAverage() >= a);
-    }
-
-    public static List<Student> orderStudents(List<Student> students) {
-        return students.stream().sorted((a, b) -> {
-            if(a.getAverage() < b.getAverage()) return 1;
-            else if(a.getAverage() > b.getAverage()) return  -1;
-            else return 0;
-        }).collect(Collectors.toList());
-    }
-
     public String getId() {
         return id;
     }
@@ -60,6 +44,26 @@ public class Student {
 
     public void show() {
         System.out.println(this.toString());
+    }
+
+    public static boolean aboveAverageStudents(double a, Student... students) {
+        return aboveAverageStudents(a, Arrays.asList(students));
+    }
+
+    public static boolean aboveAverageStudents(double a, List<Student> students) {
+        return students.stream().allMatch(s -> s.getAverage() >= a);
+    }
+
+    public static List<Student> orderStudents(List<Student> students) {
+        return students.stream().sorted((a, b) -> {
+            if(a.getAverage() < b.getAverage()) return 1;
+            else if(a.getAverage() > b.getAverage()) return  -1;
+            else return 0;
+        }).collect(Collectors.toList());
+    }
+
+    public static void showBestNOf(int n, List<Student> students) {
+        Student.orderStudents(students).subList(0,n).forEach(Student::show);
     }
 
     @Override

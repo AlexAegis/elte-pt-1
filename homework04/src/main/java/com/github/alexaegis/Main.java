@@ -23,12 +23,12 @@ public class Main {
         System.out.println("Igaz e, hogy minden tanulónak az átlaga legalább négyes? "
                 + Student.aboveAverageStudents(4, student1,student2,student3,student4));
         System.out.println("A legjobb 3 átlaggal rendelkező: ");
-        Student.orderStudents(students).subList(0,3).forEach(Student::show);
+        Student.showBestNOf(3, students);
 
         List<Student> studentsFromFile = new StudentReader(new File("src\\main\\resources\\positiveinput.txt")).getStudents();
         System.out.println("Igaz e, hogy minden tanulónak az átlaga legalább négyes? "
                 + Student.aboveAverageStudents(4, studentsFromFile));
         System.out.println("A legjobb 3 átlaggal rendelkező: ");
-        Student.orderStudents(studentsFromFile).subList(0,3).forEach(Student::show);
+        Student.showBestNOf(3, studentsFromFile);
     }
 }
