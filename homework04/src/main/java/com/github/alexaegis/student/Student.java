@@ -80,7 +80,6 @@ public class Student {
 
         return id != null ? id.equals(student.id) : student.id == null
                 && (grades != null ? grades.equals(student.grades) : student.grades == null);
-
     }
 
     @Override
