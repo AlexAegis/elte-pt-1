@@ -54,7 +54,7 @@ public class Student {
         return students.stream().allMatch(s -> s.getAverage() >= a);
     }
 
-    public static List<Student> orderStudents(List<Student> students) {
+    public static List<Student> orderedStudents(List<Student> students) {
         return students.stream().sorted((a, b) -> {
             if(a.getAverage() < b.getAverage()) return 1;
             else if(a.getAverage() > b.getAverage()) return  -1;
@@ -63,7 +63,7 @@ public class Student {
     }
 
     public static void showBestNOf(int n, List<Student> students) {
-        Student.orderStudents(students).subList(0,n).forEach(Student::show);
+        Student.orderedStudents(students).subList(0,n).forEach(Student::show);
     }
 
     @Override
