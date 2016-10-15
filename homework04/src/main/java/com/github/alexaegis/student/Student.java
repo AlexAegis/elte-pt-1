@@ -21,7 +21,7 @@ public class Student {
 
     public double getAverage() {
         return grades.stream().mapToInt(Integer::intValue).average()
-                .orElseThrow(IllegalArgumentException::new);
+                .orElseThrow(() -> new IllegalArgumentException("Possible illegal divisor -> empty list"));
     }
 
     public String getId() {
@@ -54,7 +54,7 @@ public class Student {
         return students.stream().allMatch(s -> s.getAverage() >= a);
     }
 
-    public static List<Student> orderedStudents(List<Student> students) {
+    public static List<Student> orderByAverages(List<Student> students) {
         return students.stream().sorted((a, b) -> {
             if(a.getAverage() < b.getAverage()) return 1;
             else if(a.getAverage() > b.getAverage()) return  -1;
@@ -63,7 +63,7 @@ public class Student {
     }
 
     public static void showBestNOf(int n, List<Student> students) {
-        Student.orderedStudents(students).subList(0,n).forEach(Student::show);
+        orderByAverages(students).subList(0,n).forEach(Student::show);
     }
 
     @Override
