@@ -3,12 +3,11 @@ package com.github.alexaegis.student;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-import java.util.stream.Collectors;
 
 public class Student {
 
     private final String id;
-    private List<Integer> grades = new ArrayList<>();
+    private final List<Integer> grades = new ArrayList<>();
 
     public Student(String id) {
         this.id = id;
@@ -29,7 +28,7 @@ public class Student {
     }
 
     public void addGrade(int g) {
-        if(isGrade(g)) {
+        if(StudentUtils.isGrade(g)) {
             grades.add(g);
         } else throw new IllegalArgumentException("Not a valid grade: " + g + " not in [1..5]");
     }
@@ -38,32 +37,8 @@ public class Student {
         Arrays.stream(grades).forEach(this::addGrade);
     }
 
-    private boolean isGrade(int g) {
-        return g <= 5 && g >= 1;
-    }
-
     public void show() {
         System.out.println(this.toString());
-    }
-
-    public static boolean isAllAboveAverage(double a, Student... students) {
-        return isAllAboveAverage(a, Arrays.asList(students));
-    }
-
-    public static boolean isAllAboveAverage(double a, List<Student> students) {
-        return students.stream().allMatch(s -> s.getAverage() >= a);
-    }
-
-    public static List<Student> orderByAverages(List<Student> students) {
-        return students.stream().sorted((a, b) -> {
-            if(a.getAverage() < b.getAverage()) return 1;
-            else if(a.getAverage() > b.getAverage()) return  -1;
-            else return 0;
-        }).collect(Collectors.toList());
-    }
-
-    public static void showBestNOf(int n, List<Student> students) {
-        orderByAverages(students).subList(0,n).forEach(Student::show);
     }
 
     @Override

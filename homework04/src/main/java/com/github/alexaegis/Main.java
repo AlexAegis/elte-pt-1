@@ -2,6 +2,7 @@ package com.github.alexaegis;
 
 import com.github.alexaegis.student.Student;
 import com.github.alexaegis.student.StudentReader;
+import com.github.alexaegis.student.StudentUtils;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -17,14 +18,14 @@ public class Main {
         students.add(new Student("HLKPTR",1,2,1,1,1,1,3));
         students.add(new Student("LAZAR1",2,3,4,1,2,1));
         System.out.println("Igaz e, hogy minden tanulónak az átlaga legalább négyes? "
-                + Student.isAllAboveAverage(4, students));
+                + StudentUtils.isAllAboveAverage(4, students));
         System.out.println("A legjobb 3 átlaggal rendelkező: ");
-        Student.showBestNOf(3, students);
+        StudentUtils.showBestNOf(3, students);
 
         List<Student> studentsFromFile = new StudentReader(new File("src\\main\\resources\\positiveinput.txt")).getStudents();
         System.out.println("Igaz e, hogy minden tanulónak az átlaga legalább négyes? "
-                + Student.isAllAboveAverage(4, studentsFromFile));
+                + StudentUtils.isAllAboveAverage(4, studentsFromFile));
         System.out.println("A legjobb 3 átlaggal rendelkező: ");
-        Student.showBestNOf(3, studentsFromFile);
+        StudentUtils.showBestNOf(3, studentsFromFile);
     }
 }
