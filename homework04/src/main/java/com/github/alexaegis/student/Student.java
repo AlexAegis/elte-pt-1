@@ -8,15 +8,19 @@ import java.util.stream.Collectors;
 public class Student {
 
     private final String id;
-    private List<Integer> grades;
+    private List<Integer> grades = new ArrayList<>();
 
     public Student(String id) {
         this.id = id;
-        this.grades = new ArrayList<>();
+    }
+
+    public Student(String id, int... grades) {
+        this.id = id;
+        addGrades(grades);
     }
 
     public double getAverage() {
-        return this.grades.stream().mapToInt(Integer::intValue).average()
+        return grades.stream().mapToInt(Integer::intValue).average()
                 .orElseThrow(IllegalArgumentException::new);
     }
 
@@ -24,18 +28,14 @@ public class Student {
         return id;
     }
 
-    public Student addGrade(int g) {
+    public void addGrade(int g) {
         if(isGrade(g)) {
-            this.grades.add(g);
-        } else {
-            throw new IllegalArgumentException();
-        }
-        return this;
+            grades.add(g);
+        } else throw new IllegalArgumentException("Not a valid grade: " + g + " not in [1..5]");
     }
 
-    public Student addGrades(int... grades) {
+    public void addGrades(int... grades) {
         Arrays.stream(grades).forEach(this::addGrade);
-        return this;
     }
 
     private boolean isGrade(int g) {
@@ -46,11 +46,11 @@ public class Student {
         System.out.println(this.toString());
     }
 
-    public static boolean aboveAverageStudents(double a, Student... students) {
-        return aboveAverageStudents(a, Arrays.asList(students));
+    public static boolean isAllAboveAverage(double a, Student... students) {
+        return isAllAboveAverage(a, Arrays.asList(students));
     }
 
-    public static boolean aboveAverageStudents(double a, List<Student> students) {
+    public static boolean isAllAboveAverage(double a, List<Student> students) {
         return students.stream().allMatch(s -> s.getAverage() >= a);
     }
 
@@ -68,7 +68,7 @@ public class Student {
 
     @Override
     public String toString() {
-        return this.getId() + ", " + this.getAverage();
+        return getId() + ", " + getAverage();
     }
 
     @Override

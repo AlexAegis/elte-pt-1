@@ -8,27 +8,30 @@ import java.util.Scanner;
 
 public class StudentReader {
 
-    private List<Student> students;
+    private List<Student> students = new ArrayList<>();
 
     public StudentReader(File file) throws FileNotFoundException {
-        this.students = new ArrayList<>();
-        Scanner scn = new Scanner(file);
-        while(scn.hasNextLine()) {
-            String line = scn.nextLine();
-            if(line.charAt(6) == ' ' && Integer.valueOf(line.substring(7, 8)) != null) {
-                Student student = new Student(line.substring(0,6)).addGrade(Integer.valueOf(line.substring(7, 8)));
-                if(this.students.contains(student)) {
-                    this.students.get(this.students.indexOf(student)).addGrade(Integer.valueOf(line.substring(7, 8)));
-                } else {
-                    this.students.add(student);
+        try(Scanner scn = new Scanner(file)) {
+            while(scn.hasNextLine()) {
+                String line = scn.nextLine();
+                Integer grade = Integer.valueOf(line.substring(7, 8));
+                if(line.charAt(6) == ' ' && grade != null) {
+                    Student student = new Student(line.substring(0,6), grade);
+                    if(students.contains(student)) {
+                        students.get(students.indexOf(student)).addGrade(grade);
+                    } else {
+                        students.add(student);
+                    }
                 }
             }
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
         }
-        scn.close();
+
     }
 
     public List<Student> getStudents() {
-        return this.students;
+        return students;
     }
 
 }
