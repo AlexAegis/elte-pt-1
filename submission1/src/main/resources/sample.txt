@@ -1,0 +1,6 @@
+4
+Circle 0 0 7
+Triangle 3 3 4
+Tetragon 4 5 8
+Hexagon 2 2 7
+Tetragon -2 4 2
