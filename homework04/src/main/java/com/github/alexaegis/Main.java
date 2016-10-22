@@ -22,7 +22,7 @@ public class Main {
         System.out.println("A legjobb 3 átlaggal rendelkező: ");
         StudentUtils.showBestNOf(3, students);
 
-        List<Student> studentsFromFile = new StudentReader(new File("src\\main\\resources\\positiveinput.txt")).getStudents();
+        List<Student> studentsFromFile = new StudentReader(new File("src/main/resources/positiveinput.txt")).getStudents();
         System.out.println("Igaz e, hogy minden tanulónak az átlaga legalább négyes? "
                 + StudentUtils.isAllAboveAverage(4, studentsFromFile));
         System.out.println("A legjobb 3 átlaggal rendelkező: ");
