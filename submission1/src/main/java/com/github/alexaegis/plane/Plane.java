@@ -9,7 +9,8 @@ import java.util.List;
 public class Plane {
 
     private List<Polygon> polygons;
-    private int polygonCount;
+
+    @Deprecated private int polygonCount;
 
     public Plane() {
         polygons = new ArrayList<>();
@@ -19,12 +20,16 @@ public class Plane {
         polygons.add(polygon);
     }
 
+    /**
+     * @deprecated Useless, list already contains such information
+     */
+    @Deprecated
     public void setPolygonCount(int polygonCount) {
         this.polygonCount = polygonCount;
     }
 
     public int getPolygonCount() {
-        return polygonCount;
+        return polygons.size();
     }
 
     public void show() {

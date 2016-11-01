@@ -12,11 +12,7 @@ public class PolygonFactory {
 
     public static PolygonFactory getFactory() {
         if (instance == null) {
-            synchronized(PolygonFactory.class) {
-                if (instance == null) {
-                    instance = new PolygonFactory();
-                }
-            }
+            instance = new PolygonFactory();
         }
         return instance;
     }
