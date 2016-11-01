@@ -53,4 +53,38 @@ public abstract class RegularPolygon implements Polygon {
                 ", perimeter = " + perimeter +
                 '}';
     }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        RegularPolygon that = (RegularPolygon) o;
+
+        if (Double.compare(that.edgeLength, edgeLength) != 0) return false;
+        if (Double.compare(that.radius, radius) != 0) return false;
+        if (Double.compare(that.apothem, apothem) != 0) return false;
+        if (Double.compare(that.perimeter, perimeter) != 0) return false;
+        if (type != that.type) return false;
+        if (center != null ? !center.equals(that.center) : that.center != null) return false;
+
+        return true;
+    }
+
+    @Override
+    public int hashCode() {
+        int result;
+        long temp;
+        result = type != null ? type.hashCode() : 0;
+        result = 31 * result + (center != null ? center.hashCode() : 0);
+        temp = Double.doubleToLongBits(edgeLength);
+        result = 31 * result + (int) (temp ^ (temp >>> 32));
+        temp = Double.doubleToLongBits(radius);
+        result = 31 * result + (int) (temp ^ (temp >>> 32));
+        temp = Double.doubleToLongBits(apothem);
+        result = 31 * result + (int) (temp ^ (temp >>> 32));
+        temp = Double.doubleToLongBits(perimeter);
+        result = 31 * result + (int) (temp ^ (temp >>> 32));
+        return result;
+    }
 }
