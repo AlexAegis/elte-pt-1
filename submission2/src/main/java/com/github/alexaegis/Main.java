@@ -25,7 +25,10 @@ public final class Main {
         }
     }
 
-    public static Properties getProperties() {
+    public static Properties getProps() {
         return PROPERTIES;
+    }
+    public static Logger getLogger() {
+        return LOGGER;
     }
 }
