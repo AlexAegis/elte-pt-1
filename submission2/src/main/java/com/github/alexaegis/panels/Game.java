@@ -10,5 +10,7 @@ public class Game extends JPanel {
     public Game() {
         setLayout(new GridBagLayout());
         add(new ExitButton());
+        add(new GameField());
+
     }
 }
