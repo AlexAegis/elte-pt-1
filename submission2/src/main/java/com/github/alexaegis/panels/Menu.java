@@ -13,5 +13,4 @@ public class Menu extends JPanel {
         add(new PlayButton());
         add(new ExitButton());
     }
-
 }

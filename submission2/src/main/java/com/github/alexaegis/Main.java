@@ -31,4 +31,5 @@ public final class Main {
     public static Logger getLogger() {
         return LOGGER;
     }
+
 }

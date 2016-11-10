@@ -14,7 +14,7 @@ public class PlayButton extends Button {
 
     private final String NAME = "Play";
 
-    public PlayButton() throws HeadlessException {
+    public PlayButton() {
         setName(NAME);
         setLabel(NAME);
         setSize(BUTTON_SIZE);

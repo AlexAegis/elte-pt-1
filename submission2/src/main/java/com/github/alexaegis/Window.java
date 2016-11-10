@@ -9,7 +9,7 @@ public class Window extends JFrame {
     private static final int WINDOW_HEIGHT = Integer.parseInt(Main.getProps().getProperty("window_height"));
     private static final int WINDOW_WIDTH = Integer.parseInt(Main.getProps().getProperty("window_width"));
     private static final String WINDOW_NAME_MAIN = Main.getProps().getProperty("window_name_main");
-    private static final boolean WINDOW_RESIZEABLE = Boolean.valueOf(Main.getProps().getProperty("window_resizeable"));
+    private static final boolean WINDOW_RESIZEABLE = Boolean.parseBoolean(Main.getProps().getProperty("window_resizeable"));
 
     public Window() {
         setTitle(WINDOW_NAME_MAIN);
