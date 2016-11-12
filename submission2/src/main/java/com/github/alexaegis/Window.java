@@ -1,6 +1,7 @@
 package com.github.alexaegis;
 
 import com.github.alexaegis.panels.Menu;
+import com.github.alexaegis.panels.Game;
 
 import javax.swing.*;
 
@@ -17,7 +18,7 @@ public class Window extends JFrame {
         setResizable(WINDOW_RESIZEABLE);
         setLocationRelativeTo(null);
         setDefaultCloseOperation(EXIT_ON_CLOSE);
-        add(new Menu());
+        add(new Game()); // TODO new Menu()
 
     }
 
