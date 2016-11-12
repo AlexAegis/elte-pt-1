@@ -2,14 +2,16 @@ package com.github.alexaegis.buttons;
 
 import com.github.alexaegis.Main;
 
+import javax.accessibility.Accessible;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.datatransfer.StringSelection;
 import java.awt.datatransfer.Transferable;
 import java.awt.dnd.*;
+import java.awt.GraphicsEnvironment;
 
 
-public class Tile extends Button implements DragGestureListener, DragSourceListener {
+public class Tile extends Component implements DragGestureListener, DragSourceListener {
 
     private static final int TILE_SIZE = Integer.parseInt(Main.getProps().getProperty("tile_size"));
 
@@ -17,6 +19,11 @@ public class Tile extends Button implements DragGestureListener, DragSourceListe
 
     public Tile() {
         setPreferredSize(new Dimension(TILE_SIZE, TILE_SIZE));
+        setMinimumSize(new Dimension(TILE_SIZE, TILE_SIZE));
+        setMaximumSize(new Dimension(TILE_SIZE, TILE_SIZE));
+        setBackground(Color.black);
+        setVisible(true);
+
 
 
         dragSource = new DragSource();
