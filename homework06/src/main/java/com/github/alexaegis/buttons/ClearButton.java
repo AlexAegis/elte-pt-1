@@ -1,6 +1,8 @@
 package com.github.alexaegis.buttons;
 
 import com.github.alexaegis.Main;
+import com.github.alexaegis.fields.DisplayField;
+import com.github.alexaegis.panels.CalculatorPanel;
 
 import java.awt.*;
 
@@ -13,10 +15,11 @@ public class ClearButton extends Button {
     public ClearButton() {
         setName(name);
         setLabel(name);
-        //setPreferredSize(BUTTON_SIZE);
+        setPreferredSize(BUTTON_SIZE);
         addActionListener(actionEvent -> {
-            Main.getLogger().info("Process terminated through Exit Button");
-            System.exit(0);
+            DisplayField.empty = true;
+            CalculatorPanel.getDisplayField().setText("0");
+            Main.getLogger().info(name + " pressed");
         });
     }
 }

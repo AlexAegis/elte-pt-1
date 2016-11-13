@@ -16,55 +16,70 @@ public class CalculatorPanel extends JPanel {
 
     private GridBagConstraints c = new GridBagConstraints();
 
+    private static DisplayField displayField = new DisplayField();
+
     public CalculatorPanel() {
         setLayout(new GridBagLayout());
-
-        //setPreferredSize(new Dimension(WINDOW_WIDTH, WINDOW_HEIGHT));
-
         c.gridy = 0;
         c.gridx = 0;
-        /*constraints.weightx = 0.5;
-        constraints.gridwidth = 4;
-        constraints.gridheight = 1;
-        add(new DisplayField(), constraints);*/
-        c.gridx = 0;
-        c.gridy = 0;
-        add(new ClearButton(), c);
+        c.gridwidth = 4;
+        add(displayField, c);
+        c.gridwidth = 1;
         c.gridy = 1;
+        c.gridx = 0;
+        add(new ClearButton(), c);
+        c.gridx = 1;
         add(new OperationButton("="), c);
-        c.gridy = 2;
+        c.gridx = 2;
         add(new OperationButton("/"), c);
-        c.gridy = 3;
+        c.gridx = 3;
         add(new OperationButton("*"), c);
 
+        c.gridy = 2;
+        c.gridx = 0;
+        add(new NumberButton(7), c);
+        c.gridx = 1;
+        add(new NumberButton(8), c);
         c.gridx = 2;
-        c.gridy = 0;
-        add(new NumberButton(7));
-        c.gridy = 1;
-        add(new NumberButton(8));
-        c.gridy = 2;
-        add(new NumberButton(9));
-        c.gridy = 3;
-        add(new OperationButton("-"));
-
+        add(new NumberButton(9), c);
         c.gridx = 3;
-        c.gridy = 0;
-        add(new NumberButton(7));
-        c.gridy = 1;
-        add(new NumberButton(5));
-        c.gridy = 2;
-        add(new NumberButton(6));
+        add(new OperationButton("-"), c);
+
         c.gridy = 3;
-        add(new OperationButton("+"));/*
-        add(new NumberButton(1));
-        add(new NumberButton(2));
-        add(new NumberButton(3));
+        c.gridx = 0;
+        add(new NumberButton(4), c);
+        c.gridx = 1;
+        add(new NumberButton(5), c);
+        c.gridx = 2;
+        add(new NumberButton(6), c);
+        c.gridx = 3;
+        add(new OperationButton("+"), c);
+        c.gridy = 4;
+        c.gridx = 0;
+        add(new NumberButton(1), c);
+        c.gridx = 1;
+        add(new NumberButton(2), c);
+        c.gridx = 2;
+        add(new NumberButton(3), c);
+        c.gridx = 3;
+
+        c.gridheight = 2;
         OperationButton equation = new OperationButton("=");
         equation.setPreferredSize(new Dimension((int) Math.round(BUTTON_SIZE.getWidth()), (int) Math.round(BUTTON_SIZE.getHeight()) * 2));
-        add(equation);
+        add(equation, c);
+        c.gridheight = 1;
+        c.gridy = 5;
+        c.gridx = 0;
+        c.gridwidth = 2;
         NumberButton zero = new NumberButton(0);
         zero.setPreferredSize(new Dimension((int) Math.round(BUTTON_SIZE.getWidth()) * 2, (int) Math.round(BUTTON_SIZE.getHeight())));
-        add(zero);
-        add(new OperationButton("."));*/
+        add(zero, c);
+        c.gridx = 2;
+        c.gridwidth = 1;
+        add(new OperationButton("."), c);
+    }
+
+    public static DisplayField getDisplayField() {
+        return displayField;
     }
 }
