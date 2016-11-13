@@ -1,18 +1,16 @@
 package com.github.alexaegis.buttons;
 
-import com.github.alexaegis.Main;
+import com.github.alexaegis.logic.GameType;
 import com.github.alexaegis.panels.Game;
 
 import javax.swing.*;
 import java.awt.*;
 
+import static com.github.alexaegis.Main.BUTTON_SIZE;
+
 public class PlayButton extends Button {
 
-    private static final int WINDOW_HEIGHT = Integer.parseInt(Main.getProps().getProperty("window_height"));
-    private static final int WINDOW_WIDTH = Integer.parseInt(Main.getProps().getProperty("window_width"));
-    private static final Dimension BUTTON_SIZE = new Dimension(WINDOW_HEIGHT / 10, WINDOW_WIDTH / 16);
-
-    private final String name = "Play";
+    private final String name = "Play Dash";
 
     public PlayButton() {
         setName(name);
@@ -21,7 +19,7 @@ public class PlayButton extends Button {
         addActionListener(actionEvent -> {
             JPanel gp = (JPanel) getParent().getParent();
             gp.removeAll();
-            gp.add(new Game());
+            gp.add(new Game(GameType.DASH));
             gp.revalidate();
             gp.repaint();
         });

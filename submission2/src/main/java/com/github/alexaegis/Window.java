@@ -1,16 +1,12 @@
 package com.github.alexaegis;
 
 import com.github.alexaegis.panels.Menu;
-import com.github.alexaegis.panels.Game;
 
 import javax.swing.*;
 
-public class Window extends JFrame {
+import static com.github.alexaegis.Main.*;
 
-    private static final int WINDOW_HEIGHT = Integer.parseInt(Main.getProps().getProperty("window_height"));
-    private static final int WINDOW_WIDTH = Integer.parseInt(Main.getProps().getProperty("window_width"));
-    private static final String WINDOW_NAME_MAIN = Main.getProps().getProperty("window_name_main");
-    private static final boolean WINDOW_RESIZEABLE = Boolean.parseBoolean(Main.getProps().getProperty("window_resizeable"));
+public class Window extends JFrame {
 
     public Window() {
         setTitle(WINDOW_NAME_MAIN);
@@ -18,8 +14,6 @@ public class Window extends JFrame {
         setResizable(WINDOW_RESIZEABLE);
         setLocationRelativeTo(null);
         setDefaultCloseOperation(EXIT_ON_CLOSE);
-        add(new Game()); // TODO new Menu()
-
+        getContentPane().add(new Menu());
     }
-
 }
