@@ -2,9 +2,8 @@ package com.github.alexaegis.panels;
 
 import com.github.alexaegis.elements.MenuButton;
 import com.github.alexaegis.logic.FieldSizeOptions;
-import com.github.alexaegis.logic.GameTypeOptions;
 import com.github.alexaegis.elements.ExitButton;
-import com.github.alexaegis.controllers.MouseControl;
+import com.github.alexaegis.logic.MouseControl;
 import com.github.alexaegis.tiles.Pawn;
 
 import javax.swing.*;
@@ -24,7 +23,7 @@ public class GamePanel extends JLayeredPane {
     private Button menuButton = new MenuButton();
     private Button exitButton = new ExitButton();
 
-    public GamePanel(GameTypeOptions gameTypeOptions, FieldSizeOptions option) {
+    public GamePanel(FieldSizeOptions option) {
         this.option = option;
         TILE_SIZE = GRID_SIZE_DEFAULT / Math.min(option.getN(), option.getM());
         menuButton.setBounds(20, WINDOW_WIDTH - 180, 100, 50);
@@ -36,17 +35,7 @@ public class GamePanel extends JLayeredPane {
         add(gameFieldPanel, JLayeredPane.DEFAULT_LAYER, 1);
         addMouseListener(mouseControl);
         addMouseMotionListener(mouseControl);
-        initGame(gameTypeOptions);
-    }
-
-    private void initGame(GameTypeOptions gameTypeOptions) {
-        switch (gameTypeOptions) {
-            case DASH: initGameDash();
-                break;
-            case MYDASH: initGameDash();
-                break;
-            default: break;
-        }
+        initGameDash();
     }
 
     private void initGameDash() {

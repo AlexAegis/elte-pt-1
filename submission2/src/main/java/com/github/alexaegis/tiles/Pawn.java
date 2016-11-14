@@ -27,6 +27,10 @@ public class Pawn extends JLabel {
         }
     }
 
+    public int getPlayer() {
+        return player;
+    }
+
     private Image scaleImage(Image srcImg, int w, int h){
         BufferedImage resizedImg = new BufferedImage(w, h, BufferedImage.TYPE_INT_ARGB);
         Graphics2D g2 = resizedImg.createGraphics();
