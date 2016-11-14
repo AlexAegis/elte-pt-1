@@ -6,18 +6,16 @@ import java.awt.image.BufferedImage;
 
 import static com.github.alexaegis.Main.TILE_SIZE;
 
+
 public class Pawn extends JLabel {
 
     ImageIcon icon = new ImageIcon(scaleImage(new ImageIcon("r.png").getImage(), TILE_SIZE, TILE_SIZE));
 
     public Pawn() {
         setPreferredSize(new Dimension(TILE_SIZE, TILE_SIZE));
-        setMinimumSize(new Dimension(TILE_SIZE, TILE_SIZE));
-        setMaximumSize(new Dimension(TILE_SIZE, TILE_SIZE));
         setBackground(Color.WHITE);
         setIcon(icon);
         setVisible(true);
-
     }
 
     private Image scaleImage(Image srcImg, int w, int h){
