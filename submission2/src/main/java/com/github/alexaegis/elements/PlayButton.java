@@ -1,7 +1,6 @@
 package com.github.alexaegis.elements;
 
 import com.github.alexaegis.logic.FieldSizeOptions;
-import com.github.alexaegis.logic.GameTypeOptions;
 import com.github.alexaegis.panels.GamePanel;
 
 import javax.swing.*;
@@ -25,7 +24,7 @@ public class PlayButton extends Button {
             NumberSelector n2 = (NumberSelector) getParent().getComponent(5);
             option.setCustomSize(Math.max(n1.getValue(), n2.getValue()), Math.max(n1.getValue(), n2.getValue()));
             gp.removeAll();
-            gp.add(new GamePanel(GameTypeOptions.DASH, option));
+            gp.add(new GamePanel(option));
             gp.revalidate();
             gp.repaint();
         });
