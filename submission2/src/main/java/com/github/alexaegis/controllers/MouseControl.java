@@ -1,7 +1,7 @@
 package com.github.alexaegis.controllers;
 
-import com.github.alexaegis.tiles.Pawn;
 import com.github.alexaegis.tiles.Tile;
+import com.github.alexaegis.tiles.Pawn;
 
 import javax.swing.*;
 import java.awt.*;
@@ -9,8 +9,8 @@ import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionListener;
 
-import static com.github.alexaegis.panels.Game.xOffset;
-import static com.github.alexaegis.panels.Game.yOffset;
+import static com.github.alexaegis.panels.GamePanel.xOffset;
+import static com.github.alexaegis.panels.GamePanel.yOffset;
 
 public class MouseControl implements MouseListener, MouseMotionListener {
 

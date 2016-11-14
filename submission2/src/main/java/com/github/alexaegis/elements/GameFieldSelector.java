@@ -7,9 +7,9 @@ import javax.swing.*;
 public class GameFieldSelector extends JComboBox {
 
     public GameFieldSelector() {
-        addItem(FieldSizeOptions.SIX);
-        addItem(FieldSizeOptions.EIGTH);
         addItem(FieldSizeOptions.TEN);
+        addItem(FieldSizeOptions.EIGTH);
+        addItem(FieldSizeOptions.SIX);
         addItem(FieldSizeOptions.CUSTOM);
         setSelectedIndex(0);
         addActionListener(actionEvent -> {

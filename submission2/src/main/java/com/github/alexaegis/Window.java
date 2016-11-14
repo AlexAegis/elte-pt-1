@@ -1,6 +1,6 @@
 package com.github.alexaegis;
 
-import com.github.alexaegis.panels.Menu;
+import com.github.alexaegis.panels.MenuPanel;
 
 import javax.swing.*;
 
@@ -14,6 +14,6 @@ public class Window extends JFrame {
         setResizable(WINDOW_RESIZEABLE);
         setLocationRelativeTo(null);
         setDefaultCloseOperation(EXIT_ON_CLOSE);
-        getContentPane().add(new Menu());
+        getContentPane().add(new MenuPanel());
     }
 }
