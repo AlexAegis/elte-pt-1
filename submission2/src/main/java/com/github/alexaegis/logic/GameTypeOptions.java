@@ -1,6 +1,6 @@
 package com.github.alexaegis.logic;
 
-public enum GameType {
+public enum GameTypeOptions {
     DASH,
     MYDASH;
 

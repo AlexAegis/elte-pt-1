@@ -1,7 +1,8 @@
 package com.github.alexaegis.panels;
 
-import com.github.alexaegis.logic.GameType;
-import com.github.alexaegis.buttons.ExitButton;
+import com.github.alexaegis.logic.FieldSizeOptions;
+import com.github.alexaegis.logic.GameTypeOptions;
+import com.github.alexaegis.elements.ExitButton;
 import com.github.alexaegis.controllers.MouseControl;
 import com.github.alexaegis.tiles.Pawn;
 
@@ -12,21 +13,26 @@ import static com.github.alexaegis.Main.*;
 public class Game extends JLayeredPane {
 
     private MouseControl mouseControl = new MouseControl();
-    private GameField gameField = new GameField();
+    private GameField gameField;
     public static int xOffset = (int) (WINDOW_WIDTH / 1.4);
     public static int yOffset = 20;
+    public FieldSizeOptions option;
 
-    public Game(GameType gameType) {
+    public Game(GameTypeOptions gameTypeOptions, FieldSizeOptions option) {
+        this.option = option;
+
+        TILE_SIZE = GRID_SIZE_DEFAULT / Math.min(option.getN(), option.getM());
         add(new ExitButton(), 2);
+        gameField = new GameField(option);
         gameField.setBounds(xOffset, yOffset, GRID_SIZE_DEFAULT, GRID_SIZE_DEFAULT);
         add(gameField, JLayeredPane.DEFAULT_LAYER, 1);
         addMouseListener(mouseControl);
         addMouseMotionListener(mouseControl);
-        initGame(gameType);
+        initGame(gameTypeOptions);
     }
 
-    private void initGame(GameType gameType) {
-        switch (gameType) {
+    private void initGame(GameTypeOptions gameTypeOptions) {
+        switch (gameTypeOptions) {
             case DASH: initGameDash();
                 break;
             case MYDASH: initGameDash();
@@ -41,10 +47,9 @@ public class Game extends JLayeredPane {
             JPanel panel = (JPanel) gameField.getComponent(i);
             panel.add(piece);
         }
-        for (int i = 80; i < 100; i++) {
-            JLabel piece = new Pawn();
-            JPanel panel = (JPanel) gameField.getComponent(i);
-            panel.add(piece);
-        }
+    }
+
+    public FieldSizeOptions getOption() {
+        return option;
     }
 }
