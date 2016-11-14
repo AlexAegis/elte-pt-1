@@ -5,7 +5,7 @@ import com.github.alexaegis.elements.*;
 import javax.swing.*;
 import java.awt.*;
 
-public class Menu extends JPanel {
+public class MenuPanel extends JPanel {
 
     Button play = new PlayButton();
     Button exit = new ExitButton();
@@ -13,7 +13,7 @@ public class Menu extends JPanel {
     JComboBox numberSelector1 = new NumberSelector();
     JComboBox numberSelector2 = new NumberSelector();
 
-    public Menu() {
+    public MenuPanel() {
 
         setPreferredSize(new Dimension(240,240));
         setLayout(new GridBagLayout());

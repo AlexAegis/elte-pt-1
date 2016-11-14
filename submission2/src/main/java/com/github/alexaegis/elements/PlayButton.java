@@ -2,11 +2,10 @@ package com.github.alexaegis.elements;
 
 import com.github.alexaegis.logic.FieldSizeOptions;
 import com.github.alexaegis.logic.GameTypeOptions;
-import com.github.alexaegis.panels.Game;
+import com.github.alexaegis.panels.GamePanel;
 
 import javax.swing.*;
 import java.awt.*;
-import java.util.Arrays;
 
 import static com.github.alexaegis.Main.BUTTON_SIZE;
 
@@ -26,7 +25,7 @@ public class PlayButton extends Button {
             NumberSelector n2 = (NumberSelector) getParent().getComponent(5);
             option.setCustomSize(Math.max(n1.getValue(), n2.getValue()), Math.max(n1.getValue(), n2.getValue()));
             gp.removeAll();
-            gp.add(new Game(GameTypeOptions.DASH, option));
+            gp.add(new GamePanel(GameTypeOptions.DASH, option));
             gp.revalidate();
             gp.repaint();
         });
