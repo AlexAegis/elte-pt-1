@@ -14,11 +14,11 @@ public class Game extends JLayeredPane {
     private MouseControl mouseControl = new MouseControl();
     private GameField gameField = new GameField();
     public static int xOffset = (int) (WINDOW_WIDTH / 1.4);
-    public static int yOffset = 24;
+    public static int yOffset = 20;
 
     public Game(GameType gameType) {
         add(new ExitButton(), 2);
-        gameField.setBounds(xOffset, yOffset, GRID_SIZE_DEFAULT * TILE_SIZE, GRID_SIZE_DEFAULT * TILE_SIZE);
+        gameField.setBounds(xOffset, yOffset, GRID_SIZE_DEFAULT, GRID_SIZE_DEFAULT);
         add(gameField, JLayeredPane.DEFAULT_LAYER, 1);
         addMouseListener(mouseControl);
         addMouseMotionListener(mouseControl);
