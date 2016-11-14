@@ -4,15 +4,16 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.image.BufferedImage;
 
+import static com.github.alexaegis.Main.GRID_SIZE_DEFAULT;
 import static com.github.alexaegis.Main.TILE_SIZE;
-
 
 public class Pawn extends JLabel {
 
-    ImageIcon icon = new ImageIcon(scaleImage(new ImageIcon("r.png").getImage(), TILE_SIZE, TILE_SIZE));
+    private ImageIcon icon;
 
     public Pawn() {
-        setPreferredSize(new Dimension(TILE_SIZE, TILE_SIZE));
+        icon = new ImageIcon(scaleImage(new ImageIcon("r.png").getImage(), TILE_SIZE, TILE_SIZE));
+        setPreferredSize(new Dimension(GRID_SIZE_DEFAULT / TILE_SIZE, GRID_SIZE_DEFAULT / TILE_SIZE));
         setBackground(Color.WHITE);
         setIcon(icon);
         setVisible(true);

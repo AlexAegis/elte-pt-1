@@ -1,4 +1,4 @@
-package com.github.alexaegis.buttons;
+package com.github.alexaegis.elements;
 
 import com.github.alexaegis.Main;
 
