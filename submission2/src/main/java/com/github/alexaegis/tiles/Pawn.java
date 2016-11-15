@@ -39,5 +39,9 @@ public class Pawn extends JLabel {
         g2.dispose();
         return resizedImg;
     }
+    
+    public int getOtherPlayer() {
+        return player == 0 ? 1 : 0;
+    }
 
 }

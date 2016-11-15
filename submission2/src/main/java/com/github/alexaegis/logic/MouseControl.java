@@ -23,6 +23,7 @@ public class MouseControl implements MouseListener, MouseMotionListener {
     private JPanel gameField;
     private Component original;
     private ArrayList<Tile> valids = new ArrayList<>();
+    private int actualPlayer = 1; //starting player
 
     @Override
     public void mousePressed(MouseEvent e) {
@@ -30,10 +31,11 @@ public class MouseControl implements MouseListener, MouseMotionListener {
         gameField = (JPanel) game.getParent();
         pawn = null;
         Component c = gameField.findComponentAt(e.getX(), e.getY());
-        if (c instanceof JPanel) {
+        if (c instanceof JPanel || ((Pawn)c).getPlayer() != actualPlayer) {
             return;
         }
         pawn = (Pawn)c;
+
 
         Component c1 = gameField.getParent().findComponentAt(e.getX(), e.getY() - TILE_SIZE);
         Component c2 = gameField.getParent().findComponentAt(e.getX() - TILE_SIZE, e.getY() - TILE_SIZE);
@@ -143,7 +145,12 @@ public class MouseControl implements MouseListener, MouseMotionListener {
             v.setBorder(null);
         });
         valids.removeAll(valids);
+        switchActivePlayer(pawn);
 
+    }
+    
+    private void switchActivePlayer(Pawn pawn) {
+        actualPlayer = pawn.getOtherPlayer();
     }
 
     @Override
