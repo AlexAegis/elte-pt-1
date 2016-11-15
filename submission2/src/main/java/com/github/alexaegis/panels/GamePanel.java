@@ -22,14 +22,17 @@ public class GamePanel extends JLayeredPane {
 
     private Button menuButton = new MenuButton();
     private Button exitButton = new ExitButton();
-
+    private JLabel actualPlayer = new JLabel("Next player: ");
+    
     public GamePanel(FieldSizeOptions option) {
         this.option = option;
         TILE_SIZE = GRID_SIZE_DEFAULT / Math.min(option.getN(), option.getM());
         menuButton.setBounds(20, WINDOW_WIDTH - 180, 100, 50);
         exitButton.setBounds(20, WINDOW_WIDTH - 90, 100, 50);
+        actualPlayer.setBounds(20, 90, 100, 50);
         add(menuButton, 2);
         add(exitButton, 2);
+        add(actualPlayer, 2);
         gameFieldPanel = new GameFieldPanel(option);
         gameFieldPanel.setBounds(xOffset, yOffset, GRID_SIZE_DEFAULT, GRID_SIZE_DEFAULT);
         add(gameFieldPanel, JLayeredPane.DEFAULT_LAYER, 1);

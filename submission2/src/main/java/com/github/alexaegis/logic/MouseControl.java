@@ -123,15 +123,22 @@ public class MouseControl implements MouseListener, MouseMotionListener {
         Component c = gameField.findComponentAt(ix, iy);
 
         if (c instanceof Pawn && valids.contains(c.getParent())) {
+            
+            
             Container parent = c.getParent();
             parent.remove(0);
             parent.add(pawn);
             parent.validate();
+            switchActivePlayer(pawn);
         }
         else if(c instanceof Tile && valids.contains(c)) {
+            
+           
             Container parent = (Container)c;
             parent.add(pawn);
             parent.validate();
+             switchActivePlayer(pawn);
+            
         }
         else {
             Container parent = (Container) original;
@@ -145,12 +152,13 @@ public class MouseControl implements MouseListener, MouseMotionListener {
             v.setBorder(null);
         });
         valids.removeAll(valids);
-        switchActivePlayer(pawn);
 
     }
     
-    private void switchActivePlayer(Pawn pawn) {
+    private void switchActivePlayer(Pawn pawn) { // TODO labelchange not works
         actualPlayer = pawn.getOtherPlayer();
+        JLabel act = (JLabel) gameField.getParent().getComponent(2);
+        act.setText("Next player: " + Integer.toString(actualPlayer + 1));
     }
 
     @Override
