@@ -14,7 +14,7 @@ public class DisplayField extends JTextField {
     public DisplayField() {
         setEditable(false);
         setText(DEFAULT_DISPLAY);
-        setPreferredSize(new Dimension(WINDOW_WIDTH - BUTTON_SIZE.width -2 , 24));
+        setPreferredSize(new Dimension(WINDOW_WIDTH - BUTTON_SIZE.width - 2, 24));
         setHorizontalAlignment(JTextField.RIGHT);
         setToolTipText("0");
     }

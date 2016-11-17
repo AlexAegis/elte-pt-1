@@ -17,9 +17,7 @@ public class GameFieldPanel extends JPanel {
         setBounds(0, 0, GRID_DIMENSIONS.width, GRID_DIMENSIONS.height);
         for (int i = 0; i < options.getN(); i++) {
             for (int j = 0; j < options.getM(); j++) {
-                Tile square = new Tile();
-                square.setBackground((i + j) % 2 == 0 ? Color.LIGHT_GRAY : Color.GRAY);
-                square.setOriginalColor(square.getBackground());
+                Tile square = new Tile((i + j) % 2 == 0 ? Color.LIGHT_GRAY : Color.GRAY);
                 add(square);
             }
         }

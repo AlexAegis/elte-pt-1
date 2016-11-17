@@ -1,5 +1,6 @@
 package com.github.alexaegis;
 
+import com.github.alexaegis.panels.CalculatorPanel;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

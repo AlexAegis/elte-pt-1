@@ -7,12 +7,10 @@ public class Tile extends JPanel {
 
     private Color originalColor;
 
-    public Tile() {
+    public Tile(Color color) {
         setLayout(new BorderLayout());
-    }
-
-    public void setOriginalColor(Color originalColor) {
-        this.originalColor = originalColor;
+        originalColor = color;
+        applyOriginalColor();
     }
 
     public void applyOriginalColor() {
