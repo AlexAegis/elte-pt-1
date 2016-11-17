@@ -9,8 +9,6 @@ import javax.swing.*;
 import java.awt.*;
 
 import static com.github.alexaegis.Window.BUTTON_SIZE;
-import static com.github.alexaegis.Window.WINDOW_HEIGHT;
-import static com.github.alexaegis.Window.WINDOW_WIDTH;
 
 public class CalculatorPanel extends JPanel {
 

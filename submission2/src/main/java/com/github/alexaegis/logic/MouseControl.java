@@ -157,8 +157,8 @@ public class MouseControl implements MouseListener, MouseMotionListener {
     
     private void switchActivePlayer(Pawn pawn) { // TODO labelchange not works
         actualPlayer = pawn.getOtherPlayer();
-        JLabel act = (JLabel) gameField.getParent().getComponent(2);
-        act.setText("Next player: " + Integer.toString(actualPlayer + 1));
+        //JLabel act = (JLabel) gameField.getParent().getComponent(2);
+        //act.setText("Next player: " + Integer.toString(actualPlayer + 1));
     }
 
     @Override
