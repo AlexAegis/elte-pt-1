@@ -8,7 +8,7 @@ import java.awt.image.BufferedImage;
 import static com.github.alexaegis.Main.GRID_SIZE_DEFAULT;
 import static com.github.alexaegis.Main.TILE_SIZE;
 
-public class Pawn extends JComponent {
+public final class Pawn extends JComponent {
 
     private ImageIcon icon;
     private int player;
@@ -17,10 +17,10 @@ public class Pawn extends JComponent {
     private GradientPaint player1Color = new GradientPaint(0, 0, Color.BLUE,100, 255, Color.getHSBColor(0,255,255));
 
     public Pawn(int player) {
-            this.player = player;
-            setPreferredSize(new Dimension(GRID_SIZE_DEFAULT / TILE_SIZE, GRID_SIZE_DEFAULT / TILE_SIZE));
-            setBackground(Color.WHITE);
-            setVisible(true);
+        this.player = player;
+        setPreferredSize(new Dimension(GRID_SIZE_DEFAULT / TILE_SIZE, GRID_SIZE_DEFAULT / TILE_SIZE));
+        setBackground(Color.WHITE);
+        setVisible(true);
     }
 
     @Override
@@ -28,7 +28,6 @@ public class Pawn extends JComponent {
         Graphics2D g = (Graphics2D) graphics;
         g.setRenderingHint(RenderingHints.KEY_ANTIALIASING,
                 RenderingHints.VALUE_ANTIALIAS_ON);
-        g.setColor(player == 1 ? Color.RED : Color.BLUE);
         g.setPaint(player == 1 ? player0Color : player1Color);
         g.fillOval(0,0, TILE_SIZE,TILE_SIZE);
     }
@@ -36,9 +35,27 @@ public class Pawn extends JComponent {
     public int getPlayer() {
         return player;
     }
-    
+
     public int getOtherPlayer() {
         return player == 0 ? 1 : 0;
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        Pawn pawn = (Pawn) o;
+
+        if (player != pawn.player) return false;
+        return icon != null ? icon.equals(pawn.icon) : pawn.icon == null;
+
+    }
+
+    @Override
+    public int hashCode() {
+        int result = icon != null ? icon.hashCode() : 0;
+        result = 31 * result + player;
+        return result;
+    }
 }

@@ -1,7 +1,9 @@
 package com.github.alexaegis.logic;
 
+import com.github.alexaegis.tiles.HightLight;
 import com.github.alexaegis.tiles.Tile;
 import com.github.alexaegis.tiles.Pawn;
+import com.sun.xml.internal.ws.api.ha.HaInfo;
 
 import javax.swing.*;
 import java.awt.*;
@@ -9,6 +11,8 @@ import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionListener;
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.stream.Stream;
 
 import static com.github.alexaegis.Main.TILE_SIZE;
 import static com.github.alexaegis.panels.GamePanel.xOffset;
@@ -31,7 +35,7 @@ public class MouseControl implements MouseListener, MouseMotionListener {
         gameField = (JPanel) game.getParent();
         pawn = null;
         Component c = gameField.findComponentAt(e.getX(), e.getY());
-        if (c instanceof JPanel || ((Pawn)c).getPlayer() != actualPlayer) {
+        if (c instanceof Tile || ((Pawn)c).getPlayer() != actualPlayer) {
             return;
         }
         pawn = (Pawn)c;
@@ -47,28 +51,27 @@ public class MouseControl implements MouseListener, MouseMotionListener {
             c3 = gameField.getParent().findComponentAt(e.getX() + TILE_SIZE, e.getY() + TILE_SIZE);
         }
 
-        if(c1 instanceof JPanel) {
+        if(c1 instanceof Tile) {
             valids.add((Tile) c1);
-        } else if(c1 instanceof JLabel) {
+        } else if(c1 instanceof Pawn) {
             //valids.add((Tile) c1.getParent());  // szembe nem lépünk
         }
 
-        if(c2 instanceof JPanel) {
+        if(c2 instanceof Tile) {
             valids.add((Tile) c2);
-        } else if(c2 instanceof JLabel) {
+        } else if(c2 instanceof Pawn) {
             valids.add((Tile) c2.getParent());
         }
 
-        if(c3 instanceof JPanel) {
+        if(c3 instanceof Tile) {
             valids.add((Tile) c3);
-        } else if(c3 instanceof JLabel) {
+        } else if(c3 instanceof Pawn) {
             valids.add((Tile) c3.getParent());
         }
 
-        valids.forEach(v -> {
-            v.setBackground(new Color(v.getBackground().getRed(), v.getBackground().getBlue(), v.getBackground().getBlue(), 160));
-            v.setBorder(BorderFactory.createLineBorder(Color.WHITE));
-        });
+
+        valids.forEach(v ->
+                v.add(new HightLight()));
 
         original = c.getParent();
 
@@ -80,6 +83,9 @@ public class MouseControl implements MouseListener, MouseMotionListener {
 
         game.add(pawn, JLayeredPane.DRAG_LAYER);
         game.setCursor(Cursor.getPredefinedCursor(Cursor.MOVE_CURSOR));
+
+        game.revalidate();
+        game.repaint();
     }
 
     @Override
@@ -120,11 +126,14 @@ public class MouseControl implements MouseListener, MouseMotionListener {
         int iy = Math.min(e.getY(), yMax);
         iy = Math.max(iy, 0);
 
+        valids.stream().flatMap(valid -> Stream.of(valid.getComponents()))
+                .filter(component -> component instanceof HightLight)
+                .forEach(highLight -> highLight.getParent().remove(highLight));
+
         Component c = gameField.findComponentAt(ix, iy);
 
         if (c instanceof Pawn && valids.contains(c.getParent())) {
-            
-            
+
             Container parent = c.getParent();
             parent.remove(0);
             parent.add(pawn);
@@ -132,26 +141,52 @@ public class MouseControl implements MouseListener, MouseMotionListener {
             switchActivePlayer(pawn);
         }
         else if(c instanceof Tile && valids.contains(c)) {
-            
-           
+
+
             Container parent = (Container)c;
             parent.add(pawn);
             parent.validate();
-             switchActivePlayer(pawn);
-            
+            switchActivePlayer(pawn);
+
+        }else if(c instanceof HightLight) {
+            Container parent = c.getParent();
+            parent.add(pawn);
+            parent.validate();
+            switchActivePlayer(pawn);
+
+
+
         }
         else {
             Container parent = (Container) original;
             parent.add(pawn);
             parent.repaint();
             parent.validate();
+
         }
 
+
+/*
         valids.forEach(v -> {
-            v.applyOriginalColor();
-            v.setBorder(null);
-        });
-        valids.removeAll(valids);
+            /*System.out.println(v);
+            System.out.println("COMP0" + v.getComponent(0));
+            System.out.println("PARENT" + v.getParent());
+            if(Arrays.stream(v.getComponents()).allMatch(component -> component instanceof HightLight)) {
+
+            }
+            if(v.getComponent(0) instanceof HightLight) {
+                v.remove(v.getComponent(0));
+            } else if(v.getComponent(0) instanceof Pawn) {
+
+                System.out.println("COMP0" + v.getComponent(0));
+
+                v.remove(v.getComponent(1));
+            }
+        });*/
+        valids.clear();
+
+        game.revalidate();
+        game.repaint();
 
     }
     

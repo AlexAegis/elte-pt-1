@@ -5,6 +5,7 @@ import com.github.alexaegis.logic.FieldSizeOptions;
 import com.github.alexaegis.elements.ExitButton;
 import com.github.alexaegis.logic.MouseControl;
 import com.github.alexaegis.tiles.Pawn;
+import com.github.alexaegis.tiles.Tile;
 
 import javax.swing.*;
 
@@ -44,12 +45,12 @@ public class GamePanel extends JLayeredPane {
     private void initGameDash() {
         for (int i = 0; i < Math.min(option.getN(), option.getM()) * 2; i++) {
             Pawn piece = new Pawn(0);
-            JPanel panel = (JPanel) gameFieldPanel.getComponent(i);
+            Tile panel = (Tile) gameFieldPanel.getComponent(i);
             panel.add(piece);
         }
         for (int i = 0; i < Math.min(option.getN(), option.getM()) * 2; i++) {
             Pawn piece = new Pawn(1);
-            JPanel panel = (JPanel) gameFieldPanel.getComponent((Math.min(option.getN(), option.getM()) * Math.min(option.getN(), option.getM())) - i - 1);
+            Tile panel = (Tile) gameFieldPanel.getComponent((Math.min(option.getN(), option.getM()) * Math.min(option.getN(), option.getM())) - i - 1);
             panel.add(piece);
         }
     }
