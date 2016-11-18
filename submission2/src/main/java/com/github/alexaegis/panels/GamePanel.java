@@ -43,12 +43,12 @@ public class GamePanel extends JLayeredPane {
 
     private void initGameDash() {
         for (int i = 0; i < Math.min(option.getN(), option.getM()) * 2; i++) {
-            JLabel piece = new Pawn(0);
+            Pawn piece = new Pawn(0);
             JPanel panel = (JPanel) gameFieldPanel.getComponent(i);
             panel.add(piece);
         }
         for (int i = 0; i < Math.min(option.getN(), option.getM()) * 2; i++) {
-            JLabel piece = new Pawn(1);
+            Pawn piece = new Pawn(1);
             JPanel panel = (JPanel) gameFieldPanel.getComponent((Math.min(option.getN(), option.getM()) * Math.min(option.getN(), option.getM())) - i - 1);
             panel.add(piece);
         }
