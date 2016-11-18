@@ -12,16 +12,16 @@ public final class HightLight extends JComponent {
     }
 
     @Override
-    protected void paintComponent(Graphics graphics) {
-        super.paintComponent(graphics);
+    public void paint(Graphics graphics) {
+       //super.paintComponent(graphics);
         Graphics2D g = (Graphics2D) graphics;
         float[] dist = {0.0f, 1.0f};
 
-        Color[] colors = {new Color(255, 255, 255, 200), new Color(255, 255, 255, 100)};
-        g.setPaint(new RadialGradientPaint(TILE_SIZE / 2, TILE_SIZE / 2, TILE_SIZE, dist, colors ));
+        Color[] colors = {new Color(255, 255, 255, 160), new Color(255, 255, 255, 90)};
+        g.setPaint(new RadialGradientPaint(TILE_SIZE / 2, TILE_SIZE / 2, TILE_SIZE * 2, dist, colors ));
         g.fillRect(0,0, TILE_SIZE,TILE_SIZE);
 
-        g.setColor(new Color(0, 0, 0, 20));
+        g.setColor(new Color(0, 0, 0, 5));
         g.fillRect(TILE_SIZE / 20 ,TILE_SIZE / 20, TILE_SIZE - TILE_SIZE / 10,TILE_SIZE - TILE_SIZE / 10);
 
     }

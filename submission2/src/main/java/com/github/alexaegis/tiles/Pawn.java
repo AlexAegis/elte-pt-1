@@ -13,8 +13,8 @@ public final class Pawn extends JComponent {
     private ImageIcon icon;
     private int player;
 
-    private GradientPaint player0Color = new GradientPaint(0, 0, Color.RED,100, 255, Color.getHSBColor(255,255,255));
-    private GradientPaint player1Color = new GradientPaint(0, 0, Color.BLUE,100, 255, Color.getHSBColor(0,255,255));
+    private GradientPaint player0Color = new GradientPaint(0, 0, new Color(220,60, 40, 255),100, 255, new Color(220,160, 100, 230));
+    private GradientPaint player1Color = new GradientPaint(0, 0, new Color(40,40, 200, 255),100, 255, new Color(160,200, 220, 230));
 
     public Pawn(int player) {
         this.player = player;
