@@ -5,13 +5,10 @@ public enum FieldSizeOptions {
     TEN(10, 10),
     EIGHT(8, 8),
     SIX(6, 6),
-    FOUR(4, 4),
-    /*CUSTOM(10, 10)*/;
+    FOUR(4, 4);
 
     private int n;
     private int m;
-    private int customN;
-    private int customM;
 
     FieldSizeOptions(int n, int m) {
         this.n = n;
@@ -19,29 +16,15 @@ public enum FieldSizeOptions {
     }
 
     public int getWidth() {
-        /*if(this.equals(FieldSizeOptions.CUSTOM)) {
-            return customN;
-        }*/
         return n;
     }
 
     public int getHeight() {
-        /* if(this.equals(FieldSizeOptions.CUSTOM)) {
-            return customM;
-        }*/
         return m;
-    }
-
-    public void setCustomSize(int n, int m) {
-        customN = n;
-        customM = m;
     }
 
     @Override
     public String toString() {
-        /*if(this.equals(FieldSizeOptions.CUSTOM)) {
-            return "Custom";
-        }*/
         return n + " by " + m;
     }
 }

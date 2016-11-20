@@ -23,7 +23,7 @@ public class GamePanel extends JLayeredPane {
 
     private JButton menuButton = new MenuButton();
     private JButton exitButton = new ExitButton();
-    private JLabel actualPlayerLabel = new JLabel("Next player: ");
+    private JLabel actualPlayerLabel = new JLabel("Actual player: ");
     private PlayerIndicator playerIndicator;
     
     public GamePanel(FieldSizeOptions fieldSizeOption, GameLogic gameLogic) {
@@ -33,7 +33,7 @@ public class GamePanel extends JLayeredPane {
         gameFieldPanel.setBounds(xOffset, yOffset, GRID_SIZE_DEFAULT, GRID_SIZE_DEFAULT);
         menuButton.setBounds((WINDOW_WIDTH - GRID_SIZE_DEFAULT) / 2, WINDOW_HEIGHT - 70, 100, 30);
         exitButton.setBounds(((WINDOW_WIDTH - GRID_SIZE_DEFAULT) / 2) + 120, WINDOW_HEIGHT - 70, 100, 30);
-        actualPlayerLabel.setBounds(WINDOW_WIDTH - ((WINDOW_WIDTH - GRID_SIZE_DEFAULT) / 2) - 250, WINDOW_HEIGHT - 70, 160, 30);
+        actualPlayerLabel.setBounds(WINDOW_WIDTH - ((WINDOW_WIDTH - GRID_SIZE_DEFAULT) / 2) - 280, WINDOW_HEIGHT - 70, 200, 30);
         actualPlayerLabel.setFont(new Font("Century Gothic", Font.PLAIN, (int) Math.round(BUTTON_SIZE.height / 2.4)));
         playerIndicator.setBounds(WINDOW_WIDTH - ((WINDOW_WIDTH - GRID_SIZE_DEFAULT) / 2) - 100, WINDOW_HEIGHT - 70, 100, 30);
         gameLogic.setActualGamePanel(gameFieldPanel);

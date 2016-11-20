@@ -13,12 +13,12 @@ public class GameFieldPanel extends JPanel {
     Color color1 = new Color(180, 180, 180, 240);
     Color color2 = new Color(40, 40, 40, 200);
 
-    public GameFieldPanel(FieldSizeOptions options) {
-        setLayout(new GridLayout(options.getWidth(), options.getHeight()));
+    public GameFieldPanel(FieldSizeOptions option) {
+        setLayout(new GridLayout(option.getWidth(), option.getHeight()));
         setMaximumSize(GRID_DIMENSIONS);
         setBounds(0, 0, GRID_DIMENSIONS.width, GRID_DIMENSIONS.height);
-        for (int i = 0; i < options.getWidth(); i++) {
-            for (int j = 0; j < options.getHeight(); j++) {
+        for (int i = 0; i < option.getWidth(); i++) {
+            for (int j = 0; j < option.getHeight(); j++) {
                 Tile tile = new Tile((i + j) % 2 == 0 ? color1 : color2);
                 add(tile);
             }

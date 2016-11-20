@@ -4,10 +4,7 @@
 
     <groupId>com.github.alexaegis</groupId>
     <artifactId>submission2</artifactId>
-    <version>0.5.0</version>
-    <modules>
-        <module>asd</module>
-    </modules>
+    <version>1.1.0</version>
     <packaging>pom</packaging>
 
     <name>submission2</name>

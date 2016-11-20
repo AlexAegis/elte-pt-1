@@ -20,14 +20,12 @@ public class DashLogic extends AbstractLogic implements GameLogic {
     @Override
     public void initGame(FieldSizeOptions option) {
         for (int i = 0; i < Math.min(option.getWidth(), option.getHeight()) * 2; i++) {
-            Pawn piece = new Pawn(-1);
             Tile panel = (Tile) actualGamePanel.getComponent(i);
-            panel.add(piece);
+            panel.add(new Pawn(-1));
         }
         for (int i = 0; i < Math.min(option.getWidth(), option.getHeight()) * 2; i++) {
-            Pawn piece = new Pawn(1);
             Tile panel = (Tile) actualGamePanel.getComponent((Math.min(option.getWidth(), option.getHeight()) * Math.min(option.getWidth(), option.getHeight())) - i - 1);
-            panel.add(piece);
+            panel.add(new Pawn(1));
         }
     }
 
