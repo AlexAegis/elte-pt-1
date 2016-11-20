@@ -14,7 +14,7 @@ public final class Pawn extends JComponent {
     private static GradientPaint player0Color = new GradientPaint(0, 0, new Color(220,60, 40, 255),100, 255, new Color(220,160, 100, 230));
     private static GradientPaint player0PromotedColor = new GradientPaint(0, 0, new Color(182, 14, 47, 255),100, 255, new Color(220, 61, 46, 230));
     private static GradientPaint player1Color = new GradientPaint(0, 0, new Color(0, 110, 180, 255),100, 255, new Color(160,200, 220, 230));
-    private static GradientPaint player1PromotedColor = new GradientPaint(0, 0, new Color(94, 49, 220, 255),100, 255, new Color(141, 48, 247, 230));
+    private static GradientPaint player1PromotedColor = new GradientPaint(0, 0, new Color(109, 93, 220, 255),100, 255, new Color(141, 48, 247, 230));
     private GradientPaint actualColor;
 
     public Pawn(int player) {
@@ -64,6 +64,11 @@ public final class Pawn extends JComponent {
 
     public static GradientPaint getPlayer1Color() {
         return player1Color;
+    }
+
+    @Override
+    public String toString() {
+        return (player == 1) ? "Red" : "Blue";
     }
 
     @Override

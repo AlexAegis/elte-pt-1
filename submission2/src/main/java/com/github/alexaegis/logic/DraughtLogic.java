@@ -57,7 +57,7 @@ public class DraughtLogic extends AbstractLogic implements GameLogic {
             } else {
                 fw = direction.turnVertical().isForward();
             }
-            if((fw && direction.isDiagonal()) || actualPawn.isPromoted()) {
+            if((fw || actualPawn.isPromoted()) && direction.isDiagonal()) {
                 try {
                     Tile tile = (Tile) actualGamePanel.getComponentAt(TILE_SIZE * location[0] + (direction.getX() * TILE_SIZE), TILE_SIZE * location[1] + (direction.getY() * TILE_SIZE));
                     Tile tileAbove = (Tile) actualGamePanel.getComponentAt(TILE_SIZE * location[0] + (direction.getX() * 2 * TILE_SIZE), TILE_SIZE * location[1] + (direction.getY() * 2 * TILE_SIZE));
@@ -104,7 +104,7 @@ public class DraughtLogic extends AbstractLogic implements GameLogic {
             actualPawn.promote();
         }
         if(isGameWon()) {
-            JOptionPane.showMessageDialog(null, "Game over! The winner is: " + (actualPawn.getPlayer() == 1 ? "Red" : "Blue"));
+            JOptionPane.showMessageDialog(null, "Game over! The winner is: " + actualPawn.toString());
             JPanel gp = (JPanel) actualGamePanel.getParent().getParent();
             gp.removeAll();
             gp.add(new MenuPanel());
@@ -125,15 +125,16 @@ public class DraughtLogic extends AbstractLogic implements GameLogic {
     }
 
     public boolean isReachedEnd() {
-        ArrayList<Tile> goal1 = new ArrayList<>(); // Blue dest
-        ArrayList<Tile> goal2 = new ArrayList<>(); // Red dest
+        ArrayList<Tile> goal = new ArrayList<>();
         for (int i = 0; i < GRID_SIZE_DEFAULT / TILE_SIZE; i++) {
-            goal1.add((Tile) actualGamePanel.getComponent(actualGamePanel.getComponents().length - i - 1));
-            goal2.add((Tile) actualGamePanel.getComponent(i));
+            if(actualPawn.getPlayer() == -1) {
+                goal.add((Tile) actualGamePanel.getComponent(actualGamePanel.getComponents().length - i - 1));
+            } else {
+                goal.add((Tile) actualGamePanel.getComponent(i));
+            }
         }
-        return goal1.stream()
+        return goal.stream()
                 .anyMatch(tile -> tile.getComponents().length > 0 &&
-                        tile.getComponent(0) instanceof Pawn && ((Pawn) tile.getComponent(0)).getPlayer() == -1) ||
-                goal2.stream().anyMatch(tile -> tile.getComponents().length > 0 && tile.getComponent(0) instanceof Pawn && ((Pawn) tile.getComponent(0)).getPlayer() == 1);
+                        tile.getComponent(0) instanceof Pawn && ((Pawn) tile.getComponent(0)).getPlayer() == actualPawn.getPlayer());
     }
 }
