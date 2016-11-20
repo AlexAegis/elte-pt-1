@@ -1,6 +1,6 @@
 package com.github.alexaegis.elements;
 
-import com.github.alexaegis.logic.GameModes;
+import com.github.alexaegis.logic.GameLogic;
 import com.github.alexaegis.tiles.Pawn;
 
 import javax.swing.*;
@@ -11,10 +11,10 @@ import static com.github.alexaegis.Main.BUTTON_SIZE;
 public class PlayerIndicator extends JComponent {
 
     private Paint actualPlayerColor;
-    private GameModes gameMode;
+    private GameLogic gameLogic;
 
-    public PlayerIndicator(GameModes gameMode) {
-        this.gameMode = gameMode;
+    public PlayerIndicator(GameLogic gameLogic) {
+        this.gameLogic = gameLogic;
     }
 
     public void setIndicatorColor(int actualPlayer) {
@@ -28,7 +28,7 @@ public class PlayerIndicator extends JComponent {
         Graphics2D graphics = (Graphics2D)g;
         graphics.setRenderingHint(RenderingHints.KEY_ANTIALIASING,
                 RenderingHints.VALUE_ANTIALIAS_ON);
-        setIndicatorColor(gameMode.getActualPlayer());
+        setIndicatorColor(gameLogic.getActualPlayer());
         graphics.setPaint(actualPlayerColor);
         graphics.fillRect(0, 0, BUTTON_SIZE.width, BUTTON_SIZE.height);
     }

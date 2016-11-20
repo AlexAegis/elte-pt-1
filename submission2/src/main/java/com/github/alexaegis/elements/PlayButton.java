@@ -26,7 +26,7 @@ public class PlayButton extends GameButton {
             fieldSizeOption.setCustomSize(Math.max(n1.getValue(), n2.getValue()), Math.max(n1.getValue(), n2.getValue()));*/
             TILE_SIZE = GRID_SIZE_DEFAULT / Math.max(fieldSizeOption.getWidth(), fieldSizeOption.getHeight());
             gp.removeAll();
-            gp.add(new GamePanel(fieldSizeOption, ((GameModes) ((GameModeSelector) getParent().getComponent(1)).getSelectedItem())));
+            gp.add(new GamePanel(fieldSizeOption, ((GameModes) ((GameModeSelector) getParent().getComponent(1)).getSelectedItem()).getGameLogic()));
             gp.revalidate();
             gp.repaint();
         });

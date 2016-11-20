@@ -4,6 +4,7 @@ import com.github.alexaegis.elements.MenuButton;
 import com.github.alexaegis.elements.PlayerIndicator;
 import com.github.alexaegis.logic.FieldSizeOptions;
 import com.github.alexaegis.elements.ExitButton;
+import com.github.alexaegis.logic.GameLogic;
 import com.github.alexaegis.logic.GameModes;
 import com.github.alexaegis.controllers.MouseControl;
 
@@ -25,9 +26,9 @@ public class GamePanel extends JLayeredPane {
     private JLabel actualPlayerLabel = new JLabel("Next player: ");
     private PlayerIndicator playerIndicator;
     
-    public GamePanel(FieldSizeOptions fieldSizeOption, GameModes gameMode) {
-        mouseControl = new MouseControl(gameMode);
-        playerIndicator = new PlayerIndicator(gameMode);
+    public GamePanel(FieldSizeOptions fieldSizeOption, GameLogic gameLogic) {
+        mouseControl = new MouseControl(gameLogic);
+        playerIndicator = new PlayerIndicator(gameLogic);
         gameFieldPanel = new GameFieldPanel(fieldSizeOption);
         gameFieldPanel.setBounds(xOffset, yOffset, GRID_SIZE_DEFAULT, GRID_SIZE_DEFAULT);
         menuButton.setBounds((WINDOW_WIDTH - GRID_SIZE_DEFAULT) / 2, WINDOW_HEIGHT - 70, 100, 30);
@@ -35,8 +36,8 @@ public class GamePanel extends JLayeredPane {
         actualPlayerLabel.setBounds(WINDOW_WIDTH - ((WINDOW_WIDTH - GRID_SIZE_DEFAULT) / 2) - 250, WINDOW_HEIGHT - 70, 160, 30);
         actualPlayerLabel.setFont(new Font("Century Gothic", Font.PLAIN, (int) Math.round(BUTTON_SIZE.height / 2.4)));
         playerIndicator.setBounds(WINDOW_WIDTH - ((WINDOW_WIDTH - GRID_SIZE_DEFAULT) / 2) - 100, WINDOW_HEIGHT - 70, 100, 30);
-        gameMode.setActualGamePanel(gameFieldPanel);
-        gameMode.initGame(fieldSizeOption);
+        gameLogic.setActualGamePanel(gameFieldPanel);
+        gameLogic.initGame(fieldSizeOption);
         add(gameFieldPanel, JLayeredPane.DEFAULT_LAYER, 1);
         add(menuButton, 2);
         add(exitButton, 2);
