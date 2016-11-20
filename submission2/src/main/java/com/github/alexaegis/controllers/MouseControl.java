@@ -67,7 +67,7 @@ public class MouseControl implements MouseListener, MouseMotionListener {
         iy = Math.min(iy, yMax);
         iy = Math.max(iy, 0);
         gameMode.getActualPawn().setLocation(ix, iy);
-        game.repaint(); //INFO can be disabled for better performance
+        //game.repaint(); //INFO can be disabled for better performance
     }
 
     @Override

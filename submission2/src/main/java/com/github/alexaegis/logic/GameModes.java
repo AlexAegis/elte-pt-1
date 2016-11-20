@@ -219,4 +219,16 @@ public enum GameModes {
 
         }
     }
+
+    @Override
+    public String toString() {
+        switch(this) {
+            case DASH:
+                return "Dash";
+            case DASH_WITH_REAL_PAWNS:
+                return "Dash (with real pawns)";
+            default:
+                return "";
+        }
+    }
 }

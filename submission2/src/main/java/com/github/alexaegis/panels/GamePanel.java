@@ -1,6 +1,7 @@
 package com.github.alexaegis.panels;
 
 import com.github.alexaegis.elements.MenuButton;
+import com.github.alexaegis.elements.PlayerIndicator;
 import com.github.alexaegis.logic.FieldSizeOptions;
 import com.github.alexaegis.elements.ExitButton;
 import com.github.alexaegis.logic.GameModes;
@@ -19,24 +20,28 @@ public class GamePanel extends JLayeredPane {
     public static int xOffset = (WINDOW_WIDTH - GRID_SIZE_DEFAULT) / 2;
     public static int yOffset = 20;
 
-    private Button menuButton = new MenuButton();
-    private Button exitButton = new ExitButton();
+    private JButton menuButton = new MenuButton();
+    private JButton exitButton = new ExitButton();
     private JLabel actualPlayerLabel = new JLabel("Next player: ");
+    private PlayerIndicator playerIndicator;
     
     public GamePanel(FieldSizeOptions fieldSizeOption, GameModes gameMode) {
         mouseControl = new MouseControl(gameMode);
+        playerIndicator = new PlayerIndicator(gameMode);
         gameFieldPanel = new GameFieldPanel(fieldSizeOption);
         gameFieldPanel.setBounds(xOffset, yOffset, GRID_SIZE_DEFAULT, GRID_SIZE_DEFAULT);
-        menuButton.setBounds(20, WINDOW_WIDTH - 180, 100, 50);
-        exitButton.setBounds(20, WINDOW_WIDTH - 90, 100, 50);
-        actualPlayerLabel.setBounds(20, 90, 100, 50);
-
+        menuButton.setBounds((WINDOW_WIDTH - GRID_SIZE_DEFAULT) / 2, WINDOW_HEIGHT - 70, 100, 30);
+        exitButton.setBounds(((WINDOW_WIDTH - GRID_SIZE_DEFAULT) / 2) + 120, WINDOW_HEIGHT - 70, 100, 30);
+        actualPlayerLabel.setBounds(WINDOW_WIDTH - ((WINDOW_WIDTH - GRID_SIZE_DEFAULT) / 2) - 250, WINDOW_HEIGHT - 70, 160, 30);
+        actualPlayerLabel.setFont(new Font("Century Gothic", Font.PLAIN, (int) Math.round(BUTTON_SIZE.height / 2.4)));
+        playerIndicator.setBounds(WINDOW_WIDTH - ((WINDOW_WIDTH - GRID_SIZE_DEFAULT) / 2) - 100, WINDOW_HEIGHT - 70, 100, 30);
         gameMode.setActualGamePanel(gameFieldPanel);
         gameMode.initGame(fieldSizeOption);
         add(gameFieldPanel, JLayeredPane.DEFAULT_LAYER, 1);
         add(menuButton, 2);
         add(exitButton, 2);
         add(actualPlayerLabel, 2);
+        add(playerIndicator, 2);
         addMouseListener(mouseControl);
         addMouseMotionListener(mouseControl);
     }
@@ -45,7 +50,7 @@ public class GamePanel extends JLayeredPane {
     protected void paintComponent(Graphics g) {
         super.paintComponent(g);
         Graphics2D graphics = (Graphics2D) g;
-        graphics.setPaint(new GradientPaint(0, 0, new Color(25, 89, 138,255), WINDOW_WIDTH, WINDOW_HEIGHT / 2 ,new Color(70, 83, 167,255)));
+        graphics.setPaint(new GradientPaint(0, 0, new Color(96, 121, 211,255), WINDOW_WIDTH, WINDOW_HEIGHT / 2 ,new Color(46, 91, 206,255)));
         graphics.fillRect(0,0,WINDOW_WIDTH, WINDOW_HEIGHT);
     }
 }

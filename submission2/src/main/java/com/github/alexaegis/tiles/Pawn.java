@@ -32,6 +32,14 @@ public final class Pawn extends JComponent {
         return player;
     }
 
+    public static GradientPaint getPlayer0Color() {
+        return player0Color;
+    }
+
+    public static GradientPaint getPlayer1Color() {
+        return player1Color;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;

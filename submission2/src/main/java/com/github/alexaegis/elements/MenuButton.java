@@ -7,14 +7,12 @@ import java.awt.*;
 
 import static com.github.alexaegis.Main.BUTTON_SIZE;
 
-public class MenuButton extends Button {
-
-    private final String name = "Back to menu";
+public class MenuButton extends GameButton {
 
     public MenuButton() {
+        name = "Back";
         setName(name);
-        setLabel(name);
-        setSize(BUTTON_SIZE);
+        setText(name);
         addActionListener(actionEvent -> {
             JPanel gp = (JPanel) getParent().getParent();
             gp.removeAll();

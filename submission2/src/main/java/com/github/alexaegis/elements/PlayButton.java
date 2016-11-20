@@ -7,30 +7,30 @@ import com.github.alexaegis.panels.GamePanel;
 import javax.swing.*;
 import java.awt.*;
 
-import static com.github.alexaegis.Main.BUTTON_SIZE;
-import static com.github.alexaegis.Main.GRID_SIZE_DEFAULT;
-import static com.github.alexaegis.Main.TILE_SIZE;
+import static com.github.alexaegis.Main.*;
+import static com.github.alexaegis.Main.WINDOW_HEIGHT;
+import static com.github.alexaegis.Main.WINDOW_WIDTH;
 
-public class PlayButton extends Button {
-
-    private final String name = "Play Dash";
+public class PlayButton extends GameButton {
 
     public PlayButton() {
+        name = "Play";
         setName(name);
-        setLabel(name);
-        setSize(BUTTON_SIZE);
+        setText(name);
         addActionListener(actionEvent -> {
             JPanel gp = (JPanel) getParent().getParent();
-            JComboBox comboBox = (JComboBox) getParent().getComponent(1);
+            JComboBox comboBox = (JComboBox) getParent().getComponent(2);
             FieldSizeOptions fieldSizeOption = (FieldSizeOptions) comboBox.getSelectedItem();
-            NumberSelector n1 = (NumberSelector) getParent().getComponent(3);
-            NumberSelector n2 = (NumberSelector) getParent().getComponent(5);
+            NumberSelector n1 = (NumberSelector) getParent().getComponent(4);
+            NumberSelector n2 = (NumberSelector) getParent().getComponent(6);
             fieldSizeOption.setCustomSize(Math.max(n1.getValue(), n2.getValue()), Math.max(n1.getValue(), n2.getValue()));
             TILE_SIZE = GRID_SIZE_DEFAULT / Math.max(fieldSizeOption.getWidth(), fieldSizeOption.getHeight());
             gp.removeAll();
-            gp.add(new GamePanel(fieldSizeOption, GameModes.DASH_WITH_REAL_PAWNS));
+            gp.add(new GamePanel(fieldSizeOption, ((GameModes) ((GameModeSelector) getParent().getComponent(1)).getSelectedItem())));
             gp.revalidate();
             gp.repaint();
         });
     }
+
+
 }

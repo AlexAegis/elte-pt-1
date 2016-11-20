@@ -1,12 +1,8 @@
 package com.github.alexaegis.logic;
 
-
-import static com.github.alexaegis.Main.GRID_SIZE_DEFAULT;
-import static com.github.alexaegis.Main.TILE_SIZE;
-
 public enum FieldSizeOptions {
     SIX(6, 6),
-    EIGTH(8, 8),
+    EIGHT(8, 8),
     TEN(10, 10),
     CUSTOM(10, 10);
 
