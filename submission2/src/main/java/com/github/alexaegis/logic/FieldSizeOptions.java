@@ -1,10 +1,12 @@
 package com.github.alexaegis.logic;
 
 public enum FieldSizeOptions {
-    SIX(6, 6),
-    EIGHT(8, 8),
+    TWELVE(12, 12),
     TEN(10, 10),
-    CUSTOM(10, 10);
+    EIGHT(8, 8),
+    SIX(6, 6),
+    FOUR(4, 4),
+    /*CUSTOM(10, 10)*/;
 
     private int n;
     private int m;
@@ -17,19 +19,17 @@ public enum FieldSizeOptions {
     }
 
     public int getWidth() {
-        if(this.equals(FieldSizeOptions.CUSTOM)) {
+        /*if(this.equals(FieldSizeOptions.CUSTOM)) {
             return customN;
-        } else {
-            return n;
-        }
+        }*/
+        return n;
     }
 
     public int getHeight() {
-        if(this.equals(FieldSizeOptions.CUSTOM)) {
+        /* if(this.equals(FieldSizeOptions.CUSTOM)) {
             return customM;
-        } else {
-            return m;
-        }
+        }*/
+        return m;
     }
 
     public void setCustomSize(int n, int m) {
@@ -39,9 +39,9 @@ public enum FieldSizeOptions {
 
     @Override
     public String toString() {
-        if(this.equals(FieldSizeOptions.CUSTOM)) {
+        /*if(this.equals(FieldSizeOptions.CUSTOM)) {
             return "Custom";
-        }
+        }*/
         return n + " by " + m;
     }
 }

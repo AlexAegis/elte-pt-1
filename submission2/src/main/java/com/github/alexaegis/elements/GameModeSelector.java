@@ -3,12 +3,11 @@ package com.github.alexaegis.elements;
 import com.github.alexaegis.logic.GameModes;
 
 import javax.swing.*;
+import java.util.Arrays;
 
 public class GameModeSelector extends JComboBox {
-
     public GameModeSelector() {
-        addItem(GameModes.DASH);
-        addItem(GameModes.DASH_WITH_REAL_PAWNS);
+        Arrays.stream(GameModes.values()).forEach(this::addItem);
         setSelectedIndex(0);
     }
 }

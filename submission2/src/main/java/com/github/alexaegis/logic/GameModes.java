@@ -1,10 +1,12 @@
 package com.github.alexaegis.logic;
 
 import com.github.alexaegis.panels.GameFieldPanel;
+import com.github.alexaegis.panels.MenuPanel;
 import com.github.alexaegis.tiles.HightLight;
 import com.github.alexaegis.tiles.Pawn;
 import com.github.alexaegis.tiles.Tile;
 
+import javax.swing.*;
 import java.awt.*;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -15,7 +17,7 @@ import static com.github.alexaegis.Main.TILE_SIZE;
 
 public enum GameModes {
     DASH,
-    DASH_WITH_REAL_PAWNS;
+    DASH_WITH_CHESS_PAWNS;
 
     private int actualPlayer;
     private Pawn actualPawn;
@@ -28,7 +30,7 @@ public enum GameModes {
             case DASH:
                 initDash(option);
                 break;
-            case DASH_WITH_REAL_PAWNS:
+            case DASH_WITH_CHESS_PAWNS:
                 initDash(option);
                 break;
         }
@@ -82,7 +84,7 @@ public enum GameModes {
                     validSteps.forEach(v ->
                             v.add(new HightLight()));
                 }
-            case DASH_WITH_REAL_PAWNS:
+            case DASH_WITH_CHESS_PAWNS:
                 if(location != null) {
                     try {
                         Tile front = (Tile) actualGamePanel.getComponentAt(TILE_SIZE * location[0], TILE_SIZE * location[1] - TILE_SIZE * actualPlayer);
@@ -172,17 +174,20 @@ public enum GameModes {
             case DASH:
                 evaluateDash(destination, original);
                 break;
-            case DASH_WITH_REAL_PAWNS:
+            case DASH_WITH_CHESS_PAWNS:
                 evaluateDash(destination, original);
                 break;
         }
+        clearValidSteps();
         if(isGameWon()) {
-            System.out.println("GAME OVER!");
-            System.out.println("WON BY: " + (actualPawn.getPlayer() == -1 ? "red" : "blue"));
-
+            JOptionPane.showMessageDialog(null, "Game over! The winner is: " + (actualPawn.getPlayer() == 1 ? "red" : "blue"));
+            JPanel gp = (JPanel) actualGamePanel.getParent().getParent();
+            gp.removeAll();
+            gp.add(new MenuPanel());
+            gp.revalidate();
+            gp.repaint();
         }
         clearActualPawn();
-        clearValidSteps();
     }
 
     private void evaluateDash(Component destination, Component original) {
@@ -225,8 +230,8 @@ public enum GameModes {
         switch(this) {
             case DASH:
                 return "Dash";
-            case DASH_WITH_REAL_PAWNS:
-                return "Dash (with real pawns)";
+            case DASH_WITH_CHESS_PAWNS:
+                return "Dash (Chess pawns)";
             default:
                 return "";
         }

@@ -41,7 +41,7 @@ public class MenuPanel extends JPanel {
         constraints.gridx = 1;
         add(exit, constraints);
         constraints.insets = new Insets(0, 0, 0, 0);
-
+        /*
         constraints.gridy = 2;
         constraints.gridx = 2;
         add(numberSelector1, constraints);
@@ -52,7 +52,7 @@ public class MenuPanel extends JPanel {
 
         constraints.gridy = 2;
         constraints.gridx = 4;
-        add(numberSelector2, constraints);
+        add(numberSelector2, constraints);*/
 
         constraints.gridy = 2;
         constraints.gridx = 0;
