@@ -20,7 +20,7 @@ public enum FieldSizeOptions {
         this.m = m;
     }
 
-    public int getN() {
+    public int getWidth() {
         if(this.equals(FieldSizeOptions.CUSTOM)) {
             return customN;
         } else {
@@ -28,7 +28,7 @@ public enum FieldSizeOptions {
         }
     }
 
-    public int getM() {
+    public int getHeight() {
         if(this.equals(FieldSizeOptions.CUSTOM)) {
             return customM;
         } else {

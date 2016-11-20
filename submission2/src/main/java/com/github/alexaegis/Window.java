@@ -1,6 +1,7 @@
 package com.github.alexaegis;
 
 import com.github.alexaegis.logic.FieldSizeOptions;
+import com.github.alexaegis.logic.GameModes;
 import com.github.alexaegis.panels.GamePanel;
 import com.github.alexaegis.panels.MenuPanel;
 
@@ -16,6 +17,6 @@ public class Window extends JFrame {
         setResizable(WINDOW_RESIZEABLE);
         setLocationRelativeTo(null);
         setDefaultCloseOperation(EXIT_ON_CLOSE);
-        getContentPane().add(new GamePanel(FieldSizeOptions.SIX)); //getContentPane().add(new MenuPanel());
+        getContentPane().add(new MenuPanel()); //getContentPane().add(new MenuPanel());
     }
 }
