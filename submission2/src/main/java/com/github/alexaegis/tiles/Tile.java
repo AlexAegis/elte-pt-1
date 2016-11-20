@@ -7,7 +7,7 @@ import static com.github.alexaegis.Main.TILE_SIZE;
 
 public final class Tile extends JComponent {
 
-    float[] dist = {0.05f, 1f};
+    private float[] dist = {0.05f, 1f};
 
     private Paint paint;
 

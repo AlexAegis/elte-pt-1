@@ -34,7 +34,7 @@ public final class Main {
             WINDOW_WIDTH = Integer.parseInt(PROPERTIES.getProperty("window_width"));
             WINDOW_NAME_MAIN = PROPERTIES.getProperty("window_name_main");
             WINDOW_RESIZEABLE = Boolean.parseBoolean(PROPERTIES.getProperty("window_resizeable"));
-            BUTTON_SIZE = new Dimension(WINDOW_HEIGHT / 10, WINDOW_WIDTH / 16);
+            BUTTON_SIZE = new Dimension(WINDOW_WIDTH / 10, WINDOW_HEIGHT / 16);
 
             EventQueue.invokeLater(() -> {
                 Window window = new Window();
