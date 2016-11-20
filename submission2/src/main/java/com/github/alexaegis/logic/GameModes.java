@@ -17,7 +17,8 @@ import static com.github.alexaegis.Main.TILE_SIZE;
 
 public enum GameModes {
     DASH,
-    DASH_WITH_CHESS_PAWNS;
+    DASH_WITH_CHESS_PAWNS,
+    DRAUGHTS;
 
     private int actualPlayer;
     private Pawn actualPawn;
@@ -33,6 +34,36 @@ public enum GameModes {
             case DASH_WITH_CHESS_PAWNS:
                 initDash(option);
                 break;
+            case DRAUGHTS:
+                initDraughts(option);
+                break;
+        }
+    }
+
+    private void initDraughts(FieldSizeOptions option) {
+        int lines = 2;
+        if(option.getHeight() > 6) {
+            lines = 3;
+        }
+
+        for (int i = 0; i < option.getWidth(); i++) {
+            for (int j = 0; j < lines; j++) {
+                if((i + j) % 2 == 0) {
+                    Pawn piece = new Pawn(-1);
+                    Tile panel = (Tile) actualGamePanel.getComponent(i + j);
+                    panel.add(piece);
+                }
+            }
+        }
+
+        for (int i = 0; i < option.getWidth(); i++) {
+            for (int j = 0; j < option.getHeight() - lines; j++) {
+                if((i + j) % 2 == 0) {
+                    Pawn piece = new Pawn(1);
+                    Tile panel = (Tile) actualGamePanel.getComponent(i + j);
+                    panel.add(piece);
+                }
+            }
         }
     }
 
@@ -106,7 +137,7 @@ public enum GameModes {
                     try {
                         Tile right = (Tile) actualGamePanel.getComponentAt(TILE_SIZE * location[0] + TILE_SIZE, TILE_SIZE * location[1] - TILE_SIZE * actualPlayer);
                         if(right != null && !Arrays.stream(right.getComponents()).anyMatch(component -> component instanceof Pawn && ((Pawn)component).getPlayer() == actualPlayer) && right.getComponents().length == 1) {
-                            validSteps.add(right);
+                           validSteps.add(right);
                         }
                     } catch (ClassCastException e) {
                         e.printStackTrace();
@@ -232,6 +263,8 @@ public enum GameModes {
                 return "Dash";
             case DASH_WITH_CHESS_PAWNS:
                 return "Dash (Chess pawns)";
+            case DRAUGHTS:
+                return "Draughts";
             default:
                 return "";
         }

@@ -5,7 +5,10 @@
     <groupId>com.github.alexaegis</groupId>
     <artifactId>submission2</artifactId>
     <version>0.5.0</version>
-    <packaging>jar</packaging>
+    <modules>
+        <module>asd</module>
+    </modules>
+    <packaging>pom</packaging>
 
     <name>submission2</name>
     <url>http://maven.apache.org</url>
