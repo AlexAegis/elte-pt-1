@@ -7,9 +7,11 @@ import com.github.alexaegis.tiles.Tile;
 
 import javax.swing.*;
 import java.awt.*;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+import static com.github.alexaegis.Main.GRID_SIZE_DEFAULT;
 import static com.github.alexaegis.Main.TILE_SIZE;
 
 public class DraughtLogic extends AbstractLogic implements GameLogic {
@@ -65,10 +67,10 @@ public class DraughtLogic extends AbstractLogic implements GameLogic {
                         } else if(tile.getComponents().length == 1
                                 && tile.getComponent(0) instanceof Pawn
                                 && ((Pawn)tile.getComponent(0)).getPlayer() != actualPlayer) {
-                            setTarget((Pawn) tile.getComponent(0));
                             if(tileAbove != null && tileAbove.getComponents().length == 0) {
                                 validSteps.add(tileAbove);
                                 aboveTarget = tileAbove;
+                                setTarget((Pawn) tile.getComponent(0));
                             }
                         }
                     }
@@ -98,6 +100,9 @@ public class DraughtLogic extends AbstractLogic implements GameLogic {
         parent.repaint();
         parent.validate();
         clearValidSteps();
+        if(isReachedEnd()) {
+            actualPawn.promote();
+        }
         if(isGameWon()) {
             JOptionPane.showMessageDialog(null, "Game over! The winner is: " + (actualPawn.getPlayer() == 1 ? "Red" : "Blue"));
             JPanel gp = (JPanel) actualGamePanel.getParent().getParent();
@@ -117,5 +122,18 @@ public class DraughtLogic extends AbstractLogic implements GameLogic {
         return Arrays.stream(actualGamePanel.getComponents()).filter(component -> ((Tile)component).getComponents().length > 0)
                 .map(component -> ((Tile)component).getComponent(0))
                 .allMatch(component -> ((Pawn)component).getPlayer() == actualPawn.getPlayer());
+    }
+
+    public boolean isReachedEnd() {
+        ArrayList<Tile> goal1 = new ArrayList<>(); // Blue dest
+        ArrayList<Tile> goal2 = new ArrayList<>(); // Red dest
+        for (int i = 0; i < GRID_SIZE_DEFAULT / TILE_SIZE; i++) {
+            goal1.add((Tile) actualGamePanel.getComponent(actualGamePanel.getComponents().length - i - 1));
+            goal2.add((Tile) actualGamePanel.getComponent(i));
+        }
+        return goal1.stream()
+                .anyMatch(tile -> tile.getComponents().length > 0 &&
+                        tile.getComponent(0) instanceof Pawn && ((Pawn) tile.getComponent(0)).getPlayer() == -1) ||
+                goal2.stream().anyMatch(tile -> tile.getComponents().length > 0 && tile.getComponent(0) instanceof Pawn && ((Pawn) tile.getComponent(0)).getPlayer() == 1);
     }
 }
