@@ -1,6 +1,6 @@
 package com.github.alexaegis.controllers;
 
-import com.github.alexaegis.logic.GameModes;
+import com.github.alexaegis.logic.GameLogic;
 import com.github.alexaegis.tiles.Pawn;
 
 import javax.swing.*;
@@ -20,10 +20,10 @@ public class MouseControl implements MouseListener, MouseMotionListener {
     private JPanel gameField;
     private Component original;
 
-    private GameModes gameMode;
+    private GameLogic gameLogic;
 
-    public MouseControl(GameModes gameMode) {
-        this.gameMode = gameMode;
+    public MouseControl(GameLogic gameLogic) {
+        this.gameLogic = gameLogic;
     }
 
     @Override
@@ -32,10 +32,10 @@ public class MouseControl implements MouseListener, MouseMotionListener {
         gameField = (JPanel) game.getParent();
         try {
             Pawn pawn = (Pawn) gameField.findComponentAt(e.getX(), e.getY());
-            if (!gameMode.currentPlayersPawn(pawn)) {
+            if (!gameLogic.currentPlayersPawn(pawn)) {
                 return;
             }
-            gameMode.setActualPawn(pawn);
+            gameLogic.setActualPawn(pawn);
 
             original = pawn.getParent();
 
@@ -43,9 +43,9 @@ public class MouseControl implements MouseListener, MouseMotionListener {
             x = parentLocation.x - e.getX();
             y = parentLocation.y - e.getY();
 
-            gameMode.getActualPawn().setLocation(e.getX() + x + xOffset, e.getY() + y + yOffset);
+            gameLogic.getActualPawn().setLocation(e.getX() + x + xOffset, e.getY() + y + yOffset);
 
-            game.add(gameMode.getActualPawn(), JLayeredPane.DRAG_LAYER);
+            game.add(gameLogic.getActualPawn(), JLayeredPane.DRAG_LAYER);
             game.setCursor(Cursor.getPredefinedCursor(Cursor.MOVE_CURSOR));
         } catch (ClassCastException ex) {
         }
@@ -55,18 +55,18 @@ public class MouseControl implements MouseListener, MouseMotionListener {
 
     @Override
     public void mouseDragged(MouseEvent e) {
-        if (gameMode.getActualPawn() == null) {
+        if (gameLogic.getActualPawn() == null) {
             return;
         }
         int ix = e.getX() + this.x + xOffset;
-        int xMax = game.getWidth() - gameMode.getActualPawn().getWidth();
+        int xMax = game.getWidth() - gameLogic.getActualPawn().getWidth();
         ix = Math.min(ix, xMax);
         ix = Math.max(ix, 0);
         int iy = e.getY() + this.y + yOffset;
-        int yMax = game.getHeight() - gameMode.getActualPawn().getHeight();
+        int yMax = game.getHeight() - gameLogic.getActualPawn().getHeight();
         iy = Math.min(iy, yMax);
         iy = Math.max(iy, 0);
-        gameMode.getActualPawn().setLocation(ix, iy);
+        gameLogic.getActualPawn().setLocation(ix, iy);
         //game.repaint(); //INFO can be disabled for better performance
     }
 
@@ -75,25 +75,25 @@ public class MouseControl implements MouseListener, MouseMotionListener {
 
         game.setCursor(null);
 
-        if (gameMode.getActualPawn() == null) {
-            gameMode.clearValidSteps();
-            gameMode.clearActualPawn();
+        if (gameLogic.getActualPawn() == null) {
+            gameLogic.clearValidSteps();
+            gameLogic.clearActualPawn();
             return;
         }
 
-        gameMode.getActualPawn().setVisible(false);
-        game.remove(gameMode.getActualPawn());
-        gameMode.getActualPawn().setVisible(true);
+        gameLogic.getActualPawn().setVisible(false);
+        game.remove(gameLogic.getActualPawn());
+        gameLogic.getActualPawn().setVisible(true);
 
-        int xMax = game.getWidth() - gameMode.getActualPawn().getWidth();
+        int xMax = game.getWidth() - gameLogic.getActualPawn().getWidth();
         int ix = Math.min(e.getX(), xMax);
         ix = Math.max(ix, 0);
 
-        int yMax = game.getHeight() - gameMode.getActualPawn().getHeight();
+        int yMax = game.getHeight() - gameLogic.getActualPawn().getHeight();
         int iy = Math.min(e.getY(), yMax);
         iy = Math.max(iy, 0);
 
-        gameMode.evaluateStep(gameField.findComponentAt(ix, iy), original);
+        gameLogic.evaluateStep(gameField.findComponentAt(ix, iy), original);
         game.revalidate();
         game.repaint();
     }
