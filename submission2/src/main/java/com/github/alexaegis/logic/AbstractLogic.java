@@ -6,6 +6,7 @@ import com.github.alexaegis.tiles.Pawn;
 import com.github.alexaegis.tiles.Tile;
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.stream.Stream;
 
 import static com.github.alexaegis.Main.GRID_SIZE_DEFAULT;
@@ -15,7 +16,8 @@ public abstract class AbstractLogic implements GameLogic {
 
     protected int actualPlayer = -1;
     protected Pawn actualPawn;
-    protected ArrayList<Tile> validSteps = new ArrayList<>();
+    protected Pawn target;
+    protected List<Tile> validSteps = new ArrayList<>();
     protected GameFieldPanel actualGamePanel;
 
     @Override
@@ -59,6 +61,16 @@ public abstract class AbstractLogic implements GameLogic {
     public void setActualPawn(Pawn pawn) {
         actualPawn = pawn;
         getValidSteps();
+    }
+
+    @Override
+    public void setTarget(Pawn target) {
+        this.target = target;
+    }
+
+    @Override
+    public void clearTarget() {
+        target = null;
     }
 
     @Override

@@ -36,4 +36,7 @@ public interface GameLogic {
 
     boolean isGameWon();
 
+    void setTarget(Pawn target);
+
+    void clearTarget();
 }

@@ -9,6 +9,7 @@ import static com.github.alexaegis.Main.TILE_SIZE;
 public final class Pawn extends JComponent {
 
     private int player;
+    private boolean promoted = false;
 
     private static GradientPaint player0Color = new GradientPaint(0, 0, new Color(220,60, 40, 255),100, 255, new Color(220,160, 100, 230));
     private static GradientPaint player1Color = new GradientPaint(0, 0, new Color(0, 110, 180, 255),100, 255, new Color(160,200, 220, 230));
@@ -17,6 +18,23 @@ public final class Pawn extends JComponent {
         this.player = player;
         setPreferredSize(new Dimension(GRID_SIZE_DEFAULT / TILE_SIZE, GRID_SIZE_DEFAULT / TILE_SIZE));
         setVisible(true);
+    }
+
+    public void promote() {
+        promoted = true;
+    }
+
+    public void demote() {
+        promoted = false;
+    }
+
+    public boolean isPromoted() {
+        return promoted;
+    }
+
+    public Pawn takeOff() {
+        this.getParent().remove(this);
+        return this;
     }
 
     @Override

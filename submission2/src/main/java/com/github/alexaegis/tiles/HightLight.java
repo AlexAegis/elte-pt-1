@@ -17,7 +17,7 @@ public final class HightLight extends JComponent {
         Graphics2D g = (Graphics2D) graphics;
         float[] dist = {0.0f, 1.0f};
 
-        Color[] colors = {new Color(255, 255, 255, 160), new Color(255, 255, 255, 90)};
+        Color[] colors = {new Color(255, 255, 255, 180), new Color(255, 255, 255, 120)};
         g.setPaint(new RadialGradientPaint(TILE_SIZE / 2, TILE_SIZE / 2, TILE_SIZE * 2, dist, colors ));
         g.fillRect(0,0, TILE_SIZE,TILE_SIZE);
 
