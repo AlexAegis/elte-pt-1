@@ -1,0 +1,425 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<ClassDiagram name="submission2">
+  <ClassDiagramComponents>
+    <Class name="MouseControl" package="com.github.alexaegis.controllers" visibility="public" xPosition="20.0" yPosition="20.0">
+      <Fields>
+        <Field name="x" type="int" visibility="private"/>
+        <Field name="y" type="int" visibility="private"/>
+        <Field name="game" type="JLayeredPane" visibility="private"/>
+        <Field name="gameField" type="JPanel" visibility="private"/>
+        <Field name="original" type="Component" visibility="private"/>
+        <Field name="gameLogic" type="GameLogic" visibility="private"/>
+      </Fields>
+      <Constructors>
+        <Constructor visibility="public">
+          <Argument type="GameLogic" name="gameLogic"/>
+        </Constructor>
+      </Constructors>
+      <Methods>
+        <Method name="mousePressed" returnType="void" visibility="public">
+          <Argument type="MouseEvent" name="e"/>
+        </Method>
+        <Method name="mouseDragged" returnType="void" visibility="public">
+          <Argument type="MouseEvent" name="e"/>
+        </Method>
+        <Method name="mouseReleased" returnType="void" visibility="public">
+          <Argument type="MouseEvent" name="e"/>
+        </Method>
+        <Method name="mouseClicked" returnType="void" visibility="public">
+          <Argument type="MouseEvent" name="mouseEvent"/>
+        </Method>
+        <Method name="mouseEntered" returnType="void" visibility="public">
+          <Argument type="MouseEvent" name="mouseEvent"/>
+        </Method>
+        <Method name="mouseExited" returnType="void" visibility="public">
+          <Argument type="MouseEvent" name="mouseEvent"/>
+        </Method>
+        <Method name="mouseMoved" returnType="void" visibility="public">
+          <Argument type="MouseEvent" name="mouseEvent"/>
+        </Method>
+      </Methods>
+    </Class>
+    <Class name="ExitButton" package="com.github.alexaegis.elements" visibility="public" xPosition="2269.0" yPosition="247.0">
+      <Fields/>
+      <Constructors>
+        <Constructor visibility="public"/>
+      </Constructors>
+      <Methods/>
+    </Class>
+    <Class name="GameButton" package="com.github.alexaegis.elements" visibility="public" xPosition="2011.0" yPosition="20.0">
+      <Fields>
+        <Field name="fractions" type="float[]" visibility="private"/>
+        <Field name="colorsDefault" type="Color[]" visibility="private"/>
+        <Field name="colorsHover" type="Color[]" visibility="private"/>
+        <Field name="colorsPress" type="Color[]" visibility="private"/>
+        <Field name="name" type="String" visibility="protected"/>
+        <Field name="defaultPaint" type="RadialGradientPaint" visibility="private"/>
+        <Field name="hoverPaint" type="RadialGradientPaint" visibility="private"/>
+        <Field name="pressPaint" type="RadialGradientPaint" visibility="private"/>
+        <Field name="actualPaint" type="Paint" visibility="private"/>
+      </Fields>
+      <Constructors>
+        <Constructor visibility="public"/>
+      </Constructors>
+      <Methods>
+        <Method name="paint" returnType="void" visibility="public">
+          <Argument type="Graphics" name="g"/>
+        </Method>
+      </Methods>
+    </Class>
+    <Class name="GameFieldSelector" package="com.github.alexaegis.elements" visibility="public" xPosition="1832.0" yPosition="145.0">
+      <Fields/>
+      <Constructors>
+        <Constructor visibility="public"/>
+      </Constructors>
+      <Methods/>
+    </Class>
+    <Class name="GameModeSelector" package="com.github.alexaegis.elements" visibility="public" xPosition="1832.0" yPosition="20.0">
+      <Fields/>
+      <Constructors>
+        <Constructor visibility="public"/>
+      </Constructors>
+      <Methods/>
+    </Class>
+    <Class name="MenuButton" package="com.github.alexaegis.elements" visibility="public" xPosition="2269.0" yPosition="132.0">
+      <Fields/>
+      <Constructors>
+        <Constructor visibility="public"/>
+      </Constructors>
+      <Methods/>
+    </Class>
+    <Class name="NumberSelector" package="com.github.alexaegis.elements" visibility="public" xPosition="20.0" yPosition="887.0">
+      <Fields>
+        <Field name="value" type="int" visibility="private"/>
+      </Fields>
+      <Constructors>
+        <Constructor visibility="public"/>
+      </Constructors>
+      <Methods>
+        <Method name="getValue" returnType="int" visibility="public"/>
+      </Methods>
+    </Class>
+    <Class name="PlayButton" package="com.github.alexaegis.elements" visibility="public" xPosition="2269.0" yPosition="20.0">
+      <Fields/>
+      <Constructors>
+        <Constructor visibility="public"/>
+      </Constructors>
+      <Methods/>
+    </Class>
+    <Class name="PlayerIndicator" package="com.github.alexaegis.elements" visibility="public" xPosition="518.0" yPosition="336.0">
+      <Fields>
+        <Field name="actualPlayerColor" type="Paint" visibility="private"/>
+        <Field name="gameLogic" type="GameLogic" visibility="private"/>
+      </Fields>
+      <Constructors>
+        <Constructor visibility="public">
+          <Argument type="GameLogic" name="gameLogic"/>
+        </Constructor>
+      </Constructors>
+      <Methods>
+        <Method name="setIndicatorColor" returnType="void" visibility="public">
+          <Argument type="int" name="actualPlayer"/>
+        </Method>
+        <Method name="paintComponent" returnType="void" visibility="public">
+          <Argument type="Graphics" name="g"/>
+        </Method>
+      </Methods>
+    </Class>
+    <Class name="AbstractLogic" package="com.github.alexaegis.logic" visibility="public" isAbstract="true" xPosition="1091.0" yPosition="391.0">
+      <Fields>
+        <Field name="actualPlayer" type="int" visibility="protected"/>
+        <Field name="actualPawn" type="Pawn" visibility="protected"/>
+        <Field name="target" type="Pawn" visibility="protected"/>
+        <Field name="validSteps" type="List&lt;Tile&gt;" visibility="protected"/>
+        <Field name="actualGamePanel" type="GameFieldPanel" visibility="protected"/>
+      </Fields>
+      <Constructors/>
+      <Methods>
+        <Method name="setActualGamePanel" returnType="void" visibility="public">
+          <Argument type="GameFieldPanel" name="actualGamePanel"/>
+        </Method>
+        <Method name="clearValidSteps" returnType="void" visibility="public"/>
+        <Method name="currentPlayersPawn" returnType="boolean" visibility="public">
+          <Argument type="Pawn" name="pawn"/>
+        </Method>
+        <Method name="getActualPlayer" returnType="int" visibility="public"/>
+        <Method name="findPawn" returnType="int[]" visibility="public">
+          <Argument type="Pawn" name="pawn"/>
+        </Method>
+        <Method name="setActualPawn" returnType="void" visibility="public">
+          <Argument type="Pawn" name="pawn"/>
+        </Method>
+        <Method name="setTarget" returnType="void" visibility="public">
+          <Argument type="Pawn" name="target"/>
+        </Method>
+        <Method name="clearTarget" returnType="void" visibility="public"/>
+        <Method name="getActualPawn" returnType="Pawn" visibility="public"/>
+        <Method name="clearActualPawn" returnType="void" visibility="public"/>
+        <Method name="switchActualPlayer" returnType="void" visibility="public"/>
+      </Methods>
+    </Class>
+    <Class name="DashChessPawnLogic" package="com.github.alexaegis.logic" visibility="public" xPosition="1512.0" yPosition="1108.0">
+      <Fields/>
+      <Constructors/>
+      <Methods>
+        <Method name="getValidSteps" returnType="List&lt;Tile&gt;" visibility="public"/>
+      </Methods>
+    </Class>
+    <Class name="DashLogic" package="com.github.alexaegis.logic" visibility="public" xPosition="1500.0" yPosition="911.0">
+      <Fields/>
+      <Constructors/>
+      <Methods>
+        <Method name="initGame" returnType="void" visibility="public">
+          <Argument type="FieldSizeOptions" name="option"/>
+        </Method>
+        <Method name="getValidSteps" returnType="List&lt;Tile&gt;" visibility="public"/>
+        <Method name="evaluateStep" returnType="void" visibility="public">
+          <Argument type="Component" name="destination"/>
+          <Argument type="Component" name="original"/>
+        </Method>
+        <Method name="isGameWon" returnType="boolean" visibility="public"/>
+      </Methods>
+    </Class>
+    <Class name="DraughtLogic" package="com.github.alexaegis.logic" visibility="public" xPosition="473.0" yPosition="1013.0">
+      <Fields>
+        <Field name="aboveTarget" type="Tile" visibility="private"/>
+      </Fields>
+      <Constructors/>
+      <Methods>
+        <Method name="initGame" returnType="void" visibility="public">
+          <Argument type="FieldSizeOptions" name="option"/>
+        </Method>
+        <Method name="getValidSteps" returnType="List&lt;Tile&gt;" visibility="public"/>
+        <Method name="evaluateStep" returnType="void" visibility="public">
+          <Argument type="Component" name="destination"/>
+          <Argument type="Component" name="original"/>
+        </Method>
+        <Method name="isGameWon" returnType="boolean" visibility="public"/>
+        <Method name="isReachedEnd" returnType="boolean" visibility="public"/>
+      </Methods>
+    </Class>
+    <Class name="Main" package="com.github.alexaegis" visibility="public" isFinal="true" xPosition="1276.0" yPosition="20.0">
+      <Fields>
+        <Field name="PROPERTIES" type="Properties" visibility="private" isStatic="true" isFinal="true"/>
+        <Field name="CONFIG" type="String" visibility="private" isStatic="true" isFinal="true"/>
+        <Field name="GRID_SIZE_DEFAULT" type="int" visibility="public" isStatic="true"/>
+        <Field name="GRID_DIMENSIONS" type="Dimension" visibility="public" isStatic="true"/>
+        <Field name="WINDOW_HEIGHT" type="int" visibility="public" isStatic="true"/>
+        <Field name="WINDOW_WIDTH" type="int" visibility="public" isStatic="true"/>
+        <Field name="WINDOW_NAME_MAIN" type="String" visibility="public" isStatic="true"/>
+        <Field name="WINDOW_RESIZEABLE" type="boolean" visibility="public" isStatic="true"/>
+        <Field name="BUTTON_SIZE" type="Dimension" visibility="public" isStatic="true"/>
+        <Field name="TILE_SIZE" type="int" visibility="public" isStatic="true"/>
+      </Fields>
+      <Constructors/>
+      <Methods>
+        <Method name="main" returnType="void" visibility="public" isStatic="true">
+          <Argument type="String[]" name="args"/>
+        </Method>
+      </Methods>
+    </Class>
+    <Class name="GameFieldPanel" package="com.github.alexaegis.panels" visibility="public" xPosition="964.0" yPosition="86.0">
+      <Fields>
+        <Field name="color1" type="Color" visibility="package"/>
+        <Field name="color2" type="Color" visibility="package"/>
+      </Fields>
+      <Constructors>
+        <Constructor visibility="public">
+          <Argument type="FieldSizeOptions" name="option"/>
+        </Constructor>
+      </Constructors>
+      <Methods/>
+    </Class>
+    <Class name="GamePanel" package="com.github.alexaegis.panels" visibility="public" xPosition="395.0" yPosition="20.0">
+      <Fields>
+        <Field name="mouseControl" type="MouseControl" visibility="private"/>
+        <Field name="gameFieldPanel" type="GameFieldPanel" visibility="private"/>
+        <Field name="xOffset" type="int" visibility="public" isStatic="true"/>
+        <Field name="yOffset" type="int" visibility="public" isStatic="true"/>
+        <Field name="menuButton" type="JButton" visibility="private"/>
+        <Field name="exitButton" type="JButton" visibility="private"/>
+        <Field name="actualPlayerLabel" type="JLabel" visibility="private"/>
+        <Field name="playerIndicator" type="PlayerIndicator" visibility="private"/>
+      </Fields>
+      <Constructors>
+        <Constructor visibility="public">
+          <Argument type="FieldSizeOptions" name="fieldSizeOption"/>
+          <Argument type="GameLogic" name="gameLogic"/>
+        </Constructor>
+      </Constructors>
+      <Methods>
+        <Method name="paintComponent" returnType="void" visibility="protected">
+          <Argument type="Graphics" name="g"/>
+        </Method>
+      </Methods>
+    </Class>
+    <Class name="MenuPanel" package="com.github.alexaegis.panels" visibility="public" xPosition="1571.0" yPosition="152.0">
+      <Fields>
+        <Field name="play" type="JButton" visibility="package"/>
+        <Field name="exit" type="JButton" visibility="package"/>
+        <Field name="fieldSelector" type="JComboBox" visibility="package"/>
+        <Field name="modeSelector" type="JComboBox" visibility="package"/>
+      </Fields>
+      <Constructors>
+        <Constructor visibility="public"/>
+      </Constructors>
+      <Methods>
+        <Method name="paintComponent" returnType="void" visibility="protected">
+          <Argument type="Graphics" name="g"/>
+        </Method>
+      </Methods>
+    </Class>
+    <Class name="HightLight" package="com.github.alexaegis.tiles" visibility="public" isFinal="true" xPosition="786.0" yPosition="585.0">
+      <Fields/>
+      <Constructors>
+        <Constructor visibility="public"/>
+      </Constructors>
+      <Methods>
+        <Method name="paint" returnType="void" visibility="public">
+          <Argument type="Graphics" name="graphics"/>
+        </Method>
+      </Methods>
+    </Class>
+    <Class name="Pawn" package="com.github.alexaegis.tiles" visibility="public" isFinal="true" xPosition="1571.0" yPosition="391.0">
+      <Fields>
+        <Field name="player" type="int" visibility="private"/>
+        <Field name="promoted" type="boolean" visibility="private"/>
+        <Field name="player0Color" type="GradientPaint" visibility="private" isStatic="true"/>
+        <Field name="player0PromotedColor" type="GradientPaint" visibility="private" isStatic="true"/>
+        <Field name="player1Color" type="GradientPaint" visibility="private" isStatic="true"/>
+        <Field name="player1PromotedColor" type="GradientPaint" visibility="private" isStatic="true"/>
+        <Field name="actualColor" type="GradientPaint" visibility="private"/>
+      </Fields>
+      <Constructors>
+        <Constructor visibility="public">
+          <Argument type="int" name="player"/>
+        </Constructor>
+      </Constructors>
+      <Methods>
+        <Method name="promote" returnType="void" visibility="public"/>
+        <Method name="demote" returnType="void" visibility="public"/>
+        <Method name="isPromoted" returnType="boolean" visibility="public"/>
+        <Method name="takeOff" returnType="Pawn" visibility="public"/>
+        <Method name="paintComponent" returnType="void" visibility="protected">
+          <Argument type="Graphics" name="graphics"/>
+        </Method>
+        <Method name="getPlayer" returnType="int" visibility="public"/>
+        <Method name="getPlayer0Color" returnType="GradientPaint" visibility="public" isStatic="true"/>
+        <Method name="getPlayer1Color" returnType="GradientPaint" visibility="public" isStatic="true"/>
+        <Method name="toString" returnType="String" visibility="public"/>
+        <Method name="equals" returnType="boolean" visibility="public">
+          <Argument type="Object" name="o"/>
+        </Method>
+        <Method name="hashCode" returnType="int" visibility="public"/>
+      </Methods>
+    </Class>
+    <Class name="Tile" package="com.github.alexaegis.tiles" visibility="public" isFinal="true" xPosition="796.0" yPosition="391.0">
+      <Fields>
+        <Field name="dist" type="float[]" visibility="private"/>
+        <Field name="paint" type="Paint" visibility="private"/>
+      </Fields>
+      <Constructors>
+        <Constructor visibility="public">
+          <Argument type="Color" name="color"/>
+        </Constructor>
+      </Constructors>
+      <Methods>
+        <Method name="paintComponent" returnType="void" visibility="protected">
+          <Argument type="Graphics" name="graphics"/>
+        </Method>
+      </Methods>
+    </Class>
+    <Class name="Window" package="com.github.alexaegis" visibility="public" xPosition="1652.0" yPosition="30.0">
+      <Fields/>
+      <Constructors>
+        <Constructor visibility="public"/>
+      </Constructors>
+      <Methods/>
+    </Class>
+    <Interface name="GameLogic" package="com.github.alexaegis.logic" visibility="public" xPosition="1011.0" yPosition="853.0">
+      <Methods>
+        <Method name="initGame" returnType="void" visibility="package">
+          <Argument type="FieldSizeOptions" name="option"/>
+        </Method>
+        <Method name="getValidSteps" returnType="List&lt;Tile&gt;" visibility="package"/>
+        <Method name="setActualGamePanel" returnType="void" visibility="package">
+          <Argument type="GameFieldPanel" name="actualGamePanel"/>
+        </Method>
+        <Method name="clearValidSteps" returnType="void" visibility="package"/>
+        <Method name="currentPlayersPawn" returnType="boolean" visibility="package">
+          <Argument type="Pawn" name="pawn"/>
+        </Method>
+        <Method name="getActualPlayer" returnType="int" visibility="package"/>
+        <Method name="findPawn" returnType="int[]" visibility="package">
+          <Argument type="Pawn" name="pawn"/>
+        </Method>
+        <Method name="setActualPawn" returnType="void" visibility="package">
+          <Argument type="Pawn" name="pawn"/>
+        </Method>
+        <Method name="getActualPawn" returnType="Pawn" visibility="package"/>
+        <Method name="clearActualPawn" returnType="void" visibility="package"/>
+        <Method name="switchActualPlayer" returnType="void" visibility="package"/>
+        <Method name="evaluateStep" returnType="void" visibility="package">
+          <Argument type="Component" name="destination"/>
+          <Argument type="Component" name="original"/>
+        </Method>
+        <Method name="isGameWon" returnType="boolean" visibility="package"/>
+        <Method name="setTarget" returnType="void" visibility="package">
+          <Argument type="Pawn" name="target"/>
+        </Method>
+        <Method name="clearTarget" returnType="void" visibility="package"/>
+      </Methods>
+    </Interface>
+    <Enum name="Directions" package="com.github.alexaegis.logic" visibility="public" xPosition="20.0" yPosition="629.0">
+      <Literals>
+        <Literal name="UP"/>
+        <Literal name="DOWN"/>
+        <Literal name="LEFT"/>
+        <Literal name="RIGHT"/>
+        <Literal name="UPLEFT"/>
+        <Literal name="UPRIGHT"/>
+        <Literal name="DOWNLEFT"/>
+        <Literal name="DOWNRIGHT"/>
+      </Literals>
+    </Enum>
+    <Enum name="FieldSizeOptions" package="com.github.alexaegis.logic" visibility="public" xPosition="2231.0" yPosition="571.0">
+      <Literals>
+        <Literal name="TWELVE"/>
+        <Literal name="TEN"/>
+        <Literal name="EIGHT"/>
+        <Literal name="SIX"/>
+      </Literals>
+    </Enum>
+    <Enum name="GameModes" package="com.github.alexaegis.logic" visibility="public" xPosition="2231.0" yPosition="420.0">
+      <Literals>
+        <Literal name="DASH"/>
+        <Literal name="DASH_WITH_CHESS_PAWNS"/>
+        <Literal name="DRAUGHTS"/>
+      </Literals>
+    </Enum>
+  </ClassDiagramComponents>
+  <ClassDiagramRelations>
+    <HasRelation name="gameLogic" source="com.github.alexaegis.controllers.MouseControl" target="com.github.alexaegis.logic.GameLogic" type="Aggregation" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <UseRelation source="com.github.alexaegis.logic.AbstractLogic" target="com.github.alexaegis.panels.GameFieldPanel" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <HasRelation name="gameLogic" source="com.github.alexaegis.elements.PlayerIndicator" target="com.github.alexaegis.logic.GameLogic" type="Aggregation" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <HasRelation name="actualGamePanel" source="com.github.alexaegis.logic.AbstractLogic" target="com.github.alexaegis.panels.GameFieldPanel" type="Aggregation" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <ImplementsRelation name="&lt;&lt;implements&gt;&gt;" source="com.github.alexaegis.logic.DashLogic" target="com.github.alexaegis.logic.GameLogic"/>
+    <HasRelation name="mouseControl" source="com.github.alexaegis.panels.GamePanel" target="com.github.alexaegis.controllers.MouseControl" type="Aggregation" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <IsRelation name="is" source="com.github.alexaegis.logic.DashChessPawnLogic" target="com.github.alexaegis.logic.DashLogic"/>
+    <UseRelation source="com.github.alexaegis.logic.GameLogic" target="com.github.alexaegis.panels.GameFieldPanel" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <IsRelation name="is" source="com.github.alexaegis.elements.ExitButton" target="com.github.alexaegis.elements.GameButton"/>
+    <ImplementsRelation name="&lt;&lt;implements&gt;&gt;" source="com.github.alexaegis.logic.DraughtLogic" target="com.github.alexaegis.logic.GameLogic"/>
+    <HasRelation name="validSteps" source="com.github.alexaegis.logic.AbstractLogic" target="com.github.alexaegis.tiles.Tile" type="Aggregation" sourceCardinality="1..1" targetCardinality="0..*" collectionType="List&lt;Tile&gt;"/>
+    <HasRelation name="playerIndicator" source="com.github.alexaegis.panels.GamePanel" target="com.github.alexaegis.elements.PlayerIndicator" type="Aggregation" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <IsRelation name="is" source="com.github.alexaegis.logic.DraughtLogic" target="com.github.alexaegis.logic.AbstractLogic"/>
+    <HasRelation name="target" source="com.github.alexaegis.logic.AbstractLogic" target="com.github.alexaegis.tiles.Pawn" type="Aggregation" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <IsRelation name="is" source="com.github.alexaegis.elements.PlayButton" target="com.github.alexaegis.elements.GameButton"/>
+    <IsRelation name="is" source="com.github.alexaegis.elements.MenuButton" target="com.github.alexaegis.elements.GameButton"/>
+    <ImplementsRelation name="&lt;&lt;implements&gt;&gt;" source="com.github.alexaegis.logic.DashChessPawnLogic" target="com.github.alexaegis.logic.GameLogic"/>
+    <HasRelation name="actualPawn" source="com.github.alexaegis.logic.AbstractLogic" target="com.github.alexaegis.tiles.Pawn" type="Aggregation" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <IsRelation name="is" source="com.github.alexaegis.logic.DashLogic" target="com.github.alexaegis.logic.AbstractLogic"/>
+    <HasRelation name="gameFieldPanel" source="com.github.alexaegis.panels.GamePanel" target="com.github.alexaegis.panels.GameFieldPanel" type="Aggregation" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <ImplementsRelation name="&lt;&lt;implements&gt;&gt;" source="com.github.alexaegis.logic.AbstractLogic" target="com.github.alexaegis.logic.GameLogic"/>
+  </ClassDiagramRelations>
+</ClassDiagram>
