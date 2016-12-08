@@ -5,7 +5,7 @@
     <groupId>com.github.alexaegis</groupId>
     <artifactId>submission2</artifactId>
     <version>1.1.0</version>
-    <packaging>pom</packaging>
+    <packaging>jar</packaging>
 
     <name>submission2</name>
     <url>http://maven.apache.org</url>
@@ -56,12 +56,6 @@
                         <phase>deploy</phase>
                     </execution>
                 </executions>
-            </plugin>
-
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-deploy-plugin</artifactId>
-                <version>2.7</version>
             </plugin>
 
             <plugin>

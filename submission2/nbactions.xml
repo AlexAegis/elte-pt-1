@@ -5,15 +5,6 @@
             <packagings>
                 <packaging>jar</packaging>
             </packagings>
-            <goals>
-                <goal>process-classes</goal>
-                <goal>org.codehaus.mojo:exec-maven-plugin:1.2.1:exec</goal>
-            </goals>
-            <properties>
-                <exec.args>-classpath %classpath com.github.alexaegis.Main</exec.args>
-                <exec.executable>java</exec.executable>
-                <exec.workingdir>C:\Users\alexaegis\Documents\elte-progtech-1\submission2</exec.workingdir>
-            </properties>
         </action>
         <action>
             <actionName>debug</actionName>
@@ -45,5 +36,15 @@
                 <exec.executable>java</exec.executable>
                 <exec.workingdir>C:\Users\alexaegis\Documents\elte-progtech-1\submission2</exec.workingdir>
             </properties>
+        </action>
+        <action>
+            <actionName>build-with-dependencies</actionName>
+            <reactor>also-make</reactor>
+            <packagings>
+                <packaging>*</packaging>
+            </packagings>
+            <goals>
+                <goal>install</goal>
+            </goals>
         </action>
     </actions>
