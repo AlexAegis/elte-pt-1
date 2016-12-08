@@ -1,9 +1,9 @@
 package com.github.alexaegis.logic;
 
 public enum GameModes {
-    DRAUGHTS(new DraughtLogic()),
     DASH(new DashLogic()),
-    DASH_WITH_CHESS_PAWNS(new DashChessPawnLogic());
+    DASH_WITH_CHESS_PAWNS(new DashChessPawnLogic()),
+    DRAUGHTS(new DraughtLogic());
 
     private GameLogic gameLogic;
 

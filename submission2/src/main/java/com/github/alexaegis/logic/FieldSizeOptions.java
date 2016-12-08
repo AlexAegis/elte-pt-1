@@ -4,8 +4,7 @@ public enum FieldSizeOptions {
     TWELVE(12, 12),
     TEN(10, 10),
     EIGHT(8, 8),
-    SIX(6, 6),
-    FOUR(4, 4);
+    SIX(6, 6);
 
     private int n;
     private int m;

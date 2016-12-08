@@ -14,8 +14,6 @@ public class MenuPanel extends JPanel {
     JButton exit = new ExitButton();
     JComboBox fieldSelector = new GameFieldSelector();
     JComboBox modeSelector = new GameModeSelector();
-    JComboBox numberSelector1 = new NumberSelector();
-    JComboBox numberSelector2 = new NumberSelector();
 
     public MenuPanel() {
 
@@ -41,18 +39,6 @@ public class MenuPanel extends JPanel {
         constraints.gridx = 1;
         add(exit, constraints);
         constraints.insets = new Insets(0, 0, 0, 0);
-        /*
-        constraints.gridy = 2;
-        constraints.gridx = 2;
-        add(numberSelector1, constraints);
-
-        constraints.gridy = 2;
-        constraints.gridx = 3;
-        add(new JLabel(" by "), constraints);
-
-        constraints.gridy = 2;
-        constraints.gridx = 4;
-        add(numberSelector2, constraints);*/
 
         constraints.gridy = 2;
         constraints.gridx = 0;
