@@ -1,8 +1,5 @@
 package com.github.alexaegis;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
 import javax.swing.*;
 import java.awt.*;
 import java.io.IOException;
@@ -10,7 +7,6 @@ import java.util.Properties;
 
 public final class Main {
 
-    private static final Logger LOGGER = LoggerFactory.getLogger(Main.class);
     private static final Properties PROPERTIES = new Properties();
     private static final String CONFIG = "config.properties";
 
@@ -41,14 +37,10 @@ public final class Main {
                 window.setVisible(true);
             });
         } catch (IOException e) {
-            LOGGER.error("Couldn't load the file: " + CONFIG);
+            e.printStackTrace();
         } catch (UnsupportedLookAndFeelException | ClassNotFoundException | IllegalAccessException | InstantiationException e) {
             e.printStackTrace();
         }
-    }
-
-    public static Logger getLogger() {
-        return LOGGER;
     }
 
 }
