@@ -43,7 +43,11 @@ public abstract class AbstractLogic implements GameLogic {
 
     @Override
     public Coordinate getTileLocation(Tile tile) {
-        return tileMap.entrySet().stream().filter(coordinateTileEntry -> coordinateTileEntry.getValue().equals(tile)).findFirst().orElseThrow(NoSuchFieldError::new).getKey();
+        return tileMap.entrySet().stream()
+                .filter(coordinateTileEntry -> coordinateTileEntry.getValue().equals(tile))
+                .findFirst()
+                .orElseThrow(NoSuchFieldError::new)
+                .getKey();
     }
 
     @Override

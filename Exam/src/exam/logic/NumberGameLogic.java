@@ -8,11 +8,10 @@ import exam.tiles.HighLight;
 import exam.tiles.Number;
 import exam.tiles.Tile;
 
-import javax.swing.*;
 import java.util.*;
 
 import static exam.config.Config.DEBUG_MODE;
-
+import static exam.config.Config.HIGHLIGHTING;
 
 public class NumberGameLogic extends AbstractLogic implements GameLogic {
 
@@ -71,11 +70,13 @@ public class NumberGameLogic extends AbstractLogic implements GameLogic {
                 currentTile = tileMap.get(tileLocation);
             }
         }
-        validSteps.forEach(validStep -> {
-            validStep.add(new HighLight(grid.getTileWidthByPixels(), grid.getTileHeightByPixels()));
-            validStep.revalidate();
-            validStep.repaint();
-        });
+        if(HIGHLIGHTING) {
+            validSteps.forEach(validStep -> {
+                validStep.add(new HighLight(grid.getTileWidthByPixels(), grid.getTileHeightByPixels()));
+                validStep.revalidate();
+                validStep.repaint();
+            });
+        }
     }
 
     @Override
@@ -83,10 +84,10 @@ public class NumberGameLogic extends AbstractLogic implements GameLogic {
         validSteps.forEach(t -> {
             if(limited) {
                 if(((Number)t.getChild()).modifiable(modifier, minRng, maxRng)) {
-                    ((Number)t.getChild()).modifiyValue(modifier);
+                    ((Number)t.getChild()).modifyValue(modifier);
                 }
             } else {
-                ((Number)t.getChild()).modifiyValue(modifier);
+                ((Number)t.getChild()).modifyValue(modifier);
             }
             t.revalidate();
             t.repaint();

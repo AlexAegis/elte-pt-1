@@ -18,8 +18,6 @@ import static exam.panels.Game.GAME_BG_COLOR;
 
 public class Grid extends JPanel implements Iterable<Coordinate> {
 
-    private List<List<Tile>> tiles = new ArrayList<>();
-
     private Map<Coordinate, Tile> tileMap = new TreeMap<>();
 
     private int gridWidthByPixels;
@@ -50,13 +48,13 @@ public class Grid extends JPanel implements Iterable<Coordinate> {
 
         setBackground(GAME_BG_COLOR);
 
-        // MAP IMPLEMENTATION
         for (int i = 0; i < fieldSize.getN(); i++) {
             for (int j = 0; j < fieldSize.getM(); j++) {
                 Coordinate coordinate = new Coordinate(i, j);
                 Tile tile = new Tile((i + j) % 2 == 0 ? TILE_COLOR_A : TILE_COLOR_B,
-                        WINDOW_WIDTH / fieldSize.getN(),
-                        WINDOW_WIDTH / fieldSize.getM(), coordinate);
+                        tileWidthByPixels,
+                        tileHeightByPixels,
+                        coordinate);
                 tileMap.put(coordinate, tile);
             }
         }

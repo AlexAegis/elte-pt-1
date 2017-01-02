@@ -46,4 +46,9 @@ public enum Directions {
     public boolean isDiagonal() {
         return this.equals(UPLEFT) || this.equals(UPRIGHT) || this.equals(DOWNLEFT) || this.equals(DOWNRIGHT);
     }
+
+    @Override
+    public String toString() {
+        return name().substring(0, 1) + name().toLowerCase().substring(1, name().length());
+    }
 }

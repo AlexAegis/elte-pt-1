@@ -10,10 +10,8 @@ public final class Main {
         try {
             UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
             new Window(WINDOW_TITLE);
-
         } catch (UnsupportedLookAndFeelException | ClassNotFoundException | IllegalAccessException | InstantiationException e) {
             e.printStackTrace();
         }
     }
-
 }

@@ -17,8 +17,8 @@ public class CheckBoxPanel extends JPanel {
     public List<Directions> getSelectedDirections() {
         return Arrays.stream(getComponents())
                 .map(component -> (JCheckBox) component)
-                .filter(AbstractButton::isSelected)
-                .map(jCheckBox -> Directions.valueOf(jCheckBox.getText()))
+                .filter(JCheckBox::isSelected)
+                .map(jCheckBox -> Directions.valueOf(jCheckBox.getText().toUpperCase()))
                 .collect(Collectors.toList());
     }
 }

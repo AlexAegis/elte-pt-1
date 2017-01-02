@@ -11,11 +11,17 @@ public interface GameLogic {
 
     void initGame();
 
-    void setValidSteps(Tile tile);
-
     void setGrid(Grid grid);
 
+    void setValidSteps(Tile tile);
+
+    void setValidDirections(List<Directions> directions);
+
+    void setRng(int minRng, int maxRng);
+
     void clearValidSteps();
+
+    void evaluateClick(Tile tile);
 
     boolean currentPlayersPawn(Pawn pawn);
 
@@ -33,8 +39,6 @@ public interface GameLogic {
 
     void switchActualPlayer();
 
-    void evaluateClick(Tile tile);
-
     boolean isGameWon();
 
     void setTarget(Pawn target);
@@ -42,8 +46,4 @@ public interface GameLogic {
     void clearTarget();
 
     String toString();
-
-    void setRng(int minRng, int maxRng);
-
-    void setValidDirections(List<Directions> directions);
 }

@@ -6,6 +6,7 @@ import javax.swing.*;
 import java.util.Arrays;
 
 import static exam.panels.Menu.CHECKBOXPANEL;
+import static exam.panels.Menu.VALIDDIRSLABEL;
 
 public class GameModeSelector extends JComboBox<GameModes> {
 
@@ -15,8 +16,10 @@ public class GameModeSelector extends JComboBox<GameModes> {
         addActionListener(e -> {
             if(getSelectedItem().equals(GameModes.NUMBER_GAME)) {
                 CHECKBOXPANEL.setVisible(true);
+                VALIDDIRSLABEL.setVisible(true);
             } else {
                 CHECKBOXPANEL.setVisible(false);
+                VALIDDIRSLABEL.setVisible(false);
             }
         });
     }

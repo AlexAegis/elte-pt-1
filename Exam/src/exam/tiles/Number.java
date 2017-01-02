@@ -51,10 +51,8 @@ public class Number extends JComponent {
         return value;
     }
 
-    public void modifiyValue(int modifier) {
+    public void modifyValue(int modifier) {
         value = value + modifier;
-        revalidate();
-        repaint();
     }
 
     public boolean modifiable(int modifier, int min, int max) {

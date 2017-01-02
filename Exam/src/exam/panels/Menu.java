@@ -14,6 +14,7 @@ public class Menu extends JPanel {
     public static GameModeSelector GAMEMODESELECTOR = new GameModeSelector();
     public static MinRangeSelector MINRANGESELECTOR = new MinRangeSelector();
     public static MaxRangeSelector MAXRANGESELECTOR = new MaxRangeSelector();
+    public static JLabel VALIDDIRSLABEL = new JLabel("Valid Directions:");
     public static CheckBoxPanel CHECKBOXPANEL = new CheckBoxPanel();
 
     public Menu() {
@@ -51,7 +52,7 @@ public class Menu extends JPanel {
         add(MAXRANGESELECTOR, gc);
         gc.gridx = 4;
         gc.gridy = 0;
-        add(new JLabel("Valid Directions:"), gc);
+        add(VALIDDIRSLABEL, gc);
         gc.gridx = 5;
         gc.gridy = 0;
         gc.gridheight = 4;

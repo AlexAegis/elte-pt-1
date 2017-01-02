@@ -17,8 +17,6 @@ public final class Window extends JFrame {
         setLocationRelativeTo(null);
         setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         setContentPane(new ContentPane());
-        revalidate();
-        repaint();
         setVisible(true);
     }
 
