@@ -3,6 +3,8 @@ package exam.tiles;
 import javax.swing.*;
 import java.awt.*;
 
+import static exam.config.Config.ANTI_ALIASING;
+
 public class Number extends JComponent {
 
     private int value;
@@ -23,8 +25,10 @@ public class Number extends JComponent {
     protected void paintComponent(Graphics g) {
         super.paintComponent(g);
         ((Graphics2D) g).setPaint(Color.BLACK);
-        g.setFont(new Font(Font.SANS_SERIF, Font.BOLD, height / 10));
-        g.drawString(toString(), 0, 0);
+        if(ANTI_ALIASING) ((Graphics2D) g).setRenderingHint(RenderingHints.KEY_ANTIALIASING,
+                RenderingHints.VALUE_ANTIALIAS_ON);
+        g.setFont(new Font(Font.SANS_SERIF, Font.BOLD, height - 5));
+        g.drawString(toString(), 5, height - 5);
     }
 
     @Override

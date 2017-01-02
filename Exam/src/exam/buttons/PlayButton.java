@@ -8,8 +8,8 @@ import exam.panels.Grid;
 import javax.swing.*;
 import java.awt.*;
 
-import static exam.panels.ControlPane.GAMEMODESELECTOR;
-import static exam.panels.ControlPane.SIZESELECTOR;
+import static exam.panels.Menu.GAMEMODESELECTOR;
+import static exam.panels.Menu.SIZESELECTOR;
 
 public class PlayButton extends JButton {
 

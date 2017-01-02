@@ -5,6 +5,7 @@ import sun.rmi.server.InactiveGroupException;
 import javax.swing.*;
 import java.awt.*;
 
+import static exam.config.Config.ANTI_ALIASING;
 import static exam.config.Config.DEBUG_MODE;
 
 public class Tile extends JComponent {
@@ -35,8 +36,7 @@ public class Tile extends JComponent {
         super.paintComponent(graphics);
         Graphics2D g = (Graphics2D) graphics;
         int fontSize = 10;
-
-        g.setRenderingHint(RenderingHints.KEY_ANTIALIASING,
+        if(ANTI_ALIASING) g.setRenderingHint(RenderingHints.KEY_ANTIALIASING,
                 RenderingHints.VALUE_ANTIALIAS_ON);
         g.setPaint(paint);
         g.fillRect(0,0, width, height);

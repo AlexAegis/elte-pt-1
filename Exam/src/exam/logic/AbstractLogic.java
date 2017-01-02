@@ -17,19 +17,11 @@ public abstract class AbstractLogic implements GameLogic {
     protected Pawn actualPawn;
     protected Pawn target;
     protected List<Tile> validSteps = new ArrayList<>();
-    protected Grid actualGrid;
-    protected int tileWidth;
-    protected int tileHeight;
-    protected int gridWidth;
-    protected int gridHeight;
+    protected Grid grid;
 
     @Override
-    public void setGrid(Grid actualGrid) {
-        this.actualGrid = actualGrid;
-        this.gridWidth = actualGrid.getTiles().size();
-        this.gridHeight = actualGrid.getTiles().get(0).size();
-        this.tileHeight = actualGrid.getTiles().get(0).get(0).getHeight();
-        this.tileWidth = actualGrid.getTiles().get(0).get(0).getWidth();
+    public void setGrid(Grid grid) {
+        this.grid = grid;
     }
 
     @Override
@@ -53,9 +45,9 @@ public abstract class AbstractLogic implements GameLogic {
     @Override
     public int[] findPawn(Pawn pawn) {
         boolean foundThePawn = false;
-        for (int i = 0; i < gridWidth && !foundThePawn; i++) {
-            for (int j = 0; j < gridHeight && !foundThePawn; j++) {
-                foundThePawn = actualGrid.getComponentAt(tileWidth * i, tileHeight * j) == pawn.getParent();
+        for (int i = 0; i < grid.getGridWidthByTiles() && !foundThePawn; i++) {
+            for (int j = 0; j < grid.getGridHeightByTiles() && !foundThePawn; j++) {
+                foundThePawn = grid.getComponentAt(grid.getTileWidthByPixels() * i, grid.getTileHeightByPixels() * j) == pawn.getParent();
                 if(foundThePawn) {
                     return new int[]{i, j};
                 }

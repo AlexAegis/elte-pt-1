@@ -16,15 +16,29 @@ public class Grid extends JPanel {
 
     private List<List<Tile>> tiles = new ArrayList<>();
 
+    private int gridWidthByPixels;
+    private int gridHeightByPixels;
+    private int gridWidthByTiles;
+    private int gridHeightByTiles;
+    private int tileWidthByPixels;
+    private int tileHeightByPixels;
+    private int hGap = 5;
+    private int vGap = 5;
+
     private final Color TILE_COLOR_A = new Color(145, 146, 137, 255);
     private final Color TILE_COLOR_B = new Color(210, 208, 209, 255);
 
     public Grid(FieldSizes fs, GameModes gameMode) {
         setBounds(0, 0, WINDOW_WIDTH, WINDOW_WIDTH);
-        GridLayout gridLayout = new GridLayout(fs.getN(), fs.getM(), 5, 5);
+        GridLayout gridLayout = new GridLayout(fs.getN(), fs.getM(), hGap, vGap);
         setLayout(gridLayout);
         addMouseListener(new MouseController(gameMode.getLogic()));
-
+        gridWidthByTiles = fs.getN();
+        gridHeightByTiles = fs.getM();
+        gridWidthByPixels = getWidth();
+        gridHeightByPixels = getHeight();
+        tileHeightByPixels = gridHeightByPixels / gridHeightByTiles - vGap;
+        tileWidthByPixels = gridWidthByPixels / gridWidthByTiles - hGap;
 
         setBackground(GAME_BG_COLOR);
 
@@ -48,5 +62,37 @@ public class Grid extends JPanel {
 
     public List<List<Tile>> getTiles() {
         return tiles;
+    }
+
+    public int getGridWidthByPixels() {
+        return gridWidthByPixels;
+    }
+
+    public int getGridHeightByPixels() {
+        return gridHeightByPixels;
+    }
+
+    public int getGridWidthByTiles() {
+        return gridWidthByTiles;
+    }
+
+    public int getGridHeightByTiles() {
+        return gridHeightByTiles;
+    }
+
+    public int getTileWidthByPixels() {
+        return tileWidthByPixels;
+    }
+
+    public int getTileHeightByPixels() {
+        return tileHeightByPixels;
+    }
+
+    public int gethGap() {
+        return hGap;
+    }
+
+    public int getvGap() {
+        return vGap;
     }
 }

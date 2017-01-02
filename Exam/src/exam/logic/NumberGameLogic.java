@@ -1,16 +1,30 @@
 package exam.logic;
 
+import exam.tiles.Number;
+import exam.tiles.Pawn;
 import exam.tiles.Tile;
 
 import java.awt.*;
 import java.util.List;
+
+import static exam.config.Config.DEBUG_MODE;
 
 
 public class NumberGameLogic extends AbstractLogic implements GameLogic {
 
     @Override
     public void initGame() {
-
+        if(DEBUG_MODE) {
+            System.out.println("INIT WITH DATA: "
+                    + "\nTILE HEIGHT: " + grid.getTileHeightByPixels()
+                    + "\nTILE WIDTH: " + grid.getTileWidthByPixels()
+                    + "\nGRID HEIGHT BY TILES: " + grid.getGridHeightByTiles()
+                    + "\nGRID WIDTH BY TILES: " + grid.getGridWidthByTiles()
+                    + "\nGRID HEIGHT BY PIXELS: " + grid.getGridWidthByPixels()
+                    + "\nGRID WIDTH BY PIXELS: " + grid.getGridWidthByPixels());
+        }
+        //grid.getTiles().get(0).forEach(tile -> tile.add(new Pawn(Color.BLUE, 1, grid.getTileWidthByPixels(),grid.getTileHeightByPixels())));
+        grid.getTiles().forEach(row -> row.forEach(tile -> tile.add(new Number((int) ((Math.random() * 100) % 52), grid.getTileWidthByPixels(), grid.getTileHeightByPixels()))));
     }
 
     @Override
@@ -20,7 +34,7 @@ public class NumberGameLogic extends AbstractLogic implements GameLogic {
 
     @Override
     public void evaluateClick(int x, int y) {
-        System.out.println(x + " + " + y);
+        if(DEBUG_MODE) System.out.println("Evaluate Click at:" + x + ", " + y);
     }
 
     @Override
