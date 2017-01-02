@@ -1,15 +1,14 @@
 package exam.buttons;
 
-
-import exam.logic.FieldSize;
+import exam.config.FieldSizes;
 
 import javax.swing.*;
 import java.util.Arrays;
 
-public class SizeSelector extends JComboBox<FieldSize> {
+public class SizeSelector extends JComboBox<FieldSizes> {
 
     public SizeSelector() {
-        Arrays.stream(FieldSize.values()).forEach(this::addItem);
+        Arrays.stream(FieldSizes.values()).forEach(this::addItem);
         setSelectedIndex(0);
     }
 }

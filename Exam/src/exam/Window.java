@@ -15,7 +15,7 @@ public final class Window extends JFrame {
         setSize(WINDOW_WIDTH + 6, WINDOW_HEIGHT);
         setResizable(WINDOW_RESIZABLE);
         setLocationRelativeTo(null);
-        setDefaultCloseOperation(EXIT_ON_CLOSE);
+        setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         setContentPane(new ContentPane());
         revalidate();
         repaint();

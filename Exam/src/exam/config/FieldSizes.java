@@ -1,7 +1,8 @@
-package exam.logic;
+package exam.config;
 
-public enum FieldSize {
+public enum FieldSizes {
 
+    SEVEN(7, 7),
     EIGHT(8, 8),
     TEN(10, 10),
     TWELVE(12, 12);
@@ -9,7 +10,7 @@ public enum FieldSize {
     private int n;
     private int m;
 
-    FieldSize(int n, int m) {
+    FieldSizes(int n, int m) {
         this.n = n;
         this.m = m;
     }
