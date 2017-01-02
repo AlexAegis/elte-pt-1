@@ -1,7 +1,6 @@
 package exam.config;
 
 public enum FieldSizes {
-
     SEVEN(7, 7),
     EIGHT(8, 8),
     TEN(10, 10),

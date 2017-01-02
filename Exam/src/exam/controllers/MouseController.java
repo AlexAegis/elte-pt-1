@@ -1,27 +1,21 @@
 package exam.controllers;
 
-
 import exam.logic.GameLogic;
-import exam.panels.Game;
-import exam.panels.Grid;
 
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
-import java.awt.event.MouseMotionListener;
 
 public class MouseController implements MouseListener {
 
-    private Grid grid;
     private GameLogic gameLogic;
 
-    public MouseController(Grid grid, GameLogic gameLogic) {
-        this.grid = grid;
+    public MouseController(GameLogic gameLogic) {
         this.gameLogic = gameLogic;
     }
 
     @Override
     public void mouseClicked(MouseEvent e) {
-
+        gameLogic.evaluateClick(e.getX(), e.getY());
     }
 
     @Override

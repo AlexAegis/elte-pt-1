@@ -14,7 +14,7 @@ public interface GameLogic {
 
     List<Tile> getValidSteps();
 
-    void setActualGrid(Grid actualGrid);
+    void setGrid(Grid actualGrid);
 
     void clearValidSteps();
 
@@ -32,12 +32,14 @@ public interface GameLogic {
 
     void switchActualPlayer();
 
-    void evaluateStep(Component destination, Component original);
+    void evaluateClick(int x, int y);
 
     boolean isGameWon();
 
     void setTarget(Pawn target);
 
     void clearTarget();
+
+    String toString();
 
 }

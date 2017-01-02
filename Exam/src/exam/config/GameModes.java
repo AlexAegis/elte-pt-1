@@ -6,7 +6,7 @@ import exam.logic.NumberGameLogic;
 public enum GameModes {
     NUMBER_GAME(new NumberGameLogic());
 
-    GameLogic gameLogic;
+    private GameLogic gameLogic;
 
     GameModes(GameLogic gameLogic) {
         this.gameLogic = gameLogic;
@@ -14,5 +14,10 @@ public enum GameModes {
 
     public GameLogic getLogic() {
         return gameLogic;
+    }
+
+    @Override
+    public String toString() {
+        return gameLogic.toString();
     }
 }

@@ -3,7 +3,6 @@ package exam.panels;
 import exam.config.GameModes;
 import exam.controllers.MouseController;
 import exam.config.FieldSizes;
-import exam.logic.GameLogic;
 import exam.tiles.Tile;
 
 import javax.swing.*;
@@ -24,7 +23,7 @@ public class Grid extends JPanel {
         setBounds(0, 0, WINDOW_WIDTH, WINDOW_WIDTH);
         GridLayout gridLayout = new GridLayout(fs.getN(), fs.getM(), 5, 5);
         setLayout(gridLayout);
-        addMouseListener(new MouseController(this, gameMode.getLogic()));
+        addMouseListener(new MouseController(gameMode.getLogic()));
 
 
         setBackground(GAME_BG_COLOR);
@@ -42,6 +41,7 @@ public class Grid extends JPanel {
                 add(b);
             }
         }
+        gameMode.getLogic().setGrid(this);
         gameMode.getLogic().initGame();
         setVisible(true);
     }

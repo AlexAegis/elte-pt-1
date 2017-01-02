@@ -5,6 +5,8 @@ import sun.rmi.server.InactiveGroupException;
 import javax.swing.*;
 import java.awt.*;
 
+import static exam.config.Config.DEBUG_MODE;
+
 public class Tile extends JComponent {
 
     private float[] dist = {0.08f, 1f};
@@ -40,6 +42,6 @@ public class Tile extends JComponent {
         g.fillRect(0,0, width, height);
         g.setPaint(Color.DARK_GRAY);
         g.setFont(new Font(Font.SANS_SERIF, Font.BOLD, fontSize));
-        g.drawString(Integer.toString(no), width - fontSize * 2, fontSize);
+        if(DEBUG_MODE) g.drawString(Integer.toString(no), width - fontSize * 2, fontSize);
     }
 }

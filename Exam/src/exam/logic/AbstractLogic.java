@@ -24,7 +24,7 @@ public abstract class AbstractLogic implements GameLogic {
     protected int gridHeight;
 
     @Override
-    public void setActualGrid(Grid actualGrid) {
+    public void setGrid(Grid actualGrid) {
         this.actualGrid = actualGrid;
         this.gridWidth = actualGrid.getTiles().size();
         this.gridHeight = actualGrid.getTiles().get(0).size();
@@ -95,4 +95,8 @@ public abstract class AbstractLogic implements GameLogic {
         actualPlayer = 0 - actualPlayer;
     }
 
+    @Override
+    public String toString() {
+        return "AbstractLogic";
+    }
 }

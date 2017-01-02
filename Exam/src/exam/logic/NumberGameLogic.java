@@ -19,12 +19,17 @@ public class NumberGameLogic extends AbstractLogic implements GameLogic {
     }
 
     @Override
-    public void evaluateStep(Component destination, Component original) {
-
+    public void evaluateClick(int x, int y) {
+        System.out.println(x + " + " + y);
     }
 
     @Override
     public boolean isGameWon() {
         return false;
+    }
+
+    @Override
+    public String toString() {
+        return "NumberGame";
     }
 }

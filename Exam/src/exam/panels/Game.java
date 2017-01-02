@@ -1,12 +1,9 @@
 package exam.panels;
 
-import exam.config.FieldSizes;
-import exam.config.GameModes;
-
 import javax.swing.*;
 import java.awt.*;
 
-import static exam.config.Config.WINDOW_WIDTH;
+import static exam.config.Config.*;
 
 public class Game extends JPanel {
 
@@ -16,6 +13,6 @@ public class Game extends JPanel {
         setLayout(null);
         setBounds(0,0,WINDOW_WIDTH, WINDOW_WIDTH);
         setBackground(GAME_BG_COLOR);
-        add(new Grid(FieldSizes.SEVEN, GameModes.NUMBER_GAME));
+        if(START_WITH_DEFAULT) add(new Grid(DEFAULT_FIELDSIZE, DEFAULT_GAMEMODE));
     }
 }
