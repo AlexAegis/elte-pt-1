@@ -18,10 +18,18 @@ public abstract class AbstractLogic implements GameLogic {
     protected Pawn target;
     protected List<Tile> validSteps = new ArrayList<>();
     protected Grid grid;
+    protected int maxRng;
+    protected int minRng;
 
     @Override
     public void setGrid(Grid grid) {
         this.grid = grid;
+    }
+
+    @Override
+    public void setRng(int minRng, int maxRng) {
+        this.minRng = minRng;
+        this.maxRng = maxRng;
     }
 
     @Override

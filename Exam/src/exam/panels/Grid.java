@@ -28,7 +28,7 @@ public class Grid extends JPanel {
     private final Color TILE_COLOR_A = new Color(145, 146, 137, 255);
     private final Color TILE_COLOR_B = new Color(210, 208, 209, 255);
 
-    public Grid(FieldSizes fs, GameModes gameMode) {
+    public Grid(FieldSizes fs, GameModes gameMode, int minRng, int maxRng) {
         setBounds(0, 0, WINDOW_WIDTH, WINDOW_WIDTH);
         GridLayout gridLayout = new GridLayout(fs.getN(), fs.getM(), hGap, vGap);
         setLayout(gridLayout);
@@ -55,6 +55,7 @@ public class Grid extends JPanel {
                 add(b);
             }
         }
+        gameMode.getLogic().setRng(minRng, maxRng);
         gameMode.getLogic().setGrid(this);
         gameMode.getLogic().initGame();
         setVisible(true);

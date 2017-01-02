@@ -1,8 +1,9 @@
 package exam.buttons;
 
-import javax.swing.*;
-import java.awt.*;
+import static exam.config.Config.DEFAULT_MAX_RNG;
 
 public class MaxRangeSelector extends RangeSelector {
-
+    public MaxRangeSelector() {
+        setText(Integer.toString(DEFAULT_MAX_RNG));
+    }
 }

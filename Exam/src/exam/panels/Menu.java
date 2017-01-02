@@ -38,8 +38,14 @@ public class Menu extends JPanel {
         add(GAMEMODESELECTOR, gc);
         gc.gridx = 2;
         gc.gridy = 0;
-        add(MINRANGESELECTOR, gc);
+        add(new JLabel("Min rng"), gc);
         gc.gridx = 3;
+        gc.gridy = 0;
+        add(MINRANGESELECTOR, gc);
+        gc.gridx = 4;
+        gc.gridy = 0;
+        add(new JLabel("Max rng"), gc);
+        gc.gridx = 5;
         gc.gridy = 0;
         add(MAXRANGESELECTOR, gc);
     }

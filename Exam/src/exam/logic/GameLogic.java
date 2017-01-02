@@ -42,4 +42,5 @@ public interface GameLogic {
 
     String toString();
 
+    void setRng(int minRng, int maxRng);
 }
