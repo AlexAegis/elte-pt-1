@@ -56,4 +56,8 @@ public class Number extends JComponent {
         revalidate();
         repaint();
     }
+
+    public boolean modifiable(int modifier, int min, int max) {
+        return value + modifier >= min && value + modifier <= max;
+    }
 }

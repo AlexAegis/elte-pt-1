@@ -1,10 +1,9 @@
 package exam.tiles;
 
-import exam.logic.Coordinate;
+import exam.logic.abstraction.Coordinate;
 
 import javax.swing.*;
 import java.awt.*;
-import java.util.Arrays;
 
 import static exam.config.Config.ANTI_ALIASING;
 import static exam.config.Config.DEBUG_MODE;
@@ -16,7 +15,7 @@ public class Tile extends JComponent {
     private int height;
     private Paint paint;
     private Coordinate coordinate;
-    private Component children;
+    private Component child;
 
     public Tile(Color color, int width, int height) {
         this.height = height;
@@ -47,23 +46,23 @@ public class Tile extends JComponent {
         if(DEBUG_MODE) g.drawString(coordinate.toString(), width - fontSize * 4, fontSize);
     }
 
-    public Component getChildren() {
-        return children;
+    public Component getChild() {
+        return child;
     }
 
-    public void setChildren(Component children) {
-        if(this.children == null) {
-            add(children);
-            this.children = children;
+    public void setChild(Component child) {
+        if(this.child == null) {
+            add(child);
+            this.child = child;
         } else { // maybe throw something
-            System.out.println("Remove children before attempting to add a new");
+            System.out.println("Remove child before attempting to add a new");
         }
     }
 
-    public Component removeChildren() {
-        Component component = children;
-        children.getParent().remove(children);
-        children = null;
+    public Component removeChild() {
+        Component component = child;
+        child.getParent().remove(child);
+        child = null;
         return component;
     }
 }

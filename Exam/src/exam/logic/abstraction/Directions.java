@@ -1,4 +1,4 @@
-package exam.logic;
+package exam.logic.abstraction;
 
 public enum Directions {
     UP(-1, 0),

@@ -1,4 +1,4 @@
-package exam.logic;
+package exam.logic.abstraction;
 
 public class Coordinate implements Comparable<Coordinate> {
     private int x;

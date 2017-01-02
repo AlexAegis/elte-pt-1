@@ -1,8 +1,5 @@
 package exam;
 
-import exam.logic.Coordinate;
-import exam.logic.Directions;
-
 import javax.swing.*;
 
 import static exam.config.Config.WINDOW_TITLE;

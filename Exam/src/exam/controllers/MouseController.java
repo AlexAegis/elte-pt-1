@@ -1,6 +1,6 @@
 package exam.controllers;
 
-import exam.logic.GameLogic;
+import exam.logic.abstraction.GameLogic;
 import exam.tiles.Tile;
 
 import java.awt.event.MouseEvent;

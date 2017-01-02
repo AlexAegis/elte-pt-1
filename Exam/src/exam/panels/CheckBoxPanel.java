@@ -1,6 +1,6 @@
 package exam.panels;
 
-import exam.logic.Directions;
+import exam.logic.abstraction.Directions;
 
 import javax.swing.*;
 import java.util.Arrays;

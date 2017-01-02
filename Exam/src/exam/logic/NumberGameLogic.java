@@ -1,9 +1,14 @@
 package exam.logic;
 
+import exam.logic.abstraction.AbstractLogic;
+import exam.logic.abstraction.Coordinate;
+import exam.logic.abstraction.Directions;
+import exam.logic.abstraction.GameLogic;
 import exam.tiles.HighLight;
 import exam.tiles.Number;
 import exam.tiles.Tile;
 
+import javax.swing.*;
 import java.util.*;
 
 import static exam.config.Config.DEBUG_MODE;
@@ -41,10 +46,17 @@ public class NumberGameLogic extends AbstractLogic implements GameLogic {
                     + "\nMIN RNG: " + minRng
                     + "\nMAX RNG: " + maxRng);
         }
-        tileMap.values().forEach(tile -> tile.setChildren(new Number(
+        tileMap.values().forEach(tile -> tile.setChild(new Number(
                 (int) (((Math.random() * 100) % (maxRng - minRng + 1)) + minRng),
                 grid.getTileWidthByPixels(),
-                grid.getTileHeightByPixels())));
+                grid.getTileHeightByPixels())));/*
+        int n = 0;
+        for(Tile tile : tileMap.values()) {
+            tile.setChild(new Number(n,
+                    grid.getTileWidthByPixels(),
+                    grid.getTileHeightByPixels()));
+            n += 1;
+        }*/
     }
 
     @Override
@@ -69,15 +81,31 @@ public class NumberGameLogic extends AbstractLogic implements GameLogic {
     @Override
     public void evaluateClick(Tile tile) {
         validSteps.forEach(t -> {
-            ((Number)t.getChildren()).modifiyValue(modifier);
+            if(limited) {
+                if(((Number)t.getChild()).modifiable(modifier, minRng, maxRng)) {
+                    ((Number)t.getChild()).modifiyValue(modifier);
+                }
+            } else {
+                ((Number)t.getChild()).modifiyValue(modifier);
+            }
             t.revalidate();
             t.repaint();
         });
+        /*if(isGameWon()) {
+            JOptionPane.showMessageDialog(null, "Game Ended");
+        }*/
     }
 
     @Override
     public boolean isGameWon() {
-        return false;
+        boolean won = false;
+        Iterator iterator = grid.iterator();
+        while (iterator.hasNext()) {
+            Tile actualTile = tileMap.get((Coordinate)iterator.next());
+            won = won || ((Number)actualTile.getChild()).getValue() == 0;
+            actualTile.add(new HighLight(grid.getTileWidthByPixels(), grid.getTileHeightByPixels()));
+        }
+        return won;
     }
 
     @Override

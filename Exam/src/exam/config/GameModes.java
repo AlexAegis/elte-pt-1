@@ -1,7 +1,6 @@
 package exam.config;
 
-import exam.logic.Directions;
-import exam.logic.GameLogic;
+import exam.logic.abstraction.GameLogic;
 import exam.logic.NumberGameLogic;
 
 public enum GameModes {

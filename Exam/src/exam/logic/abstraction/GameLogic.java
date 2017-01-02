@@ -1,4 +1,4 @@
-package exam.logic;
+package exam.logic.abstraction;
 
 
 import exam.panels.Grid;
