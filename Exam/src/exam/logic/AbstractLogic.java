@@ -7,6 +7,7 @@ import exam.tiles.Pawn;
 import exam.tiles.Tile;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Stream;
@@ -36,10 +37,17 @@ public abstract class AbstractLogic implements GameLogic {
     }
 
     @Override
+    public Coordinate getTileLocation(Tile tile) {
+        return tileMap.entrySet().stream().filter(coordinateTileEntry -> coordinateTileEntry.getValue().equals(tile)).findFirst().orElseThrow(NoSuchFieldError::new).getKey();
+    }
+
+    @Override
     public void clearValidSteps() {
         validSteps.stream().flatMap(valid -> Stream.of(valid.getComponents()))
                 .filter(component -> component instanceof HighLight)
                 .forEach(highLight -> highLight.getParent().remove(highLight));
+        grid.revalidate();
+        grid.repaint();
         validSteps.clear();
     }
 
@@ -54,13 +62,13 @@ public abstract class AbstractLogic implements GameLogic {
     }
 
     @Override
-    public int[] findPawn(Pawn pawn) {
+    public Coordinate findPawn(Pawn pawn) {
         boolean foundThePawn = false;
         for (int i = 0; i < grid.getGridWidthByTiles() && !foundThePawn; i++) {
             for (int j = 0; j < grid.getGridHeightByTiles() && !foundThePawn; j++) {
                 foundThePawn = grid.getComponentAt(grid.getTileWidthByPixels() * i, grid.getTileHeightByPixels() * j) == pawn.getParent();
                 if(foundThePawn) {
-                    return new int[]{i, j};
+                    return new Coordinate(i, j);
                 }
             }
         }

@@ -11,6 +11,7 @@ public final class HighLight extends JComponent {
         this.width = width;
         this.height = height;
         setLayout(new BorderLayout());
+        setVisible(true);
     }
 
     @Override

@@ -4,6 +4,7 @@ import exam.logic.Coordinate;
 
 import javax.swing.*;
 import java.awt.*;
+import java.util.Arrays;
 
 import static exam.config.Config.ANTI_ALIASING;
 import static exam.config.Config.DEBUG_MODE;
@@ -15,6 +16,7 @@ public class Tile extends JComponent {
     private int height;
     private Paint paint;
     private Coordinate coordinate;
+    private Component children;
 
     public Tile(Color color, int width, int height) {
         this.height = height;
@@ -26,7 +28,7 @@ public class Tile extends JComponent {
         setVisible(true);
     }
 
-    public Tile( Color color, int width, int height, Coordinate coordinate) {
+    public Tile(Color color, int width, int height, Coordinate coordinate) {
         this(color, width, height);
         this.coordinate = coordinate;
     }
@@ -43,5 +45,25 @@ public class Tile extends JComponent {
         g.setPaint(Color.DARK_GRAY);
         g.setFont(new Font(Font.SANS_SERIF, Font.BOLD, fontSize));
         if(DEBUG_MODE) g.drawString(coordinate.toString(), width - fontSize * 4, fontSize);
+    }
+
+    public Component getChildren() {
+        return children;
+    }
+
+    public void setChildren(Component children) {
+        if(this.children == null) {
+            add(children);
+            this.children = children;
+        } else { // maybe throw something
+            System.out.println("Remove children before attempting to add a new");
+        }
+    }
+
+    public Component removeChildren() {
+        Component component = children;
+        children.getParent().remove(children);
+        children = null;
+        return component;
     }
 }

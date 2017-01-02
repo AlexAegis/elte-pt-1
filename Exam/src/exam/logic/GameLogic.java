@@ -5,15 +5,11 @@ import exam.panels.Grid;
 import exam.tiles.Pawn;
 import exam.tiles.Tile;
 
-import java.awt.*;
-import java.util.List;
-import java.util.Map;
-
 public interface GameLogic {
 
     void initGame();
 
-    List<Tile> getValidSteps(Tile tile);
+    void setValidSteps(Tile tile);
 
     void setGrid(Grid grid);
 
@@ -23,7 +19,9 @@ public interface GameLogic {
 
     int getActualPlayer();
 
-    int[] findPawn(Pawn pawn);
+    Coordinate getTileLocation(Tile tile);
+
+    Coordinate findPawn(Pawn pawn);
 
     void setActualPawn(Pawn pawn);
 

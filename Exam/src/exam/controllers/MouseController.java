@@ -1,11 +1,13 @@
 package exam.controllers;
 
 import exam.logic.GameLogic;
+import exam.tiles.Tile;
 
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.awt.event.MouseMotionListener;
 
-public class MouseController implements MouseListener {
+public class MouseController implements MouseListener, MouseMotionListener {
 
     private GameLogic gameLogic;
 
@@ -15,12 +17,20 @@ public class MouseController implements MouseListener {
 
     @Override
     public void mouseClicked(MouseEvent e) {
-        gameLogic.evaluateClick(null);
+    }
+
+    @Override
+    public void mouseMoved(MouseEvent e) {
+        gameLogic.clearValidSteps();
+        try {
+            System.out.println(gameLogic.getTileLocation((Tile) e.getComponent().getComponentAt(e.getX(), e.getY())).toString());
+            gameLogic.setValidSteps((Tile) e.getComponent().getComponentAt(e.getX(), e.getY()));
+        } catch (ClassCastException ignored) {}
     }
 
     @Override
     public void mousePressed(MouseEvent e) {
-
+        gameLogic.evaluateClick((Tile) e.getComponent().getComponentAt(e.getX(), e.getY()));
     }
 
     @Override
@@ -35,6 +45,11 @@ public class MouseController implements MouseListener {
 
     @Override
     public void mouseExited(MouseEvent e) {
+        gameLogic.clearValidSteps();
+    }
+
+    @Override
+    public void mouseDragged(MouseEvent e) {
 
     }
 }

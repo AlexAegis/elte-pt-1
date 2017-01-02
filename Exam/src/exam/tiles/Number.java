@@ -50,4 +50,10 @@ public class Number extends JComponent {
     public int hashCode() {
         return value;
     }
+
+    public void modifiyValue(int modifier) {
+        value = value + modifier;
+        revalidate();
+        repaint();
+    }
 }

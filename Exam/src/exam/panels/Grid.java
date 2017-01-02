@@ -36,7 +36,9 @@ public class Grid extends JPanel {
         setBounds(0, 0, WINDOW_WIDTH, WINDOW_WIDTH);
         GridLayout gridLayout = new GridLayout(fs.getN(), fs.getM(), hGap, vGap);
         setLayout(gridLayout);
-        addMouseListener(new MouseController(gameMode.getLogic()));
+        MouseController mouseController = new MouseController(gameMode.getLogic());
+        addMouseListener(mouseController);
+        addMouseMotionListener(mouseController);
         gridWidthByTiles = fs.getN();
         gridHeightByTiles = fs.getM();
         gridWidthByPixels = getWidth();

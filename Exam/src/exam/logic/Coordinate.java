@@ -25,6 +25,10 @@ public class Coordinate implements Comparable<Coordinate> {
         this.y = y;
     }
 
+    public Coordinate stepInDirection(Directions direction) {
+        return new Coordinate(x + direction.getX(), y + direction.getY());
+    }
+
     @Override
     public String toString() {
         return "C(" + (x + 1) + ", " + (y + 1) + ")";
