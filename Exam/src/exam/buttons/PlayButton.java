@@ -30,7 +30,7 @@ public class PlayButton extends JButton {
             } finally {
                 ContentPane.GAME.removeAll();
                 ContentPane.GAME.add(new Grid((FieldSizes) SIZESELECTOR.getSelectedItem(),
-                        (GameModes) GAMEMODESELECTOR.getSelectedItem(), min, max));
+                        (GameModes) GAMEMODESELECTOR.getSelectedItem(), min, max, CHECKBOXPANEL.getSelectedDirections()));
                 MINRANGESELECTOR.setText(Integer.toString(DEFAULT_MIN_RNG));
                 MAXRANGESELECTOR.setText(Integer.toString(DEFAULT_MAX_RNG));
                 ContentPane.GAME.revalidate();

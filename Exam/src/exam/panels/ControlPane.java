@@ -14,7 +14,7 @@ public class ControlPane extends JPanel {
         setLayout(null);
         setBounds(0, WINDOW_WIDTH, WINDOW_WIDTH, WINDOW_HEIGHT - WINDOW_WIDTH);
         Menu controlPane = new Menu();
-        controlPane.setBounds(0,0, (int) (WINDOW_WIDTH * 0.8),WINDOW_HEIGHT - WINDOW_WIDTH);
+        controlPane.setBounds(0,0, (int) (WINDOW_WIDTH * 1),WINDOW_HEIGHT - WINDOW_WIDTH);
         add(controlPane);
         setBackground(MENU_BG_COLOR);
     }

@@ -1,10 +1,12 @@
 package exam.config;
 
+import exam.logic.Directions;
 import exam.logic.GameLogic;
 import exam.logic.NumberGameLogic;
 
 public enum GameModes {
-    NUMBER_GAME(new NumberGameLogic());
+    NUMBER_GAME(new NumberGameLogic()),
+    DEBUGMODE(new NumberGameLogic());
 
     private GameLogic gameLogic;
 

@@ -16,21 +16,27 @@ public class MouseController implements MouseListener, MouseMotionListener {
     }
 
     @Override
-    public void mouseClicked(MouseEvent e) {
+    public void mousePressed(MouseEvent e) {
+        try {
+            gameLogic.evaluateClick((Tile) e.getComponent().getComponentAt(e.getX(), e.getY()));
+        } catch (ClassCastException ignored) {}
     }
 
     @Override
     public void mouseMoved(MouseEvent e) {
         gameLogic.clearValidSteps();
         try {
-            System.out.println(gameLogic.getTileLocation((Tile) e.getComponent().getComponentAt(e.getX(), e.getY())).toString());
             gameLogic.setValidSteps((Tile) e.getComponent().getComponentAt(e.getX(), e.getY()));
         } catch (ClassCastException ignored) {}
     }
 
     @Override
-    public void mousePressed(MouseEvent e) {
-        gameLogic.evaluateClick((Tile) e.getComponent().getComponentAt(e.getX(), e.getY()));
+    public void mouseExited(MouseEvent e) {
+        gameLogic.clearValidSteps();
+    }
+
+    @Override
+    public void mouseClicked(MouseEvent e) {
     }
 
     @Override
@@ -41,11 +47,6 @@ public class MouseController implements MouseListener, MouseMotionListener {
     @Override
     public void mouseEntered(MouseEvent e) {
 
-    }
-
-    @Override
-    public void mouseExited(MouseEvent e) {
-        gameLogic.clearValidSteps();
     }
 
     @Override

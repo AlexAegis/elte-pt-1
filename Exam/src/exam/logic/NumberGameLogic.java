@@ -3,22 +3,29 @@ package exam.logic;
 import exam.tiles.HighLight;
 import exam.tiles.Number;
 import exam.tiles.Tile;
-import java.util.HashSet;
-import java.util.Set;
+
+import java.util.*;
 
 import static exam.config.Config.DEBUG_MODE;
 
 
 public class NumberGameLogic extends AbstractLogic implements GameLogic {
 
-    private Set<Directions> validDirections = new HashSet<>();
     private int modifier = -1;
+    private boolean limited;
 
     public NumberGameLogic() {
-        validDirections.add(Directions.LEFT);
-        validDirections.add(Directions.RIGHT);
-        validDirections.add(Directions.UP);
-        validDirections.add(Directions.DOWN);
+        setLimited(true);
+        setValidDirections(Directions.LEFT, Directions.RIGHT);
+    }
+
+    public void setLimited(boolean limited) {
+        this.limited = limited;
+    }
+
+    public void setValidDirections(Directions... directions) {
+        validDirections.clear();
+        Arrays.stream(directions).forEach(validDirections::add);
     }
 
     @Override
@@ -61,7 +68,11 @@ public class NumberGameLogic extends AbstractLogic implements GameLogic {
 
     @Override
     public void evaluateClick(Tile tile) {
-        validSteps.forEach(t -> ((Number)t.getChildren()).modifiyValue(modifier));
+        validSteps.forEach(t -> {
+            ((Number)t.getChildren()).modifiyValue(modifier);
+            t.revalidate();
+            t.repaint();
+        });
     }
 
     @Override

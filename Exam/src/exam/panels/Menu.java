@@ -14,15 +14,16 @@ public class Menu extends JPanel {
     public static GameModeSelector GAMEMODESELECTOR = new GameModeSelector();
     public static MinRangeSelector MINRANGESELECTOR = new MinRangeSelector();
     public static MaxRangeSelector MAXRANGESELECTOR = new MaxRangeSelector();
+    public static CheckBoxPanel CHECKBOXPANEL = new CheckBoxPanel();
 
     public Menu() {
         setLayout(new GridBagLayout());
         setBackground(MENU_BG_COLOR);
 
         gc.anchor = GridBagConstraints.NORTHWEST;
-        gc.weighty = 0.01;
-        gc.weightx = 0.01;
-        gc.insets = new Insets(10,10,10,10);
+        gc.weighty = 1;
+        gc.weightx = 1;
+        gc.insets = new Insets(5,5,0,5);
 
         gc.gridx = 0;
         gc.gridy = 0;
@@ -38,15 +39,22 @@ public class Menu extends JPanel {
         add(GAMEMODESELECTOR, gc);
         gc.gridx = 2;
         gc.gridy = 0;
-        add(new JLabel("Min rng"), gc);
+        add(new JLabel("Min rng:"), gc);
         gc.gridx = 3;
         gc.gridy = 0;
         add(MINRANGESELECTOR, gc);
+        gc.gridx = 2;
+        gc.gridy = 1;
+        add(new JLabel("Max rng:"), gc);
+        gc.gridx = 3;
+        gc.gridy = 1;
+        add(MAXRANGESELECTOR, gc);
         gc.gridx = 4;
         gc.gridy = 0;
-        add(new JLabel("Max rng"), gc);
+        add(new JLabel("Valid Directions:"), gc);
         gc.gridx = 5;
         gc.gridy = 0;
-        add(MAXRANGESELECTOR, gc);
+        gc.gridheight = 4;
+        add(CHECKBOXPANEL, gc);
     }
 }

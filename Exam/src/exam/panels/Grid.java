@@ -4,6 +4,7 @@ import exam.config.GameModes;
 import exam.controllers.MouseController;
 import exam.config.FieldSizes;
 import exam.logic.Coordinate;
+import exam.logic.Directions;
 import exam.tiles.Tile;
 
 import javax.swing.*;
@@ -32,15 +33,15 @@ public class Grid extends JPanel {
     private final Color TILE_COLOR_A = new Color(145, 146, 137, 255);
     private final Color TILE_COLOR_B = new Color(210, 208, 209, 255);
 
-    public Grid(FieldSizes fs, GameModes gameMode, int minRng, int maxRng) {
+    public Grid(FieldSizes fieldSize, GameModes gameMode, int minRng, int maxRng, List<Directions> directions) {
         setBounds(0, 0, WINDOW_WIDTH, WINDOW_WIDTH);
-        GridLayout gridLayout = new GridLayout(fs.getN(), fs.getM(), hGap, vGap);
+        GridLayout gridLayout = new GridLayout(fieldSize.getN(), fieldSize.getM(), hGap, vGap);
         setLayout(gridLayout);
         MouseController mouseController = new MouseController(gameMode.getLogic());
         addMouseListener(mouseController);
         addMouseMotionListener(mouseController);
-        gridWidthByTiles = fs.getN();
-        gridHeightByTiles = fs.getM();
+        gridWidthByTiles = fieldSize.getN();
+        gridHeightByTiles = fieldSize.getM();
         gridWidthByPixels = getWidth();
         gridHeightByPixels = getHeight();
         tileHeightByPixels = gridHeightByPixels / gridHeightByTiles - vGap;
@@ -49,33 +50,19 @@ public class Grid extends JPanel {
         setBackground(GAME_BG_COLOR);
 
         // MAP IMPLEMENTATION
-        for (int i = 0; i < fs.getN(); i++) {
-            for (int j = 0; j < fs.getM(); j++) {
+        for (int i = 0; i < fieldSize.getN(); i++) {
+            for (int j = 0; j < fieldSize.getM(); j++) {
                 Coordinate coordinate = new Coordinate(i, j);
                 Tile tile = new Tile((i + j) % 2 == 0 ? TILE_COLOR_A : TILE_COLOR_B,
-                        WINDOW_WIDTH / fs.getN(),
-                        WINDOW_WIDTH / fs.getM(), coordinate);
+                        WINDOW_WIDTH / fieldSize.getN(),
+                        WINDOW_WIDTH / fieldSize.getM(), coordinate);
                 tileMap.put(coordinate, tile);
             }
         }
         tileMap.values().forEach(this::add);
-
-
-        // LIST IMPLEMENTATION
-        /*
-        for (int i = 0; i < fs.getN(); i++) {
-            List<Tile> row = new ArrayList<>();
-            for (int j = 0; j < fs.getM(); j++) {
-                row.add(new Tile((i + j) % 2 == 0 ? TILE_COLOR_A : TILE_COLOR_B, WINDOW_WIDTH / fs.getN(), WINDOW_WIDTH / fs.getM(), i * 10 + j));
-            }
-            tiles.add(row);
+        if(directions != null && !directions.isEmpty()) {
+            gameMode.getLogic().setValidDirections(directions);
         }
-
-        for(List<Tile> row : tiles) {
-            for(Tile b : row) {
-                add(b);
-            }
-        }*/
         gameMode.getLogic().setRng(minRng, maxRng);
         gameMode.getLogic().setGrid(this);
         gameMode.getLogic().initGame();

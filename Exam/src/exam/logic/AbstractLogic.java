@@ -7,7 +7,6 @@ import exam.tiles.Pawn;
 import exam.tiles.Tile;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Stream;
@@ -21,8 +20,14 @@ public abstract class AbstractLogic implements GameLogic {
     protected int maxRng;
     protected int minRng;
     protected List<Tile> validSteps = new ArrayList<>();
+    protected List<Directions> validDirections = new ArrayList<>();
     protected Grid grid;
     protected Map<Coordinate, Tile> tileMap;
+
+    @Override
+    public void setValidDirections(List<Directions> directions) {
+        validDirections = directions;
+    }
 
     @Override
     public void setGrid(Grid grid) {

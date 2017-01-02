@@ -5,6 +5,8 @@ import exam.panels.Grid;
 import exam.tiles.Pawn;
 import exam.tiles.Tile;
 
+import java.util.List;
+
 public interface GameLogic {
 
     void initGame();
@@ -42,4 +44,6 @@ public interface GameLogic {
     String toString();
 
     void setRng(int minRng, int maxRng);
+
+    void setValidDirections(List<Directions> directions);
 }
