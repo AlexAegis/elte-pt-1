@@ -7,14 +7,15 @@ import exam.tiles.Tile;
 
 import java.awt.*;
 import java.util.List;
+import java.util.Map;
 
 public interface GameLogic {
 
     void initGame();
 
-    List<Tile> getValidSteps();
+    List<Tile> getValidSteps(Tile tile);
 
-    void setGrid(Grid actualGrid);
+    void setGrid(Grid grid);
 
     void clearValidSteps();
 
@@ -32,7 +33,7 @@ public interface GameLogic {
 
     void switchActualPlayer();
 
-    void evaluateClick(int x, int y);
+    void evaluateClick(Tile tile);
 
     boolean isGameWon();
 

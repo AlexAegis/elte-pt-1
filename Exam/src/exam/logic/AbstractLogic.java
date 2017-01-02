@@ -8,6 +8,7 @@ import exam.tiles.Tile;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 import java.util.stream.Stream;
 
 
@@ -16,14 +17,16 @@ public abstract class AbstractLogic implements GameLogic {
     protected int actualPlayer = -1;
     protected Pawn actualPawn;
     protected Pawn target;
-    protected List<Tile> validSteps = new ArrayList<>();
-    protected Grid grid;
     protected int maxRng;
     protected int minRng;
+    protected List<Tile> validSteps = new ArrayList<>();
+    protected Grid grid;
+    protected Map<Coordinate, Tile> tileMap;
 
     @Override
     public void setGrid(Grid grid) {
         this.grid = grid;
+        this.tileMap = grid.getTiles();
     }
 
     @Override
@@ -67,7 +70,6 @@ public abstract class AbstractLogic implements GameLogic {
     @Override
     public void setActualPawn(Pawn pawn) {
         actualPawn = pawn;
-        getValidSteps();
     }
 
     @Override

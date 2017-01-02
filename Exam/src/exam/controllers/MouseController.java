@@ -15,7 +15,7 @@ public class MouseController implements MouseListener {
 
     @Override
     public void mouseClicked(MouseEvent e) {
-        gameLogic.evaluateClick(e.getX(), e.getY());
+        gameLogic.evaluateClick(null);
     }
 
     @Override

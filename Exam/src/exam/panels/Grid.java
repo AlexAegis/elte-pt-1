@@ -3,18 +3,22 @@ package exam.panels;
 import exam.config.GameModes;
 import exam.controllers.MouseController;
 import exam.config.FieldSizes;
+import exam.logic.Coordinate;
 import exam.tiles.Tile;
 
 import javax.swing.*;
 import java.awt.*;
-import java.util.ArrayList;
+import java.util.*;
 import java.util.List;
+
 import static exam.config.Config.WINDOW_WIDTH;
 import static exam.panels.Game.GAME_BG_COLOR;
 
 public class Grid extends JPanel {
 
     private List<List<Tile>> tiles = new ArrayList<>();
+
+    private Map<Coordinate, Tile> tileMap = new TreeMap<>();
 
     private int gridWidthByPixels;
     private int gridHeightByPixels;
@@ -42,6 +46,21 @@ public class Grid extends JPanel {
 
         setBackground(GAME_BG_COLOR);
 
+        // MAP IMPLEMENTATION
+        for (int i = 0; i < fs.getN(); i++) {
+            for (int j = 0; j < fs.getM(); j++) {
+                Coordinate coordinate = new Coordinate(i, j);
+                Tile tile = new Tile((i + j) % 2 == 0 ? TILE_COLOR_A : TILE_COLOR_B,
+                        WINDOW_WIDTH / fs.getN(),
+                        WINDOW_WIDTH / fs.getM(), coordinate);
+                tileMap.put(coordinate, tile);
+            }
+        }
+        tileMap.values().forEach(this::add);
+
+
+        // LIST IMPLEMENTATION
+        /*
         for (int i = 0; i < fs.getN(); i++) {
             List<Tile> row = new ArrayList<>();
             for (int j = 0; j < fs.getM(); j++) {
@@ -54,15 +73,15 @@ public class Grid extends JPanel {
             for(Tile b : row) {
                 add(b);
             }
-        }
+        }*/
         gameMode.getLogic().setRng(minRng, maxRng);
         gameMode.getLogic().setGrid(this);
         gameMode.getLogic().initGame();
         setVisible(true);
     }
 
-    public List<List<Tile>> getTiles() {
-        return tiles;
+    public Map<Coordinate, Tile> getTiles() {
+        return tileMap;
     }
 
     public int getGridWidthByPixels() {

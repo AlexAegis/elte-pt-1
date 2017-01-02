@@ -1,6 +1,6 @@
 package exam.tiles;
 
-import sun.rmi.server.InactiveGroupException;
+import exam.logic.Coordinate;
 
 import javax.swing.*;
 import java.awt.*;
@@ -14,7 +14,7 @@ public class Tile extends JComponent {
     private int width;
     private int height;
     private Paint paint;
-    private int no;
+    private Coordinate coordinate;
 
     public Tile(Color color, int width, int height) {
         this.height = height;
@@ -26,9 +26,9 @@ public class Tile extends JComponent {
         setVisible(true);
     }
 
-    public Tile(Color color, int width, int height, int no) {
+    public Tile( Color color, int width, int height, Coordinate coordinate) {
         this(color, width, height);
-        this.no = no;
+        this.coordinate = coordinate;
     }
 
     @Override
@@ -42,6 +42,6 @@ public class Tile extends JComponent {
         g.fillRect(0,0, width, height);
         g.setPaint(Color.DARK_GRAY);
         g.setFont(new Font(Font.SANS_SERIF, Font.BOLD, fontSize));
-        if(DEBUG_MODE) g.drawString(Integer.toString(no), width - fontSize * 2, fontSize);
+        if(DEBUG_MODE) g.drawString(coordinate.toString(), width - fontSize * 4, fontSize);
     }
 }
