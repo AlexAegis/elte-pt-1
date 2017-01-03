@@ -58,4 +58,8 @@ public final class Number extends JComponent {
     public boolean modifiable(int modifier, int min, int max) {
         return value + modifier >= min && value + modifier <= max;
     }
+
+    public void setValue(int value) {
+        this.value = value;
+    }
 }

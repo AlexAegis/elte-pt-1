@@ -31,7 +31,7 @@ public class MouseController implements MouseListener, MouseMotionListener {
     }
 
     @Override
-    public void mousePressed(MouseEvent e) {
+    public void mousePressed(MouseEvent e) { //TODO ADD SHADOW
         game = (JLayeredPane) ((Grid) e.getSource()).getParent().getParent();/*
         gameField = (JPanel) ((Grid) e.getSource()).getParent();*/
         try {

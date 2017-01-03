@@ -19,6 +19,7 @@ public class Menu extends JPanel {
     public static CheckBoxPanel CHECKBOXPANEL = new CheckBoxPanel();
     public static TimerLabel TIMERLABEL = new TimerLabel();
     public static StepCounterLabel STEPCOUNTERLABEL = new StepCounterLabel();
+    public static ModifierSelector MODIFIERSELECTOR = new ModifierSelector();
 
     public Menu() {
         GridBagConstraints gc = new GridBagConstraints();
@@ -53,6 +54,14 @@ public class Menu extends JPanel {
         gc.gridx = 3;
         gc.gridy = 1;
         add(MAXRANGESELECTOR, gc);
+
+        gc.gridx = 2;
+        gc.gridy = 2;
+        add(new JLabel("Modifier:"), gc);
+        gc.gridx = 3;
+        gc.gridy = 2;
+        add(MODIFIERSELECTOR, gc);
+
         gc.gridx = 4;
         gc.gridy = 0;
         add(VALIDDIRSLABEL, gc);

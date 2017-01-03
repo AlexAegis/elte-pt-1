@@ -18,7 +18,6 @@ import static exam.config.Config.HIGHLIGHTING;
 
 public class NumberGame extends AbstractLogic implements GameLogic {
 
-    private int modifier = -1;
     private boolean limited;
 
     public NumberGame() {
@@ -91,6 +90,12 @@ public class NumberGame extends AbstractLogic implements GameLogic {
             if(limited) {
                 if(((Number)t.getChild()).modifiable(modifier, minRng, maxRng)) {
                     ((Number)t.getChild()).modifyValue(modifier);
+                } else {
+                    if(modifier > 0) {
+                        ((Number)t.getChild()).setValue(maxRng);
+                    } else {
+                        ((Number)t.getChild()).setValue(minRng);
+                    }
                 }
             } else {
                 ((Number)t.getChild()).modifyValue(modifier);

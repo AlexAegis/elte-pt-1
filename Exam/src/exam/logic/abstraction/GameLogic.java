@@ -21,6 +21,8 @@ public interface GameLogic {
 
     void setValidDirections(List<Directions> directions);
 
+    void setModifier(int mod);
+
     void setRng(int minRng, int maxRng);
 
     void clearValidSteps();

@@ -29,7 +29,7 @@ public class Grid extends JPanel implements Iterable<Coordinate> {
     private int hGap = 5;
     private int vGap = 5;
 
-    public Grid(FieldSizes fieldSize, GameModes gameMode, int minRng, int maxRng, List<Directions> directions) {
+    public Grid(FieldSizes fieldSize, GameModes gameMode, int minRng, int maxRng, int mod, List<Directions> directions) {
         setBounds(0, 0, WINDOW_WIDTH, WINDOW_WIDTH);
         GridLayout gridLayout = new GridLayout(fieldSize.getN(), fieldSize.getM(), hGap, vGap);
         setLayout(gridLayout);
@@ -65,6 +65,7 @@ public class Grid extends JPanel implements Iterable<Coordinate> {
             gameMode.getLogic().setValidDirections(directions);
         }
         gameMode.getLogic().setRng(minRng, maxRng);
+        gameMode.getLogic().setModifier(mod);
         gameMode.getLogic().setGrid(this);
         gameMode.getLogic().initGame();
         setVisible(true);

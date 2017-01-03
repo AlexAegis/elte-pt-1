@@ -23,6 +23,7 @@ public abstract class AbstractLogic implements GameLogic {
     protected Pawn target;
     protected int maxRng;
     protected int minRng;
+    protected int modifier;
     protected List<Tile> validSteps = new ArrayList<>();
     protected List<Directions> validDirections = new ArrayList<>();
     protected Grid grid;
@@ -34,9 +35,14 @@ public abstract class AbstractLogic implements GameLogic {
         validDirections = directions;
     }
 
-
+    @Override
     public boolean isContinuusHighLighting() {
         return continuusHighLighting;
+    }
+
+    @Override
+    public void setModifier(int mod) {
+        this.modifier = mod;
     }
 
     @Override
