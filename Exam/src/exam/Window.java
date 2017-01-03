@@ -8,7 +8,7 @@ import java.awt.*;
 
 import static exam.config.Config.*;
 
-final class Window extends JFrame {
+public final class Window extends JFrame {
 
     Window(String title) {
         setTitle(title);

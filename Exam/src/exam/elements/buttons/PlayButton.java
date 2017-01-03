@@ -8,6 +8,7 @@ import exam.elements.panels.Grid;
 import javax.swing.*;
 import java.awt.*;
 
+import static exam.Main.GAME_WINDOW;
 import static exam.config.Config.DEFAULT_MAX_RNG;
 import static exam.config.Config.DEFAULT_MIN_RNG;
 import static exam.elements.panels.Menu.*;
@@ -25,6 +26,7 @@ public class PlayButton extends JButton {
                 max = Integer.valueOf(MAXRANGESELECTOR.getText());
             } catch (NumberFormatException ignored) {
             } finally {
+                GAME_WINDOW.setTitle(GAMEMODESELECTOR.getSelectedItem().toString());
                 ContentPane.GAME.removeAll();
                 ContentPane.GAME.add(new Grid((FieldSizes) SIZESELECTOR.getSelectedItem(),
                         (GameModes) GAMEMODESELECTOR.getSelectedItem(), min, max, CHECKBOXPANEL.getSelectedDirections()));

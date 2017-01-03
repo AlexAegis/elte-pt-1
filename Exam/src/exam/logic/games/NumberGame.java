@@ -1,5 +1,6 @@
-package exam.logic;
+package exam.logic.games;
 
+import exam.elements.tiles.Pawn;
 import exam.logic.abstraction.AbstractLogic;
 import exam.logic.abstraction.Coordinate;
 import exam.logic.abstraction.Directions;
@@ -9,19 +10,22 @@ import exam.elements.tiles.Number;
 import exam.elements.tiles.Tile;
 
 import javax.swing.*;
+import java.awt.*;
 import java.util.*;
 
 import static exam.config.Config.DEBUG_MODE;
 import static exam.config.Config.HIGHLIGHTING;
 
-public class NumberGameLogic extends AbstractLogic implements GameLogic {
+public class NumberGame extends AbstractLogic implements GameLogic {
 
     private int modifier = -1;
     private boolean limited;
 
-    public NumberGameLogic() {
+    public NumberGame() {
+        continuusHighLighting = true;
         setLimited(true);
         setValidDirections(Directions.LEFT, Directions.RIGHT);
+        setActualPawn(new Pawn(Color.BLUE, 1, 1, 1));
     }
 
     public void setLimited(boolean limited) {
@@ -32,6 +36,7 @@ public class NumberGameLogic extends AbstractLogic implements GameLogic {
         validDirections.clear();
         Arrays.stream(directions).forEach(validDirections::add);
     }
+
 
     @Override
     public void initGame() {
@@ -81,7 +86,7 @@ public class NumberGameLogic extends AbstractLogic implements GameLogic {
     }
 
     @Override
-    public void evaluateClick(Tile tile) {
+    public void evaluateStep(JComponent from, JComponent to) {
         validSteps.forEach(t -> {
             if(limited) {
                 if(((Number)t.getChild()).modifiable(modifier, minRng, maxRng)) {

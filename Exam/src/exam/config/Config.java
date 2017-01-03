@@ -9,7 +9,8 @@ public final class Config {
     public static final boolean WINDOW_RESIZABLE = false; //TODO
     public static final boolean ANTI_ALIASING = true;
     public static final boolean START_WITH_DEFAULT = true;
-    public static final GameModes DEFAULT_GAMEMODE = GameModes.NUMBER_GAME;
+    //public static final GameModes DEFAULT_GAMEMODE = GameModes.NUMBER_GAME;
+    public static final GameModes DEFAULT_GAMEMODE = GameModes.DASH;
     public static final FieldSizes DEFAULT_FIELDSIZE = FieldSizes.SEVEN;
     public static final boolean DEBUG_MODE = true;
     public static final int DEFAULT_MIN_RNG = 0;

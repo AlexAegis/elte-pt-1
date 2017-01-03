@@ -16,6 +16,9 @@ public class Tile extends JComponent {
     private Coordinate coordinate;
     private Component child;
 
+    public Tile() {
+    }
+
     public Tile(Color color, int width, int height) {
         this.height = height;
         this.width = width;

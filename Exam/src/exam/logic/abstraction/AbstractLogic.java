@@ -6,6 +6,7 @@ import exam.elements.tiles.HighLight;
 import exam.elements.tiles.Pawn;
 import exam.elements.tiles.Tile;
 
+import java.awt.*;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -13,6 +14,9 @@ import java.util.stream.Stream;
 
 
 public abstract class AbstractLogic implements GameLogic {
+
+    protected static final Color p1Color = new Color(255, 83, 72,255);
+    protected static final Color p2Color = new Color(67, 105, 243,255);
 
     protected int actualPlayer = -1;
     protected Pawn actualPawn;
@@ -23,10 +27,16 @@ public abstract class AbstractLogic implements GameLogic {
     protected List<Directions> validDirections = new ArrayList<>();
     protected Grid grid;
     protected Map<Coordinate, Tile> tileMap;
+    protected boolean continuusHighLighting = false;
 
     @Override
     public void setValidDirections(List<Directions> directions) {
         validDirections = directions;
+    }
+
+
+    public boolean isContinuusHighLighting() {
+        return continuusHighLighting;
     }
 
     @Override
@@ -75,9 +85,13 @@ public abstract class AbstractLogic implements GameLogic {
         boolean foundThePawn = false;
         for (int i = 0; i < grid.getGridWidthByTiles() && !foundThePawn; i++) {
             for (int j = 0; j < grid.getGridHeightByTiles() && !foundThePawn; j++) {
-                foundThePawn = grid.getComponentAt(grid.getTileWidthByPixels() * i, grid.getTileHeightByPixels() * j) == pawn.getParent();
-                if(foundThePawn) {
-                    return new Coordinate(i, j);
+                try {
+                    foundThePawn = grid.getComponentAt(grid.getTileWidthByPixels() * i, grid.getTileHeightByPixels() * j) == pawn.getParent();
+                    if(foundThePawn) {
+                        return new Coordinate(i, j);
+                    }
+                } catch (NullPointerException e) {
+
                 }
             }
         }
@@ -87,6 +101,7 @@ public abstract class AbstractLogic implements GameLogic {
     @Override
     public void setActualPawn(Pawn pawn) {
         actualPawn = pawn;
+        pawn.promote(); //FIXME take me out
     }
 
     @Override

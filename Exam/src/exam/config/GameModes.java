@@ -1,11 +1,15 @@
 package exam.config;
 
+import exam.logic.games.Dash;
 import exam.logic.abstraction.GameLogic;
-import exam.logic.NumberGameLogic;
+import exam.logic.games.Draught;
+import exam.logic.games.NumberGame;
 
 public enum GameModes {
-    NUMBER_GAME(new NumberGameLogic()),
-    DEBUGMODE(new NumberGameLogic());
+    NUMBER_GAME(new NumberGame()),
+    DRAUGHT(new Draught()),
+    DASH(new Dash()),
+    DEBUGMODE(new NumberGame());
 
     private GameLogic gameLogic;
 

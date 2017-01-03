@@ -5,11 +5,15 @@ import exam.elements.panels.Grid;
 import exam.elements.tiles.Pawn;
 import exam.elements.tiles.Tile;
 
+import javax.swing.*;
+import java.awt.*;
 import java.util.List;
 
 public interface GameLogic {
 
     void initGame();
+
+    boolean isContinuusHighLighting();
 
     void setGrid(Grid grid);
 
@@ -21,7 +25,7 @@ public interface GameLogic {
 
     void clearValidSteps();
 
-    void evaluateClick(Tile tile);
+    void evaluateStep(JComponent from, JComponent to);
 
     boolean currentPlayersPawn(Pawn pawn);
 
