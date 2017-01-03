@@ -29,12 +29,12 @@ public class Menu extends JPanel {
         gc.anchor = GridBagConstraints.NORTHWEST;
         gc.weighty = 1;
         gc.weightx = 1;
-        gc.insets = new Insets(5, 5, 5, 5);
+        gc.insets = new Insets(5, 5, 0, 5);
         gc.gridx = 0;
         gc.gridy = 0;
         add(new PlayButton(), gc);
         gc.gridx = 0;
-        gc.gridy = 2;
+        gc.gridy = 4;
         add(new CloseButton(), gc);
         gc.gridx = 1;
         gc.gridy = 0;
@@ -42,12 +42,14 @@ public class Menu extends JPanel {
         gc.gridx = 1;
         gc.gridy = 1;
         add(GAMEMODESELECTOR, gc);
+
         gc.gridx = 2;
         gc.gridy = 0;
         add(new JLabel("Min rng:"), gc);
         gc.gridx = 3;
         gc.gridy = 0;
         add(MINRANGESELECTOR, gc);
+
         gc.gridx = 2;
         gc.gridy = 1;
         add(new JLabel("Max rng:"), gc);
@@ -67,21 +69,21 @@ public class Menu extends JPanel {
         add(VALIDDIRSLABEL, gc);
         gc.gridx = 5;
         gc.gridy = 0;
-        gc.gridheight = 3;
+        gc.gridheight = 4;
         add(CHECKBOXPANEL, gc);
         gc.anchor = GridBagConstraints.CENTER;
         gc.gridx = 3;
-        gc.gridy = 2;
+        gc.gridy = 3;
         gc.gridheight = 1;
         add(new Label("Time elapsed:"), gc);
         gc.gridx = 4;
-        gc.gridy = 2;
+        gc.gridy = 3;
         add(TIMERLABEL, gc);
         gc.gridx = 1;
-        gc.gridy = 2;
+        gc.gridy = 3;
         add(new Label("Steps taken:"), gc);
         gc.gridx = 2;
-        gc.gridy = 2;
+        gc.gridy = 3;
         add(STEPCOUNTERLABEL, gc);
     }
 }

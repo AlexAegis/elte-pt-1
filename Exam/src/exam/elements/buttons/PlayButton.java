@@ -38,8 +38,6 @@ public class PlayButton extends JButton {
                         max,
                         mod,
                         CHECKBOXPANEL.getSelectedDirections()));
-                MINRANGESELECTOR.setText(Integer.toString(DEFAULT_MIN_RNG));
-                MAXRANGESELECTOR.setText(Integer.toString(DEFAULT_MAX_RNG));
                 TIMERLABEL.reset();
                 STEPCOUNTERLABEL.reset();
                 ContentPane.GAME.revalidate();

@@ -1,7 +1,7 @@
 package exam.elements.panels;
 
 import exam.config.GameModes;
-import exam.controllers.MouseController;
+import exam.logic.controllers.MouseController;
 import exam.config.FieldSizes;
 import exam.logic.abstraction.Coordinate;
 import exam.logic.abstraction.Directions;

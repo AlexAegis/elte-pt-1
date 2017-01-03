@@ -1,6 +1,5 @@
-package exam.controllers;
+package exam.logic.controllers;
 
-import exam.elements.labels.StepCounterLabel;
 import exam.elements.panels.Grid;
 import exam.elements.tiles.Pawn;
 import exam.logic.abstraction.GameLogic;
