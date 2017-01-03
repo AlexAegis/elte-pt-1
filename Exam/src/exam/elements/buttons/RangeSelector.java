@@ -1,4 +1,4 @@
-package exam.buttons;
+package exam.elements.buttons;
 
 import javax.swing.*;
 import java.awt.*;

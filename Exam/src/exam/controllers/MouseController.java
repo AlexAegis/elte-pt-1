@@ -1,11 +1,14 @@
 package exam.controllers;
 
+import exam.elements.labels.StepCounterLabel;
 import exam.logic.abstraction.GameLogic;
-import exam.tiles.Tile;
+import exam.elements.tiles.Tile;
 
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionListener;
+
+import static exam.elements.panels.Menu.STEPCOUNTERLABEL;
 
 public class MouseController implements MouseListener, MouseMotionListener {
 
@@ -19,6 +22,7 @@ public class MouseController implements MouseListener, MouseMotionListener {
     public void mousePressed(MouseEvent e) {
         try {
             gameLogic.evaluateClick((Tile) e.getComponent().getComponentAt(e.getX(), e.getY()));
+            STEPCOUNTERLABEL.increase();
         } catch (ClassCastException ignored) {}
     }
 

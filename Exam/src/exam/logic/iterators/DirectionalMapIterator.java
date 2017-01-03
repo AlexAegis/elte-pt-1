@@ -3,7 +3,7 @@ package exam.logic.iterators;
 
 import exam.logic.abstraction.Coordinate;
 import exam.logic.abstraction.Directions;
-import exam.tiles.Tile;
+import exam.elements.tiles.Tile;
 
 import java.util.Iterator;
 import java.util.Map;

@@ -1,9 +1,9 @@
 package exam.logic.abstraction;
 
 
-import exam.panels.Grid;
-import exam.tiles.Pawn;
-import exam.tiles.Tile;
+import exam.elements.panels.Grid;
+import exam.elements.tiles.Pawn;
+import exam.elements.tiles.Tile;
 
 import java.util.List;
 

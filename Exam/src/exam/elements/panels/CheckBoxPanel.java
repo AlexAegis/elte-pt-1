@@ -1,4 +1,4 @@
-package exam.panels;
+package exam.elements.panels;
 
 import exam.logic.abstraction.Directions;
 

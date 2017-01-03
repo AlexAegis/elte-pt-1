@@ -1,12 +1,12 @@
-package exam.buttons;
+package exam.elements.buttons;
 
 import exam.config.GameModes;
 
 import javax.swing.*;
 import java.util.Arrays;
 
-import static exam.panels.Menu.CHECKBOXPANEL;
-import static exam.panels.Menu.VALIDDIRSLABEL;
+import static exam.elements.panels.Menu.CHECKBOXPANEL;
+import static exam.elements.panels.Menu.VALIDDIRSLABEL;
 
 public class GameModeSelector extends JComboBox<GameModes> {
 

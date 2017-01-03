@@ -1,11 +1,11 @@
-package exam.tiles;
+package exam.elements.tiles;
 
 import javax.swing.*;
 import java.awt.*;
 
 import static exam.config.Config.ANTI_ALIASING;
 
-public class Number extends JComponent {
+public final class Number extends JComponent {
 
     private int value;
     private int width;

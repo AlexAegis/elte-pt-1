@@ -1,4 +1,4 @@
-package exam.buttons;
+package exam.elements.buttons;
 
 import static exam.config.Config.DEFAULT_MIN_RNG;
 

@@ -1,6 +1,6 @@
 package exam;
 
-import exam.panels.ContentPane;
+import exam.elements.panels.ContentPane;
 
 import javax.swing.*;
 

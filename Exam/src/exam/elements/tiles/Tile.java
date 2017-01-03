@@ -1,4 +1,4 @@
-package exam.tiles;
+package exam.elements.tiles;
 
 import exam.logic.abstraction.Coordinate;
 

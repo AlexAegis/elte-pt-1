@@ -4,10 +4,11 @@ import exam.logic.abstraction.AbstractLogic;
 import exam.logic.abstraction.Coordinate;
 import exam.logic.abstraction.Directions;
 import exam.logic.abstraction.GameLogic;
-import exam.tiles.HighLight;
-import exam.tiles.Number;
-import exam.tiles.Tile;
+import exam.elements.tiles.HighLight;
+import exam.elements.tiles.Number;
+import exam.elements.tiles.Tile;
 
+import javax.swing.*;
 import java.util.*;
 
 import static exam.config.Config.DEBUG_MODE;
@@ -92,20 +93,20 @@ public class NumberGameLogic extends AbstractLogic implements GameLogic {
             t.revalidate();
             t.repaint();
         });
-        /*if(isGameWon()) {
+        if(isGameWon()) {
             JOptionPane.showMessageDialog(null, "Game Ended");
-        }*/
+        }
     }
 
     @Override
     public boolean isGameWon() {
-        boolean won = false;
+        boolean won = false;/*
         Iterator iterator = grid.iterator();
         while (iterator.hasNext()) {
             Tile actualTile = tileMap.get((Coordinate)iterator.next());
             won = won || ((Number)actualTile.getChild()).getValue() == 0;
             actualTile.add(new HighLight(grid.getTileWidthByPixels(), grid.getTileHeightByPixels()));
-        }
+        }*/
         return won;
     }
 

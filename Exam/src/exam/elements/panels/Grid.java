@@ -1,4 +1,4 @@
-package exam.panels;
+package exam.elements.panels;
 
 import exam.config.GameModes;
 import exam.controllers.MouseController;
@@ -6,7 +6,7 @@ import exam.config.FieldSizes;
 import exam.logic.abstraction.Coordinate;
 import exam.logic.abstraction.Directions;
 import exam.logic.iterators.DirectionalMapIterator;
-import exam.tiles.Tile;
+import exam.elements.tiles.Tile;
 
 import javax.swing.*;
 import java.awt.*;
@@ -14,7 +14,7 @@ import java.util.*;
 import java.util.List;
 
 import static exam.config.Config.WINDOW_WIDTH;
-import static exam.panels.Game.GAME_BG_COLOR;
+import static exam.elements.panels.Game.GAME_BG_COLOR;
 
 public class Grid extends JPanel implements Iterable<Coordinate> {
 

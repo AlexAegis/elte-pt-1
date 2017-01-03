@@ -1,4 +1,4 @@
-package exam.panels;
+package exam.elements.panels;
 
 import javax.swing.*;
 import java.awt.*;
