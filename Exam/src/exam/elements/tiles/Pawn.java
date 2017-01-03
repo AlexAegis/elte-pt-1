@@ -5,7 +5,6 @@ import java.awt.*;
 
 public class Pawn extends JComponent {
 
-    private float[] dist = {0.2f, 1f};
     private Color color;
     private Color colorMuter = new Color(232, 241, 219, 30);
     private int width;
@@ -23,6 +22,7 @@ public class Pawn extends JComponent {
         this.padding = ((width + height) / 2) / 16;
         setLayout(new BorderLayout());
         Color[] colors = {color, new Color(255,255,255,200)};
+        float[] dist = {0.2f, 1f};
         paint = new RadialGradientPaint(width / 2, height / 2,width, dist, colors);
         setPreferredSize(new Dimension(width, height));
         setVisible(true);

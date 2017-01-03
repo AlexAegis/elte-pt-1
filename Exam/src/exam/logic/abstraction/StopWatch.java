@@ -10,7 +10,7 @@ public class StopWatch extends Thread {
         this.start();
     }
 
-    public int[] getTime() {
+    private int[] getTime() {
         long milliTime = System.currentTimeMillis() - this.startTime;
         int[] out = new int[]{0, 0, 0, 0};
         out[0] = (int)(milliTime / 3600000      );

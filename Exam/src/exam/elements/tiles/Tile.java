@@ -10,7 +10,6 @@ import static exam.config.Config.DEBUG_MODE;
 
 public class Tile extends JComponent {
 
-    private float[] dist = {0.08f, 1f};
     private int width;
     private int height;
     private Paint paint;
@@ -22,6 +21,7 @@ public class Tile extends JComponent {
         this.width = width;
         setLayout(new BorderLayout());
         Color[] colors = {color, new Color(255,255,255,200)};
+        float[] dist = {0.08f, 1f};
         paint = new RadialGradientPaint(width / 2, height / 2,40 * 5, dist, colors);
         setPreferredSize(new Dimension(width, height));
         setVisible(true);

@@ -15,7 +15,7 @@ public final class TimerLabel extends JLabel {
         start();
     }
 
-    public void start(){
+    void start(){
         reset();
         Timer timer = new Timer(10, e -> {
             String minute = Integer.toString(stopWatch.getMinute());

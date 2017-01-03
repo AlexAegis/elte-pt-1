@@ -13,8 +13,8 @@ import java.awt.*;
 import java.util.*;
 import java.util.List;
 
+import static exam.config.Config.GAME_BG_COLOR;
 import static exam.config.Config.WINDOW_WIDTH;
-import static exam.elements.panels.Game.GAME_BG_COLOR;
 
 public class Grid extends JPanel implements Iterable<Coordinate> {
 
@@ -28,9 +28,6 @@ public class Grid extends JPanel implements Iterable<Coordinate> {
     private int tileHeightByPixels;
     private int hGap = 5;
     private int vGap = 5;
-
-    private final Color TILE_COLOR_A = new Color(145, 146, 137, 255);
-    private final Color TILE_COLOR_B = new Color(210, 208, 209, 255);
 
     public Grid(FieldSizes fieldSize, GameModes gameMode, int minRng, int maxRng, List<Directions> directions) {
         setBounds(0, 0, WINDOW_WIDTH, WINDOW_WIDTH);
@@ -47,6 +44,11 @@ public class Grid extends JPanel implements Iterable<Coordinate> {
         tileWidthByPixels = gridWidthByPixels / gridWidthByTiles - hGap;
 
         setBackground(GAME_BG_COLOR);
+
+        Color TILE_COLOR_A = GAME_BG_COLOR.brighter().brighter();
+        Color TILE_COLOR_B = GAME_BG_COLOR.darker();
+        /*Color TILE_COLOR_C = new Color(145, 146, 137, 255);
+        Color TILE_COLOR_D = new Color(210, 208, 209, 255);*/
 
         for (int i = 0; i < fieldSize.getN(); i++) {
             for (int j = 0; j < fieldSize.getM(); j++) {

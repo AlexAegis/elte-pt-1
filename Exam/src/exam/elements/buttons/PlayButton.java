@@ -14,10 +14,8 @@ import static exam.elements.panels.Menu.*;
 
 public class PlayButton extends JButton {
 
-    private String name = "Play";
-
     public PlayButton() {
-        setText(name);
+        setText("Play");
         setPreferredSize(new Dimension(80, 40));
         addActionListener(e -> {
             int min = DEFAULT_MIN_RNG;

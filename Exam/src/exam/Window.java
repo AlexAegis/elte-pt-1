@@ -8,9 +8,9 @@ import java.awt.*;
 
 import static exam.config.Config.*;
 
-public final class Window extends JFrame {
+final class Window extends JFrame {
 
-    public Window(String title) {
+    Window(String title) {
         setTitle(title);
         setSize(WINDOW_WIDTH + 6, WINDOW_HEIGHT);
         setResizable(WINDOW_RESIZABLE);

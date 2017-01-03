@@ -9,7 +9,7 @@ import static exam.config.Config.WINDOW_WIDTH;
 public class ContentPane extends JLayeredPane {
 
     public static Game GAME = new Game();
-    public static ControlPane MENU = new ControlPane();
+    private static ControlPane MENU = new ControlPane();
 
     public ContentPane() {
         setSize(WINDOW_WIDTH, WINDOW_HEIGHT);

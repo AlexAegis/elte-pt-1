@@ -7,11 +7,10 @@ import exam.elements.labels.TimerLabel;
 import javax.swing.*;
 import java.awt.*;
 
-import static exam.elements.panels.ControlPane.MENU_BG_COLOR;
+import static exam.config.Config.MENU_BG_COLOR;
 
 public class Menu extends JPanel {
 
-    private GridBagConstraints gc = new GridBagConstraints();
     public static SizeSelector SIZESELECTOR = new SizeSelector();
     public static GameModeSelector GAMEMODESELECTOR = new GameModeSelector();
     public static MinRangeSelector MINRANGESELECTOR = new MinRangeSelector();
@@ -22,13 +21,14 @@ public class Menu extends JPanel {
     public static StepCounterLabel STEPCOUNTERLABEL = new StepCounterLabel();
 
     public Menu() {
+        GridBagConstraints gc = new GridBagConstraints();
         setLayout(new GridBagLayout());
         setBackground(MENU_BG_COLOR);
+
         gc.anchor = GridBagConstraints.NORTHWEST;
         gc.weighty = 1;
         gc.weightx = 1;
         gc.insets = new Insets(5, 5, 5, 5);
-
         gc.gridx = 0;
         gc.gridy = 0;
         add(new PlayButton(), gc);

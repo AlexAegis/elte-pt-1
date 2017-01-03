@@ -3,13 +3,11 @@ package exam.elements.panels;
 import javax.swing.*;
 import java.awt.*;
 
+import static exam.config.Config.MENU_BG_COLOR;
 import static exam.config.Config.WINDOW_HEIGHT;
 import static exam.config.Config.WINDOW_WIDTH;
 
 public class ControlPane extends JPanel {
-
-    public static final Color MENU_BG_COLOR = new Color(226, 210, 202, 255);
-
     public ControlPane() {
         setLayout(null);
         setBounds(0, WINDOW_WIDTH, WINDOW_WIDTH, WINDOW_HEIGHT - WINDOW_WIDTH);

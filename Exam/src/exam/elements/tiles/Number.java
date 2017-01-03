@@ -27,7 +27,7 @@ public final class Number extends JComponent {
         ((Graphics2D) g).setPaint(Color.BLACK);
         if(ANTI_ALIASING) ((Graphics2D) g).setRenderingHint(RenderingHints.KEY_ANTIALIASING,
                 RenderingHints.VALUE_ANTIALIAS_ON);
-        g.setFont(new Font(Font.SANS_SERIF, Font.BOLD, height - 5));
+        g.setFont(new Font(Font.SANS_SERIF, Font.BOLD, Math.max(height, width) - 5));
         g.drawString(toString(), 5, height - 5);
     }
 

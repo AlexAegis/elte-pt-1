@@ -4,8 +4,7 @@ import javax.swing.*;
 
 import static exam.config.Config.WINDOW_TITLE;
 
-public final class Main {
-
+final class Main {
     public static void main(String[] args) {
         try {
             UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());

@@ -1,5 +1,7 @@
 package exam.config;
 
+import java.awt.*;
+
 public final class Config {
     public static final String WINDOW_TITLE = "NumberGame";
     public static final int WINDOW_HEIGHT = 700;
@@ -13,4 +15,6 @@ public final class Config {
     public static final int DEFAULT_MIN_RNG = 0;
     public static final int DEFAULT_MAX_RNG = 50;
     public static final boolean HIGHLIGHTING = true;
+    public static final Color GAME_BG_COLOR = new Color(251, 87, 72, 255);
+    public static final Color MENU_BG_COLOR = GAME_BG_COLOR.brighter();
 }
