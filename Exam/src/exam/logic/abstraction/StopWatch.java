@@ -10,26 +10,24 @@ public class StopWatch extends Thread {
         this.start();
     }
 
-    private int[] getTime() {
-        long milliTime = System.currentTimeMillis() - this.startTime;
-        int[] out = new int[]{0, 0, 0, 0};
-        out[0] = (int)(milliTime / 3600000      );
-        out[1] = (int)(milliTime / 60000        ) % 60;
-        out[2] = (int)(milliTime / 1000         ) % 60;
-        out[3] = (int)(milliTime)                 % 1000;
-        return out;
+    private long getTime() {
+        return System.currentTimeMillis() - this.startTime;
+    }
+
+    public int getHour() {
+        return (int) (getTime() / 3600000);
     }
 
     public int getMinute() {
-        return getTime()[1];
+        return (int) (getTime() / 60000) % 60;
     }
 
     public int getSecond() {
-        return getTime()[2];
+        return (int) (getTime() / 1000) % 60;
     }
 
     public int getMilliSeconds() {
-        return getTime()[3];
+        return (int) getTime() % 1000;
     }
 
     public void reset() {
