@@ -1,4 +1,4 @@
-package exam;
+package exam.config;
 
 public interface ResizeableElement {
 

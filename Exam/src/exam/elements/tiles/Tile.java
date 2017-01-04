@@ -1,6 +1,6 @@
 package exam.elements.tiles;
 
-import exam.ResizeableElement;
+import exam.config.ResizeableElement;
 import exam.elements.panels.Grid;
 import exam.logic.abstraction.Coordinate;
 
@@ -14,9 +14,10 @@ public class Tile extends JComponent implements ResizeableElement {
 
     private int width;
     private int height;
-    private Paint paint;
     private Coordinate coordinate;
     private Component child;
+    Color[] colors;
+    float[] dist;
 
     public Tile() {
     }
@@ -25,9 +26,8 @@ public class Tile extends JComponent implements ResizeableElement {
         this.height = height;
         this.width = width;
         setLayout(new BorderLayout());
-        Color[] colors = {color, new Color(255,255,255,200)};
-        float[] dist = {0.08f, 1f};
-        paint = new RadialGradientPaint(width / 2, height / 2,40 * 5, dist, colors);
+        colors = new Color[]{color, new Color(255,255,255,200)};
+        dist = new float[]{0.08f, 1f};
         setPreferredSize(new Dimension(width, height));
         setVisible(true);
     }
@@ -44,7 +44,7 @@ public class Tile extends JComponent implements ResizeableElement {
         int fontSize = 10;
         if(ANTI_ALIASING) g.setRenderingHint(RenderingHints.KEY_ANTIALIASING,
                 RenderingHints.VALUE_ANTIALIAS_ON);
-        g.setPaint(paint);
+        g.setPaint(new RadialGradientPaint(width / 2, height / 2,width * 3, dist, colors));
         g.fillRect(0,0, width, height);
         g.setPaint(Color.DARK_GRAY);
         g.setFont(new Font(Font.SANS_SERIF, Font.BOLD, fontSize));

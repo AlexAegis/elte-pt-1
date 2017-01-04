@@ -1,6 +1,6 @@
 package exam.elements.tiles;
 
-import exam.ResizeableElement;
+import exam.config.ResizeableElement;
 
 import javax.swing.*;
 import java.awt.*;

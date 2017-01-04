@@ -1,7 +1,6 @@
 package exam.elements.panels;
-
-import exam.ResizeableElement;
 import exam.config.GameModes;
+import exam.config.ResizeableElement;
 import exam.logic.controllers.MouseController;
 import exam.config.FieldSizes;
 import exam.logic.abstraction.Coordinate;
@@ -11,13 +10,12 @@ import exam.elements.tiles.Tile;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ComponentEvent;
-import java.awt.event.ComponentListener;
 import java.util.*;
 import java.util.List;
 
+import static exam.config.Config.DEFAULT_WINDOW_HEIGHT;
 import static exam.config.Config.GAME_BG_COLOR;
-import static exam.config.Config.WINDOW_WIDTH;
+import static exam.config.Config.DEFAULT_WINDOW_WIDTH;
 
 public class Grid extends JPanel implements Iterable<Coordinate>, ResizeableElement {
 
@@ -33,7 +31,7 @@ public class Grid extends JPanel implements Iterable<Coordinate>, ResizeableElem
     private int vGap = 5;
 
     public Grid(FieldSizes fieldSize, GameModes gameMode, int minRng, int maxRng, int mod, List<Directions> directions) {
-        setBounds(0, 0, WINDOW_WIDTH, WINDOW_WIDTH);
+        setBounds(0,0, Math.min(DEFAULT_WINDOW_WIDTH, DEFAULT_WINDOW_HEIGHT), Math.min(DEFAULT_WINDOW_WIDTH, DEFAULT_WINDOW_HEIGHT));
         GridLayout gridLayout = new GridLayout(fieldSize.getN(), fieldSize.getM(), hGap, vGap);
         setLayout(gridLayout);
         MouseController mouseController = new MouseController(gameMode.getLogic());
@@ -117,7 +115,7 @@ public class Grid extends JPanel implements Iterable<Coordinate>, ResizeableElem
 
     @Override
     public void onResize() {
-        setBounds(0, 0, WINDOW_WIDTH, WINDOW_WIDTH);
+        setBounds(0,0, Math.min(DEFAULT_WINDOW_WIDTH, DEFAULT_WINDOW_HEIGHT), Math.min(DEFAULT_WINDOW_WIDTH, DEFAULT_WINDOW_HEIGHT));
         gridWidthByPixels = getWidth();
         gridHeightByPixels = getHeight();
         tileHeightByPixels = gridHeightByPixels / gridHeightByTiles - vGap;

@@ -1,13 +1,12 @@
 package exam.elements.panels;
 
-
-import exam.ResizeableElement;
+import exam.config.ResizeableElement;
 
 import javax.swing.*;
 import java.awt.*;
 
-import static exam.config.Config.WINDOW_HEIGHT;
-import static exam.config.Config.WINDOW_WIDTH;
+import static exam.config.Config.DEFAULT_WINDOW_HEIGHT;
+import static exam.config.Config.DEFAULT_WINDOW_WIDTH;
 
 public class ContentPane extends JLayeredPane implements ResizeableElement {
 
@@ -15,7 +14,7 @@ public class ContentPane extends JLayeredPane implements ResizeableElement {
     private static ControlPane MENU = new ControlPane();
 
     public ContentPane() {
-        setSize(WINDOW_WIDTH, WINDOW_HEIGHT);
+        setSize(DEFAULT_WINDOW_WIDTH, DEFAULT_WINDOW_HEIGHT);
         setLayout(null);
         add(GAME);
         add(MENU);
@@ -24,7 +23,7 @@ public class ContentPane extends JLayeredPane implements ResizeableElement {
 
     @Override
     public void onResize() {
-        setSize(WINDOW_WIDTH, WINDOW_HEIGHT);
+        setSize(DEFAULT_WINDOW_WIDTH, DEFAULT_WINDOW_HEIGHT);
         revalidate();
         repaint();
     }

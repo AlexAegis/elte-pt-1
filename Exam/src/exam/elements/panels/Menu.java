@@ -1,14 +1,12 @@
 package exam.elements.panels;
 
-import exam.ResizeableElement;
+import exam.config.ResizeableElement;
 import exam.elements.buttons.*;
 import exam.elements.labels.StepCounterLabel;
 import exam.elements.labels.TimerLabel;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ComponentEvent;
-import java.awt.event.ComponentListener;
 
 import static exam.config.Config.MENU_BG_COLOR;
 

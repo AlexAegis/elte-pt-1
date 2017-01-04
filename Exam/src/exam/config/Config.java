@@ -5,8 +5,8 @@ import java.awt.*;
 public final class Config {
     public static final boolean DEBUG_MODE = false;
     public static final String WINDOW_TITLE = "NumberGame";
-    public static int WINDOW_HEIGHT = 900;
-    public static int WINDOW_WIDTH = 680;
+    public static int DEFAULT_WINDOW_HEIGHT = 700;
+    public static int DEFAULT_WINDOW_WIDTH = 580;
     public static final boolean WINDOW_RESIZABLE = true; //TODO
     public static final boolean ANTI_ALIASING = true;
     public static final boolean START_WITH_DEFAULT = false;
