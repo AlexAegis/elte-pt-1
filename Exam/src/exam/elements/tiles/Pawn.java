@@ -1,9 +1,11 @@
 package exam.elements.tiles;
 
+import exam.ResizeableElement;
+
 import javax.swing.*;
 import java.awt.*;
 
-public class Pawn extends JComponent {
+public class Pawn extends JComponent implements ResizeableElement {
 
     private Color color;
     private Color colorMuter = new Color(232, 241, 219, 30);
@@ -81,5 +83,14 @@ public class Pawn extends JComponent {
     @Override
     public int hashCode() {
         return player;
+    }
+
+    @Override
+    public void onResize() {
+        setSize(getParent().getSize());
+        width = getParent().getWidth();
+        height = getParent().getHeight();
+        revalidate();
+        repaint();
     }
 }

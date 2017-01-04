@@ -5,19 +5,26 @@ import exam.elements.panels.ContentPane;
 import javax.swing.*;
 
 import java.awt.*;
+import java.awt.event.ComponentEvent;
+import java.awt.event.ComponentListener;
+import java.util.List;
+import java.util.Objects;
+import java.util.stream.Collectors;
 
 import static exam.config.Config.*;
+import static exam.config.Utilities.findComponents;
 
-public final class Window extends JFrame {
+public final class Window extends JFrame implements ComponentListener {
 
     Window(String title) {
         setTitle(title);
-        setSize(WINDOW_WIDTH + 6, WINDOW_HEIGHT);
+        setSize(WINDOW_WIDTH + 16, WINDOW_HEIGHT);
         setResizable(WINDOW_RESIZABLE);
         setLocationRelativeTo(null);
         setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         setContentPane(new ContentPane());
         setVisible(true);
+        addComponentListener(this);
     }
 
     @Override
@@ -26,5 +33,29 @@ public final class Window extends JFrame {
         Graphics2D graphics2D = (Graphics2D) g;
         if(ANTI_ALIASING) graphics2D.setRenderingHint(RenderingHints.KEY_ANTIALIASING,
                 RenderingHints.VALUE_ANTIALIAS_ON);
+    }
+
+    @Override
+    public void componentResized(ComponentEvent e) {
+        WINDOW_WIDTH = getWidth() - 16;
+        WINDOW_HEIGHT = getHeight() - 32;
+        findComponents(this, ResizeableElement.class).forEach(ResizeableElement::onResize);
+        revalidate();
+        repaint();
+    }
+
+    @Override
+    public void componentMoved(ComponentEvent e) {
+
+    }
+
+    @Override
+    public void componentShown(ComponentEvent e) {
+
+    }
+
+    @Override
+    public void componentHidden(ComponentEvent e) {
+
     }
 }

@@ -1,11 +1,13 @@
 package exam.elements.tiles;
 
+import exam.ResizeableElement;
+
 import javax.swing.*;
 import java.awt.*;
 
 import static exam.config.Config.ANTI_ALIASING;
 
-public final class Number extends JComponent {
+public final class Number extends JComponent implements ResizeableElement {
 
     private int value;
     private int width;
@@ -61,5 +63,14 @@ public final class Number extends JComponent {
 
     public void setValue(int value) {
         this.value = value;
+    }
+
+    @Override
+    public void onResize() {
+        setSize(getParent().getSize());
+        width = getParent().getWidth();
+        height = getParent().getHeight();
+        revalidate();
+        repaint();
     }
 }

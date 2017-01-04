@@ -1,9 +1,11 @@
 package exam.elements.tiles;
 
+import exam.ResizeableElement;
+
 import javax.swing.*;
 import java.awt.*;
 
-public final class HighLight extends JComponent {
+public final class HighLight extends JComponent implements ResizeableElement {
     private int width;
     private int height;
 
@@ -42,5 +44,14 @@ public final class HighLight extends JComponent {
         g.fillRect(0,0, width, height);
         g.setColor(new Color(0, 0, 0, 5));
         g.fillRect(width / 20 , height/ 20, width -  height / 10, height - width / 10);
+    }
+
+    @Override
+    public void onResize() {
+        setSize(getParent().getSize());
+        width = getParent().getWidth();
+        height = getParent().getHeight();
+        revalidate();
+        repaint();
     }
 }

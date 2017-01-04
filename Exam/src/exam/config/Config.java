@@ -3,11 +3,11 @@ package exam.config;
 import java.awt.*;
 
 public final class Config {
-    public static final boolean DEBUG_MODE = true;
+    public static final boolean DEBUG_MODE = false;
     public static final String WINDOW_TITLE = "NumberGame";
-    public static final int WINDOW_HEIGHT = 900;
-    public static final int WINDOW_WIDTH = 680;
-    public static final boolean WINDOW_RESIZABLE = false; //TODO
+    public static int WINDOW_HEIGHT = 900;
+    public static int WINDOW_WIDTH = 680;
+    public static final boolean WINDOW_RESIZABLE = true; //TODO
     public static final boolean ANTI_ALIASING = true;
     public static final boolean START_WITH_DEFAULT = false;
     public static final GameModes DEFAULT_GAMEMODE = GameModes.NUMBER_GAME;

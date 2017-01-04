@@ -1,15 +1,18 @@
 package exam.elements.panels;
 
+import exam.ResizeableElement;
 import exam.elements.buttons.*;
 import exam.elements.labels.StepCounterLabel;
 import exam.elements.labels.TimerLabel;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ComponentEvent;
+import java.awt.event.ComponentListener;
 
 import static exam.config.Config.MENU_BG_COLOR;
 
-public class Menu extends JPanel {
+public class Menu extends JPanel implements ResizeableElement {
 
     public static SizeSelector SIZESELECTOR = new SizeSelector();
     public static GameModeSelector GAMEMODESELECTOR = new GameModeSelector();
@@ -85,5 +88,12 @@ public class Menu extends JPanel {
         gc.gridx = 2;
         gc.gridy = 3;
         add(STEPCOUNTERLABEL, gc);
+    }
+
+    @Override
+    public void onResize() {
+        setSize(getParent().getSize());
+        revalidate();
+        repaint();
     }
 }

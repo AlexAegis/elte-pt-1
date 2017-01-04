@@ -1,5 +1,6 @@
 package exam.elements.panels;
 
+import exam.ResizeableElement;
 import exam.config.GameModes;
 import exam.logic.controllers.MouseController;
 import exam.config.FieldSizes;
@@ -10,13 +11,15 @@ import exam.elements.tiles.Tile;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ComponentEvent;
+import java.awt.event.ComponentListener;
 import java.util.*;
 import java.util.List;
 
 import static exam.config.Config.GAME_BG_COLOR;
 import static exam.config.Config.WINDOW_WIDTH;
 
-public class Grid extends JPanel implements Iterable<Coordinate> {
+public class Grid extends JPanel implements Iterable<Coordinate>, ResizeableElement {
 
     private Map<Coordinate, Tile> tileMap = new TreeMap<>();
 
@@ -110,5 +113,16 @@ public class Grid extends JPanel implements Iterable<Coordinate> {
     @Override
     public Iterator<Coordinate> iterator() {
         return new DirectionalMapIterator(tileMap, Directions.DOWN);
+    }
+
+    @Override
+    public void onResize() {
+        setBounds(0, 0, WINDOW_WIDTH, WINDOW_WIDTH);
+        gridWidthByPixels = getWidth();
+        gridHeightByPixels = getHeight();
+        tileHeightByPixels = gridHeightByPixels / gridHeightByTiles - vGap;
+        tileWidthByPixels = gridWidthByPixels / gridWidthByTiles - hGap;
+        revalidate();
+        repaint();
     }
 }

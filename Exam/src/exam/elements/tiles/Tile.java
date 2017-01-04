@@ -1,5 +1,7 @@
 package exam.elements.tiles;
 
+import exam.ResizeableElement;
+import exam.elements.panels.Grid;
 import exam.logic.abstraction.Coordinate;
 
 import javax.swing.*;
@@ -8,7 +10,7 @@ import java.awt.*;
 import static exam.config.Config.ANTI_ALIASING;
 import static exam.config.Config.DEBUG_MODE;
 
-public class Tile extends JComponent {
+public class Tile extends JComponent implements ResizeableElement {
 
     private int width;
     private int height;
@@ -67,5 +69,14 @@ public class Tile extends JComponent {
         child.getParent().remove(child);
         child = null;
         return component;
+    }
+
+    @Override
+    public void onResize() {
+        height = ((Grid)getParent()).getTileHeightByPixels();
+        width = ((Grid)getParent()).getTileWidthByPixels();
+        setSize(width, height);
+        revalidate();
+        repaint();
     }
 }
