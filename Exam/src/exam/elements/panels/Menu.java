@@ -90,7 +90,7 @@ public class Menu extends JPanel implements ResizeableElement {
 
     @Override
     public void onResize() {
-        setSize(getParent().getSize());
+        //setSize(getParent().getSize());
         revalidate();
         repaint();
     }

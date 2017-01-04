@@ -18,7 +18,7 @@ public class ControlPane extends JPanel implements ResizeableElement {
             menu.setBounds(0,0, DEFAULT_WINDOW_WIDTH, DEFAULT_WINDOW_HEIGHT - DEFAULT_WINDOW_WIDTH);
         } else {
             setBounds(DEFAULT_WINDOW_HEIGHT, 0, DEFAULT_WINDOW_WIDTH - DEFAULT_WINDOW_HEIGHT, DEFAULT_WINDOW_HEIGHT);
-            menu.setBounds(0,0, DEFAULT_WINDOW_WIDTH - DEFAULT_WINDOW_HEIGHT, DEFAULT_WINDOW_HEIGHT);
+            menu.setBounds(0,0, DEFAULT_WINDOW_WIDTH - DEFAULT_WINDOW_HEIGHT,DEFAULT_WINDOW_WIDTH -  DEFAULT_WINDOW_HEIGHT);
         }
 
         add(menu);
@@ -32,7 +32,7 @@ public class ControlPane extends JPanel implements ResizeableElement {
             menu.setBounds(0,0, DEFAULT_WINDOW_WIDTH, DEFAULT_WINDOW_HEIGHT - DEFAULT_WINDOW_WIDTH);
         } else {
             setBounds(DEFAULT_WINDOW_HEIGHT, 0, DEFAULT_WINDOW_WIDTH - DEFAULT_WINDOW_HEIGHT, DEFAULT_WINDOW_HEIGHT);
-            menu.setBounds(0,0, DEFAULT_WINDOW_WIDTH - DEFAULT_WINDOW_HEIGHT, DEFAULT_WINDOW_HEIGHT);
+            menu.setBounds(0,0, DEFAULT_WINDOW_WIDTH - DEFAULT_WINDOW_HEIGHT, DEFAULT_WINDOW_HEIGHT / 2);
         }
         revalidate();
         repaint();

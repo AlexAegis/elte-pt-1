@@ -29,13 +29,13 @@ public final class Number extends JComponent implements ResizeableElement {
         ((Graphics2D) g).setPaint(Color.BLACK);
         if(ANTI_ALIASING) ((Graphics2D) g).setRenderingHint(RenderingHints.KEY_ANTIALIASING,
                 RenderingHints.VALUE_ANTIALIAS_ON);
-        g.setFont(new Font(Font.SANS_SERIF, Font.BOLD, Math.max(height, width) - 5));
-        g.drawString(toString(), 5, height - 5);
+        g.setFont(new Font(Font.SANS_SERIF, Font.BOLD, (int) (Math.max(height, width) * 0.8)));
+        g.drawString(toString(), (int) (Math.max(height, width) * 0.1), height - (int) (Math.max(height, width) * 0.1));
     }
 
     @Override
     public String toString() {
-        return Integer.toString(value);
+        return value < 10 ? "  " + Integer.toString(value) : Integer.toString(value) ;
     }
 
     @Override
