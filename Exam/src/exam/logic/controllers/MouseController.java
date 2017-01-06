@@ -4,6 +4,7 @@ import exam.elements.panels.Grid;
 import exam.elements.tiles.Pawn;
 import exam.logic.abstraction.GameLogic;
 import exam.elements.tiles.Tile;
+import sun.plugin.com.event.COMEventHandler;
 
 import javax.swing.*;
 import java.awt.*;
@@ -22,6 +23,7 @@ public class MouseController implements MouseListener, MouseMotionListener {
     private JLayeredPane game;/*
     private JPanel gameField;*/
     private Component original;
+    //private Pawn shadow;
 
     private GameLogic gameLogic;
 
@@ -38,6 +40,8 @@ public class MouseController implements MouseListener, MouseMotionListener {
             if (!gameLogic.currentPlayersPawn(pawn)) {
                 return;
             }
+            //shadow = new Pawn(Color.BLUE, 1, 50, 50);
+
             gameLogic.clearValidSteps();
             gameLogic.setValidSteps((Tile) pawn.getParent());
             gameLogic.setActualPawn(pawn);
@@ -49,8 +53,10 @@ public class MouseController implements MouseListener, MouseMotionListener {
             y = parentLocation.y - e.getY();
 
             gameLogic.getActualPawn().setLocation(e.getX() + x + xOffset, e.getY() + y + yOffset);
-
+            //shadow.setLocation(e.getX() + x + 30, e.getY() + y + 30);
+            //shadow.setBounds(e.getX() + x + 30, e.getY() + y + 30, 50, 50);
             game.add(gameLogic.getActualPawn(), JLayeredPane.DRAG_LAYER);
+            //game.add(shadow);
             game.setCursor(Cursor.getPredefinedCursor(Cursor.MOVE_CURSOR));
         } catch (ClassCastException ignored) {
         }
@@ -87,6 +93,7 @@ public class MouseController implements MouseListener, MouseMotionListener {
 
         gameLogic.getActualPawn().setVisible(false);
         game.remove(gameLogic.getActualPawn());
+        //game.remove(shadow);
         gameLogic.getActualPawn().setVisible(true);
 
         int xMax = game.getWidth() - gameLogic.getActualPawn().getWidth();
@@ -98,7 +105,7 @@ public class MouseController implements MouseListener, MouseMotionListener {
         iy = Math.max(iy, 0);
 
         try {
-            gameLogic.evaluateStep((JComponent) e.getComponent().getComponentAt(ix, iy), (JComponent) original);
+            gameLogic.evaluateStep((Tile) original, (Tile) e.getComponent().getComponentAt(ix, iy));
             STEPCOUNTERLABEL.increase();
         } catch (ClassCastException ignored) {
         } finally {
@@ -126,6 +133,7 @@ public class MouseController implements MouseListener, MouseMotionListener {
         iy = Math.min(iy, yMax);
         iy = Math.max(iy, 0);
         gameLogic.getActualPawn().setLocation(ix, iy);
+        //shadow.setLocation(ix + 30, iy + 30);
         //game.repaint(); //INFO can be disabled for better performance
     }
 }

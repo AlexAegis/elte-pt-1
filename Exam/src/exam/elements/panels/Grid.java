@@ -27,8 +27,8 @@ public class Grid extends JPanel implements Iterable<Coordinate>, ResizeableElem
     private int gridHeightByTiles;
     private int tileWidthByPixels;
     private int tileHeightByPixels;
-    private int hGap = 5;
-    private int vGap = 5;
+    private int hGap = 0;
+    private int vGap = 0;
 
     public Grid(FieldSizes fieldSize, GameModes gameMode, int minRng, int maxRng, int mod, List<Directions> directions) {
         setBounds(0,0, Math.min(DEFAULT_WINDOW_WIDTH, DEFAULT_WINDOW_HEIGHT), Math.min(DEFAULT_WINDOW_WIDTH, DEFAULT_WINDOW_HEIGHT));
@@ -63,7 +63,7 @@ public class Grid extends JPanel implements Iterable<Coordinate>, ResizeableElem
         }
         tileMap.values().forEach(this::add);
         if(directions != null && !directions.isEmpty()) {
-            gameMode.getLogic().setValidDirections(directions);
+            gameMode.getLogic().setValidDirections(directions.stream().toArray(size -> new Directions[directions.size()]));
         }
         gameMode.getLogic().setRng(minRng, maxRng);
         gameMode.getLogic().setModifier(mod);

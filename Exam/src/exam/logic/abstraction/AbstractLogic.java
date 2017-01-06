@@ -8,9 +8,13 @@ import exam.elements.tiles.Tile;
 
 import java.awt.*;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 import java.util.stream.Stream;
+
+import static exam.config.Config.HIGHLIGHTING;
 
 
 public abstract class AbstractLogic implements GameLogic {
@@ -31,8 +35,25 @@ public abstract class AbstractLogic implements GameLogic {
     protected boolean continuusHighLighting = false;
 
     @Override
-    public void setValidDirections(List<Directions> directions) {
-        validDirections = directions;
+    public void setValidDirections(Directions... directions) {
+        validDirections.clear();
+        Arrays.stream(directions).forEach(validDirections::add);
+    }
+
+
+    @Override
+    public void setValidSteps(Tile tile) {
+        validSteps = getValidSteps(getTileLocation(tile)).stream()
+                .filter(coordinate -> tileMap.get(coordinate) != null)
+                .map(coordinate -> tileMap.get(coordinate))
+                .collect(Collectors.toList());
+        if(HIGHLIGHTING) {
+            validSteps.forEach(validStep -> {
+                validStep.add(new HighLight(grid.getTileWidthByPixels(), grid.getTileHeightByPixels()));
+                validStep.revalidate();
+                validStep.repaint();
+            });
+        }
     }
 
     @Override
@@ -107,7 +128,6 @@ public abstract class AbstractLogic implements GameLogic {
     @Override
     public void setActualPawn(Pawn pawn) {
         actualPawn = pawn;
-        pawn.promote(); //FIXME take me out
     }
 
     @Override

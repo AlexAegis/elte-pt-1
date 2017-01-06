@@ -12,6 +12,8 @@ import exam.elements.tiles.Tile;
 import javax.swing.*;
 import java.awt.*;
 import java.util.*;
+import java.util.List;
+import java.util.stream.Collectors;
 
 import static exam.config.Config.DEBUG_MODE;
 import static exam.config.Config.HIGHLIGHTING;
@@ -30,12 +32,6 @@ public class NumberGame extends AbstractLogic implements GameLogic {
     public void setLimited(boolean limited) {
         this.limited = limited;
     }
-
-    public void setValidDirections(Directions... directions) {
-        validDirections.clear();
-        Arrays.stream(directions).forEach(validDirections::add);
-    }
-
 
     @Override
     public void initGame() {
@@ -64,28 +60,21 @@ public class NumberGame extends AbstractLogic implements GameLogic {
     }
 
     @Override
-    public void setValidSteps(Tile tile) {
-        validSteps.add(tile);
+    public List<Coordinate> getValidSteps(Coordinate coordinate) {
+        List<Coordinate> coordinates = new ArrayList<>();
+        coordinates.add(coordinate);
         for(Directions direction : validDirections) {
-            Coordinate tileLocation = getTileLocation(tile).stepInDirection(direction);
-            Tile currentTile = tileMap.get(tileLocation);
-            while(currentTile != null) {
-                validSteps.add(currentTile);
-                tileLocation = tileLocation.stepInDirection(direction);
-                currentTile = tileMap.get(tileLocation);
+            Coordinate current = coordinate.stepInDirection(direction);
+            while(tileMap.get(current) != null) {
+                coordinates.add(current);
+                current = current.stepInDirection(direction);
             }
         }
-        if(HIGHLIGHTING) {
-            validSteps.forEach(validStep -> {
-                validStep.add(new HighLight(grid.getTileWidthByPixels(), grid.getTileHeightByPixels()));
-                validStep.revalidate();
-                validStep.repaint();
-            });
-        }
+        return coordinates;
     }
 
     @Override
-    public void evaluateStep(JComponent from, JComponent to) {
+    public void evaluateStep(Tile from, Tile to) {
         validSteps.forEach(t -> {
             if(limited) {
                 if(((Number)t.getChild()).modifiable(modifier, minRng, maxRng)) {

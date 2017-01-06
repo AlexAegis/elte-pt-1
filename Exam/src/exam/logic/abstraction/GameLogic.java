@@ -19,7 +19,9 @@ public interface GameLogic {
 
     void setValidSteps(Tile tile);
 
-    void setValidDirections(List<Directions> directions);
+    List<Coordinate> getValidSteps(Coordinate coordinate);
+
+    void setValidDirections(Directions... directions);
 
     void setModifier(int mod);
 
@@ -27,7 +29,7 @@ public interface GameLogic {
 
     void clearValidSteps();
 
-    void evaluateStep(JComponent from, JComponent to);
+    void evaluateStep(Tile from, Tile to);
 
     boolean currentPlayersPawn(Pawn pawn);
 

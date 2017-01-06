@@ -85,7 +85,12 @@ public class Draught extends AbstractLogic implements GameLogic {
     }
 
     @Override
-    public void evaluateStep(JComponent from, JComponent to) {
+    public List<Coordinate> getValidSteps(Coordinate coordinate) {
+        return null;
+    }
+
+    @Override
+    public void evaluateStep(Tile from, Tile to) {/*
         Container parent = to.getParent();
         if (target != null && to.getParent().equals(aboveTarget)) {
             target.takeOff();
@@ -108,7 +113,7 @@ public class Draught extends AbstractLogic implements GameLogic {
         }
         clearActualPawn();
         clearTarget();
-        aboveTarget = null;
+        aboveTarget = null;*/
     }
 
 

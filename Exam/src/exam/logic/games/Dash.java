@@ -1,11 +1,11 @@
 package exam.logic.games;
 
-import exam.config.FieldSizes;
 import exam.elements.tiles.HighLight;
 import exam.elements.tiles.Pawn;
 import exam.elements.tiles.Tile;
 import exam.logic.abstraction.AbstractLogic;
 import exam.logic.abstraction.Coordinate;
+import exam.logic.abstraction.Directions;
 import exam.logic.abstraction.GameLogic;
 
 import javax.swing.*;
@@ -13,68 +13,54 @@ import java.awt.*;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Map;
+import java.util.stream.Collectors;
 
 
 public class Dash extends AbstractLogic implements GameLogic {
 
+    public Dash() {
+        continuusHighLighting = false;
+        setValidDirections(Directions.UP, Directions.UPLEFT, Directions.UPRIGHT);
+    }
+
     @Override
     public void initGame() {
-        for (int i = 0; i < Math.min(grid.getGridWidthByTiles(), grid.getGridHeightByPixels()) * 2; i++) {
-            Pawn piece = new Pawn(p1Color, -1, grid.getTileWidthByPixels(), grid.getTileHeightByPixels());
-            Tile panel = (Tile) grid.getComponent(i);
-            panel.add(piece);
-        }
-        for (int i = 0; i < Math.min(grid.getGridWidthByTiles(), grid.getGridHeightByPixels()) * 2; i++) {
-            Tile panel = (Tile) grid.getComponent((Math.min(grid.getGridWidthByTiles(), grid.getGridHeightByPixels()) * Math.min(grid.getGridWidthByTiles(), grid.getGridHeightByPixels())) - i - 1);
-            panel.add(new Pawn(p2Color, 1, grid.getTileWidthByPixels(), grid.getTileHeightByPixels()));
-        }
+        tileMap.entrySet().stream()
+                .filter(entry -> entry.getKey().getX() <= 1)
+                .map(Map.Entry::getValue)
+                .forEach(tile -> tile.add(new Pawn(p1Color, -1, grid.getTileWidthByPixels(), grid.getTileHeightByPixels())));
+        tileMap.entrySet().stream()
+                .filter(entry -> entry.getKey().getX() >= grid.getGridHeightByTiles() - 2)
+                .map(Map.Entry::getValue)
+                .forEach(tile -> tile.add(new Pawn(p2Color, 1, grid.getTileWidthByPixels(), grid.getTileHeightByPixels())));
     }
 
     @Override
-    public void setValidSteps(Tile tile) {
-        Coordinate location = findPawn(actualPawn);
-        if(location != null) {
-            try {
-                Tile front = (Tile) grid.getComponentAt(grid.getTileWidthByPixels() * location.getX(), grid.getTileHeightByPixels() * location.getY() - grid.getTileWidthByPixels() * actualPlayer);
-                if (front != null && !Arrays.stream(front.getComponents()).anyMatch(component -> component instanceof Pawn)) {
-                    validSteps.add(front);
-                }
-            } catch (ClassCastException e) {
-                e.printStackTrace();
-            }
-
-            try {
-                Tile left = (Tile) grid.getComponentAt(grid.getTileWidthByPixels() * location.getX() - grid.getTileWidthByPixels(), grid.getTileWidthByPixels() * location.getY() - grid.getTileWidthByPixels() * actualPlayer);
-                if (left != null && !Arrays.stream(left.getComponents()).anyMatch(component -> component instanceof Pawn && ((Pawn) component).getPlayer() == actualPlayer)) {
-                    validSteps.add(left);
-                }
-            } catch (ClassCastException e) {
-                e.printStackTrace();
-            }
-            try {
-                Tile right = (Tile) grid.getComponentAt(grid.getTileWidthByPixels() * location.getX() + grid.getTileWidthByPixels(), grid.getTileWidthByPixels() * location.getY() - grid.getTileWidthByPixels() * actualPlayer);
-                if (right != null && !Arrays.stream(right.getComponents()).anyMatch(component -> component instanceof Pawn && ((Pawn) component).getPlayer() == actualPlayer)) {
-                    validSteps.add(right);
-                }
-            } catch (ClassCastException e) {
-                e.printStackTrace();
-            }
-            validSteps.forEach(v ->
-                    v.add(new HighLight(grid.getTileWidthByPixels(), grid.getTileHeightByPixels())));
-        }
+    public List<Coordinate> getValidSteps(Coordinate coordinate) {
+        List<Directions> currentValidDirections;
+        if(actualPlayer == 1) currentValidDirections = validDirections;
+        else currentValidDirections = validDirections.stream().map(Directions::turnVertical).collect(Collectors.toList());
+        return currentValidDirections.stream().map(direction -> {
+            Coordinate stepCoordinate = coordinate.stepInDirection(direction);
+            Tile tile = tileMap.get(stepCoordinate);
+            if (tile != null && Arrays.stream(tile.getComponents()).noneMatch(c -> c instanceof Pawn && (direction == Directions.UP || ((Pawn) c).getPlayer() == actualPlayer))) {
+                return stepCoordinate;
+            } else return null;
+        }).collect(Collectors.toList());
     }
 
     @Override
-    public void evaluateStep(JComponent from, JComponent to) {
-        Container parent = to.getParent();
-        if (to instanceof Pawn && validSteps.contains(to.getParent())) {
-            ((Pawn) to).takeOff();
+    public void evaluateStep(Tile from, Tile to) {
+        Tile parent = to;
+        if (Arrays.stream(to.getComponents()).anyMatch(component -> component instanceof Pawn)  && validSteps.contains(to)) {
+            ((Pawn)to.getChild()).takeOff();
             switchActualPlayer();
-        } else if(to instanceof HighLight) {
-            parent = to.getParent();
+        } else if(Arrays.stream(to.getComponents()).anyMatch(component -> component instanceof HighLight) ) {
+            parent = to;
             switchActualPlayer();
         } else {
-            parent = (Container) from;
+            parent = from;
         }
         parent.add(getActualPawn());
         parent.repaint();
