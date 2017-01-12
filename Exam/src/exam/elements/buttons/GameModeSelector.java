@@ -5,8 +5,7 @@ import exam.config.GameModes;
 import javax.swing.*;
 import java.util.Arrays;
 
-import static exam.elements.panels.Menu.CHECKBOXPANEL;
-import static exam.elements.panels.Menu.VALIDDIRSLABEL;
+import static exam.elements.panels.Menu.*;
 
 public class GameModeSelector extends JComboBox<GameModes> {
 
@@ -14,12 +13,39 @@ public class GameModeSelector extends JComboBox<GameModes> {
         Arrays.stream(GameModes.values()).forEach(this::addItem);
         setSelectedIndex(0);
         addActionListener(e -> {
-            if(getSelectedItem().equals(GameModes.NUMBER_GAME)) {
-                CHECKBOXPANEL.setVisible(true);
-                VALIDDIRSLABEL.setVisible(true);
-            } else {
-                CHECKBOXPANEL.setVisible(false);
-                VALIDDIRSLABEL.setVisible(false);
+            switch ((GameModes) getSelectedItem()) {
+                case NUMBER_GAME:
+                    // To show
+                    CHECKBOXPANEL.setVisible(true);
+                    VALIDDIRSLABEL.setVisible(true);
+                    MODIFIERLABEL.setVisible(true);
+                    MODIFIERSELECTOR.setVisible(true);
+                    // To hide
+                    DIFFLABEL.setVisible(false);
+                    DIFFSELECTOR.setVisible(false);
+                    HINTLABEL.setVisible(false);
+                    HINTBUTTON.setVisible(false);
+                    break;
+                case DASH:
+                    break;
+                case DRAUGHT:
+                    break;
+                case MASTERMIND:
+                    // To show
+                    DIFFLABEL.setVisible(true);
+                    DIFFSELECTOR.setVisible(true);
+                    HINTLABEL.setVisible(true);
+                    HINTBUTTON.setVisible(true);
+
+                    // To hide
+
+                    MODIFIERLABEL.setVisible(false);
+                    MODIFIERSELECTOR.setVisible(false);
+                    CHECKBOXPANEL.setVisible(false);
+                    VALIDDIRSLABEL.setVisible(false);
+                    break;
+                default:
+                    break;
             }
         });
     }

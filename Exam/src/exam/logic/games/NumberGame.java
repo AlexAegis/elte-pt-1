@@ -18,7 +18,7 @@ import java.util.stream.Collectors;
 import static exam.config.Config.DEBUG_MODE;
 import static exam.config.Config.HIGHLIGHTING;
 
-public class NumberGame extends AbstractLogic implements GameLogic {
+public class NumberGame extends AbstractLogic {
 
     private boolean limited;
 

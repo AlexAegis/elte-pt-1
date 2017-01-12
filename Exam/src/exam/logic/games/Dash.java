@@ -17,7 +17,7 @@ import java.util.Map;
 import java.util.stream.Collectors;
 
 
-public class Dash extends AbstractLogic implements GameLogic {
+public class Dash extends AbstractLogic {
 
     public Dash() {
         continuusHighLighting = false;

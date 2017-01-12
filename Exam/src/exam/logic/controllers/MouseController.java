@@ -4,7 +4,6 @@ import exam.elements.panels.Grid;
 import exam.elements.tiles.Pawn;
 import exam.logic.abstraction.GameLogic;
 import exam.elements.tiles.Tile;
-import sun.plugin.com.event.COMEventHandler;
 
 import javax.swing.*;
 import java.awt.*;
@@ -12,7 +11,7 @@ import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionListener;
 
-import static exam.elements.panels.Menu.STEPCOUNTERLABEL;
+import static exam.elements.panels.Menu.STEPCOUNTER;
 
 public class MouseController implements MouseListener, MouseMotionListener {
 
@@ -106,7 +105,7 @@ public class MouseController implements MouseListener, MouseMotionListener {
 
         try {
             gameLogic.evaluateStep((Tile) original, (Tile) e.getComponent().getComponentAt(ix, iy));
-            STEPCOUNTERLABEL.increase();
+            STEPCOUNTER.increase();
         } catch (ClassCastException ignored) {
         } finally {
             game.revalidate();

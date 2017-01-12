@@ -15,7 +15,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-public class Draught extends AbstractLogic implements GameLogic {
+public class Draught extends AbstractLogic {
 
     private Tile aboveTarget = null;
 

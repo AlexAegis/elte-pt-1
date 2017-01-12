@@ -5,7 +5,8 @@ public enum FieldSizes {
     SEVEN(7, 7),
     EIGHT(8, 8),
     TEN(10, 10),
-    TWELVE(12, 12);
+    TWELVE(12, 12),
+    CUSTOM(10, 10);
 
     private int n;
     private int m;
@@ -21,6 +22,14 @@ public enum FieldSizes {
 
     public int getM() {
         return m;
+    }
+
+    public void setM(int m) {
+        this.m = m;
+    }
+
+    public void setN(int n) {
+        this.n = n;
     }
 
     @Override

@@ -24,8 +24,8 @@ public class PlayButton extends JButton {
             int max = DEFAULT_MAX_RNG;
             int mod = DEFAULT_MODIFIER_VALUE;
             try {
-                min = Integer.valueOf(MINRANGESELECTOR.getText());
-                max = Integer.valueOf(MAXRANGESELECTOR.getText());
+                min = Integer.valueOf(MINRNGSELECTOR.getText());
+                max = Integer.valueOf(MAXRNGSELECTOR.getText());
                 mod = Integer.valueOf(MODIFIERSELECTOR.getText());
             } catch (NumberFormatException ignored) {
             } finally {
@@ -38,8 +38,8 @@ public class PlayButton extends JButton {
                         max,
                         mod,
                         CHECKBOXPANEL.getSelectedDirections()));
-                TIMERLABEL.reset();
-                STEPCOUNTERLABEL.reset();
+                TIMER.reset();
+                STEPCOUNTER.reset();
                 ContentPane.GAME.revalidate();
                 ContentPane.GAME.repaint();
             }
