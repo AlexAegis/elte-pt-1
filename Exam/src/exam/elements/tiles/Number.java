@@ -29,8 +29,8 @@ public final class Number extends JComponent implements ResizeableElement {
         ((Graphics2D) g).setPaint(Color.BLACK);
         if(ANTI_ALIASING) ((Graphics2D) g).setRenderingHint(RenderingHints.KEY_ANTIALIASING,
                 RenderingHints.VALUE_ANTIALIAS_ON);
-        g.setFont(new Font(Font.SANS_SERIF, Font.BOLD, (int) (Math.max(height, width) * 0.8)));
-        g.drawString(toString(), (int) (Math.max(height, width) * 0.1), height - (int) (Math.max(height, width) * 0.1));
+        g.setFont(new Font(Font.SANS_SERIF, Font.BOLD, (int) (Math.min(height, width) * 0.8)));
+        g.drawString(toString(), (int) (Math.min(height, width) * 0.1),  (int) (Math.min(height, width) * 0.8));
     }
 
     @Override

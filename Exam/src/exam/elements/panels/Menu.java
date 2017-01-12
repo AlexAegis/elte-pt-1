@@ -80,6 +80,11 @@ public class Menu extends JPanel implements ResizeableElement {
         putRowThree();
         putRowFour();
         putRowFive();
+
+        CUSTOMNSELECTORLABEL.setVisible(false);
+        CUSTOMNSELECTOR.setVisible(false);
+        CUSTOMMSELECTORLABEL.setVisible(false);
+        CUSTOMMSELECTOR.setVisible(false);
     }
 
     private void putRowZero() {

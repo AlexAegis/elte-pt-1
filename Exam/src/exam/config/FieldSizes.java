@@ -1,12 +1,16 @@
 package exam.config;
 
+import static exam.config.Config.DEFAULT_CUSTOM_M;
+import static exam.config.Config.DEFAULT_CUSTOM_N;
+import static exam.elements.panels.Menu.*;
+
 public enum FieldSizes {
     FOUR(4, 4),
     SEVEN(7, 7),
     EIGHT(8, 8),
     TEN(10, 10),
     TWELVE(12, 12),
-    CUSTOM(10, 10);
+    CUSTOM(DEFAULT_CUSTOM_N, DEFAULT_CUSTOM_M);
 
     private int n;
     private int m;
@@ -17,23 +21,27 @@ public enum FieldSizes {
     }
 
     public int getN() {
-        return n;
+        if(this.equals(CUSTOM) && CUSTOMNSELECTOR.getText().chars().allMatch(Character::isDigit)) {
+            return Integer.valueOf(CUSTOMNSELECTOR.getText());
+        } else {
+            return n;
+        }
     }
 
     public int getM() {
-        return m;
-    }
-
-    public void setM(int m) {
-        this.m = m;
-    }
-
-    public void setN(int n) {
-        this.n = n;
+        if(this.equals(CUSTOM) && CUSTOMMSELECTOR.getText().chars().allMatch(Character::isDigit)) {
+            return Integer.valueOf(CUSTOMMSELECTOR.getText());
+        } else {
+            return m;
+        }
     }
 
     @Override
     public String toString() {
-        return n + " by " + m;
+        if(this.equals(CUSTOM)) {
+            return "Custom";
+        } else {
+            return n + " by " + m;
+        }
     }
 }

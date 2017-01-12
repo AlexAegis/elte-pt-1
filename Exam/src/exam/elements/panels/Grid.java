@@ -48,8 +48,6 @@ public class Grid extends JPanel implements Iterable<Coordinate>, ResizeableElem
 
         Color TILE_COLOR_A = GAME_BG_COLOR.brighter().brighter();
         Color TILE_COLOR_B = GAME_BG_COLOR.darker();
-        /*Color TILE_COLOR_C = new Color(145, 146, 137, 255);
-        Color TILE_COLOR_D = new Color(210, 208, 209, 255);*/
 
         for (int i = 0; i < fieldSize.getN(); i++) {
             for (int j = 0; j < fieldSize.getM(); j++) {
