@@ -1,14 +1,27 @@
 package exam.logic.games;
 
+import exam.elements.tiles.ColorTile;
+import exam.elements.tiles.Pawn;
 import exam.elements.tiles.Tile;
 import exam.logic.abstraction.AbstractLogic;
 import exam.logic.abstraction.Coordinate;
 import exam.logic.abstraction.Directions;
 import exam.logic.controllers.BasicMouseController;
 
+import java.awt.*;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
+import java.util.stream.Collectors;
+
+import static exam.config.Utilities.getColumnFromGrid;
+import static exam.config.Utilities.getColumnsFromGrid;
 
 public class MasterMind extends AbstractLogic {
+
+    private List<ColorTile> solution = new ArrayList<>();
+    private List<List<Tile>> tiles;
+    private List<Tile> hints;
 
     public MasterMind() {
         continuousHighLighting = true;
@@ -18,13 +31,16 @@ public class MasterMind extends AbstractLogic {
 
     @Override
     public void initGame() {
-        // RIGHTMOST COLUMN LABEL INSERTION
-        /*
-        Coordinate rightMost = new Coordinate(0, grid.getGridWidthByTiles() - 1);
-        do {
-            tileMap.get(rightMost).add(new HintLabel());
-            rightMost = rightMost.stepInDirection(Directions.DOWN);
-        } while (tileMap.get(rightMost) != null);*/
+        tiles = getColumnsFromGrid(grid, 0, grid.getGridWidthByTiles() - 2);
+        hints = getColumnFromGrid(grid, grid.getGridWidthByTiles() - 1);
+
+        hints.forEach(tile -> {
+            tile.setChild(new Pawn(Color.black, 1, 50,50 ));
+        });
+
+        tiles.forEach(row-> row.forEach(tile -> {
+            tile.setChild(new Pawn(Color.red, 1, 50,50 ));
+        }));
     }
 
     @Override
