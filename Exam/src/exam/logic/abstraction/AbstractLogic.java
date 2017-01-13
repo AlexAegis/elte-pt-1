@@ -8,6 +8,8 @@ import exam.elements.tiles.Pawn;
 import exam.elements.tiles.Tile;
 
 import java.awt.*;
+import java.awt.event.MouseListener;
+import java.awt.event.MouseMotionListener;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -15,6 +17,7 @@ import java.util.Map;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
+import static exam.config.Config.DEFAULT_STARTING_PLAYER;
 import static exam.config.Config.HIGHLIGHTING;
 
 
@@ -23,7 +26,7 @@ public abstract class AbstractLogic implements GameLogic {
     protected static final Color p1Color = new Color(255, 83, 72,255);
     protected static final Color p2Color = new Color(67, 105, 243,255);
 
-    protected int actualPlayer = -1;
+    protected int actualPlayer = DEFAULT_STARTING_PLAYER;
     protected Pawn actualPawn;
     protected Pawn target;
     protected int maxRng;
@@ -33,13 +36,25 @@ public abstract class AbstractLogic implements GameLogic {
     protected List<Directions> validDirections = new ArrayList<>();
     protected Grid grid;
     protected Map<Coordinate, Tile> tileMap;
-    protected boolean continuusHighLighting = false;
+    protected boolean continuousHighLighting = false;
+    protected MouseListener controller;
+
+    @Override
+    public MouseListener getMouseListener() {
+        return controller;
+    }
+
+    @Override
+    public MouseMotionListener getMouseMotionListener() {
+        return (MouseMotionListener) controller;
+    }
 
     protected PlayerIndicator indicator;
 
     @Override
     public void setIndicator(PlayerIndicator indicator) {
         this.indicator = indicator;
+        this.indicator.setIndicatorColor(actualPlayer == 1 ? p2Color : p1Color);
     }
 
     public void setIndicatorColor(Color color) {
@@ -55,24 +70,18 @@ public abstract class AbstractLogic implements GameLogic {
 
     @Override
     public void setValidSteps(Tile tile) {
-        Coordinate coordinate = getTileLocation(tile);
-        if(coordinate != null) {
+        Coordinate coordinate = tile.getCoordinate();
+        if(coordinate != null && tile.gotChild() && ((Pawn)tile.getChild()).getPlayer() == actualPlayer) {
             validSteps = getValidSteps(coordinate).stream()
                     .map(c -> tileMap.get(c))
                     .collect(Collectors.toList());
         }
-        if(HIGHLIGHTING) {
-            validSteps.forEach(validStep -> {
-                validStep.add(new HighLight(grid.getTileHeightByPixels(), grid.getTileWidthByPixels()));
-                validStep.revalidate();
-                validStep.repaint();
-            });
-        }
+        if(HIGHLIGHTING) { highlight();}
     }
 
     @Override
-    public boolean isContinuusHighLighting() {
-        return continuusHighLighting;
+    public boolean isContinuousHighLighting() {
+        return continuousHighLighting;
     }
 
     @Override
@@ -84,6 +93,15 @@ public abstract class AbstractLogic implements GameLogic {
     public void setGrid(Grid grid) {
         this.grid = grid;
         this.tileMap = grid.getTiles();
+    }
+
+    @Override
+    public void highlight() {
+        validSteps.forEach(validStep -> {
+            validStep.add(new HighLight(grid.getTileHeightByPixels(), grid.getTileWidthByPixels()));
+            validStep.revalidate();
+            validStep.repaint();
+        });
     }
 
     @Override

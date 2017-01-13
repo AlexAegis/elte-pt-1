@@ -8,6 +8,7 @@ import exam.logic.abstraction.GameLogic;
 import exam.elements.tiles.HighLight;
 import exam.elements.tiles.Number;
 import exam.elements.tiles.Tile;
+import exam.logic.controllers.BasicMouseController;
 
 import javax.swing.*;
 import java.awt.*;
@@ -23,10 +24,10 @@ public class NumberGame extends AbstractLogic {
     private boolean limited;
 
     public NumberGame() {
-        continuusHighLighting = true;
+        continuousHighLighting = true;
+        controller = new BasicMouseController(this);
         setLimited(true);
         setValidDirections(Directions.LEFT, Directions.RIGHT);
-        setActualPawn(new Pawn(Color.BLUE, 1, 1, 1));
     }
 
     public void setLimited(boolean limited) {
@@ -39,6 +40,17 @@ public class NumberGame extends AbstractLogic {
                 (int) (((Math.random() * 100) % (maxRng - minRng + 1)) + minRng),
                 grid.getTileWidthByPixels(),
                 grid.getTileHeightByPixels())));
+    }
+
+    @Override
+    public void setValidSteps(Tile tile) {
+        Coordinate coordinate = tile.getCoordinate();
+        if(coordinate != null && tile.gotChild() && (!(tile.getChild() instanceof Pawn) || ((Pawn)tile.getChild()).getPlayer() == actualPlayer)) {
+            validSteps = getValidSteps(coordinate).stream()
+                    .map(c -> tileMap.get(c))
+                    .collect(Collectors.toList());
+        }
+        if(HIGHLIGHTING) { highlight();}
     }
 
     @Override

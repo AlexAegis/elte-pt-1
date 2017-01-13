@@ -8,7 +8,9 @@ public class PlayerIndicator extends JButton {
     private Paint actualPlayerColor = Color.BLACK;
 
     public PlayerIndicator() {
-        setBounds(0,0,100,50);
+        setBounds(0,0,120,60);
+        setSize(new Dimension(120, 60));
+        setPreferredSize(new Dimension(120, 60));
         setVisible(true);
         System.out.println("asd");
         repaint();
@@ -26,6 +28,6 @@ public class PlayerIndicator extends JButton {
         graphics.setRenderingHint(RenderingHints.KEY_ANTIALIASING,
                 RenderingHints.VALUE_ANTIALIAS_ON);
         graphics.setPaint(actualPlayerColor);
-        graphics.fillRect(0, 0, 100, 50);
+        graphics.fillRect(0, 0, 120, 60);
     }
 }

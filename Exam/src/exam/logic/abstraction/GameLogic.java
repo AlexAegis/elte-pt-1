@@ -8,13 +8,15 @@ import exam.elements.tiles.Tile;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.MouseListener;
+import java.awt.event.MouseMotionListener;
 import java.util.List;
 
 public interface GameLogic {
 
     void initGame();
 
-    boolean isContinuusHighLighting();
+    boolean isContinuousHighLighting();
 
     void setGrid(Grid grid);
 
@@ -57,4 +59,10 @@ public interface GameLogic {
     String toString();
 
     void setIndicator(PlayerIndicator playerindicator);
+
+    MouseListener getMouseListener();
+
+    MouseMotionListener getMouseMotionListener();
+
+    void highlight();
 }

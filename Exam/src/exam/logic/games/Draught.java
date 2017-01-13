@@ -1,16 +1,13 @@
 package exam.logic.games;
 
-import exam.config.FieldSizes;
 import exam.elements.tiles.HighLight;
 import exam.elements.tiles.Pawn;
 import exam.elements.tiles.Tile;
 import exam.logic.abstraction.AbstractLogic;
 import exam.logic.abstraction.Coordinate;
 import exam.logic.abstraction.Directions;
-import exam.logic.abstraction.GameLogic;
+import exam.logic.controllers.PickupMouseController;
 
-import javax.swing.*;
-import java.awt.*;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -18,6 +15,11 @@ import java.util.List;
 public class Draught extends AbstractLogic {
 
     private Tile aboveTarget = null;
+
+    public Draught() {
+        continuousHighLighting = true;
+        controller = new PickupMouseController(this);
+    }
 
     @Override
     public void initGame() {

@@ -68,20 +68,27 @@ public class Tile extends JComponent implements ResizeableElement {
 
     public Component removeChild() {
         Component component = child;
-        child.getParent().remove(child);
+        try{ child.getParent().remove(child);
+        } catch (NullPointerException ignored) {}
         child = null;
         return component;
     }
 
+    public Coordinate getCoordinate() {
+        return coordinate;
+    }
+
     @Override
     public void onResize() {
-        //this.height = ((Grid)getParent()).getTileHeightByPixels();
-        //this.width = ((Grid)getParent()).getTileWidthByPixels();
         this.height = ((Grid)getParent()).getTileWidthByPixels();
         this.width =((Grid)getParent()).getTileHeightByPixels();
         setPreferredSize(new Dimension(width, height));
         setSize(width, height);
         revalidate();
         repaint();
+    }
+
+    public boolean gotChild() {
+        return child != null;
     }
 }

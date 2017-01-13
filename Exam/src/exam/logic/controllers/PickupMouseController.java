@@ -13,7 +13,7 @@ import java.awt.event.MouseMotionListener;
 
 import static exam.elements.panels.Menu.STEPCOUNTER;
 
-public class MouseController implements MouseListener, MouseMotionListener {
+public class PickupMouseController implements MouseListener, MouseMotionListener {
 
     private int x;
     private int y;
@@ -27,12 +27,12 @@ public class MouseController implements MouseListener, MouseMotionListener {
 
     private GameLogic gameLogic;
 
-    public MouseController(GameLogic gameLogic) {
+    public PickupMouseController(GameLogic gameLogic) {
         this.gameLogic = gameLogic;
     }
 
     @Override
-    public void mousePressed(MouseEvent e) { //TODO ADD SHADOW
+    public void mousePressed(MouseEvent e) {
         game = (JLayeredPane) ((Grid) e.getSource()).getParent().getParent();/*
         gameField = (JPanel) ((Grid) e.getSource()).getParent();*/
         try {
@@ -59,6 +59,7 @@ public class MouseController implements MouseListener, MouseMotionListener {
             game.add(gameLogic.getActualPawn(), JLayeredPane.DRAG_LAYER);
             game.add(shadow, JLayeredPane.DRAG_LAYER);
             game.setCursor(Cursor.getPredefinedCursor(Cursor.MOVE_CURSOR));
+            //((Tile)pawn.getParent()).removeChild();
         } catch (ClassCastException ignored) {
         }
     }
@@ -69,7 +70,7 @@ public class MouseController implements MouseListener, MouseMotionListener {
 
     @Override
     public void mouseMoved(MouseEvent e) {
-        if(gameLogic.isContinuusHighLighting()) {
+        if(gameLogic.isContinuousHighLighting()) {
             gameLogic.clearValidSteps();
             try {
                 gameLogic.setValidSteps((Tile) e.getComponent().getComponentAt(e.getX(), e.getY()));

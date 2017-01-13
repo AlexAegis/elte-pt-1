@@ -3,6 +3,9 @@ package exam.config;
 import exam.logic.games.*;
 import exam.logic.abstraction.GameLogic;
 
+import java.awt.event.MouseListener;
+import java.awt.event.MouseMotionListener;
+
 public enum GameModes {
     NUMBER_GAME(new NumberGame()),
     DRAUGHT(new Draught()),
@@ -24,4 +27,5 @@ public enum GameModes {
     public String toString() {
         return gameLogic.toString();
     }
+
 }

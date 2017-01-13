@@ -7,9 +7,9 @@ import exam.logic.abstraction.AbstractLogic;
 import exam.logic.abstraction.Coordinate;
 import exam.logic.abstraction.Directions;
 import exam.logic.abstraction.GameLogic;
+import exam.logic.controllers.PickupMouseController;
 
 import javax.swing.*;
-import java.awt.*;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -20,7 +20,8 @@ import java.util.stream.Collectors;
 public class Dash extends AbstractLogic implements GameLogic {
 
     public Dash() {
-        continuusHighLighting = false;
+        continuousHighLighting = true;
+        controller = new PickupMouseController(this);
         setValidDirections(Directions.UP, Directions.UPLEFT, Directions.UPRIGHT);
     }
 
@@ -29,7 +30,7 @@ public class Dash extends AbstractLogic implements GameLogic {
         tileMap.entrySet().stream()
                 .filter(entry -> entry.getKey().getX() <= 1)
                 .map(Map.Entry::getValue)
-                .forEach(tile -> tile.add(new Pawn(p1Color, -1, grid.getTileWidthByPixels(), grid.getTileHeightByPixels())));
+                .forEach(tile -> tile.setChild(new Pawn(p1Color, -1, grid.getTileWidthByPixels(), grid.getTileHeightByPixels())));
         tileMap.entrySet().stream()
                 .filter(entry -> {
                     if(entry.getKey().getX() >= grid.getGridHeightByTiles() - 2) {
@@ -39,7 +40,7 @@ public class Dash extends AbstractLogic implements GameLogic {
                     return entry.getKey().getX() >= grid.getGridHeightByTiles() - 2;
                 })
                 .map(Map.Entry::getValue)
-                .forEach(tile -> tile.add(new Pawn(p2Color, 1, grid.getTileWidthByPixels(), grid.getTileHeightByPixels())));
+                .forEach(tile -> tile.setChild(new Pawn(p2Color, 1, grid.getTileWidthByPixels(), grid.getTileHeightByPixels())));
     }
 
     @Override
@@ -51,7 +52,8 @@ public class Dash extends AbstractLogic implements GameLogic {
                 .stream()
                 .filter(direction -> tileMap.get(coordinate.stepInDirection(direction)) != null
                                         && Arrays.stream(tileMap.get(coordinate.stepInDirection(direction)).getComponents())
-                                                .allMatch(component -> !(component instanceof Pawn) || direction.isDiagonal()))
+                                                .allMatch(component -> !(component instanceof Pawn)
+                                                                || (direction.isDiagonal() && ((Pawn)component).getPlayer() != actualPlayer)))
                 .map(coordinate::stepInDirection)
                 .collect(Collectors.toList());
     }
@@ -59,28 +61,28 @@ public class Dash extends AbstractLogic implements GameLogic {
     @Override
     public boolean evaluateStep(Tile from, Tile to) {
         boolean result = true;
-        System.out.println(getTileLocation(from).toString());
-        System.out.println(getTileLocation(to).toString());
         Tile parent = to;
-        if (Arrays.stream(to.getComponents()).anyMatch(component -> component instanceof Pawn) && validSteps.contains(to)) {
-            System.out.println("1");
-            ((Pawn)to.getChild()).takeOff();
-            switchActualPlayer();
-        } else if(Arrays.stream(to.getComponents()).anyMatch(component -> component instanceof HighLight) ) {
-            System.out.println("2");
-            parent = to;
-            switchActualPlayer();
-        } else {
-            result = false;
-            System.out.println("3");
+        try {
+            getTileLocation(to);
+            if (Arrays.stream(to.getComponents()).anyMatch(component -> component instanceof Pawn) && validSteps.contains(to)) {
+                to.removeChild();
+                switchActualPlayer();
+            } else if(Arrays.stream(to.getComponents()).anyMatch(component -> component instanceof HighLight)) {
+                switchActualPlayer();
+            } else {
+                result = false;
+                parent = from;
+            }
+        } catch (NoSuchFieldError ignored) {
             parent = from;
         }
+        from.removeChild();
         parent.setChild(getActualPawn());
         parent.repaint();
         parent.validate();
         clearValidSteps();
         if(isGameWon()) {
-            JOptionPane.showMessageDialog(null, "Game over! The winner is: " + (actualPawn.getPlayer() == 1 ? "Red" : "Blue"));
+            JOptionPane.showMessageDialog(null, "Game over! The winner is: " + (actualPawn.getPlayer() == -1 ? "Red" : "Blue"));
             JPanel gp = (JPanel) grid.getParent();
             gp.removeAll();
         }

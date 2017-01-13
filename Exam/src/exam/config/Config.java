@@ -20,4 +20,5 @@ public final class Config {
     public static final boolean HIGHLIGHTING = true;
     public static final Color GAME_BG_COLOR = new Color(89, 104, 126, 255);
     public static final Color MENU_BG_COLOR = GAME_BG_COLOR.brighter();
+    public static final int DEFAULT_STARTING_PLAYER = -1; // 1 or -1
 }

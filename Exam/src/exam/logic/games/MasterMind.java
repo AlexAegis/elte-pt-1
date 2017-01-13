@@ -3,10 +3,18 @@ package exam.logic.games;
 import exam.elements.tiles.Tile;
 import exam.logic.abstraction.AbstractLogic;
 import exam.logic.abstraction.Coordinate;
+import exam.logic.abstraction.Directions;
+import exam.logic.controllers.BasicMouseController;
 
 import java.util.List;
 
 public class MasterMind extends AbstractLogic {
+
+    public MasterMind() {
+        continuousHighLighting = true;
+        controller = new BasicMouseController(this);
+        setValidDirections(Directions.LEFT, Directions.RIGHT);
+    }
 
     @Override
     public void initGame() {

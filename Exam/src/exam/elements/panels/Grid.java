@@ -1,7 +1,7 @@
 package exam.elements.panels;
 import exam.config.GameModes;
 import exam.config.ResizeableElement;
-import exam.logic.controllers.MouseController;
+import exam.logic.controllers.PickupMouseController;
 import exam.config.FieldSizes;
 import exam.logic.abstraction.Coordinate;
 import exam.logic.abstraction.Directions;
@@ -35,9 +35,10 @@ public class Grid extends JPanel implements Iterable<Coordinate>, ResizeableElem
         setBounds(0,0, Math.min(DEFAULT_WINDOW_WIDTH, DEFAULT_WINDOW_HEIGHT), Math.min(DEFAULT_WINDOW_WIDTH, DEFAULT_WINDOW_HEIGHT));
         GridLayout gridLayout = new GridLayout(fieldSize.getN(), fieldSize.getM(), hGap, vGap);
         setLayout(gridLayout);
-        MouseController mouseController = new MouseController(gameMode.getLogic());
-        addMouseListener(mouseController);
-        addMouseMotionListener(mouseController);
+        PickupMouseController pickupMouseController = new PickupMouseController(gameMode.getLogic());
+
+        addMouseListener(gameMode.getLogic().getMouseListener());
+        addMouseMotionListener(gameMode.getLogic().getMouseMotionListener());
         gridHeightByTiles = fieldSize.getN();
         gridWidthByTiles = fieldSize.getM();
         gridWidthByPixels = Math.min(DEFAULT_WINDOW_WIDTH, DEFAULT_WINDOW_HEIGHT);

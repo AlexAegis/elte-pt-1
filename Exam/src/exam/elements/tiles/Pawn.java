@@ -88,8 +88,8 @@ public class Pawn extends JComponent implements ResizeableElement {
     @Override
     public void onResize() {
         setSize(getParent().getSize());
-        width = getParent().getWidth();
-        height = getParent().getHeight();
+        height = getParent().getWidth();
+        width = getParent().getHeight();
         revalidate();
         repaint();
     }
