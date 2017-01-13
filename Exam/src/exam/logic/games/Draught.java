@@ -90,7 +90,7 @@ public class Draught extends AbstractLogic {
     }
 
     @Override
-    public void evaluateStep(Tile from, Tile to) {/*
+    public boolean evaluateStep(Tile from, Tile to) {/*
         Container parent = to.getParent();
         if (target != null && to.getParent().equals(aboveTarget)) {
             target.takeOff();
@@ -114,6 +114,7 @@ public class Draught extends AbstractLogic {
         clearActualPawn();
         clearTarget();
         aboveTarget = null;*/
+        return true;
     }
 
 

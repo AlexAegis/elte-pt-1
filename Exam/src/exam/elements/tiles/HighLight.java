@@ -41,7 +41,7 @@ public final class HighLight extends JComponent implements ResizeableElement {
         float[] dist = {0.0f, 1.0f};
 
         g.setPaint(new RadialGradientPaint(width / 2, height / 2, width * 2, dist, actualColors));
-        g.fillRect(0,0, width, height);
+        g.fillRect(0,0, height, width);
         g.setColor(new Color(0, 0, 0, 5));
         g.fillRect(width / 20 , height/ 20, width -  height / 10, height - width / 10);
     }

@@ -20,6 +20,8 @@ public class GameModeSelector extends JComboBox<GameModes> {
                     VALIDDIRSLABEL.setVisible(true);
                     MODIFIERLABEL.setVisible(true);
                     MODIFIERSELECTOR.setVisible(true);
+                    VALIDDIRSLABEL.setVisible(true);
+                    CHECKBOXPANEL.setVisible(true);
                     // To hide
                     DIFFLABEL.setVisible(false);
                     DIFFSELECTOR.setVisible(false);
@@ -27,8 +29,15 @@ public class GameModeSelector extends JComboBox<GameModes> {
                     HINTBUTTON.setVisible(false);
                     break;
                 case DASH:
+                    //To Hide
+                    VALIDDIRSLABEL.setVisible(false);
+                    CHECKBOXPANEL.setVisible(false);
                     break;
                 case DRAUGHT:
+
+                    //To Hide
+                    VALIDDIRSLABEL.setVisible(false);
+                    CHECKBOXPANEL.setVisible(false);
                     break;
                 case MASTERMIND:
                     // To show

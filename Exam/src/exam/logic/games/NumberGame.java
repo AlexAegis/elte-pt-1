@@ -35,28 +35,10 @@ public class NumberGame extends AbstractLogic {
 
     @Override
     public void initGame() {
-        if(DEBUG_MODE) {
-            System.out.println("INIT WITH DATA: "
-                    + "\nTILE HEIGHT: " + grid.getTileHeightByPixels()
-                    + "\nTILE WIDTH: " + grid.getTileWidthByPixels()
-                    + "\nGRID HEIGHT BY TILES: " + grid.getGridHeightByTiles()
-                    + "\nGRID WIDTH BY TILES: " + grid.getGridWidthByTiles()
-                    + "\nGRID HEIGHT BY PIXELS: " + grid.getGridWidthByPixels()
-                    + "\nGRID WIDTH BY PIXELS: " + grid.getGridWidthByPixels()
-                    + "\nMIN RNG: " + minRng
-                    + "\nMAX RNG: " + maxRng);
-        }
         tileMap.values().forEach(tile -> tile.setChild(new Number(
                 (int) (((Math.random() * 100) % (maxRng - minRng + 1)) + minRng),
                 grid.getTileWidthByPixels(),
-                grid.getTileHeightByPixels())));/*
-        int n = 0;
-        for(Tile tile : tileMap.values()) {
-            tile.setChild(new Number(n,
-                    grid.getTileWidthByPixels(),
-                    grid.getTileHeightByPixels()));
-            n += 1;
-        }*/
+                grid.getTileHeightByPixels())));
     }
 
     @Override
@@ -74,7 +56,7 @@ public class NumberGame extends AbstractLogic {
     }
 
     @Override
-    public void evaluateStep(Tile from, Tile to) {
+    public boolean evaluateStep(Tile from, Tile to) {
         validSteps.forEach(t -> {
             if(limited) {
                 if(((Number)t.getChild()).modifiable(modifier, minRng, maxRng)) {
@@ -95,6 +77,7 @@ public class NumberGame extends AbstractLogic {
         if(isGameWon()) {
             JOptionPane.showMessageDialog(null, "Game Ended");
         }
+        return true;
     }
 
     @Override

@@ -16,6 +16,7 @@ import java.util.List;
 import static exam.config.Config.DEFAULT_WINDOW_HEIGHT;
 import static exam.config.Config.GAME_BG_COLOR;
 import static exam.config.Config.DEFAULT_WINDOW_WIDTH;
+import static exam.elements.panels.Menu.PLAYERINDICATOR;
 
 public class Grid extends JPanel implements Iterable<Coordinate>, ResizeableElement {
 
@@ -37,10 +38,10 @@ public class Grid extends JPanel implements Iterable<Coordinate>, ResizeableElem
         MouseController mouseController = new MouseController(gameMode.getLogic());
         addMouseListener(mouseController);
         addMouseMotionListener(mouseController);
-        gridWidthByTiles = fieldSize.getN();
-        gridHeightByTiles = fieldSize.getM();
-        gridWidthByPixels = getWidth();
-        gridHeightByPixels = getHeight();
+        gridHeightByTiles = fieldSize.getN();
+        gridWidthByTiles = fieldSize.getM();
+        gridWidthByPixels = Math.min(DEFAULT_WINDOW_WIDTH, DEFAULT_WINDOW_HEIGHT);
+        gridHeightByPixels = Math.min(DEFAULT_WINDOW_WIDTH, DEFAULT_WINDOW_HEIGHT);
         tileHeightByPixels = gridHeightByPixels / gridHeightByTiles - vGap;
         tileWidthByPixels = gridWidthByPixels / gridWidthByTiles - hGap;
 
@@ -63,6 +64,7 @@ public class Grid extends JPanel implements Iterable<Coordinate>, ResizeableElem
         if(directions != null && !directions.isEmpty()) {
             gameMode.getLogic().setValidDirections(directions.stream().toArray(size -> new Directions[directions.size()]));
         }
+        gameMode.getLogic().setIndicator(PLAYERINDICATOR);
         gameMode.getLogic().setRng(minRng, maxRng);
         gameMode.getLogic().setModifier(mod);
         gameMode.getLogic().setGrid(this);
@@ -113,11 +115,12 @@ public class Grid extends JPanel implements Iterable<Coordinate>, ResizeableElem
 
     @Override
     public void onResize() {
+        System.out.println("SD");
         setBounds(0,0, Math.min(DEFAULT_WINDOW_WIDTH, DEFAULT_WINDOW_HEIGHT), Math.min(DEFAULT_WINDOW_WIDTH, DEFAULT_WINDOW_HEIGHT));
-        gridWidthByPixels = getWidth();
-        gridHeightByPixels = getHeight();
-        tileHeightByPixels = gridHeightByPixels / gridHeightByTiles - vGap;
-        tileWidthByPixels = gridWidthByPixels / gridWidthByTiles - hGap;
+        this.gridWidthByPixels = Math.min(DEFAULT_WINDOW_WIDTH, DEFAULT_WINDOW_HEIGHT);
+        this.gridHeightByPixels = Math.min(DEFAULT_WINDOW_WIDTH, DEFAULT_WINDOW_HEIGHT);
+        this.tileHeightByPixels = gridHeightByPixels / gridHeightByTiles - vGap;
+        this.tileWidthByPixels = gridWidthByPixels / gridWidthByTiles - hGap;
         revalidate();
         repaint();
     }

@@ -6,17 +6,10 @@ import exam.logic.abstraction.Coordinate;
 
 import java.util.List;
 
-public class MasterMind extends AbstractLogic {
-
+public class Empty extends AbstractLogic {
     @Override
     public void initGame() {
-        // RIGHTMOST COLUMN LABEL INSERTION
-        /*
-        Coordinate rightMost = new Coordinate(0, grid.getGridWidthByTiles() - 1);
-        do {
-            tileMap.get(rightMost).add(new HintLabel());
-            rightMost = rightMost.stepInDirection(Directions.DOWN);
-        } while (tileMap.get(rightMost) != null);*/
+
     }
 
     @Override
@@ -36,6 +29,6 @@ public class MasterMind extends AbstractLogic {
 
     @Override
     public String toString() {
-        return "MasterMind";
+        return "Empty";
     }
 }

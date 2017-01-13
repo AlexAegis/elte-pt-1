@@ -11,11 +11,11 @@ public final class Config {
     public static final boolean ANTI_ALIASING = true;
     public static final boolean START_WITH_DEFAULT = true;
     public static final GameModes DEFAULT_GAMEMODE = GameModes.DASH;
-    public static final FieldSizes DEFAULT_FIELDSIZE = FieldSizes.SEVEN;
+    public static final FieldSizes DEFAULT_FIELDSIZE = FieldSizes.TEN;
     public static final int DEFAULT_MIN_RNG = 0;
     public static final int DEFAULT_MAX_RNG = 50;
     public static final int DEFAULT_CUSTOM_N = 10;
-    public static final int DEFAULT_CUSTOM_M = 4;
+    public static final int DEFAULT_CUSTOM_M = 5;
     public static final int DEFAULT_MODIFIER_VALUE = -1;
     public static final boolean HIGHLIGHTING = true;
     public static final Color GAME_BG_COLOR = new Color(89, 104, 126, 255);

@@ -59,7 +59,7 @@ public class Pawn extends JComponent implements ResizeableElement {
     }
 
     public Pawn takeOff() {
-        getParent().remove(this);
+        ((Tile)getParent()).removeChild();
         return this;
     }
 
@@ -92,5 +92,9 @@ public class Pawn extends JComponent implements ResizeableElement {
         height = getParent().getHeight();
         revalidate();
         repaint();
+    }
+
+    public Color getColor() {
+        return color;
     }
 }

@@ -1,6 +1,7 @@
 package exam.logic.abstraction;
 
 
+import exam.elements.labels.PlayerIndicator;
 import exam.elements.panels.Grid;
 import exam.elements.tiles.HighLight;
 import exam.elements.tiles.Pawn;
@@ -34,6 +35,17 @@ public abstract class AbstractLogic implements GameLogic {
     protected Map<Coordinate, Tile> tileMap;
     protected boolean continuusHighLighting = false;
 
+    protected PlayerIndicator indicator;
+
+    @Override
+    public void setIndicator(PlayerIndicator indicator) {
+        this.indicator = indicator;
+    }
+
+    public void setIndicatorColor(Color color) {
+        indicator.setIndicatorColor(color);
+    }
+
     @Override
     public void setValidDirections(Directions... directions) {
         validDirections.clear();
@@ -43,13 +55,15 @@ public abstract class AbstractLogic implements GameLogic {
 
     @Override
     public void setValidSteps(Tile tile) {
-        validSteps = getValidSteps(getTileLocation(tile)).stream()
-                .filter(coordinate -> tileMap.get(coordinate) != null)
-                .map(coordinate -> tileMap.get(coordinate))
-                .collect(Collectors.toList());
+        Coordinate coordinate = getTileLocation(tile);
+        if(coordinate != null) {
+            validSteps = getValidSteps(coordinate).stream()
+                    .map(c -> tileMap.get(c))
+                    .collect(Collectors.toList());
+        }
         if(HIGHLIGHTING) {
             validSteps.forEach(validStep -> {
-                validStep.add(new HighLight(grid.getTileWidthByPixels(), grid.getTileHeightByPixels()));
+                validStep.add(new HighLight(grid.getTileHeightByPixels(), grid.getTileWidthByPixels()));
                 validStep.revalidate();
                 validStep.repaint();
             });
@@ -153,6 +167,7 @@ public abstract class AbstractLogic implements GameLogic {
     @Override
     public void switchActualPlayer() {
         actualPlayer = 0 - actualPlayer;
+        setIndicatorColor(actualPlayer == 1 ? p2Color : p1Color);
     }
 
     @Override

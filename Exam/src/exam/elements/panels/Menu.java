@@ -2,6 +2,7 @@ package exam.elements.panels;
 
 import exam.config.ResizeableElement;
 import exam.elements.buttons.*;
+import exam.elements.labels.PlayerIndicator;
 import exam.elements.labels.StepCounterLabel;
 import exam.elements.labels.TimerLabel;
 
@@ -18,6 +19,8 @@ public class Menu extends JPanel implements ResizeableElement {
     // ROW 0
 
     public static PlayButton PLAYBUTTON = new PlayButton();                         // x:0,   y:0
+    public static JLabel PLAYERINDICATORLABEL = new JLabel("Actual");          // x:2,   y:0
+    public static PlayerIndicator PLAYERINDICATOR = new PlayerIndicator();          // x:3,   y:0
     public static JLabel VALIDDIRSLABEL = new JLabel("Valid Directions:");     // x:4-5, y:0
     public static CheckBoxPanel CHECKBOXPANEL = new CheckBoxPanel();                // x:6,   y:0-5
 
@@ -92,6 +95,10 @@ public class Menu extends JPanel implements ResizeableElement {
 
         gc.gridx = 0;
         add(PLAYBUTTON, gc);
+        gc.gridx = 2;
+        add(PLAYERINDICATORLABEL, gc);
+        gc.gridx = 3;
+        add(PLAYERINDICATOR, gc);
         gc.gridx = 4;
         gc.gridwidth = 2;
         add(VALIDDIRSLABEL, gc);

@@ -1,6 +1,7 @@
 package exam.logic.abstraction;
 
 
+import exam.elements.labels.PlayerIndicator;
 import exam.elements.panels.Grid;
 import exam.elements.tiles.Pawn;
 import exam.elements.tiles.Tile;
@@ -29,7 +30,7 @@ public interface GameLogic {
 
     void clearValidSteps();
 
-    void evaluateStep(Tile from, Tile to);
+    boolean evaluateStep(Tile from, Tile to);
 
     boolean currentPlayersPawn(Pawn pawn);
 
@@ -54,4 +55,6 @@ public interface GameLogic {
     void clearTarget();
 
     String toString();
+
+    void setIndicator(PlayerIndicator playerindicator);
 }

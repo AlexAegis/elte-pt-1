@@ -17,7 +17,7 @@ import java.util.Map;
 import java.util.stream.Collectors;
 
 
-public class Dash extends AbstractLogic {
+public class Dash extends AbstractLogic implements GameLogic {
 
     public Dash() {
         continuusHighLighting = false;
@@ -31,7 +31,13 @@ public class Dash extends AbstractLogic {
                 .map(Map.Entry::getValue)
                 .forEach(tile -> tile.add(new Pawn(p1Color, -1, grid.getTileWidthByPixels(), grid.getTileHeightByPixels())));
         tileMap.entrySet().stream()
-                .filter(entry -> entry.getKey().getX() >= grid.getGridHeightByTiles() - 2)
+                .filter(entry -> {
+                    if(entry.getKey().getX() >= grid.getGridHeightByTiles() - 2) {
+
+                        System.out.println("x" + entry.getKey().getX() + "ghbTiles:" + grid.getGridHeightByTiles());
+                    }
+                    return entry.getKey().getX() >= grid.getGridHeightByTiles() - 2;
+                })
                 .map(Map.Entry::getValue)
                 .forEach(tile -> tile.add(new Pawn(p2Color, 1, grid.getTileWidthByPixels(), grid.getTileHeightByPixels())));
     }
@@ -41,28 +47,35 @@ public class Dash extends AbstractLogic {
         List<Directions> currentValidDirections;
         if(actualPlayer == 1) currentValidDirections = validDirections;
         else currentValidDirections = validDirections.stream().map(Directions::turnVertical).collect(Collectors.toList());
-        return currentValidDirections.stream().map(direction -> {
-            Coordinate stepCoordinate = coordinate.stepInDirection(direction);
-            Tile tile = tileMap.get(stepCoordinate);
-            if (tile != null && Arrays.stream(tile.getComponents()).noneMatch(c -> c instanceof Pawn && (direction == Directions.UP || ((Pawn) c).getPlayer() == actualPlayer))) {
-                return stepCoordinate;
-            } else return null;
-        }).collect(Collectors.toList());
+        return currentValidDirections
+                .stream()
+                .filter(direction -> tileMap.get(coordinate.stepInDirection(direction)) != null
+                                        && Arrays.stream(tileMap.get(coordinate.stepInDirection(direction)).getComponents())
+                                                .allMatch(component -> !(component instanceof Pawn) || direction.isDiagonal()))
+                .map(coordinate::stepInDirection)
+                .collect(Collectors.toList());
     }
 
     @Override
-    public void evaluateStep(Tile from, Tile to) {
+    public boolean evaluateStep(Tile from, Tile to) {
+        boolean result = true;
+        System.out.println(getTileLocation(from).toString());
+        System.out.println(getTileLocation(to).toString());
         Tile parent = to;
-        if (Arrays.stream(to.getComponents()).anyMatch(component -> component instanceof Pawn)  && validSteps.contains(to)) {
+        if (Arrays.stream(to.getComponents()).anyMatch(component -> component instanceof Pawn) && validSteps.contains(to)) {
+            System.out.println("1");
             ((Pawn)to.getChild()).takeOff();
             switchActualPlayer();
         } else if(Arrays.stream(to.getComponents()).anyMatch(component -> component instanceof HighLight) ) {
+            System.out.println("2");
             parent = to;
             switchActualPlayer();
         } else {
+            result = false;
+            System.out.println("3");
             parent = from;
         }
-        parent.add(getActualPawn());
+        parent.setChild(getActualPawn());
         parent.repaint();
         parent.validate();
         clearValidSteps();
@@ -72,6 +85,7 @@ public class Dash extends AbstractLogic {
             gp.removeAll();
         }
         clearActualPawn();
+        return result;
     }
 
     @Override
