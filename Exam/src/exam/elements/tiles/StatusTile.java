@@ -51,5 +51,4 @@ public class StatusTile extends JComponent implements ResizeableElement {
         revalidate();
         repaint();
     }
-
 }

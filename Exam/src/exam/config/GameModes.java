@@ -4,6 +4,7 @@ import exam.logic.games.*;
 import exam.logic.abstraction.GameLogic;
 
 public enum GameModes {
+    RUBIKTABLE(new RubikTable()),
     QUEENS(new Queens()),
     KNIGHTSTOUR(new KnightsTour()),
     MASTERMIND(new MasterMind()),

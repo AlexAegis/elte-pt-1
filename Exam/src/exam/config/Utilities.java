@@ -25,6 +25,16 @@ public abstract class Utilities {
         return result;
     }
 
+    public static List<List<Tile>> getSquareFromGrid(Grid grid, int skippedLines) {
+        List<List<Tile>> result = new ArrayList<>();
+        if(skippedLines < 0 || skippedLines >= Math.min(grid.getGridHeightByTiles(), grid.getGridWidthByTiles())) throw new IndexOutOfBoundsException();
+        for (int i = skippedLines; i < grid.getGridHeightByTiles() - skippedLines; i++) {
+            List<Tile> row = getRowFromGrid(grid, i);
+            result.add(row.subList(skippedLines, row.size() - skippedLines));
+        }
+        return result;
+    }
+
     public static <T> List<List<T>> copyMatrix(List<List<T>> matrix) {
         List<List<T>> result = new ArrayList<>();
         for (List<T> row : matrix) {
@@ -35,6 +45,14 @@ public abstract class Utilities {
             result.add(rowCopy);
         }
         return result;
+    }
+
+    public static <T> List<T> getRowFromMatrix(List<List<T>> matrix, int n) {
+        return matrix.get(n);
+    }
+
+    public static <T> List<T> getColumnFromMatrix(List<List<T>> matrix, int n) {
+        return transpose(matrix).get(n);
     }
 
     public static List<Tile> getRowFromGrid(Grid grid, int n) {

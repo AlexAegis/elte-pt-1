@@ -76,7 +76,7 @@ public class Pawn extends JComponent implements ResizeableElement {
 
         Pawn pawn = (Pawn) o;
 
-        return player == pawn.player && getColor().equals(pawn.getColor());
+        return player == pawn.player /*&& getColor().equals(pawn.getColor())*/;
 
     }
 
