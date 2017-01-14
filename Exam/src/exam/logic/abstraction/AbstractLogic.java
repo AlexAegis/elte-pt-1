@@ -19,6 +19,8 @@ import java.util.stream.Stream;
 
 import static exam.config.Config.DEFAULT_STARTING_PLAYER;
 import static exam.config.Config.HIGHLIGHTING;
+import static exam.elements.panels.Menu.PAUSEBUTTON;
+import static exam.elements.panels.Menu.TIMER;
 
 
 public abstract class AbstractLogic implements GameLogic {

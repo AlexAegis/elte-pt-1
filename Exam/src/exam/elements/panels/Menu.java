@@ -61,6 +61,7 @@ public class Menu extends JPanel implements ResizeableElement {
     // ROW 5
 
     public static CloseButton CLOSEBUTTON = new CloseButton();                      // x:0,   y:5
+    public static PauseButton PAUSEBUTTON = new PauseButton();                      // x:1,   y:5
     public static JLabel STEPCOUNTERLABEL = new JLabel("Steps:");              // x:2,   y:5
     public static StepCounterLabel STEPCOUNTER = new StepCounterLabel();            // x:3,   y:5
     public static JLabel TIMERLABEL = new JLabel("Time:");                     // x:4,   y:5
@@ -178,6 +179,8 @@ public class Menu extends JPanel implements ResizeableElement {
 
         gc.gridx = 0;
         add(CLOSEBUTTON, gc);
+        gc.gridx = 1;
+        add(PAUSEBUTTON, gc);
         gc.gridx = 2;
         add(STEPCOUNTERLABEL, gc);
         gc.gridx = 3;

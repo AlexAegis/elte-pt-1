@@ -8,6 +8,7 @@ import java.awt.*;
 public final class TimerLabel extends JLabel {
 
     private StopWatch stopWatch = new StopWatch();
+    Timer timer;
 
     public TimerLabel() {
         setPreferredSize(new Dimension(80, 20));
@@ -17,7 +18,7 @@ public final class TimerLabel extends JLabel {
 
     void start(){
         reset();
-        Timer timer = new Timer(10, e -> {
+        timer = new Timer(10, e -> {
             String minute = Integer.toString(stopWatch.getMinute());
             String second = Integer.toString(stopWatch.getSecond());
             String milliSecond = Integer.toString(stopWatch.getMilliSeconds() / 10);
@@ -32,5 +33,18 @@ public final class TimerLabel extends JLabel {
 
     public void reset() {
         stopWatch.reset();
+    }
+
+    public void resume() {
+        timer.start();
+    }
+
+    public void pause() {
+        timer.stop();
+    }
+
+    public void restart() {
+        stopWatch.reset();
+        timer.start();
     }
 }

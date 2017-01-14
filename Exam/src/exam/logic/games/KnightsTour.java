@@ -16,36 +16,52 @@ import java.util.stream.Collectors;
 
 import static exam.config.Config.HIGHLIGHTING;
 import static exam.elements.panels.Menu.BACKBUTTON;
+import static exam.elements.panels.Menu.PAUSEBUTTON;
+import static exam.elements.panels.Menu.TIMER;
 
 public class KnightsTour extends AbstractLogic {
 
     private java.util.List<Pawn> shades;
     private boolean firstStep;
+    private boolean paused;
 
     public KnightsTour() {
-        continuousHighLighting = false;
+        continuousHighLighting = true;
     }
 
     @Override
     public void initGame() {
+        TIMER.restart();
+        paused = false;
         grid.removeMouseListener(controller);
         grid.removeMouseMotionListener((MouseMotionListener) controller);
         controller = new BasicMouseController(this);
         grid.addMouseListener(controller);
         shades = new ArrayList<>();
-        continuousHighLighting = false;
         firstStep = true;
-
+        Arrays.stream(BACKBUTTON.getActionListeners()).forEach(actionListener -> BACKBUTTON.removeActionListener(actionListener));
+        Arrays.stream(PAUSEBUTTON.getActionListeners()).forEach(actionListener -> BACKBUTTON.removeActionListener(actionListener));
+        PAUSEBUTTON.reset();
+        PAUSEBUTTON.setActualGrid(grid);
         BACKBUTTON.addActionListener(e -> {
             if(!shades.isEmpty()) {
                 Tile prevTile = ((Tile) shades.get(shades.size() - 1).getParent());
                 shades.remove(shades.size() - 1);
                 prevTile.removeChild();
                 prevTile.setChild(((Tile)actualPawn.getParent()).removeChild());
+            } else if(!firstStep && shades.isEmpty() && actualPawn != null) {
+                ((Tile)actualPawn.getParent()).removeChild();
+                firstStep = true;
+
+                grid.removeMouseListener(controller);
+                grid.removeMouseMotionListener((MouseMotionListener) controller);
+                controller = new BasicMouseController(this);
+                grid.addMouseListener(controller);
             }
             grid.revalidate();
             grid.repaint();
         });
+
     }
 
     @Override
@@ -62,7 +78,7 @@ public class KnightsTour extends AbstractLogic {
             grid.addMouseListener(controller);
             grid.addMouseMotionListener((MouseMotionListener) controller);
         } else {
-            if(!to.gotChild() && validSteps.contains(to)) {
+            if(to instanceof Tile && !to.gotChild() && validSteps.contains(to)) {
                 Pawn shade = new Pawn(Color.DARK_GRAY, 1, grid.getTileWidthByPixels(), grid.getTileHeightByPixels());
                 shade.demote();
                 shades.add(shade);

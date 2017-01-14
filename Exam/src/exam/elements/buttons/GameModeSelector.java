@@ -24,10 +24,12 @@ public class GameModeSelector extends JComboBox<GameModes> {
                     setDifficultyVisibility(false);
                     setHintButtonVisibility(false);
                     setBackVisibility(false);
+                    setPauseVisibility(false);
                     break;
                 case KNIGHTSTOUR:
                     //To Show
                     setBackVisibility(true);
+                    setPauseVisibility(true);
                     //To Hide
                     setIndicatorVisibility(false);
                     setDifficultyVisibility(false);
@@ -44,6 +46,7 @@ public class GameModeSelector extends JComboBox<GameModes> {
                     setModifierVisibility(false);
                     setRngVisibility(false);
                     setBackVisibility(false);
+                    setPauseVisibility(false);
                     break;
                 case MASTERMIND:
                     // To show
@@ -55,6 +58,7 @@ public class GameModeSelector extends JComboBox<GameModes> {
                     setModifierVisibility(false);
                     setRngVisibility(false);
                     setBackVisibility(false);
+                    setPauseVisibility(false);
                     break;
                 default:
                     break;
@@ -64,7 +68,11 @@ public class GameModeSelector extends JComboBox<GameModes> {
     }
 
     private void setBackVisibility(boolean value) {
+        BACKBUTTON.setVisible(value);
+    }
 
+    private void setPauseVisibility(boolean value) {
+        PAUSEBUTTON.setVisible(value);
     }
 
     private void setHintButtonVisibility(boolean value) {

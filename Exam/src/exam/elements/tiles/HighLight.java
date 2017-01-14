@@ -12,6 +12,7 @@ public final class HighLight extends JComponent implements ResizeableElement {
     private Color[] baseColors = {new Color(255, 255, 255, 180), new Color(255, 255, 255, 120)};
     private Color[] warmColors = {new Color(255, 71, 25, 180), new Color(255, 47, 0, 120)};
     private Color[] coldColors = {new Color(40, 170, 255, 180), new Color(25, 72, 255, 120)};
+    private Color[] naturalColors = {new Color(99, 255, 125, 180), new Color(0, 255, 30, 120)};
     private Color[] actualColors;
 
     public HighLight(int width, int height) {
@@ -19,6 +20,7 @@ public final class HighLight extends JComponent implements ResizeableElement {
         this.height = height;
         setLayout(new BorderLayout());
         switchToBase();
+        switchToNatural(); // Delete to resume base
         setVisible(true);
     }
 
@@ -32,6 +34,10 @@ public final class HighLight extends JComponent implements ResizeableElement {
 
     public void switchToBase() {
         actualColors = baseColors;
+    }
+
+    public void switchToNatural() {
+        actualColors = naturalColors;
     }
 
     @Override

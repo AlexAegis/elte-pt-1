@@ -29,15 +29,17 @@ public class PlayButton extends JButton {
                 mod = Integer.valueOf(MODIFIERSELECTOR.getText());
             } catch (NumberFormatException ignored) {
             } finally {
-                GAME_WINDOW.setTitle(GAMEMODESELECTOR.getSelectedItem().toString());
-                ContentPane.GAME.removeAll();
-                ContentPane.GAME.add(new Grid(
+                GameModes gameMode = ((GameModes) GAMEMODESELECTOR.getSelectedItem());
+                Grid grid = new Grid(
                         (FieldSizes) SIZESELECTOR.getSelectedItem(),
-                        (GameModes) GAMEMODESELECTOR.getSelectedItem(),
+                        gameMode,
                         min,
                         max,
                         mod,
-                        CHECKBOXPANEL.getSelectedDirections()));
+                        CHECKBOXPANEL.getSelectedDirections());
+                GAME_WINDOW.setTitle(GAMEMODESELECTOR.getSelectedItem().toString());
+                ContentPane.GAME.removeAll();
+                ContentPane.GAME.add(grid);
                 TIMER.reset();
                 STEPCOUNTER.reset();
                 ContentPane.GAME.revalidate();
