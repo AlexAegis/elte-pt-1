@@ -1,6 +1,7 @@
 package exam.logic.games;
 
 import exam.elements.tiles.Pawn;
+import exam.elements.tiles.Shade;
 import exam.elements.tiles.Tile;
 import exam.logic.abstraction.AbstractLogic;
 import exam.logic.abstraction.Coordinate;
@@ -21,7 +22,7 @@ import static exam.elements.panels.Menu.TIMER;
 
 public class KnightsTour extends AbstractLogic {
 
-    private java.util.List<Pawn> shades;
+    private java.util.List<Shade> shades;
     private boolean firstStep;
     private boolean paused;
 
@@ -52,7 +53,6 @@ public class KnightsTour extends AbstractLogic {
             } else if(!firstStep && shades.isEmpty() && actualPawn != null) {
                 ((Tile)actualPawn.getParent()).removeChild();
                 firstStep = true;
-
                 grid.removeMouseListener(controller);
                 grid.removeMouseMotionListener((MouseMotionListener) controller);
                 controller = new BasicMouseController(this);
@@ -61,7 +61,6 @@ public class KnightsTour extends AbstractLogic {
             grid.revalidate();
             grid.repaint();
         });
-
     }
 
     @Override
@@ -79,7 +78,7 @@ public class KnightsTour extends AbstractLogic {
             grid.addMouseMotionListener((MouseMotionListener) controller);
         } else {
             if(to instanceof Tile && !to.gotChild() && validSteps.contains(to)) {
-                Pawn shade = new Pawn(Color.DARK_GRAY, 1, grid.getTileWidthByPixels(), grid.getTileHeightByPixels());
+                Shade shade = new Shade(grid.getTileWidthByPixels(), grid.getTileHeightByPixels());
                 shade.demote();
                 shades.add(shade);
                 from.removeChild();
