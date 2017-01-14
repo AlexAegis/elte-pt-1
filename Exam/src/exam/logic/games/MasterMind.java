@@ -21,6 +21,7 @@ public class MasterMind extends AbstractLogic {
     private List<Color> solution = new ArrayList<>();
     private List<List<Tile>> tiles;
     private List<Tile> hints;
+    private List<Color> allColors = new ArrayList<>();
     private List<Color> colors = new ArrayList<>();
 
     private int difficulty;
@@ -39,22 +40,21 @@ public class MasterMind extends AbstractLogic {
         tiles = getColumnsFromGrid(grid, 0, grid.getGridWidthByTiles() - 2);
         hints = getColumnFromGrid(grid, grid.getGridWidthByTiles() - 1);
 
-        colors.add(Color.red);
-        colors.add(Color.blue);
-        colors.add(Color.yellow);
-        colors.add(Color.green);
-        colors.add(Color.white);
-        colors.add(Color.black);
+        allColors.add(Color.red);
+        allColors.add(Color.blue);
+        allColors.add(Color.yellow);
+        allColors.add(Color.green);
+        allColors.add(Color.white);
+        allColors.add(Color.black);
         if(DIFFSELECTOR.getText().chars().allMatch(Character::isDigit)) {
             difficulty = Integer.parseInt(DIFFSELECTOR.getText());
         } else {
-            difficulty = colors.size();
+            difficulty = allColors.size();
         }
-        colors = colors.subList(0, difficulty);
+        colors = allColors.subList(0, difficulty);
 
         solution = new ArrayList<>(colors);
         Collections.rotate(solution, new Random().nextInt(solution.size()));
-        solution.forEach(System.out::println);
 
         hints.forEach(tile -> tile.setChild(new StatusTile(grid.getTileWidthByPixels(), grid.getTileHeightByPixels())));
         tiles.forEach(row -> row.forEach(tile -> {
@@ -62,18 +62,12 @@ public class MasterMind extends AbstractLogic {
         }));
         activateRow(actualRow);
 
-
         HINTBUTTON.addActionListener(e -> {
             solution.forEach(System.out::println);
             List<Color> rowColors = getRow(tiles, actualRow)
                     .stream()
                     .map(tile -> ((ColorTile) tile.getChild()).getActualColor())
                     .collect(Collectors.toList());
-            System.out.println(rowColors);
-
-            System.out.println(rowColors.size());
-            System.out.println(solution.size());
-
             correctColors = 0;
             correctPositions = 0;
             List<Color> tempSolutions = new ArrayList<>(solution);
@@ -116,7 +110,7 @@ public class MasterMind extends AbstractLogic {
 
     @Override
     public List<Coordinate> getValidSteps(Coordinate coordinate) {
-        return null;
+        return getRow(tiles, coordinate.getX()).stream().map(Tile::getCoordinate).collect(Collectors.toList());
     }
 
     @Override

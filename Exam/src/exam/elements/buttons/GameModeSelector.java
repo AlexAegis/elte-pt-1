@@ -1,6 +1,7 @@
 package exam.elements.buttons;
 
 import exam.config.GameModes;
+import exam.elements.panels.Menu;
 
 import javax.swing.*;
 import java.util.Arrays;
@@ -16,46 +17,74 @@ public class GameModeSelector extends JComboBox<GameModes> {
             switch ((GameModes) getSelectedItem()) {
                 case NUMBER_GAME:
                     // To show
-                    CHECKBOXPANEL.setVisible(true);
-                    VALIDDIRSLABEL.setVisible(true);
-                    MODIFIERLABEL.setVisible(true);
-                    MODIFIERSELECTOR.setVisible(true);
-                    VALIDDIRSLABEL.setVisible(true);
-                    CHECKBOXPANEL.setVisible(true);
+                    setDirectionSelectorVisibility(true);
+                    setModifierVisibility(true);
+                    setRngVisibility(true);
                     // To hide
-                    DIFFLABEL.setVisible(false);
-                    DIFFSELECTOR.setVisible(false);
-                    HINTLABEL.setVisible(false);
-                    HINTBUTTON.setVisible(false);
+                    setIndicatorVisibility(false);
+                    setDifficultyVisibility(false);
+                    setHintButtonVisibility(false);
                     break;
                 case DASH:
+                    //To Show
+                    setIndicatorVisibility(true);
                     //To Hide
-                    VALIDDIRSLABEL.setVisible(false);
-                    CHECKBOXPANEL.setVisible(false);
+                    setDirectionSelectorVisibility(false);
+                    setModifierVisibility(false);
+                    setRngVisibility(false);
                     break;
                 case DRAUGHT:
-
+                    //To Show
+                    setIndicatorVisibility(true);
                     //To Hide
-                    VALIDDIRSLABEL.setVisible(false);
-                    CHECKBOXPANEL.setVisible(false);
+                    setDirectionSelectorVisibility(false);
+                    setModifierVisibility(false);
+                    setRngVisibility(false);
                     break;
                 case MASTERMIND:
                     // To show
-                    DIFFLABEL.setVisible(true);
-                    DIFFSELECTOR.setVisible(true);
-                    HINTLABEL.setVisible(true);
-                    HINTBUTTON.setVisible(true);
-
+                    setDifficultyVisibility(true);
+                    setHintButtonVisibility(true);
                     // To hide
-
-                    MODIFIERLABEL.setVisible(false);
-                    MODIFIERSELECTOR.setVisible(false);
-                    CHECKBOXPANEL.setVisible(false);
-                    VALIDDIRSLABEL.setVisible(false);
+                    setIndicatorVisibility(false);
+                    setDirectionSelectorVisibility(false);
+                    setModifierVisibility(false);
+                    setRngVisibility(false);
                     break;
                 default:
                     break;
             }
         });
+    }
+    private void setHintButtonVisibility(boolean value) {
+        HINTLABEL.setVisible(value);
+        HINTBUTTON.setVisible(value);
+    }
+    private void setDifficultyVisibility(boolean value) {
+        DIFFLABEL.setVisible(value);
+        DIFFSELECTOR.setVisible(value);
+    }
+
+    private void setModifierVisibility(boolean value) {
+        MODIFIERLABEL.setVisible(value);
+        MODIFIERSELECTOR.setVisible(value);
+    }
+
+    private void setDirectionSelectorVisibility(boolean value) {
+        CHECKBOXPANEL.setVisible(value);
+        VALIDDIRSLABEL.setVisible(value);
+    }
+
+    private void setIndicatorVisibility(boolean value) {
+        PLAYERINDICATORLABEL.setVisible(value);
+        PLAYERINDICATOR.setVisible(value);
+    }
+
+    private void setRngVisibility(boolean value) {
+        RNGLABEL.setVisible(value);
+        MINRNGLABEL.setVisible(value);
+        MINRNGSELECTOR.setVisible(value);
+        MAXRNGLABEL.setVisible(value);
+        MAXRNGSELECTOR.setVisible(value);
     }
 }

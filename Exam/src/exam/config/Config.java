@@ -11,7 +11,7 @@ public final class Config {
     public static final boolean ANTI_ALIASING = true;
     public static boolean START_WITH_DEFAULT = true;
     public static final GameModes DEFAULT_GAMEMODE = GameModes.MASTERMIND;
-    public static final FieldSizes DEFAULT_FIELDSIZE = FieldSizes.CUSTOM;
+    public static final FieldSizes DEFAULT_FIELDSIZE = FieldSizes.FOUR;
     public static final int DEFAULT_MIN_RNG = 0;
     public static final int DEFAULT_MAX_RNG = 50;
     public static final int DEFAULT_CUSTOM_N = 10;
