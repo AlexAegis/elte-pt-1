@@ -26,6 +26,7 @@ public class GameModeSelector extends JComboBox<GameModes> {
                     setBackVisibility(false);
                     setPauseVisibility(false);
                     break;
+                case QUEENS:
                 case KNIGHTSTOUR:
                     //To Show
                     setBackVisibility(true);

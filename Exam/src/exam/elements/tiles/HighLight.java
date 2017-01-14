@@ -5,15 +5,18 @@ import exam.config.ResizeableElement;
 import javax.swing.*;
 import java.awt.*;
 
-public final class HighLight extends JComponent implements ResizeableElement {
+public class HighLight extends JComponent implements ResizeableElement {
     private int width;
     private int height;
 
-    private Color[] baseColors = {new Color(255, 255, 255, 180), new Color(255, 255, 255, 120)};
-    private Color[] warmColors = {new Color(255, 71, 25, 180), new Color(255, 47, 0, 120)};
-    private Color[] coldColors = {new Color(40, 170, 255, 180), new Color(25, 72, 255, 120)};
-    private Color[] naturalColors = {new Color(99, 255, 125, 180), new Color(0, 255, 30, 120)};
+    public static Color[] baseColors = {new Color(255, 255, 255, 180), new Color(255, 255, 255, 120)};
+    public static Color[] warmColors = {new Color(255, 71, 25, 180), new Color(255, 47, 0, 120)};
+    public static Color[] coldColors = {new Color(40, 170, 255, 180), new Color(25, 72, 255, 120)};
+    public static Color[] naturalColors = {new Color(99, 255, 125, 180), new Color(0, 255, 30, 120)};
     private Color[] actualColors;
+
+    public HighLight() {
+    }
 
     public HighLight(int width, int height) {
         this.width = width;
@@ -24,20 +27,28 @@ public final class HighLight extends JComponent implements ResizeableElement {
         setVisible(true);
     }
 
-    public void switchToCold() {
+    public Color[] getActualColors() {
+        return actualColors;
+    }
+
+    public HighLight switchToCold() {
         actualColors = coldColors;
+        return this;
     }
 
-    public void switchToWarm() {
+    public HighLight switchToWarm() {
         actualColors = warmColors;
+        return this;
     }
 
-    public void switchToBase() {
+    public HighLight switchToBase() {
         actualColors = baseColors;
+        return this;
     }
 
-    public void switchToNatural() {
+    public HighLight switchToNatural() {
         actualColors = naturalColors;
+        return this;
     }
 
     @Override
@@ -60,4 +71,5 @@ public final class HighLight extends JComponent implements ResizeableElement {
         revalidate();
         repaint();
     }
+
 }

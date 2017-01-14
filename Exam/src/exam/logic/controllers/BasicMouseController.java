@@ -34,6 +34,7 @@ public class BasicMouseController implements MouseListener, MouseMotionListener 
 
     @Override
     public void mouseMoved(MouseEvent e) {
+        System.out.println("rer");
         if(gameLogic.isContinuousHighLighting()) {
             gameLogic.clearValidSteps();
             try {
