@@ -14,21 +14,11 @@ import java.awt.*;
 import java.util.*;
 import java.util.List;
 
-import static exam.config.Utilities.*;
 import static exam.elements.panels.Menu.STEPCOUNTER;
 
 public class RubikTable extends AbstractLogic {
 
-    private List<List<Tile>> tiles;
-    private List<Tile> upperButtons;
-    private List<Tile> lowerButtons;
-    private List<Tile> leftButtons;
-    private List<Tile> rightButtons;
     private List<Color> allColors;
-    private Tile cornerUpLeft;
-    private Tile cornerUpRight;
-    private Tile cornerDownLeft;
-    private Tile cornerDownRight;
 
     public RubikTable() {
         continuousHighLighting = true;
@@ -44,30 +34,10 @@ public class RubikTable extends AbstractLogic {
 
     @Override
     public void initGame() { //TODO ADD THIS PARTITION TO THE ABSTRACTION, REFACTOR GAMES ACCORDINGLY
-
+        partition(1);
         allColors = new ArrayList<>();
 
-        upperButtons = new ArrayList<>();
-        lowerButtons = new ArrayList<>();
-        leftButtons = new ArrayList<>();
-        rightButtons = new ArrayList<>();
 
-        leftButtons = getColumnFromGrid(grid, 0);
-        rightButtons = getColumnFromGrid(grid, grid.getGridWidthByTiles() - 1);
-        upperButtons = getRowFromGrid(grid, 0);
-        lowerButtons = getRowFromGrid(grid, grid.getGridHeightByTiles() - 1);
-
-        cornerUpLeft = upperButtons.get(0);
-        cornerUpRight = upperButtons.get(upperButtons.size() - 1);
-        cornerDownLeft = lowerButtons.get(0);
-        cornerDownRight = lowerButtons.get(lowerButtons.size() - 1);
-
-        leftButtons = leftButtons.subList(1, leftButtons.size() - 1);
-        rightButtons = rightButtons.subList(1, rightButtons.size() - 1);
-        upperButtons = upperButtons.subList(1, upperButtons.size() - 1);
-        lowerButtons = lowerButtons.subList(1, lowerButtons.size() - 1);
-
-        tiles = getSquareFromGrid(grid, 1);
         //tiles.forEach(tiles1 -> tiles1.forEach(tile -> tile.setChild(new Shade(grid.getTileWidthByPixels(), grid.getTileHeightByPixels()))));
 
         upperButtons.forEach(tile -> tile.setChild(new Rotator(Directions.DOWN, grid.getTileWidthByPixels(), grid.getTileHeightByPixels())));

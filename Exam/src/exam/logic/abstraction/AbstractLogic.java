@@ -19,6 +19,9 @@ import java.util.stream.Stream;
 
 import static exam.config.Config.DEFAULT_STARTING_PLAYER;
 import static exam.config.Config.HIGHLIGHTING;
+import static exam.config.Utilities.getColumnFromGrid;
+import static exam.config.Utilities.getRowFromGrid;
+import static exam.config.Utilities.getSquareFromGrid;
 import static exam.elements.panels.Menu.PAUSEBUTTON;
 import static exam.elements.panels.Menu.TIMER;
 
@@ -40,6 +43,39 @@ public abstract class AbstractLogic implements GameLogic {
     protected Map<Coordinate, Tile> tileMap;
     protected boolean continuousHighLighting = false;
     protected MouseListener controller;
+
+    protected List<List<Tile>> allTiles;
+    protected List<List<Tile>> tiles;
+    protected List<Tile> upperRow;
+    protected List<Tile> lowerRow;
+    protected List<Tile> leftColumn;
+    protected List<Tile> rightColumn;
+    protected List<Tile> upperButtons;
+    protected List<Tile> lowerButtons;
+    protected List<Tile> leftButtons;
+    protected List<Tile> rightButtons;
+    protected Tile cornerUpLeft;
+    protected Tile cornerUpRight;
+    protected Tile cornerDownLeft;
+    protected Tile cornerDownRight;
+
+    @Override
+    public void partition(int padding) {
+        allTiles = getSquareFromGrid(grid, 0);
+        tiles = getSquareFromGrid(grid, padding);
+        leftColumn = getColumnFromGrid(grid, 0);
+        rightColumn = getColumnFromGrid(grid, grid.getGridWidthByTiles() - 1);
+        upperRow = getRowFromGrid(grid, 0);
+        lowerRow = getRowFromGrid(grid, grid.getGridHeightByTiles() - 1);
+        leftButtons = leftColumn.subList(padding, leftColumn.size() - padding);
+        rightButtons = rightColumn.subList(padding, rightColumn.size() - padding);
+        upperButtons = upperRow.subList(padding, upperRow.size() - padding);
+        lowerButtons = lowerRow.subList(padding, lowerRow.size() - padding);
+        cornerUpLeft = upperRow.get(0);
+        cornerUpRight = upperRow.get(upperButtons.size() - 1);
+        cornerDownLeft = lowerRow.get(0);
+        cornerDownRight = lowerRow.get(lowerButtons.size() - 1);
+    }
 
     @Override
     public MouseListener getMouseListener() {
@@ -68,7 +104,6 @@ public abstract class AbstractLogic implements GameLogic {
         validDirections.clear();
         Arrays.stream(directions).forEach(validDirections::add);
     }
-
 
     @Override
     public void setValidSteps(Tile tile) {

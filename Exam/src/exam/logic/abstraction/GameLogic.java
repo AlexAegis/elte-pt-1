@@ -14,6 +14,8 @@ import java.util.List;
 
 public interface GameLogic {
 
+    void partition(int padding);
+
     void initGame();
 
     boolean isContinuousHighLighting();
