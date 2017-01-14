@@ -31,7 +31,6 @@ public class BasicMouseController implements MouseListener, MouseMotionListener 
         if(gameLogic.isContinuousHighLighting()) {
             gameLogic.clearValidSteps();
             try {
-                System.out.println(((Tile) e.getComponent().getComponentAt(e.getX(), e.getY())).getCoordinate().toString());
                 gameLogic.setValidSteps((Tile) e.getComponent().getComponentAt(e.getX(), e.getY()));
             } catch (ClassCastException ignored) {}
         }

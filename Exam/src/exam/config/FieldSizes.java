@@ -2,6 +2,7 @@ package exam.config;
 
 import static exam.config.Config.DEFAULT_CUSTOM_M;
 import static exam.config.Config.DEFAULT_CUSTOM_N;
+import static exam.config.Config.START_WITH_DEFAULT;
 import static exam.elements.panels.Menu.*;
 
 public enum FieldSizes {
@@ -21,7 +22,8 @@ public enum FieldSizes {
     }
 
     public int getN() {
-        if(this.equals(CUSTOM) && CUSTOMNSELECTOR.getText().chars().allMatch(Character::isDigit)) {
+        if(this.equals(CUSTOM) && !START_WITH_DEFAULT && CUSTOMNSELECTOR.getText().chars().allMatch(Character::isDigit)) {
+            START_WITH_DEFAULT = false;
             return Integer.valueOf(CUSTOMNSELECTOR.getText());
         } else {
             return n;
@@ -29,7 +31,7 @@ public enum FieldSizes {
     }
 
     public int getM() {
-        if(this.equals(CUSTOM) && CUSTOMMSELECTOR.getText().chars().allMatch(Character::isDigit)) {
+        if(this.equals(CUSTOM) && !START_WITH_DEFAULT && CUSTOMMSELECTOR.getText().chars().allMatch(Character::isDigit)) {
             return Integer.valueOf(CUSTOMMSELECTOR.getText());
         } else {
             return m;

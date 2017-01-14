@@ -8,8 +8,5 @@ public class HintButton extends JButton {
     public HintButton() {
         setText("Hint");
         setPreferredSize(new Dimension(80, 40));
-        addActionListener(e -> {
-
-        });
     }
 }

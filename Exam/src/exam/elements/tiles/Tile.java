@@ -91,4 +91,11 @@ public class Tile extends JComponent implements ResizeableElement {
     public boolean gotChild() {
         return child != null;
     }
+
+    @Override
+    public String toString() {
+        return "Tile: " + coordinate.toString() +
+                "child=" + child.toString() +
+                '}';
+    }
 }
