@@ -24,6 +24,12 @@ public class BasicMouseController implements MouseListener, MouseMotionListener 
 
     @Override
     public void mouseClicked(MouseEvent e) {
+        try {
+            if(gameLogic.evaluateStep((Tile) e.getComponent().getComponentAt(e.getX(), e.getY()), (Tile) e.getComponent().getComponentAt(e.getX(), e.getY()))) {
+                STEPCOUNTER.increase();
+            }
+        } catch (ClassCastException ignored) {}
+
     }
 
     @Override
@@ -43,11 +49,7 @@ public class BasicMouseController implements MouseListener, MouseMotionListener 
 
     @Override
     public void mouseReleased(MouseEvent e) {
-        try {
-            if(gameLogic.evaluateStep((Tile) e.getComponent().getComponentAt(e.getX(), e.getY()), (Tile) e.getComponent().getComponentAt(e.getX(), e.getY()))) {
-                STEPCOUNTER.increase();
-            }
-        } catch (ClassCastException ignored) {}
+
     }
 
     @Override

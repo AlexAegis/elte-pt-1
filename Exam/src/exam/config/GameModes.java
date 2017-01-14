@@ -4,6 +4,7 @@ import exam.logic.games.*;
 import exam.logic.abstraction.GameLogic;
 
 public enum GameModes {
+    KNIGHTSTOUR(new KnightsTour()),
     MASTERMIND(new MasterMind()),
     NUMBER_GAME(new NumberGame()),
     DASH(new Dash()),

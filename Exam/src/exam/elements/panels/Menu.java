@@ -13,7 +13,6 @@ import static exam.config.Config.*;
 
 public class Menu extends JPanel implements ResizeableElement {
 
-
     private GridBagConstraints gc = new GridBagConstraints();
 
     // ROW 0

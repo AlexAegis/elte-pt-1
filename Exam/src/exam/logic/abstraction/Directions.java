@@ -10,8 +10,8 @@ public enum Directions {
     DOWNLEFT(1, -1),
     DOWNRIGHT(1, 1);
 
-    private int x;
-    private int y;
+    protected int x;
+    protected int y;
 
     Directions(int x, int y) {
         this.x = x;

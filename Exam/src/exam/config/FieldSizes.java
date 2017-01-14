@@ -7,6 +7,7 @@ import static exam.elements.panels.Menu.*;
 
 public enum FieldSizes {
     FOUR(4, 4),
+    FIVE(5, 5),
     SEVEN(7, 7),
     EIGHT(8, 8),
     TEN(10, 10),

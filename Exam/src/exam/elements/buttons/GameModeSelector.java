@@ -1,7 +1,6 @@
 package exam.elements.buttons;
 
 import exam.config.GameModes;
-import exam.elements.panels.Menu;
 
 import javax.swing.*;
 import java.awt.*;
@@ -24,6 +23,17 @@ public class GameModeSelector extends JComboBox<GameModes> {
                     setIndicatorVisibility(false);
                     setDifficultyVisibility(false);
                     setHintButtonVisibility(false);
+                    break;
+                case KNIGHTSTOUR:
+                    //To Show
+
+                    //To Hide
+                    setIndicatorVisibility(false);
+                    setDifficultyVisibility(false);
+                    setHintButtonVisibility(false);
+                    setDirectionSelectorVisibility(false);
+                    setModifierVisibility(false);
+                    setRngVisibility(false);
                     break;
                 case DASH:
                     //To Show

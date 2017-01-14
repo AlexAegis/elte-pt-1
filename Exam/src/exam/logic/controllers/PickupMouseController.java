@@ -19,8 +19,7 @@ public class PickupMouseController implements MouseListener, MouseMotionListener
     private int y;
     private int xOffset = 0;
     private int yOffset = 0;
-    private JLayeredPane game;/*
-    private JPanel gameField;*/
+    private JLayeredPane game;
     private Component original;
     private Pawn shadow;
     private int shadowDistance = 6;
@@ -33,8 +32,7 @@ public class PickupMouseController implements MouseListener, MouseMotionListener
 
     @Override
     public void mousePressed(MouseEvent e) {
-        game = (JLayeredPane) ((Grid) e.getSource()).getParent().getParent();/*
-        gameField = (JPanel) ((Grid) e.getSource()).getParent();*/
+        game = (JLayeredPane) ((Grid) e.getSource()).getParent().getParent();
         try {
             Pawn pawn = (Pawn) ((Grid) e.getSource()).findComponentAt(e.getX(), e.getY());
             if (!gameLogic.currentPlayersPawn(pawn)) {
