@@ -13,6 +13,18 @@ import java.util.stream.Stream;
 
 public abstract class Utilities {
 
+    public static <T> List<List<T>> transpose(List<List<T>> table) {
+        List<List<T>> result = new ArrayList<>();
+        for (int i = 0; i < table.get(0).size(); i++) {
+            List<T> col = new ArrayList<>();
+            for (List<T> row : table) {
+                col.add(row.get(i));
+            }
+            result.add(col);
+        }
+        return result;
+    }
+
     public static <T> List<T> findComponents(final Container container, final Class<T> componentType) {
         return Stream.concat( Arrays.stream(container.getComponents())
                         .filter(componentType::isInstance)

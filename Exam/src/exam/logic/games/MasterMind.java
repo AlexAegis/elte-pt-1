@@ -7,28 +7,31 @@ import exam.logic.controllers.BasicMouseController;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionListener;
 import java.util.*;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import static exam.config.Config.HIGHLIGHTING;
 import static exam.config.Utilities.getColumnFromGrid;
 import static exam.config.Utilities.getColumnsFromGrid;
+import static exam.config.Utilities.transpose;
 import static exam.elements.panels.Menu.DIFFSELECTOR;
 import static exam.elements.panels.Menu.HINTBUTTON;
 
 public class MasterMind extends AbstractLogic {
 
-    private List<Color> solution = new ArrayList<>();
+    private List<Color> solution;
     private List<List<Tile>> tiles;
     private List<Tile> hints;
-    private List<Color> allColors = new ArrayList<>();
-    private List<Color> colors = new ArrayList<>();
+    private List<Color> allColors;
+    private List<Color> colors;
 
     private int difficulty;
-    private int actualRow = 0;
+    private int actualRow;
 
-    private int correctColors = 0;
-    private int correctPositions = 0;
+    private int correctColors;
+    private int correctPositions;
 
     public MasterMind() {
         continuousHighLighting = true;
@@ -37,7 +40,17 @@ public class MasterMind extends AbstractLogic {
 
     @Override
     public void initGame() {
-        tiles = getColumnsFromGrid(grid, 0, grid.getGridWidthByTiles() - 2);
+        solution = new ArrayList<>();
+        allColors = new ArrayList<>();
+        colors = new ArrayList<>();
+        actualRow = 0;
+        correctColors = 0;
+        correctPositions = 0;
+        for (ActionListener actionListener : HINTBUTTON.getActionListeners()) {
+            HINTBUTTON.removeActionListener(actionListener);
+        }
+
+        tiles = transpose(getColumnsFromGrid(grid, 0, grid.getGridWidthByTiles() - 2));
         hints = getColumnFromGrid(grid, grid.getGridWidthByTiles() - 1);
 
         allColors.add(Color.red);
@@ -46,6 +59,7 @@ public class MasterMind extends AbstractLogic {
         allColors.add(Color.green);
         allColors.add(Color.white);
         allColors.add(Color.black);
+
         if(DIFFSELECTOR.getText().chars().allMatch(Character::isDigit)) {
             difficulty = Integer.parseInt(DIFFSELECTOR.getText());
         } else {
@@ -53,17 +67,17 @@ public class MasterMind extends AbstractLogic {
         }
         colors = allColors.subList(0, difficulty);
 
-        solution = new ArrayList<>(colors);
-        Collections.rotate(solution, new Random().nextInt(solution.size()));
+        solution = new ArrayList<>();
+        for (int i = 0; i < grid.getGridWidthByTiles() - 1; i++) {
+            solution.add(colors.get(new Random().nextInt(colors.size())));
+        }
 
         hints.forEach(tile -> tile.setChild(new StatusTile(grid.getTileWidthByPixels(), grid.getTileHeightByPixels())));
         tiles.forEach(row -> row.forEach(tile -> {
             tile.setChild(new ColorTile(colors, grid.getTileWidthByPixels(), grid.getTileHeightByPixels()));
         }));
         activateRow(actualRow);
-
         HINTBUTTON.addActionListener(e -> {
-            solution.forEach(System.out::println);
             List<Color> rowColors = getRow(tiles, actualRow)
                     .stream()
                     .map(tile -> ((ColorTile) tile.getChild()).getActualColor())
@@ -82,7 +96,7 @@ public class MasterMind extends AbstractLogic {
             }
             ((StatusTile) hints.get(actualRow).getChild()).setCorrectColorsAndPositions(correctColors, correctPositions);
             if(isGameWon()) {
-                JOptionPane.showMessageDialog(null, "You won at the: " + actualRow + " round!");
+                JOptionPane.showMessageDialog(null, "You won at the round: " + actualRow);
                 JPanel gp = (JPanel) grid.getParent();
                 gp.removeAll();
             }
@@ -90,8 +104,21 @@ public class MasterMind extends AbstractLogic {
             deactivateRow(actualRow);
             actualRow++;
             activateRow(actualRow);
+            if(actualRow >= grid.getGridHeightByTiles()) {
+                JOptionPane.showMessageDialog(null, "You have lost!");
+                JPanel gp = (JPanel) grid.getParent();
+                gp.removeAll();
+                gp.revalidate();
+                gp.repaint();
+            }
 
         });
+    }
+
+    public void activateRow(int actualRow) {
+        getRow(tiles, actualRow).stream().map(tile -> ((ColorTile)tile.getChild())).forEach(ColorTile::activate);
+        grid.revalidate();
+        grid.repaint();
     }
 
     private void deactivateRow(int actualRow) {
@@ -109,30 +136,38 @@ public class MasterMind extends AbstractLogic {
     }
 
     @Override
-    public List<Coordinate> getValidSteps(Coordinate coordinate) {
-        return getRow(tiles, coordinate.getX()).stream().map(Tile::getCoordinate).collect(Collectors.toList());
-    }
-
-    @Override
     public boolean evaluateStep(Tile from, Tile to) {
-        System.out.println(from.toString());
-        ((ColorTile)from.getChild()).nextColor();
-        return true;//if activerow
+        if(((ColorTile)from.getChild()).isActivated()) {
+            ((ColorTile)from.getChild()).nextColor();
+        }
+        return true;
     }
 
     @Override
     public boolean isGameWon() {
-        return correctColors == difficulty && correctPositions == difficulty;
+        return correctColors == solution.size() && correctPositions == solution.size();
+    }
+
+    @Override
+    public void setValidSteps(Tile tile) {
+        Coordinate coordinate = tile.getCoordinate();
+        if(coordinate != null && tile.getChild() instanceof ColorTile /*&& ((ColorTile) tile.getChild()).isActivated()*/) {
+            validSteps = getValidSteps(coordinate).stream()
+                    .map(c -> tileMap.get(c))
+                    .collect(Collectors.toList());
+        }
+        if(HIGHLIGHTING) { highlight();}
+    }
+
+    @Override
+    public List<Coordinate> getValidSteps(Coordinate coordinate) {
+        List<Coordinate> coordinates = new ArrayList<>();
+        coordinates.add(coordinate);
+        return coordinates;
     }
 
     @Override
     public String toString() {
         return "MasterMind";
-    }
-
-    public void activateRow(int actualRow) {
-        getRow(tiles, actualRow).stream().map(tile -> ((ColorTile)tile.getChild())).forEach(ColorTile::activate);
-        grid.revalidate();
-        grid.repaint();
     }
 }

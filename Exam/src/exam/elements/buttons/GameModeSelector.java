@@ -4,6 +4,7 @@ import exam.config.GameModes;
 import exam.elements.panels.Menu;
 
 import javax.swing.*;
+import java.awt.*;
 import java.util.Arrays;
 
 import static exam.elements.panels.Menu.*;
@@ -12,7 +13,6 @@ public class GameModeSelector extends JComboBox<GameModes> {
 
     public GameModeSelector() {
         Arrays.stream(GameModes.values()).forEach(this::addItem);
-        setSelectedIndex(0);
         addActionListener(e -> {
             switch ((GameModes) getSelectedItem()) {
                 case NUMBER_GAME:
@@ -26,14 +26,6 @@ public class GameModeSelector extends JComboBox<GameModes> {
                     setHintButtonVisibility(false);
                     break;
                 case DASH:
-                    //To Show
-                    setIndicatorVisibility(true);
-                    //To Hide
-                    setDirectionSelectorVisibility(false);
-                    setModifierVisibility(false);
-                    setRngVisibility(false);
-                    break;
-                case DRAUGHT:
                     //To Show
                     setIndicatorVisibility(true);
                     //To Hide
@@ -55,6 +47,7 @@ public class GameModeSelector extends JComboBox<GameModes> {
                     break;
             }
         });
+        EventQueue.invokeLater(() -> setSelectedIndex(0));
     }
     private void setHintButtonVisibility(boolean value) {
         HINTLABEL.setVisible(value);

@@ -50,7 +50,7 @@ public class ColorTile extends JComponent implements ResizeableElement {
     }
 
     public void deactivate() {
-        displayColor = deactivatedColor;
+        displayColor = actualColor.darker().darker().darker().darker();
         revalidate();
         repaint();
         isActivated = false;

@@ -149,8 +149,7 @@ public abstract class AbstractLogic implements GameLogic {
                     if(foundThePawn) {
                         return new Coordinate(i, j);
                     }
-                } catch (NullPointerException e) {
-
+                } catch (NullPointerException ignored) {
                 }
             }
         }

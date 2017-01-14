@@ -36,7 +36,6 @@ public enum Directions {
             case DOWNRIGHT: return UPRIGHT;
             default: return this;
         }
-        // return Arrays.stream(values()).filter(directions -> directions.getY() == getY() * -1 && directions.getX() == getX()).findFirst().orElse(null);
     }
 
     public boolean isForward() {

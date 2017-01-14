@@ -1,5 +1,6 @@
 package exam.logic.games;
 
+import exam.config.Utilities;
 import exam.elements.tiles.HighLight;
 import exam.elements.tiles.Pawn;
 import exam.elements.tiles.Tile;
@@ -92,16 +93,14 @@ public class Dash extends AbstractLogic implements GameLogic {
 
     @Override
     public boolean isGameWon() {
-        ArrayList<Tile> goal1 = new ArrayList<>(); // Blue dest
-        ArrayList<Tile> goal2 = new ArrayList<>(); // Red dest
-        for (int i = 0; i < grid.getGridWidthByTiles(); i++) {
-            goal1.add((Tile) grid.getComponent(grid.getComponents().length - i - 1));
-            goal2.add((Tile) grid.getComponent(i));
-        }
-        return goal1.stream()
-                .anyMatch(tile -> tile.getComponents().length > 0 &&
-                        tile.getComponent(0) instanceof Pawn && ((Pawn) tile.getComponent(0)).getPlayer() == -1) ||
-                goal2.stream().anyMatch(tile -> tile.getComponents().length > 0 && tile.getComponent(0) instanceof Pawn && ((Pawn) tile.getComponent(0)).getPlayer() == 1);
+        return Utilities.getRowFromGrid(grid, grid.getGridHeightByTiles() - 1).stream()
+                .anyMatch(tile -> tile.getComponents().length > 0
+                        && tile.getComponent(0) instanceof Pawn && ((Pawn) tile.getComponent(0)).getPlayer() == -1)
+                || Utilities.getRowFromGrid(grid, 0)
+                    .stream()
+                    .anyMatch(tile -> tile.getComponents().length > 0
+                            && tile.getComponent(0) instanceof Pawn
+                            && ((Pawn) tile.getComponent(0)).getPlayer() == 1);
     }
 
     @Override
