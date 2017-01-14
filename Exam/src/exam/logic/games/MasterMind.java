@@ -100,6 +100,8 @@ public class MasterMind extends AbstractLogic {
                 JOptionPane.showMessageDialog(null, "You won at the round: " + actualRow);
                 JPanel gp = (JPanel) grid.getParent();
                 gp.removeAll();
+                gp.revalidate();
+                gp.repaint();
             }
 
             deactivateRow(actualRow);

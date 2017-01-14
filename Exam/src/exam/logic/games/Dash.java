@@ -33,13 +33,7 @@ public class Dash extends AbstractLogic implements GameLogic {
                 .map(Map.Entry::getValue)
                 .forEach(tile -> tile.setChild(new Pawn(p1Color, -1, grid.getTileWidthByPixels(), grid.getTileHeightByPixels())));
         tileMap.entrySet().stream()
-                .filter(entry -> {
-                    if(entry.getKey().getX() >= grid.getGridHeightByTiles() - 2) {
-
-                        System.out.println("x" + entry.getKey().getX() + "ghbTiles:" + grid.getGridHeightByTiles());
-                    }
-                    return entry.getKey().getX() >= grid.getGridHeightByTiles() - 2;
-                })
+                .filter(entry -> entry.getKey().getX() >= grid.getGridHeightByTiles() - 2)
                 .map(Map.Entry::getValue)
                 .forEach(tile -> tile.setChild(new Pawn(p2Color, 1, grid.getTileWidthByPixels(), grid.getTileHeightByPixels())));
     }

@@ -60,7 +60,7 @@ public class NumberGame extends AbstractLogic {
         coordinates.add(coordinate);
         for(Directions direction : validDirections) {
             Coordinate current = coordinate.stepInDirection(direction);
-            while(tileMap.get(current) != null) {
+            while(tileMap.get(current) != null) { //set distance here not null is till it hits border
                 coordinates.add(current);
                 current = current.stepInDirection(direction);
             }
@@ -89,6 +89,10 @@ public class NumberGame extends AbstractLogic {
         });
         if(isGameWon()) {
             JOptionPane.showMessageDialog(null, "Game Ended");
+            JPanel gp = (JPanel) grid.getParent();
+            gp.removeAll();
+            gp.revalidate();
+            gp.repaint();
         }
         return true;
     }

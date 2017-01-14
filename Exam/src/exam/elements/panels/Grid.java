@@ -125,7 +125,6 @@ public class Grid extends JPanel implements Iterable<Tile>, ResizeableElement {
 
     @Override
     public void onResize() {
-        System.out.println("SD");
         setBounds(0,0, Math.min(DEFAULT_WINDOW_WIDTH, DEFAULT_WINDOW_HEIGHT), Math.min(DEFAULT_WINDOW_WIDTH, DEFAULT_WINDOW_HEIGHT));
         this.gridWidthByPixels = Math.min(DEFAULT_WINDOW_WIDTH, DEFAULT_WINDOW_HEIGHT);
         this.gridHeightByPixels = Math.min(DEFAULT_WINDOW_WIDTH, DEFAULT_WINDOW_HEIGHT);

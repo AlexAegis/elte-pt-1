@@ -12,12 +12,13 @@ public class PlayerIndicator extends JButton {
         setSize(new Dimension(120, 60));
         setPreferredSize(new Dimension(120, 60));
         setVisible(true);
-        System.out.println("asd");
+        revalidate();
         repaint();
     }
 
     public void setIndicatorColor(Color actualPlayerColor) {
         this.actualPlayerColor = actualPlayerColor;
+        revalidate();
         repaint();
     }
 
