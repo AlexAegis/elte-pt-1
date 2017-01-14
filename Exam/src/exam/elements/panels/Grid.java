@@ -1,11 +1,13 @@
 package exam.elements.panels;
 import exam.config.GameModes;
 import exam.config.ResizeableElement;
+import exam.config.Utilities;
 import exam.logic.controllers.PickupMouseController;
 import exam.config.FieldSizes;
 import exam.logic.abstraction.Coordinate;
 import exam.logic.abstraction.Directions;
-import exam.logic.iterators.DirectionalMapIterator;
+import exam.logic.iterators.ContinuousMatrixColumnIterator;
+import exam.logic.iterators.ContinuousMatrixRowIterator;
 import exam.elements.tiles.Tile;
 
 import javax.swing.*;
@@ -18,7 +20,7 @@ import static exam.config.Config.GAME_BG_COLOR;
 import static exam.config.Config.DEFAULT_WINDOW_WIDTH;
 import static exam.elements.panels.Menu.PLAYERINDICATOR;
 
-public class Grid extends JPanel implements Iterable<Coordinate>, ResizeableElement {
+public class Grid extends JPanel implements Iterable<Tile>, ResizeableElement {
 
     private Map<Coordinate, Tile> tileMap = new TreeMap<>();
 
@@ -110,8 +112,15 @@ public class Grid extends JPanel implements Iterable<Coordinate>, ResizeableElem
     }
 
     @Override
-    public Iterator<Coordinate> iterator() {
-        return new DirectionalMapIterator(tileMap, Directions.DOWN);
+    public Iterator<Tile> iterator() {
+        return rowIterator();
+    }
+
+    public Iterator<Tile> rowIterator() {
+        return new ContinuousMatrixRowIterator<>(Utilities.getRowsFromGrid(this, 0, this.getGridHeightByTiles() -1));
+    }
+    public Iterator<Tile> columnIterator() {
+        return new ContinuousMatrixColumnIterator<>(Utilities.getRowsFromGrid(this, 0, this.getGridHeightByTiles() -1));
     }
 
     @Override

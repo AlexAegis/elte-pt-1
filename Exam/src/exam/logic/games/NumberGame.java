@@ -1,5 +1,6 @@
 package exam.logic.games;
 
+import exam.config.Utilities;
 import exam.elements.tiles.Pawn;
 import exam.logic.abstraction.AbstractLogic;
 import exam.logic.abstraction.Coordinate;
@@ -94,14 +95,15 @@ public class NumberGame extends AbstractLogic {
 
     @Override
     public boolean isGameWon() {
-        boolean won = false;/*
-        Iterator iterator = grid.iterator();
-        while (iterator.hasNext()) {
-            Tile actualTile = tileMap.get((Coordinate)iterator.next());
-            won = won || ((Number)actualTile.getChild()).getValue() == 0;
-            actualTile.add(new HighLight(grid.getTileWidthByPixels(), grid.getTileHeightByPixels()));
-        }*/
-        return won;
+        int current = 0;
+        for (Tile tile : grid) {
+            if(((Number)tile.getChild()).getValue() >= current) {
+                current = ((Number)tile.getChild()).getValue();
+            } else {
+                return false;
+            }
+        }
+        return true;
     }
 
     @Override

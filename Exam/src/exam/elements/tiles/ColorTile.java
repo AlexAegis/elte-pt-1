@@ -27,15 +27,13 @@ public class ColorTile extends JComponent implements ResizeableElement {
 
     public ColorTile(List<Color> colors, int width, int height) {
         this.colors = new ArrayList<>(colors);
-        this.width = width;
-        this.height = height;
+        this.width = height;
+        this.height = width;
         Collections.rotate(this.colors, new Random().nextInt(this.colors.size()));
         displayColor = this.colors.get(0);
         actualColor = this.colors.get(0);
         deactivatedColor = actualColor.darker().darker().darker().darker();
         deactivate();
-        setSize(new Dimension(width, height));
-        setPreferredSize(new Dimension(width, height));
     }
 
     public boolean isActivated() {
@@ -96,11 +94,13 @@ public class ColorTile extends JComponent implements ResizeableElement {
 
     @Override
     public void onResize() {
-        setSize(getParent().getSize());
-        width = getParent().getWidth();
-        height = getParent().getHeight();
-        revalidate();
-        repaint();
+        EventQueue.invokeLater(() -> {
+            width = getParent().getWidth();
+            height = getParent().getHeight();
+            revalidate();
+            repaint();
+        });
+
     }
 
     public Color getActualColor() {

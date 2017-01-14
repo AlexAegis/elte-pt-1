@@ -78,6 +78,7 @@ public class MasterMind extends AbstractLogic {
         }));
         activateRow(actualRow);
         HINTBUTTON.addActionListener(e -> {
+            tiles = transpose(getColumnsFromGrid(grid, 0, grid.getGridWidthByTiles() - 2));
             List<Color> rowColors = getRow(tiles, actualRow)
                     .stream()
                     .map(tile -> ((ColorTile) tile.getChild()).getActualColor())
