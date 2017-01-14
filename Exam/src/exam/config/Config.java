@@ -10,7 +10,7 @@ public final class Config {
     public static final boolean WINDOW_RESIZABLE = true;
     public static final boolean ANTI_ALIASING = true;
     public static boolean START_WITH_DEFAULT = true;
-    public static final GameModes DEFAULT_GAMEMODE = GameModes.DASH;
+    public static final GameModes DEFAULT_GAMEMODE = GameModes.RUBIKTABLE;
     public static final FieldSizes DEFAULT_FIELDSIZE = FieldSizes.EIGHT;
     public static final int DEFAULT_MIN_RNG = 0;
     public static final int DEFAULT_MAX_RNG = 50;

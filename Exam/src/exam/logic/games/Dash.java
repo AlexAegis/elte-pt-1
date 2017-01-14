@@ -41,17 +41,8 @@ public class Dash extends AbstractLogic implements GameLogic {
 
     @Override
     public List<Coordinate> getValidSteps(Coordinate coordinate) {
-        System.out.println(1);
-        if(firstStep) {
-            System.out.println(2);
-            if (tileMap.get(coordinate).gotChild()) {
-                System.out.println(3);
-                if(actualPlayer != ((Pawn)tileMap.get(coordinate).getChild()).getPlayer()) {
-                    System.out.println(4);
-                    switchActualPlayer();
-                }/*
-                actualPlayer = ((Pawn)tileMap.get(coordinate).getChild()).getPlayer();*/
-            }
+        if(firstStep && tileMap.get(coordinate).gotChild() && actualPlayer != ((Pawn)tileMap.get(coordinate).getChild()).getPlayer()) {
+             switchActualPlayer();
         }
         List<Directions> currentValidDirections;
         if(actualPlayer == 1) currentValidDirections = validDirections;
