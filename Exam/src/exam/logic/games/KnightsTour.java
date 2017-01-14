@@ -15,6 +15,7 @@ import java.util.*;
 import java.util.stream.Collectors;
 
 import static exam.config.Config.HIGHLIGHTING;
+import static exam.elements.panels.Menu.BACKBUTTON;
 
 public class KnightsTour extends AbstractLogic {
 
@@ -34,6 +35,17 @@ public class KnightsTour extends AbstractLogic {
         shades = new ArrayList<>();
         continuousHighLighting = false;
         firstStep = true;
+
+        BACKBUTTON.addActionListener(e -> {
+            if(!shades.isEmpty()) {
+                Tile prevTile = ((Tile) shades.get(shades.size() - 1).getParent());
+                shades.remove(shades.size() - 1);
+                prevTile.removeChild();
+                prevTile.setChild(((Tile)actualPawn.getParent()).removeChild());
+            }
+            grid.revalidate();
+            grid.repaint();
+        });
     }
 
     @Override

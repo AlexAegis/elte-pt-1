@@ -18,6 +18,7 @@ public class Menu extends JPanel implements ResizeableElement {
     // ROW 0
 
     public static PlayButton PLAYBUTTON = new PlayButton();                         // x:0,   y:0
+    public static JButton BACKBUTTON = new JButton("Back");                    // x:1,   y:0
     public static JLabel PLAYERINDICATORLABEL = new JLabel("Actual");          // x:2,   y:0
     public static PlayerIndicator PLAYERINDICATOR = new PlayerIndicator();          // x:3,   y:0
     public static JLabel VALIDDIRSLABEL = new JLabel("Valid Directions:");     // x:4-5, y:0
@@ -87,6 +88,7 @@ public class Menu extends JPanel implements ResizeableElement {
         CUSTOMNSELECTOR.setVisible(false);
         CUSTOMMSELECTORLABEL.setVisible(false);
         CUSTOMMSELECTOR.setVisible(false);
+        BACKBUTTON.setVisible(true);
     }
 
     private void putRowZero() {
@@ -94,6 +96,8 @@ public class Menu extends JPanel implements ResizeableElement {
 
         gc.gridx = 0;
         add(PLAYBUTTON, gc);
+        gc.gridx = 1;
+        add(BACKBUTTON, gc);
         gc.gridx = 2;
         add(PLAYERINDICATORLABEL, gc);
         gc.gridx = 3;

@@ -23,10 +23,11 @@ public class GameModeSelector extends JComboBox<GameModes> {
                     setIndicatorVisibility(false);
                     setDifficultyVisibility(false);
                     setHintButtonVisibility(false);
+                    setBackVisibility(false);
                     break;
                 case KNIGHTSTOUR:
                     //To Show
-
+                    setBackVisibility(true);
                     //To Hide
                     setIndicatorVisibility(false);
                     setDifficultyVisibility(false);
@@ -42,6 +43,7 @@ public class GameModeSelector extends JComboBox<GameModes> {
                     setDirectionSelectorVisibility(false);
                     setModifierVisibility(false);
                     setRngVisibility(false);
+                    setBackVisibility(false);
                     break;
                 case MASTERMIND:
                     // To show
@@ -52,6 +54,7 @@ public class GameModeSelector extends JComboBox<GameModes> {
                     setDirectionSelectorVisibility(false);
                     setModifierVisibility(false);
                     setRngVisibility(false);
+                    setBackVisibility(false);
                     break;
                 default:
                     break;
@@ -59,6 +62,11 @@ public class GameModeSelector extends JComboBox<GameModes> {
         });
         EventQueue.invokeLater(() -> setSelectedIndex(0));
     }
+
+    private void setBackVisibility(boolean value) {
+
+    }
+
     private void setHintButtonVisibility(boolean value) {
         HINTLABEL.setVisible(value);
         HINTBUTTON.setVisible(value);
