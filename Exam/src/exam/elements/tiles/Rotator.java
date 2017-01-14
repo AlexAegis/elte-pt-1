@@ -32,6 +32,10 @@ public class Rotator extends JComponent implements ResizeableElement, MouseListe
         addMouseListener(this);
     }
 
+    public Rotator(Directions direction, Dimension dimension) {
+        this(direction, (int) dimension.getWidth(), (int) dimension.getHeight());
+    }
+
     public void changeDirection(Directions direction) {
         this.direction = direction;
         revalidate();

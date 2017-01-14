@@ -26,19 +26,6 @@ public class GameModeSelector extends JComboBox<GameModes> {
                     setBackVisibility(false);
                     setPauseVisibility(false);
                     break;
-                case QUEENS:
-                case KNIGHTSTOUR:
-                    //To Show
-                    setBackVisibility(true);
-                    setPauseVisibility(true);
-                    //To Hide
-                    setIndicatorVisibility(false);
-                    setDifficultyVisibility(false);
-                    setHintButtonVisibility(false);
-                    setDirectionSelectorVisibility(false);
-                    setModifierVisibility(false);
-                    setRngVisibility(false);
-                    break;
                 case DASH:
                     //To Show
                     setIndicatorVisibility(true);
@@ -62,6 +49,16 @@ public class GameModeSelector extends JComboBox<GameModes> {
                     setPauseVisibility(false);
                     break;
                 default:
+                    //To Show
+                    setBackVisibility(true);
+                    setPauseVisibility(true);
+                    //To Hide
+                    setIndicatorVisibility(false);
+                    setDifficultyVisibility(false);
+                    setHintButtonVisibility(false);
+                    setDirectionSelectorVisibility(false);
+                    setModifierVisibility(false);
+                    setRngVisibility(false);
                     break;
             }
         });

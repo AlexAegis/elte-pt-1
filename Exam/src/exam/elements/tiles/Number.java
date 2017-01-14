@@ -1,7 +1,6 @@
 package exam.elements.tiles;
 
 import exam.config.ResizeableElement;
-
 import javax.swing.*;
 import java.awt.*;
 
@@ -18,6 +17,11 @@ public final class Number extends JComponent implements ResizeableElement {
         this.width = width;
         this.height = height;
     }
+
+    public Number(int value, Dimension dimension) {
+        this(value, (int) dimension.getWidth(), (int) dimension.getHeight());
+    }
+
 
     public int getValue() {
         return value;

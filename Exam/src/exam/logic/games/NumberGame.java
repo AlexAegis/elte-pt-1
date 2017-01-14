@@ -1,23 +1,18 @@
 package exam.logic.games;
 
-import exam.config.Utilities;
 import exam.elements.tiles.Pawn;
 import exam.logic.abstraction.AbstractLogic;
 import exam.logic.abstraction.Coordinate;
 import exam.logic.abstraction.Directions;
-import exam.logic.abstraction.GameLogic;
-import exam.elements.tiles.HighLight;
 import exam.elements.tiles.Number;
 import exam.elements.tiles.Tile;
 import exam.logic.controllers.BasicMouseController;
 
 import javax.swing.*;
-import java.awt.*;
 import java.util.*;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import static exam.config.Config.DEBUG_MODE;
 import static exam.config.Config.HIGHLIGHTING;
 
 public class NumberGame extends AbstractLogic {
@@ -37,10 +32,10 @@ public class NumberGame extends AbstractLogic {
 
     @Override
     public void initGame() {
+        partition(0);
         tileMap.values().forEach(tile -> tile.setChild(new Number(
                 (int) (((Math.random() * 100) % (maxRng - minRng + 1)) + minRng),
-                grid.getTileWidthByPixels(),
-                grid.getTileHeightByPixels())));
+                grid.getTileSize())));
     }
 
     @Override

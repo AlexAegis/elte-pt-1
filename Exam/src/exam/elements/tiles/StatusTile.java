@@ -20,6 +20,10 @@ public class StatusTile extends JComponent implements ResizeableElement {
         this.height = height;
     }
 
+    public StatusTile(Dimension dimension) {
+        this((int) dimension.getWidth(), (int) dimension.getHeight());
+    }
+
     public void setCorrectColorsAndPositions(int correctColors, int correctPositions) {
         this.correctColors = correctColors;
         this.correctPositions = correctPositions;

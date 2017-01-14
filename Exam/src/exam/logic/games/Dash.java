@@ -28,18 +28,31 @@ public class Dash extends AbstractLogic implements GameLogic {
 
     @Override
     public void initGame() {
+        partition(0);
         tileMap.entrySet().stream()
                 .filter(entry -> entry.getKey().getX() <= 1)
                 .map(Map.Entry::getValue)
-                .forEach(tile -> tile.setChild(new Pawn(p1Color, -1, grid.getTileWidthByPixels(), grid.getTileHeightByPixels())));
+                .forEach(tile -> tile.setChild(new Pawn(p1Color, -1, grid.getTileSize())));
         tileMap.entrySet().stream()
                 .filter(entry -> entry.getKey().getX() >= grid.getGridHeightByTiles() - 2)
                 .map(Map.Entry::getValue)
-                .forEach(tile -> tile.setChild(new Pawn(p2Color, 1, grid.getTileWidthByPixels(), grid.getTileHeightByPixels())));
+                .forEach(tile -> tile.setChild(new Pawn(p2Color, 1, grid.getTileSize())));
     }
 
     @Override
     public List<Coordinate> getValidSteps(Coordinate coordinate) {
+        System.out.println(1);
+        if(firstStep) {
+            System.out.println(2);
+            if (tileMap.get(coordinate).gotChild()) {
+                System.out.println(3);
+                if(actualPlayer != ((Pawn)tileMap.get(coordinate).getChild()).getPlayer()) {
+                    System.out.println(4);
+                    switchActualPlayer();
+                }/*
+                actualPlayer = ((Pawn)tileMap.get(coordinate).getChild()).getPlayer();*/
+            }
+        }
         List<Directions> currentValidDirections;
         if(actualPlayer == 1) currentValidDirections = validDirections;
         else currentValidDirections = validDirections.stream().map(Directions::turnVertical).collect(Collectors.toList());
@@ -76,6 +89,7 @@ public class Dash extends AbstractLogic implements GameLogic {
         parent.repaint();
         parent.validate();
         clearValidSteps();
+        firstStep = false;
         if(isGameWon()) {
             JOptionPane.showMessageDialog(null, "Game over! The winner is: " + (actualPawn.getPlayer() == -1 ? "Red" : "Blue"));
             JPanel gp = (JPanel) grid.getParent();

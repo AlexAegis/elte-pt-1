@@ -1,9 +1,6 @@
 package exam.logic.games;
 
-import exam.elements.tiles.Pawn;
-import exam.elements.tiles.Rotator;
-import exam.elements.tiles.Shade;
-import exam.elements.tiles.Tile;
+import exam.elements.tiles.*;
 import exam.logic.abstraction.AbstractLogic;
 import exam.logic.abstraction.Coordinate;
 import exam.logic.abstraction.Directions;
@@ -33,18 +30,14 @@ public class RubikTable extends AbstractLogic {
     }
 
     @Override
-    public void initGame() { //TODO ADD THIS PARTITION TO THE ABSTRACTION, REFACTOR GAMES ACCORDINGLY
+    public void initGame() {
         partition(1);
-        allColors = new ArrayList<>();
+        upperButtons.forEach(tile -> tile.setChild(new Rotator(Directions.DOWN, grid.getTileSize())));
+        lowerButtons.forEach(tile -> tile.setChild(new Rotator(Directions.UP, grid.getTileSize())));
+        leftButtons.forEach(tile -> tile.setChild(new Rotator(Directions.RIGHT, grid.getTileSize())));
+        rightButtons.forEach(tile -> tile.setChild(new Rotator(Directions.LEFT, grid.getTileSize())));
 
-
-        //tiles.forEach(tiles1 -> tiles1.forEach(tile -> tile.setChild(new Shade(grid.getTileWidthByPixels(), grid.getTileHeightByPixels()))));
-
-        upperButtons.forEach(tile -> tile.setChild(new Rotator(Directions.DOWN, grid.getTileWidthByPixels(), grid.getTileHeightByPixels())));
-        lowerButtons.forEach(tile -> tile.setChild(new Rotator(Directions.UP, grid.getTileWidthByPixels(), grid.getTileHeightByPixels())));
-        leftButtons.forEach(tile -> tile.setChild(new Rotator(Directions.RIGHT, grid.getTileWidthByPixels(), grid.getTileHeightByPixels())));
-        rightButtons.forEach(tile -> tile.setChild(new Rotator(Directions.LEFT, grid.getTileWidthByPixels(), grid.getTileHeightByPixels())));
-
+        innerTiles.forEach(row -> row.forEach(tile -> tile.setChild(new ColorTile(allColors, grid.getTileSize()))));
 
         if(isGameWon()) {
             JOptionPane.showMessageDialog(null, "You won at the round: " + STEPCOUNTER.getText());

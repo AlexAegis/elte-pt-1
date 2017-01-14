@@ -39,6 +39,14 @@ public class Tile extends JComponent implements ResizeableElement {
         this.coordinate = coordinate;
     }
 
+    public Tile(Color color, Dimension dimension) {
+        this(color, (int) dimension.getWidth(), (int) dimension.getHeight());
+    }
+
+    public Tile(Color color, Dimension dimension, Coordinate coordinate) {
+        this(color, (int) dimension.getWidth(), (int) dimension.getHeight(), coordinate);
+    }
+
     @Override
     protected void paintComponent(Graphics graphics) {
         super.paintComponent(graphics);

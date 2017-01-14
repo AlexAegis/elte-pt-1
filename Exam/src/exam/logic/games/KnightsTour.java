@@ -67,7 +67,7 @@ public class KnightsTour extends AbstractLogic {
     public boolean evaluateStep(Tile from, Tile to) {
         boolean result = true;
         if(firstStep) {
-            Pawn pawn = new Pawn(Color.black, -1, grid.getTileWidthByPixels(), grid.getTileHeightByPixels());
+            Pawn pawn = new Pawn(Color.black, -1, grid.getTileSize());
             pawn.promote();
             setActualPawn(pawn);
             from.setChild(pawn);
@@ -78,7 +78,7 @@ public class KnightsTour extends AbstractLogic {
             grid.addMouseMotionListener((MouseMotionListener) controller);
         } else {
             if(to instanceof Tile && !to.gotChild() && validSteps.contains(to)) {
-                Shade shade = new Shade(grid.getTileWidthByPixels(), grid.getTileHeightByPixels());
+                Shade shade = new Shade(grid.getTileSize());
                 shade.demote();
                 shades.add(shade);
                 from.removeChild();

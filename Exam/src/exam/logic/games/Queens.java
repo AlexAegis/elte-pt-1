@@ -71,7 +71,7 @@ public class Queens extends AbstractLogic {
                 .filter(component -> component.getClass().equals(HighLight.class))
                 .map(component -> (HighLight)component)
                 .noneMatch(highLight -> highLight.getActualColors().equals(HighLight.warmColors))) {
-                    Pawn pawn = new Pawn(Color.black, -1, grid.getTileWidthByPixels(), grid.getTileHeightByPixels());
+                    Pawn pawn = new Pawn(Color.black, -1, grid.getTileSize());
                     pawn.promote();
                     setActualPawn(pawn);
                     from.setChild(pawn);

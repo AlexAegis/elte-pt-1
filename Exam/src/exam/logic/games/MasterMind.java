@@ -23,7 +23,6 @@ public class MasterMind extends AbstractLogic {
 
     private List<Color> solution;
     private List<List<Tile>> tiles;
-    private List<Tile> hints;
     private List<Color> allColors;
     private List<Color> colors;
 
@@ -40,6 +39,7 @@ public class MasterMind extends AbstractLogic {
 
     @Override
     public void initGame() {
+        partition(1);
         solution = new ArrayList<>();
         allColors = new ArrayList<>();
         colors = new ArrayList<>();
@@ -51,7 +51,7 @@ public class MasterMind extends AbstractLogic {
         }
 
         tiles = transpose(getColumnsFromGrid(grid, 0, grid.getGridWidthByTiles() - 2));
-        hints = getColumnFromGrid(grid, grid.getGridWidthByTiles() - 1);
+
 
         allColors.add(Color.red);
         allColors.add(Color.blue);
@@ -72,9 +72,9 @@ public class MasterMind extends AbstractLogic {
             solution.add(colors.get(new Random().nextInt(colors.size())));
         }
 
-        hints.forEach(tile -> tile.setChild(new StatusTile(grid.getTileWidthByPixels(), grid.getTileHeightByPixels())));
+        rightColumn.forEach(tile -> tile.setChild(new StatusTile(grid.getTileSize())));
         tiles.forEach(row -> row.forEach(tile -> {
-            tile.setChild(new ColorTile(colors, grid.getTileWidthByPixels(), grid.getTileHeightByPixels()));
+            tile.setChild(new ColorTile(colors, grid.getTileSize()));
         }));
         activateRow(actualRow);
         HINTBUTTON.addActionListener(e -> {
@@ -95,7 +95,7 @@ public class MasterMind extends AbstractLogic {
                     correctColors++;
                 }
             }
-            ((StatusTile) hints.get(actualRow).getChild()).setCorrectColorsAndPositions(correctColors, correctPositions);
+            ((StatusTile) rightColumn.get(actualRow).getChild()).setCorrectColorsAndPositions(correctColors, correctPositions);
             if(isGameWon()) {
                 JOptionPane.showMessageDialog(null, "You won at the round: " + actualRow);
                 JPanel gp = (JPanel) grid.getParent();

@@ -10,7 +10,15 @@ public class Shade extends Pawn {
         super(color, player, width, height);
     }
 
+    public Shade(Color color, int player,  Dimension dimension) {
+        super(color, player, dimension);
+    }
+
     public Shade(int width, int height) {
         super(shadeColor, 0, width, height);
+    }
+
+    public Shade(Dimension dimension) {
+        super(shadeColor, 0, dimension);
     }
 }

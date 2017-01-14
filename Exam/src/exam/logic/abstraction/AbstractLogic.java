@@ -22,8 +22,6 @@ import static exam.config.Config.HIGHLIGHTING;
 import static exam.config.Utilities.getColumnFromGrid;
 import static exam.config.Utilities.getRowFromGrid;
 import static exam.config.Utilities.getSquareFromGrid;
-import static exam.elements.panels.Menu.PAUSEBUTTON;
-import static exam.elements.panels.Menu.TIMER;
 
 
 public abstract class AbstractLogic implements GameLogic {
@@ -45,7 +43,7 @@ public abstract class AbstractLogic implements GameLogic {
     protected MouseListener controller;
 
     protected List<List<Tile>> allTiles;
-    protected List<List<Tile>> tiles;
+    protected List<List<Tile>> innerTiles;
     protected List<Tile> upperRow;
     protected List<Tile> lowerRow;
     protected List<Tile> leftColumn;
@@ -58,11 +56,12 @@ public abstract class AbstractLogic implements GameLogic {
     protected Tile cornerUpRight;
     protected Tile cornerDownLeft;
     protected Tile cornerDownRight;
+    protected boolean firstStep;
 
     @Override
     public void partition(int padding) {
         allTiles = getSquareFromGrid(grid, 0);
-        tiles = getSquareFromGrid(grid, padding);
+        innerTiles = getSquareFromGrid(grid, padding);
         leftColumn = getColumnFromGrid(grid, 0);
         rightColumn = getColumnFromGrid(grid, grid.getGridWidthByTiles() - 1);
         upperRow = getRowFromGrid(grid, 0);
@@ -108,7 +107,7 @@ public abstract class AbstractLogic implements GameLogic {
     @Override
     public void setValidSteps(Tile tile) {
         Coordinate coordinate = tile.getCoordinate();
-        if(coordinate != null && tile.gotChild() && ((Pawn)tile.getChild()).getPlayer() == actualPlayer) {
+        if(coordinate != null && tile.gotChild() && (((Pawn)tile.getChild()).getPlayer() == actualPlayer || firstStep)) {
             validSteps = getValidSteps(coordinate).stream()
                     .map(c -> tileMap.get(c))
                     .collect(Collectors.toList());
@@ -128,6 +127,7 @@ public abstract class AbstractLogic implements GameLogic {
 
     @Override
     public void setGrid(Grid grid) {
+        firstStep = true;
         this.grid = grid;
         this.tileMap = grid.getTiles();
     }

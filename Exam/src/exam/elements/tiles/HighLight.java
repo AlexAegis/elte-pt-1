@@ -27,6 +27,10 @@ public class HighLight extends JComponent implements ResizeableElement {
         setVisible(true);
     }
 
+    public HighLight(Dimension dimension) {
+        this((int) dimension.getWidth(), (int) dimension.getHeight());
+    }
+
     public Color[] getActualColors() {
         return actualColors;
     }

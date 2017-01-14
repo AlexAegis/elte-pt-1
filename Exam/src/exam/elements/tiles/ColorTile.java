@@ -36,6 +36,10 @@ public class ColorTile extends JComponent implements ResizeableElement {
         deactivate();
     }
 
+    public ColorTile(List<Color> colors, Dimension dimension) {
+        this(colors, (int) dimension.getWidth(), (int) dimension.getHeight());
+    }
+
     public boolean isActivated() {
         return isActivated;
     }

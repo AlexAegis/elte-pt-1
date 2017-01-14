@@ -23,7 +23,7 @@ import static exam.elements.panels.Menu.PLAYERINDICATOR;
 public class Grid extends JPanel implements Iterable<Tile>, ResizeableElement {
 
     private Map<Coordinate, Tile> tileMap;
-
+    private Dimension tileSize;
     private int gridWidthByPixels;
     private int gridHeightByPixels;
     private int gridWidthByTiles;
@@ -48,7 +48,7 @@ public class Grid extends JPanel implements Iterable<Tile>, ResizeableElement {
         gridHeightByPixels = Math.min(DEFAULT_WINDOW_WIDTH, DEFAULT_WINDOW_HEIGHT);
         tileHeightByPixels = gridHeightByPixels / gridHeightByTiles - vGap;
         tileWidthByPixels = gridWidthByPixels / gridWidthByTiles - hGap;
-
+        tileSize = new Dimension(tileWidthByPixels, tileHeightByPixels);
         setBackground(GAME_BG_COLOR);
 
         Color TILE_COLOR_A = GAME_BG_COLOR.brighter();
@@ -58,8 +58,7 @@ public class Grid extends JPanel implements Iterable<Tile>, ResizeableElement {
             for (int j = 0; j < fieldSize.getM(); j++) {
                 Coordinate coordinate = new Coordinate(i, j);
                 Tile tile = new Tile((i + j) % 2 == 0 ? TILE_COLOR_A : TILE_COLOR_B,
-                        tileWidthByPixels,
-                        tileHeightByPixels,
+                        getTileSize(),
                         coordinate);
                 tileMap.put(coordinate, tile);
             }
@@ -133,5 +132,9 @@ public class Grid extends JPanel implements Iterable<Tile>, ResizeableElement {
         this.tileWidthByPixels = gridWidthByPixels / gridWidthByTiles - hGap;
         revalidate();
         repaint();
+    }
+
+    public Dimension getTileSize() {
+        return tileSize;
     }
 }
