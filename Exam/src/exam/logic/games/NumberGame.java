@@ -20,10 +20,7 @@ public class NumberGame extends AbstractLogic {
     private boolean limited;
 
     public NumberGame() {
-        continuousHighLighting = true;
-        controller = new BasicMouseController(this);
-        setLimited(true);
-        setValidDirections(Directions.LEFT, Directions.RIGHT);
+
     }
 
     public void setLimited(boolean limited) {
@@ -32,6 +29,10 @@ public class NumberGame extends AbstractLogic {
 
     @Override
     public void initGame() {
+        continuousHighLighting = true;
+        controller = new BasicMouseController(this);
+        setLimited(true);
+        setValidDirections(Directions.LEFT, Directions.RIGHT);
         partition(0);
         tileMap.values().forEach(tile -> tile.setChild(new Number(
                 (int) (((Math.random() * 100) % (maxRng - minRng + 1)) + minRng),

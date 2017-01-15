@@ -21,13 +21,13 @@ import java.util.stream.Collectors;
 public class Dash extends AbstractLogic implements GameLogic {
 
     public Dash() {
-        continuousHighLighting = true;
-        controller = new PickupMouseController(this);
-        setValidDirections(Directions.UP, Directions.UPLEFT, Directions.UPRIGHT);
     }
 
     @Override
     public void initGame() {
+        continuousHighLighting = true;
+        controller = new PickupMouseController(this);
+        setValidDirections(Directions.UP, Directions.UPLEFT, Directions.UPRIGHT);
         partition(0);
         tileMap.entrySet().stream()
                 .filter(entry -> entry.getKey().getX() <= 1)

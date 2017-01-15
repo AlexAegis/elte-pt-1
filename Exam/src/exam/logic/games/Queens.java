@@ -2,6 +2,7 @@ package exam.logic.games;
 
 import exam.elements.tiles.HighLight;
 import exam.elements.tiles.Pawn;
+import exam.elements.tiles.PermamentHighLigth;
 import exam.elements.tiles.Tile;
 import exam.logic.abstraction.AbstractLogic;
 import exam.logic.abstraction.Coordinate;
@@ -12,6 +13,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.MouseMotionListener;
 import java.util.*;
+import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
@@ -26,19 +28,21 @@ public class Queens extends AbstractLogic {
     private boolean firstStep;
 
     public Queens() {
-        continuousHighLighting = true;
-        validDirections.add(Directions.UP);
-        validDirections.add(Directions.UPLEFT);
-        validDirections.add(Directions.LEFT);
-        validDirections.add(Directions.DOWNLEFT);
-        validDirections.add(Directions.DOWN);
-        validDirections.add(Directions.DOWNRIGHT);
-        validDirections.add(Directions.RIGHT);
-        validDirections.add(Directions.UPRIGHT);
+
     }
 
     @Override
     public void initGame() {
+        partition(0);
+        continuousHighLighting = true;
+        setValidDirections(Directions.UP,
+                Directions.UPLEFT,
+                Directions.LEFT,
+                Directions.DOWNLEFT,
+                Directions.DOWN,
+                Directions.DOWNRIGHT,
+                Directions.RIGHT,
+                Directions.UPRIGHT);
         firstStep = true;
         steps = new ArrayList<>();
         TIMER.restart();
@@ -77,37 +81,37 @@ public class Queens extends AbstractLogic {
                     from.setChild(pawn);
                     steps.add(pawn);
                     result = true;
-                    /*getValidSteps(getTileLocation((Tile) pawn.getParent())).stream()
-                            .map(coordinate -> tileMap.get(coordinate))
-                            .filter(tile -> Stream.of(tile.getComponents()).anyMatch(component -> !component.getClass().equals(HighLight.class)))
-                            .forEach(tile -> tile.add(new PermamentHighLigth(grid.getTileWidthByPixels(), grid.getTileHeightByPixels())));*/
                 }
-
-
-
+        /*visibleTiles().stream()
+                .filter(tile -> Arrays.stream(tile.getComponents()).noneMatch(component -> component.getClass().equals(PermamentHighLigth.class)))
+                .forEach(tile -> tile.add(new PermamentHighLigth(grid.getTileSize()).switchToWeak(), -1));*/
+        grid.revalidate();
+        grid.repaint();
         if (isGameWon()) {
             JOptionPane.showMessageDialog(null, "You won!!");
             JPanel gp = (JPanel) grid.getParent();
             gp.removeAll();
             gp.revalidate();
             gp.repaint();
-        }/* else if (isGameFailed()) {
-            JOptionPane.showMessageDialog(null, "Game Lost, No more steps!");
-            JPanel gp = (JPanel) grid.getParent();
-            gp.removeAll();
-            gp.revalidate();
-            gp.repaint();
-        }*/
+        }
         return result;
     }
 
-    public boolean isGameFailed() {
-        return getValidSteps(((Tile) actualPawn.getParent()).getCoordinate()).isEmpty();
+    public List<Tile> visibleTiles() {
+        return grid.getTiles()
+                .entrySet()
+                .stream()
+                .map(Map.Entry::getValue)
+                .filter(Tile::gotChild)
+                .flatMap(tile -> getValidSteps(tile.getCoordinate()).stream())
+                .distinct()
+                .map(coordinate -> tileMap.get(coordinate))
+                .collect(Collectors.toList());
     }
 
     @Override
     public boolean isGameWon() {
-        return steps.size() >= 8;
+        return visibleTiles().size() == grid.getGridHeightByTiles() * grid.getGridWidthByTiles();
     }
 
     @Override

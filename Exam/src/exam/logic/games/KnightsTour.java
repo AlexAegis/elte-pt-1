@@ -27,11 +27,12 @@ public class KnightsTour extends AbstractLogic {
     private boolean paused;
 
     public KnightsTour() {
-        continuousHighLighting = true;
+
     }
 
     @Override
     public void initGame() {
+        continuousHighLighting = true;
         TIMER.restart();
         paused = false;
         grid.removeMouseListener(controller);

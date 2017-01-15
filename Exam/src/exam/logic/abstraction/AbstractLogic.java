@@ -164,7 +164,7 @@ public abstract class AbstractLogic implements GameLogic {
     @Override
     public void clearValidSteps() {
         validSteps.stream().flatMap(valid -> Stream.of(valid.getComponents()))
-                .filter(component -> component instanceof HighLight)
+                .filter(component -> component.getClass().equals(HighLight.class))
                 .forEach(highLight -> highLight.getParent().remove(highLight));
         grid.revalidate();
         grid.repaint();

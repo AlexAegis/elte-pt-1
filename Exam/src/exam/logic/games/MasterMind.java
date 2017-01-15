@@ -33,12 +33,12 @@ public class MasterMind extends AbstractLogic {
     private int correctPositions;
 
     public MasterMind() {
-        continuousHighLighting = true;
-        controller = new BasicMouseController(this);
     }
 
     @Override
     public void initGame() {
+        continuousHighLighting = true;
+        controller = new BasicMouseController(this);
         partition(1);
         solution = new ArrayList<>();
         allColors = new ArrayList<>();
