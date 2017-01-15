@@ -83,4 +83,9 @@ public class HighLight extends JComponent implements ResizeableElement {
         revalidate();
         repaint();
     }
+
+    public HighLight takeOff() {
+        getParent().remove(this);
+        return this;
+    }
 }

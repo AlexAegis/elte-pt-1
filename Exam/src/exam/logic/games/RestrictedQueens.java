@@ -1,76 +1,66 @@
 package exam.logic.games;
 
-import exam.elements.tiles.HighLight;
-import exam.elements.tiles.Pawn;
-import exam.elements.tiles.Tile;
-import exam.logic.abstraction.AbstractLogic;
+import exam.elements.tiles.*;
 import exam.logic.abstraction.Coordinate;
 import exam.logic.abstraction.Directions;
-import exam.logic.controllers.BasicMouseController;
+import exam.utilities.MatrixTools;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.MouseMotionListener;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
+import java.util.Map;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 import static exam.config.Config.HIGHLIGHTING;
 import static exam.elements.panels.Menu.BACKBUTTON;
-import static exam.elements.panels.Menu.PAUSEBUTTON;
-import static exam.elements.panels.Menu.TIMER;
 
-public class Queens extends AbstractLogic {
+public class RestrictedQueens extends Queens {
 
-    protected java.util.List<Pawn> steps;
-    protected boolean firstStep;
-
-    public Queens() {
-        continuousHighLighting = true;
-        setValidDirections(Directions.UP,
-                Directions.UPLEFT,
-                Directions.LEFT,
-                Directions.DOWNLEFT,
-                Directions.DOWN,
-                Directions.DOWNRIGHT,
-                Directions.RIGHT,
-                Directions.UPRIGHT);
+    private int activeColumn;
+    public RestrictedQueens() {
+        super();
+        activeColumn = 1;
     }
 
     @Override
     public void initGame() {
-        partition(0);
-        continuousHighLighting = true;
-        setValidDirections(Directions.UP,
-                Directions.UPLEFT,
-                Directions.LEFT,
-                Directions.DOWNLEFT,
-                Directions.DOWN,
-                Directions.DOWNRIGHT,
-                Directions.RIGHT,
-                Directions.UPRIGHT);
-        firstStep = true;
-        steps = new ArrayList<>();
-        TIMER.restart();
-        grid.removeMouseListener(controller);
-        grid.removeMouseMotionListener((MouseMotionListener) controller);
-        controller = new BasicMouseController(this);
-        grid.addMouseListener(controller);
-        grid.addMouseMotionListener((MouseMotionListener) controller);
+        super.initGame();
+        activeColumn = 1;
+        activateColumn(activeColumn);
         Arrays.stream(BACKBUTTON.getActionListeners()).forEach(actionListener -> BACKBUTTON.removeActionListener(actionListener));
-        Arrays.stream(PAUSEBUTTON.getActionListeners()).forEach(actionListener -> BACKBUTTON.removeActionListener(actionListener));
-        PAUSEBUTTON.reset();
-        PAUSEBUTTON.setActualGrid(grid);
         BACKBUTTON.addActionListener(e -> {
             if(!steps.isEmpty()) {
                 Tile prevTile = ((Tile) steps.get(steps.size() - 1).getParent());
                 steps.remove(steps.size() - 1);
                 prevTile.removeChild();
+                deactivateColumn(activeColumn);
+                if(activeColumn > 0) {
+                    activeColumn--;
+                    activateColumn(activeColumn);
+                }
             }
             grid.revalidate();
             grid.repaint();
         });
+    }
+
+    private void activateColumn(int i) {
+        MatrixTools.getColumnFromMatrix(innerTiles, i - 1).forEach(tile -> tile.add(new PermamentHighLigth(grid.getTileSize()).switchToBase()));
+        grid.revalidate();
+        grid.repaint();
+    }
+
+    private void deactivateColumn(int i) {
+        MatrixTools.getColumnFromMatrix(innerTiles, i - 1)
+                .forEach(tile -> Arrays.stream(tile.getComponents())
+                        .filter(component -> component.getClass().equals(PermamentHighLigth.class))
+                        .map(component -> (PermamentHighLigth) component)
+                        .forEach(HighLight::takeOff));
+        grid.revalidate();
+        grid.repaint();
     }
 
     @Override
@@ -81,21 +71,30 @@ public class Queens extends AbstractLogic {
                 .flatMap(tile -> Stream.of(tile.getComponents()))
                 .filter(component -> component.getClass().equals(HighLight.class))
                 .map(component -> (HighLight)component)
-                .noneMatch(highLight -> highLight.getActualColors().equals(HighLight.warmColors))) {
+                .noneMatch(highLight -> highLight.getActualColors().equals(HighLight.warmColors))
+                && MatrixTools.getColumnFromMatrix(innerTiles, activeColumn - 1).contains(from)) {
                     Pawn pawn = new Pawn(Color.black, -1, grid.getTileSize());
                     pawn.promote();
                     setActualPawn(pawn);
                     from.setChild(pawn);
                     steps.add(pawn);
                     result = true;
+                    deactivateColumn(activeColumn);
+                    if(activeColumn < grid.getGridWidthByTiles()) {
+                        activeColumn++;
+                        activateColumn(activeColumn);
+                    }
                 }
-        /*visibleTiles().stream()
-                .filter(tile -> Arrays.stream(tile.getComponents()).noneMatch(component -> component.getClass().equals(PermamentHighLigth.class)))
-                .forEach(tile -> tile.add(new PermamentHighLigth(grid.getTileSize()).switchToWeak(), -1));*/
         grid.revalidate();
         grid.repaint();
         if (isGameWon()) {
-            JOptionPane.showMessageDialog(null, "You won!!");
+            JOptionPane.showMessageDialog(null, "You won!");
+            JPanel gp = (JPanel) grid.getParent();
+            gp.removeAll();
+            gp.revalidate();
+            gp.repaint();
+        } else if(isGameLost()) {
+            JOptionPane.showMessageDialog(null, "You have lost.");
             JPanel gp = (JPanel) grid.getParent();
             gp.removeAll();
             gp.revalidate();
@@ -104,21 +103,18 @@ public class Queens extends AbstractLogic {
         return result;
     }
 
-    protected List<Tile> visibleTiles() {
+    @Override
+    public boolean isGameWon() {
         return grid.getTiles()
                 .entrySet()
                 .stream()
                 .map(Map.Entry::getValue)
                 .filter(Tile::gotChild)
-                .flatMap(tile -> getValidSteps(tile.getCoordinate()).stream())
-                .distinct()
-                .map(coordinate -> tileMap.get(coordinate))
-                .collect(Collectors.toList());
+                .collect(Collectors.toList()).size() == Math.min(grid.getGridWidthByTiles(), grid.getGridHeightByPixels());
     }
 
-    @Override
-    public boolean isGameWon() {
-        return visibleTiles().size() == grid.getGridHeightByTiles() * grid.getGridWidthByTiles();
+    private boolean isGameLost() {
+        return super.isGameWon();
     }
 
     @Override
@@ -143,8 +139,8 @@ public class Queens extends AbstractLogic {
     }
 
     @Override
-    public java.util.List<Coordinate> getValidSteps(Coordinate coordinate) {
-        java.util.List<Coordinate> coordinates = new ArrayList<>();
+    public List<Coordinate> getValidSteps(Coordinate coordinate) {
+        List<Coordinate> coordinates = new ArrayList<>();
         coordinates.add(coordinate);
         for(Directions direction : validDirections) {
             Coordinate current = coordinate.stepInDirection(direction);
@@ -158,6 +154,6 @@ public class Queens extends AbstractLogic {
 
     @Override
     public String toString() {
-        return "Queens";
+        return "Restricted Queens";
     }
 }

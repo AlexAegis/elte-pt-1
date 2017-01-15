@@ -12,4 +12,5 @@ public class PermamentHighLigth extends HighLight {
     public PermamentHighLigth(Dimension dimension) {
         this((int) dimension.getWidth(), (int) dimension.getHeight());
     }
+
 }
