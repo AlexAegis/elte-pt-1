@@ -24,7 +24,6 @@ public class GameModeSelector extends JComboBox<GameModes> {
                     setDifficultyVisibility(false);
                     setHintButtonVisibility(false);
                     setBackVisibility(false);
-                    setPauseVisibility(false);
                     break;
                 case DASH:
                     //To Show
@@ -34,7 +33,6 @@ public class GameModeSelector extends JComboBox<GameModes> {
                     setModifierVisibility(false);
                     setRngVisibility(false);
                     setBackVisibility(false);
-                    setPauseVisibility(false);
                     break;
                 case MASTERMIND:
                     // To show
@@ -46,7 +44,6 @@ public class GameModeSelector extends JComboBox<GameModes> {
                     setModifierVisibility(false);
                     setRngVisibility(false);
                     setBackVisibility(false);
-                    setPauseVisibility(false);
                     break;
                 case RUBIKTABLE:
                     //To Show

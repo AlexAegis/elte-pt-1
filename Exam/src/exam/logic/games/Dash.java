@@ -17,10 +17,14 @@ import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
+import static exam.elements.panels.Menu.PAUSEBUTTON;
+
 public class Dash extends AbstractLogic implements GameLogic {
 
     public Dash() {
-
+        continuousHighLighting = true;
+        setValidDirections(Directions.UP, Directions.UPLEFT, Directions.UPRIGHT);
+        controller = new PickupMouseController(this);
     }
 
     @Override
@@ -29,6 +33,8 @@ public class Dash extends AbstractLogic implements GameLogic {
         controller = new PickupMouseController(this);
         setValidDirections(Directions.UP, Directions.UPLEFT, Directions.UPRIGHT);
         partition(0);
+        PAUSEBUTTON.reset();
+        PAUSEBUTTON.setActualGrid(grid);
         tileMap.entrySet().stream()
                 .filter(entry -> entry.getKey().getX() <= 1)
                 .map(Map.Entry::getValue)

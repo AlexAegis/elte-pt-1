@@ -27,7 +27,7 @@ public class KnightsTour extends AbstractLogic {
     private boolean paused;
 
     public KnightsTour() {
-
+        controller = new BasicMouseController(this);
     }
 
     @Override

@@ -11,7 +11,7 @@ public class SizeSelector extends JComboBox<FieldSizes> {
 
     public SizeSelector() {
         Arrays.stream(FieldSizes.values()).forEach(this::addItem);
-        setSelectedIndex(0);
+        setSelectedIndex(4);
         addActionListener(e -> {
             switch ((FieldSizes) getSelectedItem()) {
                 case CUSTOM:

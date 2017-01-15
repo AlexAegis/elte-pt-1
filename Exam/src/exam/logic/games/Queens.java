@@ -27,7 +27,15 @@ public class Queens extends AbstractLogic {
     private boolean firstStep;
 
     public Queens() {
-
+        continuousHighLighting = true;
+        setValidDirections(Directions.UP,
+                Directions.UPLEFT,
+                Directions.LEFT,
+                Directions.DOWNLEFT,
+                Directions.DOWN,
+                Directions.DOWNRIGHT,
+                Directions.RIGHT,
+                Directions.UPRIGHT);
     }
 
     @Override

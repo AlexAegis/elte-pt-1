@@ -17,6 +17,7 @@ import static exam.config.Utilities.getColumnsFromGrid;
 import static exam.config.Utilities.transpose;
 import static exam.elements.panels.Menu.DIFFSELECTOR;
 import static exam.elements.panels.Menu.HINTBUTTON;
+import static exam.elements.panels.Menu.PAUSEBUTTON;
 
 public class MasterMind extends AbstractLogic {
 
@@ -31,7 +32,8 @@ public class MasterMind extends AbstractLogic {
     private int correctPositions;
 
     public MasterMind() {
-
+        continuousHighLighting = true;
+        controller = new BasicMouseController(this);
     }
 
     @Override
@@ -53,6 +55,8 @@ public class MasterMind extends AbstractLogic {
         allColors.add(Color.green);
         allColors.add(Color.white);
         allColors.add(Color.black);
+        PAUSEBUTTON.reset();
+        PAUSEBUTTON.setActualGrid(grid);
         if(DIFFSELECTOR.getText().chars().allMatch(Character::isDigit)
                 && Integer.parseInt(DIFFSELECTOR.getText()) > 0
                 && Integer.parseInt(DIFFSELECTOR.getText()) < 7) {

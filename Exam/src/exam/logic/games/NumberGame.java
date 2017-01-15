@@ -15,6 +15,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 import static exam.config.Config.HIGHLIGHTING;
+import static exam.elements.panels.Menu.PAUSEBUTTON;
 
 public class NumberGame extends AbstractLogic {
 
@@ -35,6 +36,8 @@ public class NumberGame extends AbstractLogic {
         controller = new BasicMouseController(this);
         setLimited(true);
         partition(0);
+        PAUSEBUTTON.reset();
+        PAUSEBUTTON.setActualGrid(grid);
         tileMap.values().forEach(tile -> tile.setChild(new Number(
                 (int) (((Math.random() * 100) % (maxRng - minRng + 1)) + minRng),
                 grid.getTileSize())));
