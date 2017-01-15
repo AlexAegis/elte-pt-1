@@ -1,6 +1,5 @@
 package exam.logic.games;
 
-import exam.utilities.GridTools;
 import exam.elements.tiles.*;
 import exam.logic.abstraction.AbstractLogic;
 import exam.logic.abstraction.Coordinate;
