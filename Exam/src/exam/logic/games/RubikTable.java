@@ -39,6 +39,7 @@ public class RubikTable extends AbstractLogic {
     @Override
     public void initGame() {
         history = new ArrayList<>();
+        Arrays.stream(BACKBUTTON.getActionListeners()).forEach(actionListener -> BACKBUTTON.removeActionListener(actionListener));
         partition(1);
         upperButtons.forEach(tile -> tile.setChild(new Rotator(Directions.DOWN, grid.getTileSize())));
         lowerButtons.forEach(tile -> tile.setChild(new Rotator(Directions.UP, grid.getTileSize())));

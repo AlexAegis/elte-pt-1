@@ -1,5 +1,6 @@
 package exam.logic.games;
 
+import exam.elements.panels.Menu;
 import exam.elements.tiles.Pawn;
 import exam.logic.abstraction.AbstractLogic;
 import exam.logic.abstraction.Coordinate;
@@ -20,15 +21,19 @@ public class NumberGame extends AbstractLogic {
     private boolean limited;
 
     public NumberGame() {
-
+        setValidDirections(Directions.LEFT, Directions.RIGHT);
+        controller = new BasicMouseController(this);
     }
 
     @Override
     public void initGame() {
+        setValidDirections(Directions.LEFT, Directions.RIGHT);
+        if(Menu.CHECKBOXPANEL.getSelectedDirections().size() > 0) {
+            validDirections = Menu.CHECKBOXPANEL.getSelectedDirections();
+        }
         continuousHighLighting = true;
         controller = new BasicMouseController(this);
         setLimited(true);
-        setValidDirections(Directions.LEFT, Directions.RIGHT);
         partition(0);
         tileMap.values().forEach(tile -> tile.setChild(new Number(
                 (int) (((Math.random() * 100) % (maxRng - minRng + 1)) + minRng),
