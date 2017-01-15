@@ -9,15 +9,17 @@ import exam.logic.controllers.BasicMouseController;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.MouseEvent;
 import java.util.*;
 import java.util.List;
 import java.util.stream.Collectors;
 
 import static exam.config.Config.HIGHLIGHTING;
+import static exam.elements.panels.Menu.BACKBUTTON;
 import static exam.elements.panels.Menu.DIFFSELECTOR;
 
 public class RubikTable extends AbstractLogic {
-
+    private List<Rotator> history;
     private List<Color> allColors;
     private List<Color> colors;
     int diff;
@@ -36,6 +38,7 @@ public class RubikTable extends AbstractLogic {
 
     @Override
     public void initGame() {
+        history = new ArrayList<>();
         partition(1);
         upperButtons.forEach(tile -> tile.setChild(new Rotator(Directions.DOWN, grid.getTileSize())));
         lowerButtons.forEach(tile -> tile.setChild(new Rotator(Directions.UP, grid.getTileSize())));
@@ -64,6 +67,31 @@ public class RubikTable extends AbstractLogic {
         for (List<Tile> row : innerTiles) {
             rotateChild(row, (int) (Math.random() * row.size()));
         }
+
+        BACKBUTTON.addActionListener(e -> {
+            if(!history.isEmpty()) {
+                Rotator rotator = history.get(history.size() - 1);
+                history.remove(history.size() - 1);
+                if(rotator.getDirection().equals(Directions.DOWN)) {
+                    Rotator rotator1 = ((Rotator)lowerButtons.get(getTileLocation((Tile)rotator.getParent()).getY() - 1).getChild());
+                    rotator1.mouseClicked(new MouseEvent(rotator1, 1, 1, 1, 1, 1, 1, false));
+                } else if(rotator.getDirection().equals(Directions.UP)) {
+                    Rotator rotator1 = ((Rotator)upperButtons.get(getTileLocation((Tile)rotator.getParent()).getY() - 1).getChild());
+                    rotator1.mouseClicked(new MouseEvent(rotator1, 1, 1, 1, 1, 1, 1, false));
+                } else if(rotator.getDirection().equals(Directions.LEFT)) {
+                    Rotator rotator1 = ((Rotator)leftButtons.get(getTileLocation((Tile)rotator.getParent()).getX() - 1).getChild());
+                    rotator1.mouseClicked(new MouseEvent(rotator1, 1, 1, 1, 1, 1, 1, false));
+                } else if(rotator.getDirection().equals(Directions.RIGHT)) {
+                    Rotator rotator1 = ((Rotator)rightButtons.get(getTileLocation((Tile)rotator.getParent()).getX() - 1).getChild());
+                    rotator1.mouseClicked(new MouseEvent(rotator1, 1, 1, 1, 1, 1, 1, false));
+                }
+                history.remove(history.size() - 1);
+            }
+            grid.revalidate();
+            grid.repaint();
+        });
+
+
         grid.revalidate();
         grid.repaint();
     }
@@ -89,6 +117,7 @@ public class RubikTable extends AbstractLogic {
                     break;
             }
             result = true;
+            history.add((Rotator) from.getChild());
         }
         grid.revalidate();
         grid.repaint();
