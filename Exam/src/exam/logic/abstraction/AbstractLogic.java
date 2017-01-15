@@ -1,5 +1,6 @@
 package exam.logic.abstraction;
 
+
 import exam.elements.labels.PlayerIndicator;
 import exam.elements.panels.Grid;
 import exam.elements.tiles.HighLight;
@@ -69,9 +70,9 @@ public abstract class AbstractLogic implements GameLogic {
         upperButtons = upperRow.subList(padding, upperRow.size() - padding);
         lowerButtons = lowerRow.subList(padding, lowerRow.size() - padding);
         cornerUpLeft = upperRow.get(0);
-        cornerUpRight = upperRow.get(upperButtons.size() - 1);
+        cornerUpRight = upperRow.get(upperRow.size() - 1);
         cornerDownLeft = lowerRow.get(0);
-        cornerDownRight = lowerRow.get(lowerButtons.size() - 1);
+        cornerDownRight = lowerRow.get(lowerRow.size() - 1);
     }
 
     @Override

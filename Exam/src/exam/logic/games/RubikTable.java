@@ -45,6 +45,10 @@ public class RubikTable extends AbstractLogic {
         lowerButtons.forEach(tile -> tile.setChild(new Rotator(Directions.UP, grid.getTileSize())));
         leftButtons.forEach(tile -> tile.setChild(new Rotator(Directions.RIGHT, grid.getTileSize())));
         rightButtons.forEach(tile -> tile.setChild(new Rotator(Directions.LEFT, grid.getTileSize())));
+        cornerDownLeft.setChild(new ColorTile(Color.white, grid.getTileSize()));
+        cornerDownRight.setChild(new ColorTile(Color.white, grid.getTileSize()));
+        cornerUpLeft.setChild(new ColorTile(Color.white, grid.getTileSize()));
+        cornerUpRight.setChild(new ColorTile(Color.white, grid.getTileSize()));
         final int[] i = {0};
         if(DIFFSELECTOR.getText().chars().allMatch(Character::isDigit)
                 && Integer.parseInt(DIFFSELECTOR.getText()) >= 2
