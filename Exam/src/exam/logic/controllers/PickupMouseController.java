@@ -57,7 +57,6 @@ public class PickupMouseController implements MouseListener, MouseMotionListener
             game.add(gameLogic.getActualPawn(), JLayeredPane.DRAG_LAYER);
             game.add(shadow, JLayeredPane.DRAG_LAYER);
             game.setCursor(Cursor.getPredefinedCursor(Cursor.MOVE_CURSOR));
-            //((Tile)pawn.getParent()).removeChild();
         } catch (ClassCastException ignored) {
         }
     }
@@ -84,13 +83,11 @@ public class PickupMouseController implements MouseListener, MouseMotionListener
     @Override
     public void mouseReleased(MouseEvent e) {
         game.setCursor(null);
-
         if (gameLogic.getActualPawn() == null) {
             gameLogic.clearValidSteps();
             gameLogic.clearActualPawn();
             return;
         }
-
         gameLogic.getActualPawn().setVisible(false);
         game.remove(gameLogic.getActualPawn());
         game.remove(shadow);

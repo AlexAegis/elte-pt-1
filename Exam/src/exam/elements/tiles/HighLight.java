@@ -17,6 +17,7 @@ public class HighLight extends JComponent implements ResizeableElement {
     private Color[] actualColors;
 
     public HighLight() {
+
     }
 
     public HighLight(int width, int height) {
@@ -82,5 +83,4 @@ public class HighLight extends JComponent implements ResizeableElement {
         revalidate();
         repaint();
     }
-
 }

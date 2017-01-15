@@ -4,6 +4,7 @@ import javax.swing.*;
 import java.awt.*;
 
 public final class StepCounterLabel extends JLabel {
+
     private static int stepCount = 0;
 
     public StepCounterLabel() {

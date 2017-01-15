@@ -72,7 +72,6 @@ public class Pawn extends JComponent implements ResizeableElement {
         return this;
     }
 
-
     @Override
     public String toString() {
         return (player == 1) ? "Red" : "Blue";

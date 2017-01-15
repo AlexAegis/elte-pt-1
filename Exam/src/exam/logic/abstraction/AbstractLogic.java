@@ -1,6 +1,5 @@
 package exam.logic.abstraction;
 
-
 import exam.elements.labels.PlayerIndicator;
 import exam.elements.panels.Grid;
 import exam.elements.tiles.HighLight;
@@ -22,7 +21,6 @@ import static exam.config.Config.HIGHLIGHTING;
 import static exam.config.Utilities.getColumnFromGrid;
 import static exam.config.Utilities.getRowFromGrid;
 import static exam.config.Utilities.getSquareFromGrid;
-
 
 public abstract class AbstractLogic implements GameLogic {
 

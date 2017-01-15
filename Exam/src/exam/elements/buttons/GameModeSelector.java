@@ -89,6 +89,7 @@ public class GameModeSelector extends JComboBox<GameModes> {
         HINTLABEL.setVisible(value);
         HINTBUTTON.setVisible(value);
     }
+
     private void setDifficultyVisibility(boolean value) {
         DIFFLABEL.setVisible(value);
         DIFFSELECTOR.setVisible(value);

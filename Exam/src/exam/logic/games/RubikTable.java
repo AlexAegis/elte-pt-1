@@ -67,7 +67,6 @@ public class RubikTable extends AbstractLogic {
         for (List<Tile> row : innerTiles) {
             rotateChild(row, (int) (Math.random() * row.size()));
         }
-
         BACKBUTTON.addActionListener(e -> {
             if(!history.isEmpty()) {
                 Rotator rotator = history.get(history.size() - 1);
@@ -90,8 +89,6 @@ public class RubikTable extends AbstractLogic {
             grid.revalidate();
             grid.repaint();
         });
-
-
         grid.revalidate();
         grid.repaint();
     }
@@ -133,8 +130,6 @@ public class RubikTable extends AbstractLogic {
             gp.revalidate();
             gp.repaint();
         }
-
-
         return result;
     }
 
@@ -167,7 +162,6 @@ public class RubikTable extends AbstractLogic {
         return result;
     }
 
-
     public boolean isColumnWon() {
         boolean result = true;
         for (List<Tile> row : Utilities.transpose(innerTiles)) {
@@ -187,13 +181,11 @@ public class RubikTable extends AbstractLogic {
         }
         if(HIGHLIGHTING) {
             validSteps.forEach(validStep -> {
-
                 validStep.add(new HighLight(grid.getTileSize()).switchToWeak(), 0);
-
                 validStep.revalidate();
                 validStep.repaint();
             });
-            }
+        }
     }
 
     @Override

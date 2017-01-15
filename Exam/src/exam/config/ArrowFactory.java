@@ -45,7 +45,6 @@ public final class ArrowFactory {
         return createRightArrow(width, height, thickness, padding);
     }
 
-
     public Polygon createDownArrow(int width, int height, int thickness, int padding) {
         Polygon downArrow = new Polygon();
         downArrow.addPoint((width / 2) - thickness, padding);

@@ -2,7 +2,6 @@ package exam.logic.games;
 
 import exam.elements.tiles.HighLight;
 import exam.elements.tiles.Pawn;
-import exam.elements.tiles.PermamentHighLigth;
 import exam.elements.tiles.Tile;
 import exam.logic.abstraction.AbstractLogic;
 import exam.logic.abstraction.Coordinate;
@@ -97,7 +96,7 @@ public class Queens extends AbstractLogic {
         return result;
     }
 
-    public List<Tile> visibleTiles() {
+    private List<Tile> visibleTiles() {
         return grid.getTiles()
                 .entrySet()
                 .stream()

@@ -1,4 +1,5 @@
 package exam.elements.panels;
+
 import exam.config.GameModes;
 import exam.config.ResizeableElement;
 import exam.config.Utilities;
@@ -119,6 +120,7 @@ public class Grid extends JPanel implements Iterable<Tile>, ResizeableElement {
     public Iterator<Tile> rowIterator() {
         return new ContinuousMatrixRowIterator<>(Utilities.getRowsFromGrid(this, 0, this.getGridHeightByTiles() -1));
     }
+
     public Iterator<Tile> columnIterator() {
         return new ContinuousMatrixColumnIterator<>(Utilities.getRowsFromGrid(this, 0, this.getGridHeightByTiles() -1));
     }

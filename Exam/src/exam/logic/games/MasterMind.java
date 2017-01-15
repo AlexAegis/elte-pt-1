@@ -13,7 +13,6 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 import static exam.config.Config.HIGHLIGHTING;
-import static exam.config.Utilities.getColumnFromGrid;
 import static exam.config.Utilities.getColumnsFromGrid;
 import static exam.config.Utilities.transpose;
 import static exam.elements.panels.Menu.DIFFSELECTOR;
@@ -28,11 +27,11 @@ public class MasterMind extends AbstractLogic {
 
     private int difficulty;
     private int actualRow;
-
     private int correctColors;
     private int correctPositions;
 
     public MasterMind() {
+
     }
 
     @Override
@@ -46,20 +45,14 @@ public class MasterMind extends AbstractLogic {
         actualRow = 0;
         correctColors = 0;
         correctPositions = 0;
-        for (ActionListener actionListener : HINTBUTTON.getActionListeners()) {
-            HINTBUTTON.removeActionListener(actionListener);
-        }
-
+        Arrays.stream(HINTBUTTON.getActionListeners()).forEach(actionListener -> HINTBUTTON.removeActionListener(actionListener));
         tiles = transpose(getColumnsFromGrid(grid, 0, grid.getGridWidthByTiles() - 2));
-
-
         allColors.add(Color.red);
         allColors.add(Color.blue);
         allColors.add(Color.yellow);
         allColors.add(Color.green);
         allColors.add(Color.white);
         allColors.add(Color.black);
-
         if(DIFFSELECTOR.getText().chars().allMatch(Character::isDigit)
                 && Integer.parseInt(DIFFSELECTOR.getText()) > 0
                 && Integer.parseInt(DIFFSELECTOR.getText()) < 7) {
@@ -68,12 +61,10 @@ public class MasterMind extends AbstractLogic {
             difficulty = allColors.size();
         }
         colors = allColors.subList(0, difficulty);
-
         solution = new ArrayList<>();
         for (int i = 0; i < grid.getGridWidthByTiles() - 1; i++) {
             solution.add(colors.get(new Random().nextInt(colors.size())));
         }
-
         rightColumn.forEach(tile -> tile.setChild(new StatusTile(grid.getTileSize())));
         tiles.forEach(row -> row.forEach(tile -> {
             tile.setChild(new ColorTile(colors, grid.getTileSize()));
@@ -108,7 +99,6 @@ public class MasterMind extends AbstractLogic {
                     HINTBUTTON.removeActionListener(actionListener);
                 }
             }
-
             deactivateRow(actualRow);
             actualRow++;
             activateRow(actualRow);
@@ -126,7 +116,7 @@ public class MasterMind extends AbstractLogic {
         });
     }
 
-    public void activateRow(int actualRow) {
+    private void activateRow(int actualRow) {
         getRow(tiles, actualRow).stream().map(tile -> ((ColorTile)tile.getChild())).forEach(ColorTile::activate);
         grid.revalidate();
         grid.repaint();

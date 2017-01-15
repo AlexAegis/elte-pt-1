@@ -23,10 +23,6 @@ public class NumberGame extends AbstractLogic {
 
     }
 
-    public void setLimited(boolean limited) {
-        this.limited = limited;
-    }
-
     @Override
     public void initGame() {
         continuousHighLighting = true;
@@ -37,6 +33,10 @@ public class NumberGame extends AbstractLogic {
         tileMap.values().forEach(tile -> tile.setChild(new Number(
                 (int) (((Math.random() * 100) % (maxRng - minRng + 1)) + minRng),
                 grid.getTileSize())));
+    }
+
+    private void setLimited(boolean limited) {
+        this.limited = limited;
     }
 
     @Override

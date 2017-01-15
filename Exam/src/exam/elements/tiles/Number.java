@@ -22,7 +22,6 @@ public final class Number extends JComponent implements ResizeableElement {
         this(value, (int) dimension.getWidth(), (int) dimension.getHeight());
     }
 
-
     public int getValue() {
         return value;
     }

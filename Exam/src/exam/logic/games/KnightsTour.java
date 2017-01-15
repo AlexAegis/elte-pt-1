@@ -111,7 +111,7 @@ public class KnightsTour extends AbstractLogic {
         return result;
     }
 
-    public boolean isGameFailed() {
+    private boolean isGameFailed() {
         return !firstStep && getValidSteps(((Tile) actualPawn.getParent()).getCoordinate()).isEmpty();
     }
 
