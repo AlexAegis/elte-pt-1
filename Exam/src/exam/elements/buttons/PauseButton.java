@@ -1,5 +1,6 @@
 package exam.elements.buttons;
 
+import exam.Main;
 import exam.elements.panels.Grid;
 
 import javax.swing.*;
@@ -15,6 +16,7 @@ public class PauseButton extends JButton {
         setText("Pause");
         setVisible(true);
         addActionListener(e -> {
+            Main.GAME_WINDOW.requestFocus();
             if(actualGrid != null) {
                 if(paused) {
                     actualGrid.setVisible(true);

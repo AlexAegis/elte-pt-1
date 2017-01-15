@@ -9,6 +9,7 @@ import javax.swing.*;
 import java.awt.*;
 
 import static exam.Main.GAME_WINDOW;
+import static exam.Window.KEYBOARDCONTROLLER;
 import static exam.config.Config.DEFAULT_MAX_RNG;
 import static exam.config.Config.DEFAULT_MIN_RNG;
 import static exam.config.Config.DEFAULT_MODIFIER_VALUE;
@@ -20,6 +21,7 @@ public class PlayButton extends JButton {
         setText("Play");
         setPreferredSize(new Dimension(80, 40));
         addActionListener(e -> {
+            KEYBOARDCONTROLLER.disable();
             int min = DEFAULT_MIN_RNG;
             int max = DEFAULT_MAX_RNG;
             int mod = DEFAULT_MODIFIER_VALUE;

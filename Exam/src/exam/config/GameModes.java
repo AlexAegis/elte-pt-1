@@ -4,6 +4,7 @@ import exam.logic.games.*;
 import exam.logic.abstraction.GameLogic;
 
 public enum GameModes {
+    MINETOUR(new MineTour()),
     RESTRICTEDQUEENS(new RestrictedQueens()),
     RUBIKTABLE(new RubikTable()),
     QUEENS(new Queens()),

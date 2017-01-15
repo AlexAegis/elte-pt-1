@@ -35,6 +35,8 @@ public class Grid extends JPanel implements Iterable<Tile>, ResizeableElement {
     private int vGap = 0;
 
     public Grid(FieldSizes fieldSize, GameModes gameMode, int minRng, int maxRng, int mod, List<Directions> directions) {
+        setFocusable(true);
+        requestFocusInWindow();
         tileMap = new TreeMap<>();
         setBounds(0,0, Math.min(DEFAULT_WINDOW_WIDTH, DEFAULT_WINDOW_HEIGHT), Math.min(DEFAULT_WINDOW_WIDTH, DEFAULT_WINDOW_HEIGHT));
         GridLayout gridLayout = new GridLayout(fieldSize.getN(), fieldSize.getM(), hGap, vGap);

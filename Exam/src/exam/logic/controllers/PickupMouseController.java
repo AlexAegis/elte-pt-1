@@ -34,7 +34,12 @@ public class PickupMouseController implements MouseListener, MouseMotionListener
     public void mousePressed(MouseEvent e) {
         game = (JLayeredPane) ((Grid) e.getSource()).getParent().getParent();
         try {
-            Pawn pawn = (Pawn) ((Grid) e.getSource()).findComponentAt(e.getX(), e.getY());
+            Pawn pawn;
+            try {
+                pawn = (Pawn) ((Grid) e.getSource()).findComponentAt(e.getX(), e.getY());
+            } catch (ClassCastException ignored) {
+                pawn = (Pawn) ((Grid) e.getSource()).findComponentAt(e.getX(), e.getY()).getParent();
+            }
             if (!gameLogic.currentPlayersPawn(pawn)) {
                 return;
             }
@@ -90,7 +95,9 @@ public class PickupMouseController implements MouseListener, MouseMotionListener
         }
         gameLogic.getActualPawn().setVisible(false);
         game.remove(gameLogic.getActualPawn());
-        game.remove(shadow);
+        if(shadow != null) {
+            game.remove(shadow);
+        }
         gameLogic.getActualPawn().setVisible(true);
 
         int xMax = game.getWidth() - gameLogic.getActualPawn().getWidth();
@@ -131,7 +138,9 @@ public class PickupMouseController implements MouseListener, MouseMotionListener
         iy = Math.min(iy, yMax);
         iy = Math.max(iy, 0);
         gameLogic.getActualPawn().setLocation(ix, iy);
-        shadow.setLocation(ix + shadowDistance, iy + shadowDistance);
+        if(shadow != null) {
+            shadow.setLocation(ix + shadowDistance, iy + shadowDistance);
+        }
         //game.repaint(); //INFO can be disabled for better performance
     }
 }

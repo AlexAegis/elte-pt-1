@@ -45,6 +45,18 @@ public class GameModeSelector extends JComboBox<GameModes> {
                     setRngVisibility(false);
                     setBackVisibility(false);
                     break;
+                case MINETOUR:
+                    //To Show
+                    setBackVisibility(true);
+                    setPauseVisibility(true);
+                    setDifficultyVisibility(true);
+                    //To Hide
+                    setIndicatorVisibility(false);
+                    setHintButtonVisibility(false);
+                    setDirectionSelectorVisibility(false);
+                    setModifierVisibility(false);
+                    setRngVisibility(false);
+                    break;
                 case RUBIKTABLE:
                     //To Show
                     setBackVisibility(true);

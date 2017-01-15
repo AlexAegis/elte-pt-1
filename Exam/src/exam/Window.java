@@ -2,6 +2,7 @@ package exam;
 
 import exam.config.ResizeableElement;
 import exam.elements.panels.ContentPane;
+import exam.logic.controllers.KeyBoardController;
 import exam.utilities.MiscTools;
 
 import javax.swing.*;
@@ -14,6 +15,8 @@ import static exam.config.Config.*;
 
 public final class Window extends JFrame implements ComponentListener {
 
+    public static KeyBoardController KEYBOARDCONTROLLER = new KeyBoardController();
+
     Window(String title) {
         setTitle(title);
         setSize(DEFAULT_WINDOW_WIDTH + 16, DEFAULT_WINDOW_HEIGHT);
@@ -23,6 +26,10 @@ public final class Window extends JFrame implements ComponentListener {
         setContentPane(new ContentPane());
         setVisible(true);
         addComponentListener(this);
+        addKeyListener(KEYBOARDCONTROLLER);
+        this.getRootPane().setFocusable(true);
+        this.getRootPane().requestFocus();
+        requestFocus();
     }
 
     @Override
@@ -40,6 +47,7 @@ public final class Window extends JFrame implements ComponentListener {
         MiscTools.findComponents(this, ResizeableElement.class).forEach(ResizeableElement::onResize);
         revalidate();
         repaint();
+        requestFocus();
     }
 
     @Override
