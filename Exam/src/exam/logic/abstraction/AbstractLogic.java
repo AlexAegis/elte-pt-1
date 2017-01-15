@@ -105,6 +105,11 @@ public abstract class AbstractLogic implements GameLogic {
     }
 
     @Override
+    public Grid getGrid() {
+        return grid;
+    }
+
+    @Override
     public void setValidSteps(Tile tile) {
         Coordinate coordinate = tile.getCoordinate();
         if(coordinate != null && tile.gotChild() && (((Pawn)tile.getChild()).getPlayer() == actualPlayer || firstStep)) {

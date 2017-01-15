@@ -60,7 +60,9 @@ public class MasterMind extends AbstractLogic {
         allColors.add(Color.white);
         allColors.add(Color.black);
 
-        if(DIFFSELECTOR.getText().chars().allMatch(Character::isDigit)) {
+        if(DIFFSELECTOR.getText().chars().allMatch(Character::isDigit)
+                && Integer.parseInt(DIFFSELECTOR.getText()) > 0
+                && Integer.parseInt(DIFFSELECTOR.getText()) < 7) {
             difficulty = Integer.parseInt(DIFFSELECTOR.getText());
         } else {
             difficulty = allColors.size();
@@ -102,6 +104,9 @@ public class MasterMind extends AbstractLogic {
                 gp.removeAll();
                 gp.revalidate();
                 gp.repaint();
+                for (ActionListener actionListener : HINTBUTTON.getActionListeners()) {
+                    HINTBUTTON.removeActionListener(actionListener);
+                }
             }
 
             deactivateRow(actualRow);
@@ -113,6 +118,9 @@ public class MasterMind extends AbstractLogic {
                 gp.removeAll();
                 gp.revalidate();
                 gp.repaint();
+                for (ActionListener actionListener : HINTBUTTON.getActionListeners()) {
+                    HINTBUTTON.removeActionListener(actionListener);
+                }
             }
 
         });

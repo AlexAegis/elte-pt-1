@@ -25,6 +25,14 @@ public abstract class Utilities {
         return result;
     }
 
+    public static <T> List<T> reverse(List<T> list) {
+        List<T> result = new ArrayList<T>(list);
+        for (int i = 0; i < list.size(); i++) {
+            result.set(result.size() - i - 1, list.get(i));
+        }
+        return result;
+    }
+
     public static List<List<Tile>> getSquareFromGrid(Grid grid, int skippedLines) {
         List<List<Tile>> result = new ArrayList<>();
         if(skippedLines < 0 || skippedLines >= Math.min(grid.getGridHeightByTiles(), grid.getGridWidthByTiles())) throw new IndexOutOfBoundsException();

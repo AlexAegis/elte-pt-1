@@ -5,10 +5,8 @@ import exam.config.ResizeableElement;
 import javax.swing.*;
 
 import java.awt.*;
-import java.util.ArrayList;
-import java.util.Collections;
+import java.util.*;
 import java.util.List;
-import java.util.Random;
 
 import static exam.config.Config.ANTI_ALIASING;
 
@@ -32,7 +30,7 @@ public class ColorTile extends JComponent implements ResizeableElement {
         Collections.rotate(this.colors, new Random().nextInt(this.colors.size()));
         displayColor = this.colors.get(0);
         actualColor = this.colors.get(0);
-        deactivatedColor = actualColor.darker().darker().darker().darker();
+        deactivatedColor = actualColor.darker();
         deactivate();
     }
 
@@ -40,22 +38,28 @@ public class ColorTile extends JComponent implements ResizeableElement {
         this(colors, (int) dimension.getWidth(), (int) dimension.getHeight());
     }
 
+    public ColorTile(Color singleColor, Dimension dimension) {
+        this(Collections.singletonList(singleColor), dimension);
+    }
+
     public boolean isActivated() {
         return isActivated;
     }
 
-    public void activate() {
+    public ColorTile activate() {
         displayColor = actualColor;
         revalidate();
         repaint();
         isActivated = true;
+        return this;
     }
 
-    public void deactivate() {
-        displayColor = actualColor.darker().darker().darker().darker();
+    public ColorTile deactivate() {
+        displayColor = actualColor.darker();
         revalidate();
         repaint();
         isActivated = false;
+        return this;
     }
 
     public void nextColor() {

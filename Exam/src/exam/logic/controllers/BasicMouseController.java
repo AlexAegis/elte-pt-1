@@ -19,7 +19,6 @@ public class BasicMouseController implements MouseListener, MouseMotionListener 
 
     @Override
     public void mousePressed(MouseEvent e) {
-
     }
 
     @Override
@@ -28,8 +27,14 @@ public class BasicMouseController implements MouseListener, MouseMotionListener 
             if(gameLogic.evaluateStep((Tile) e.getComponent().getComponentAt(e.getX(), e.getY()), (Tile) e.getComponent().getComponentAt(e.getX(), e.getY()))) {
                 STEPCOUNTER.increase();
             }
-        } catch (ClassCastException ignored) {}
-
+        } catch (ClassCastException ignored) {
+            try {
+                if(gameLogic.evaluateStep((Tile) e.getComponent().getComponentAt(e.getX(), e.getY()).getParent(), (Tile) e.getComponent().getComponentAt(e.getX(), e.getY()).getParent())) {
+                    STEPCOUNTER.increase();
+                }
+            } catch (ClassCastException ignored1) {
+            }
+        }
     }
 
     @Override
@@ -38,8 +43,15 @@ public class BasicMouseController implements MouseListener, MouseMotionListener 
             gameLogic.clearValidSteps();
             try {
                 gameLogic.setValidSteps((Tile) e.getComponent().getComponentAt(e.getX(), e.getY()));
-            } catch (ClassCastException ignored) {}
+            } catch (ClassCastException ignored) {
+                try {
+                    gameLogic.setValidSteps((Tile) e.getComponent().getComponentAt(e.getX(), e.getY()).getParent());
+                } catch (ClassCastException ignored1) {
+                }
+            }
         }
+        gameLogic.getGrid().revalidate();
+        gameLogic.getGrid().repaint();
     }
 
     @Override

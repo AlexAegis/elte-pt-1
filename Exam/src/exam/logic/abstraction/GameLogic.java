@@ -67,4 +67,6 @@ public interface GameLogic {
     MouseMotionListener getMouseMotionListener();
 
     void highlight();
+
+    Grid getGrid();
 }

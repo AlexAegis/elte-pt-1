@@ -8,10 +8,12 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.awt.event.MouseMotionListener;
+import java.util.Arrays;
 
 import static exam.config.Config.ANTI_ALIASING;
 
-public class Rotator extends JComponent implements ResizeableElement, MouseListener {
+public class Rotator extends JComponent implements ResizeableElement, MouseListener, MouseMotionListener {
 
     private Timer timer;
     private Directions direction;
@@ -22,7 +24,9 @@ public class Rotator extends JComponent implements ResizeableElement, MouseListe
     private int deltaY = 0;
 
     private Color backGroundColor = new Color(255,255,255,255);
-    private Color directionColor = new Color(0,0,0,255);
+    private Color arrowColor = new Color(0,0,0,255);
+    private Color hoverColor = new Color(64, 67, 62, 197);
+    private Color actualColor = new Color(0,0,0,255);
 
 
     public Rotator(Directions direction, int width, int height) {
@@ -30,6 +34,7 @@ public class Rotator extends JComponent implements ResizeableElement, MouseListe
         this.width = width;
         this.height = height;
         addMouseListener(this);
+        addMouseMotionListener(this);
     }
 
     public Rotator(Directions direction, Dimension dimension) {
@@ -48,9 +53,9 @@ public class Rotator extends JComponent implements ResizeableElement, MouseListe
         ((Graphics2D) g).setPaint(backGroundColor);
         if(ANTI_ALIASING) ((Graphics2D) g).setRenderingHint(RenderingHints.KEY_ANTIALIASING,
                 RenderingHints.VALUE_ANTIALIAS_ON);
-        g.fillRect(0, 0, height, width);
+        g.fillRect(0, 0, width, height);
         g.setFont(new Font(Font.SANS_SERIF, Font.BOLD, (int) (Math.min(height, width) * 0.2)));
-        ((Graphics2D) g).setPaint(directionColor);
+        ((Graphics2D) g).setPaint(actualColor);
         switch (direction) {
             case UP:
                 Polygon up = ArrowFactory.getFactory().createUpArrow(width, height);
@@ -116,20 +121,19 @@ public class Rotator extends JComponent implements ResizeableElement, MouseListe
     @Override
     public void onResize() {
         setSize(getParent().getSize());
-        width = getParent().getWidth();
-        height = getParent().getHeight();
+        width = getParent().getHeight();
+        height = getParent().getWidth();
         revalidate();
         repaint();
     }
 
     @Override
-    public void mouseClicked(MouseEvent e) {
-
+    public void mouseClicked(MouseEvent e) { //passthrough
+        Arrays.stream(getParent().getParent().getMouseListeners()).forEach(listener -> listener.mouseClicked(e));
     }
 
     @Override
     public void mousePressed(MouseEvent e) {
-
     }
 
     @Override
@@ -139,9 +143,10 @@ public class Rotator extends JComponent implements ResizeableElement, MouseListe
 
     @Override
     public void mouseEntered(MouseEvent e) {
+        actualColor = hoverColor;
         final int[] dir = {1};
         timer = new Timer(40, a -> {
-            if(deltaX > width / 4
+            if (deltaX > width / 4
                     || deltaX < 0 - width / 4
                     || deltaY > height / 4
                     || deltaY < 0 - height / 4) {
@@ -164,10 +169,25 @@ public class Rotator extends JComponent implements ResizeableElement, MouseListe
 
     @Override
     public void mouseExited(MouseEvent e) {
+        actualColor = arrowColor;
         timer.stop();
         deltaX = 0;
         deltaY = 0;
         revalidate();
         repaint();
+    }
+
+    public Directions getDirection() {
+        return direction;
+    }
+
+    @Override
+    public void mouseDragged(MouseEvent e) {
+
+    }
+
+    @Override
+    public void mouseMoved(MouseEvent e) {
+        Arrays.stream(getParent().getParent().getMouseMotionListeners()).forEach(listener -> listener.mouseMoved(e));
     }
 }

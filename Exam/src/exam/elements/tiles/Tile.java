@@ -13,14 +13,15 @@ import static exam.config.Config.DEBUG_MODE;
 
 public class Tile extends JComponent implements ResizeableElement {
 
-    private int width;
-    private int height;
-    private Coordinate coordinate;
-    private Component child;
-    private Color[] colors;
-    private float[] dist;
+    protected int width;
+    protected int height;
+    protected Coordinate coordinate;
+    protected Component child;
+    protected Color[] colors;
+    protected float[] dist = new float[]{0.08f, 1f};
 
     public Tile() {
+
     }
 
     public Tile(Color color, int width, int height) {
@@ -28,7 +29,6 @@ public class Tile extends JComponent implements ResizeableElement {
         this.width = width;
         setLayout(new BorderLayout());
         colors = new Color[]{color, new Color(255,255,255,200)};
-        dist = new float[]{0.08f, 1f};
         setPreferredSize(new Dimension(width, height));
         EventQueue.invokeLater(this::onResize);
         setVisible(true);

@@ -10,6 +10,7 @@ public class HighLight extends JComponent implements ResizeableElement {
     private int height;
 
     public static Color[] baseColors = {new Color(255, 255, 255, 180), new Color(255, 255, 255, 120)};
+    public static Color[] weakColors = {new Color(239, 239, 239, 115), new Color(238, 238, 238, 54)};
     public static Color[] warmColors = {new Color(255, 71, 25, 180), new Color(255, 47, 0, 120)};
     public static Color[] coldColors = {new Color(40, 170, 255, 180), new Color(25, 72, 255, 120)};
     public static Color[] naturalColors = {new Color(99, 255, 125, 180), new Color(0, 255, 30, 120)};
@@ -19,8 +20,8 @@ public class HighLight extends JComponent implements ResizeableElement {
     }
 
     public HighLight(int width, int height) {
-        this.width = width;
-        this.height = height;
+        this.width = height;
+        this.height = width ;
         setLayout(new BorderLayout());
         switchToBase();
         switchToNatural(); // Delete to resume base
@@ -37,6 +38,11 @@ public class HighLight extends JComponent implements ResizeableElement {
 
     public HighLight switchToCold() {
         actualColors = coldColors;
+        return this;
+    }
+
+    public HighLight switchToWeak() {
+        actualColors = weakColors;
         return this;
     }
 
@@ -64,14 +70,15 @@ public class HighLight extends JComponent implements ResizeableElement {
         g.setPaint(new RadialGradientPaint(width / 2, height / 2, width * 2, dist, actualColors));
         g.fillRect(0,0, height, width);
         g.setColor(new Color(0, 0, 0, 5));
-        g.fillRect(width / 20 , height/ 20, width -  height / 10, height - width / 10);
+        g.fillRect(width / 20 , height/ 20, height -  width / 10, width - height / 10);
     }
 
     @Override
     public void onResize() {
         setSize(getParent().getSize());
-        width = getParent().getWidth();
-        height = getParent().getHeight();
+        width = getParent().getHeight();
+        height = getParent().getWidth();
+        setPreferredSize(getParent().getSize());
         revalidate();
         repaint();
     }

@@ -121,9 +121,9 @@ public class Queens extends AbstractLogic {
         if (HIGHLIGHTING) {
             validSteps.forEach(validStep -> {
                 if(validStep.gotChild()) {
-                    validStep.add(new HighLight(grid.getTileHeightByPixels(), grid.getTileWidthByPixels()).switchToWarm());
+                    validStep.add(new HighLight(grid.getTileSize()).switchToWarm());
                 } else {
-                    validStep.add(new HighLight(grid.getTileHeightByPixels(), grid.getTileWidthByPixels()));
+                    validStep.add(new HighLight(grid.getTileSize()));
                 }
                 validStep.revalidate();
                 validStep.repaint();

@@ -14,6 +14,9 @@ public class Test {
         row1.add("1");
         row1.add("2");
         row1.add("3");
+
+        row1.forEach(System.out::print);
+        Utilities.reverse(row1).forEach(System.out::print);/*
         List<String> row2 = new ArrayList<>();
         row2.add("4");
         row2.add("5");
@@ -53,6 +56,6 @@ public class Test {
         ContinuousMatrixRowIterator iterator = new ContinuousMatrixRowIterator(matrix);
         while (iterator.hasNext()) {
             System.out.println(iterator.next().toString() + ", ");
-        }
+        }*/
     }
 }
