@@ -40,7 +40,9 @@ public class PickupMouseController implements MouseListener, MouseMotionListener
             } catch (ClassCastException ignored) {
                 pawn = (Pawn) ((Grid) e.getSource()).findComponentAt(e.getX(), e.getY()).getParent();
             }
+            System.out.println(pawn);
             if (!gameLogic.currentPlayersPawn(pawn)) {
+                System.out.println("NOT");
                 return;
             }
             shadow = new Pawn(new Color(0, 0, 0, 26), 1, pawn.getWidth(), pawn.getHeight());
@@ -51,7 +53,6 @@ public class PickupMouseController implements MouseListener, MouseMotionListener
             gameLogic.setActualPawn(pawn);
 
             original = pawn.getParent();
-
             Point parentLocation = pawn.getParent().getLocation();
             x = parentLocation.x - e.getX();
             y = parentLocation.y - e.getY();
