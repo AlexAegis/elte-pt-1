@@ -2,6 +2,7 @@ package exam;
 
 import exam.config.ResizeableElement;
 import exam.elements.panels.ContentPane;
+import exam.utilities.MiscTools;
 
 import javax.swing.*;
 
@@ -10,7 +11,6 @@ import java.awt.event.ComponentEvent;
 import java.awt.event.ComponentListener;
 
 import static exam.config.Config.*;
-import static exam.config.Utilities.findComponents;
 
 public final class Window extends JFrame implements ComponentListener {
 
@@ -37,7 +37,7 @@ public final class Window extends JFrame implements ComponentListener {
     public void componentResized(ComponentEvent e) {
         DEFAULT_WINDOW_WIDTH = getWidth() - 16;
         DEFAULT_WINDOW_HEIGHT = getHeight() - 32;
-        findComponents(this, ResizeableElement.class).forEach(ResizeableElement::onResize);
+        MiscTools.findComponents(this, ResizeableElement.class).forEach(ResizeableElement::onResize);
         revalidate();
         repaint();
     }

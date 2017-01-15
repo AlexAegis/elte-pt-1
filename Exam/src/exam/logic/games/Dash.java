@@ -1,6 +1,6 @@
 package exam.logic.games;
 
-import exam.config.Utilities;
+import exam.utilities.GridTools;
 import exam.elements.tiles.HighLight;
 import exam.elements.tiles.Pawn;
 import exam.elements.tiles.Tile;
@@ -11,7 +11,6 @@ import exam.logic.abstraction.GameLogic;
 import exam.logic.controllers.PickupMouseController;
 
 import javax.swing.*;
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
@@ -98,10 +97,10 @@ public class Dash extends AbstractLogic implements GameLogic {
 
     @Override
     public boolean isGameWon() {
-        return Utilities.getRowFromGrid(grid, grid.getGridHeightByTiles() - 1).stream()
+        return GridTools.getRowFromGrid(grid, grid.getGridHeightByTiles() - 1).stream()
                 .anyMatch(tile -> tile.getComponents().length > 0
                         && tile.getComponent(0) instanceof Pawn && ((Pawn) tile.getComponent(0)).getPlayer() == -1)
-                || Utilities.getRowFromGrid(grid, 0)
+                || GridTools.getRowFromGrid(grid, 0)
                     .stream()
                     .anyMatch(tile -> tile.getComponents().length > 0
                             && tile.getComponent(0) instanceof Pawn

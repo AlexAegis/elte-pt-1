@@ -1,11 +1,12 @@
 package exam.logic.games;
 
-import exam.config.Utilities;
+import exam.utilities.GridTools;
 import exam.elements.tiles.*;
 import exam.logic.abstraction.AbstractLogic;
 import exam.logic.abstraction.Coordinate;
 import exam.logic.abstraction.Directions;
 import exam.logic.controllers.BasicMouseController;
+import exam.utilities.MatrixTools;
 
 import javax.swing.*;
 import java.awt.*;
@@ -18,6 +19,10 @@ import static exam.config.Config.HIGHLIGHTING;
 import static exam.elements.panels.Menu.BACKBUTTON;
 import static exam.elements.panels.Menu.DIFFSELECTOR;
 import static exam.elements.panels.Menu.PAUSEBUTTON;
+import static exam.utilities.MatrixTools.getColumnFromMatrix;
+import static exam.utilities.MatrixTools.getRowFromMatrix;
+import static exam.utilities.MatrixTools.transpose;
+import static exam.utilities.TileTools.rotateChild;
 
 public class RubikTable extends AbstractLogic {
     private List<Rotator> history;
@@ -67,7 +72,7 @@ public class RubikTable extends AbstractLogic {
             i[0]++;
             row.forEach(tile -> tile.setChild(new ColorTile(rowColor, grid.getTileSize()).activate()));
         });
-        for (List<Tile> column : Utilities.transpose(innerTiles)) {
+        for (List<Tile> column : transpose(innerTiles)) {
             rotateChild(column, (int) (Math.random() * column.size()));
         }
         for (List<Tile> row : innerTiles) {
@@ -107,16 +112,16 @@ public class RubikTable extends AbstractLogic {
         if(from.getChild() instanceof Rotator) {
             switch(((Rotator) from.getChild()).getDirection()) {
                 case DOWN:
-                    rotateChild(Utilities.getColumnFromMatrix(innerTiles, from.getCoordinate().getY() - 1));
+                    rotateChild(getColumnFromMatrix(innerTiles, from.getCoordinate().getY() - 1));
                     break;
                 case UP:
-                    rotateChild(Utilities.reverse(Utilities.getColumnFromMatrix(innerTiles, from.getCoordinate().getY() - 1)));
+                    rotateChild(MatrixTools.reverse(getColumnFromMatrix(innerTiles, from.getCoordinate().getY() - 1)));
                     break;
                 case RIGHT:
-                    rotateChild(Utilities.getRowFromMatrix(innerTiles, from.getCoordinate().getX() - 1));
+                    rotateChild(getRowFromMatrix(innerTiles, from.getCoordinate().getX() - 1));
                     break;
                 case LEFT:
-                    rotateChild(Utilities.reverse(Utilities.getRowFromMatrix(innerTiles, from.getCoordinate().getX() - 1)));
+                    rotateChild(MatrixTools.reverse(getRowFromMatrix(innerTiles, from.getCoordinate().getX() - 1)));
                     break;
                 default:
                     break;
@@ -141,21 +146,6 @@ public class RubikTable extends AbstractLogic {
         return result;
     }
 
-    private void rotateChild(List<Tile> tiles) {
-        Component current = tiles.get(tiles.size() - 1).removeChild();
-        for (Tile tile : tiles) {
-            Component temp = current;
-            if (tile.gotChild()) current = tile.removeChild();
-            tile.setChild(temp);
-        }
-    }
-
-    private void rotateChild(List<Tile> tiles, int times) {
-        for (int i = 0; i < times; i++) {
-            rotateChild(tiles);
-        }
-    }
-
     @Override
     public boolean isGameWon() {
         return isRowWon() || isColumnWon();
@@ -172,7 +162,7 @@ public class RubikTable extends AbstractLogic {
 
     public boolean isColumnWon() {
         boolean result = true;
-        for (List<Tile> row : Utilities.transpose(innerTiles)) {
+        for (List<Tile> row : transpose(innerTiles)) {
             Color rowColor = ((ColorTile)row.get(0).getChild()).getActualColor();
             result &= row.stream().map(tile -> ((ColorTile)tile.getChild())).allMatch(colorTile -> colorTile.getActualColor().equals(rowColor));
         }
@@ -202,16 +192,16 @@ public class RubikTable extends AbstractLogic {
         if (tileMap.get(coordinate).gotChild() && tileMap.get(coordinate).getChild() instanceof Rotator) {
             switch(((Rotator) tileMap.get(coordinate).getChild()).getDirection()) {
                 case DOWN:
-                    coordinates = Utilities.getColumnFromMatrix(innerTiles, coordinate.getY() - 1).stream().map(Tile::getCoordinate).collect(Collectors.toList());
+                    coordinates = getColumnFromMatrix(innerTiles, coordinate.getY() - 1).stream().map(Tile::getCoordinate).collect(Collectors.toList());
                     break;
                 case UP:
-                    coordinates = Utilities.reverse(Utilities.getColumnFromMatrix(innerTiles, coordinate.getY() - 1)).stream().map(Tile::getCoordinate).collect(Collectors.toList());
+                    coordinates = MatrixTools.reverse(getColumnFromMatrix(innerTiles, coordinate.getY() - 1)).stream().map(Tile::getCoordinate).collect(Collectors.toList());
                     break;
                 case RIGHT:
-                    coordinates = Utilities.getRowFromMatrix(innerTiles, coordinate.getX() - 1).stream().map(Tile::getCoordinate).collect(Collectors.toList());
+                    coordinates = getRowFromMatrix(innerTiles, coordinate.getX() - 1).stream().map(Tile::getCoordinate).collect(Collectors.toList());
                     break;
                 case LEFT:
-                    coordinates = Utilities.reverse(Utilities.getRowFromMatrix(innerTiles, coordinate.getX() - 1)).stream().map(Tile::getCoordinate).collect(Collectors.toList());
+                    coordinates = MatrixTools.reverse(getRowFromMatrix(innerTiles, coordinate.getX() - 1)).stream().map(Tile::getCoordinate).collect(Collectors.toList());
                     break;
                 default:
                     break;

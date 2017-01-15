@@ -2,7 +2,7 @@ package exam.elements.panels;
 
 import exam.config.GameModes;
 import exam.config.ResizeableElement;
-import exam.config.Utilities;
+import exam.utilities.GridTools;
 import exam.logic.controllers.PickupMouseController;
 import exam.config.FieldSizes;
 import exam.logic.abstraction.Coordinate;
@@ -118,11 +118,11 @@ public class Grid extends JPanel implements Iterable<Tile>, ResizeableElement {
     }
 
     public Iterator<Tile> rowIterator() {
-        return new ContinuousMatrixRowIterator<>(Utilities.getRowsFromGrid(this, 0, this.getGridHeightByTiles() -1));
+        return new ContinuousMatrixRowIterator<>(GridTools.getRowsFromGrid(this, 0, this.getGridHeightByTiles() -1));
     }
 
     public Iterator<Tile> columnIterator() {
-        return new ContinuousMatrixColumnIterator<>(Utilities.getRowsFromGrid(this, 0, this.getGridHeightByTiles() -1));
+        return new ContinuousMatrixColumnIterator<>(GridTools.getRowsFromGrid(this, 0, this.getGridHeightByTiles() -1));
     }
 
     @Override

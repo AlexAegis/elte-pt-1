@@ -18,8 +18,8 @@ public final class Config {
     public static final int DEFAULT_CUSTOM_M = 5;
     public static final int DEFAULT_MODIFIER_VALUE = -1;
     public static final boolean HIGHLIGHTING = true;
-    //public static final Color GAME_BG_COLOR = new Color(89, 104, 126, 255);
-    public static final Color GAME_BG_COLOR = new Color(163, 167, 165, 255);
+    //    public static final Color GAME_BG_COLOR = new Color(163, 167, 165, 255);
+    public static final Color GAME_BG_COLOR = new Color(165, 165, 165, 255);
     public static final Color MENU_BG_COLOR = GAME_BG_COLOR.brighter();
     public static final int DEFAULT_STARTING_PLAYER = -1; // 1 or -1, 0 is inactive
     public static final String DEFAULT_DIFFICULTY = "4";

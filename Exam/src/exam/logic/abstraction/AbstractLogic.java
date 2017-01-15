@@ -19,9 +19,9 @@ import java.util.stream.Stream;
 
 import static exam.config.Config.DEFAULT_STARTING_PLAYER;
 import static exam.config.Config.HIGHLIGHTING;
-import static exam.config.Utilities.getColumnFromGrid;
-import static exam.config.Utilities.getRowFromGrid;
-import static exam.config.Utilities.getSquareFromGrid;
+import static exam.utilities.GridTools.getColumnFromGrid;
+import static exam.utilities.GridTools.getRowFromGrid;
+import static exam.utilities.GridTools.getSquareFromGrid;
 
 public abstract class AbstractLogic implements GameLogic {
 

@@ -4,6 +4,7 @@ import exam.elements.tiles.*;
 import exam.logic.abstraction.AbstractLogic;
 import exam.logic.abstraction.Coordinate;
 import exam.logic.controllers.BasicMouseController;
+import exam.utilities.MatrixTools;
 
 import javax.swing.*;
 import java.awt.*;
@@ -13,8 +14,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 import static exam.config.Config.HIGHLIGHTING;
-import static exam.config.Utilities.getColumnsFromGrid;
-import static exam.config.Utilities.transpose;
+import static exam.utilities.GridTools.getColumnsFromGrid;
 import static exam.elements.panels.Menu.DIFFSELECTOR;
 import static exam.elements.panels.Menu.HINTBUTTON;
 import static exam.elements.panels.Menu.PAUSEBUTTON;
@@ -48,7 +48,7 @@ public class MasterMind extends AbstractLogic {
         correctColors = 0;
         correctPositions = 0;
         Arrays.stream(HINTBUTTON.getActionListeners()).forEach(actionListener -> HINTBUTTON.removeActionListener(actionListener));
-        tiles = transpose(getColumnsFromGrid(grid, 0, grid.getGridWidthByTiles() - 2));
+        tiles = MatrixTools.transpose(getColumnsFromGrid(grid, 0, grid.getGridWidthByTiles() - 2));
         allColors.add(Color.red);
         allColors.add(Color.blue);
         allColors.add(Color.yellow);
@@ -75,7 +75,7 @@ public class MasterMind extends AbstractLogic {
         }));
         activateRow(actualRow);
         HINTBUTTON.addActionListener(e -> {
-            tiles = transpose(getColumnsFromGrid(grid, 0, grid.getGridWidthByTiles() - 2));
+            tiles = MatrixTools.transpose(getColumnsFromGrid(grid, 0, grid.getGridWidthByTiles() - 2));
             List<Color> rowColors = getRow(tiles, actualRow)
                     .stream()
                     .map(tile -> ((ColorTile) tile.getChild()).getActualColor())
