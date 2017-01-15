@@ -17,6 +17,7 @@ import java.util.stream.Collectors;
 import static exam.config.Config.HIGHLIGHTING;
 import static exam.elements.panels.Menu.BACKBUTTON;
 import static exam.elements.panels.Menu.DIFFSELECTOR;
+import static exam.elements.panels.Menu.PAUSEBUTTON;
 
 public class RubikTable extends AbstractLogic {
     private List<Rotator> history;
@@ -72,6 +73,8 @@ public class RubikTable extends AbstractLogic {
         for (List<Tile> row : innerTiles) {
             rotateChild(row, (int) (Math.random() * row.size()));
         }
+        PAUSEBUTTON.reset();
+        PAUSEBUTTON.setActualGrid(grid);
         BACKBUTTON.addActionListener(e -> {
             if(!history.isEmpty()) {
                 Rotator rotator = history.get(history.size() - 1);
