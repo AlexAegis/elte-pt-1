@@ -4,6 +4,7 @@ import exam.logic.games.*;
 import exam.logic.abstraction.GameLogic;
 
 public enum GameModes {
+    TASK(new Task()),
     SNAKE(new Snake()),
     MINETOUR(new MineTour()),
     RESTRICTEDQUEENS(new RestrictedQueens()),

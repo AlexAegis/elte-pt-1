@@ -1,6 +1,7 @@
 package exam.logic.games;
 
 import exam.Main;
+import exam.elements.tiles.CirclePawn;
 import exam.elements.tiles.HighLight;
 import exam.elements.tiles.Pawn;
 import exam.elements.tiles.Tile;
@@ -8,7 +9,6 @@ import exam.logic.abstraction.AbstractLogic;
 import exam.logic.abstraction.Coordinate;
 import exam.logic.abstraction.Directions;
 import exam.logic.controllers.PickupMouseController;
-import org.w3c.dom.Comment;
 
 import javax.swing.*;
 import java.awt.*;
@@ -63,7 +63,7 @@ public class MineTour extends AbstractLogic { // DEFAULT PLAYER IS ALWAYS -1
             difficulty = Integer.parseInt(DIFFSELECTOR.getText());
         }
 
-        Pawn pawn = new Pawn(Color.black, -1, grid.getTileSize());
+        Pawn pawn = new CirclePawn(new Color(255, 156, 89,255), -1, grid.getTileSize());
         innerTiles.get(0).get(0).setChild(pawn);
         setActualPawn(pawn);
         for (int i = 0; i < difficulty; i++) {

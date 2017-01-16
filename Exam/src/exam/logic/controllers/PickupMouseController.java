@@ -1,6 +1,7 @@
 package exam.logic.controllers;
 
 import exam.elements.panels.Grid;
+import exam.elements.tiles.CirclePawn;
 import exam.elements.tiles.Pawn;
 import exam.logic.abstraction.GameLogic;
 import exam.elements.tiles.Tile;
@@ -43,7 +44,11 @@ public class PickupMouseController implements MouseListener, MouseMotionListener
             if (!gameLogic.currentPlayersPawn(pawn)) {
                 return;
             }
-            shadow = new Pawn(new Color(0, 0, 0, 26), 1, pawn.getWidth(), pawn.getHeight());
+            if(pawn instanceof CirclePawn) {
+                shadow = new CirclePawn(new Color(0, 0, 0, 26), 1, pawn.getWidth(), pawn.getHeight());
+            } else {
+                shadow = new Pawn(new Color(0, 0, 0, 26), 1, pawn.getWidth(), pawn.getHeight());
+            }
 
             gameLogic.clearValidSteps();
             gameLogic.setValidSteps((Tile) pawn.getParent());

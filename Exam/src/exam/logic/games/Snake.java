@@ -76,7 +76,7 @@ public class Snake extends AbstractLogic {
         PAUSEBUTTON.setActualGrid(grid);
 
         head = new CirclePawn(snakeColor, -1, grid.getTileSize());
-        headPosition = tileMap.get(new Coordinate(5, 5));
+        headPosition = tileMap.get(new Coordinate(4, 4));
         headPosition.setChild(head);
         setActualPawn(head);
 

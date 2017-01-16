@@ -69,6 +69,30 @@ public class GameModeSelector extends JComboBox<GameModes> {
                     setModifierVisibility(false);
                     setRngVisibility(false);
                     break;
+                case SNAKE:
+                    //To Show
+                    setPauseVisibility(true);
+                    //To Hide
+                    setBackVisibility(false);
+                    setIndicatorVisibility(false);
+                    setDifficultyVisibility(false);
+                    setHintButtonVisibility(false);
+                    setDirectionSelectorVisibility(false);
+                    setModifierVisibility(false);
+                    setRngVisibility(false);
+                    break;
+                case TASK:
+                    //To Show
+                    setBackVisibility(true);
+                    setPauseVisibility(true);
+                    //To Hide
+                    setIndicatorVisibility(false);
+                    setDifficultyVisibility(false);
+                    setHintButtonVisibility(false);
+                    setDirectionSelectorVisibility(false);
+                    setModifierVisibility(false);
+                    setRngVisibility(false);
+                    break;
                 default:
                     //To Show
                     setBackVisibility(true);

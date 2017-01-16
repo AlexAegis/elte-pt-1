@@ -10,9 +10,9 @@ public class CirclePawn extends Pawn{
         this.player = player;
         this.padding = ((width + height) / 2) / 16;
         setLayout(new BorderLayout());
-        colors = new Color[]{color, new Color(255,255,255,200)};
+        colors = new Color[]{color, color.brighter()};
         dist = new float[]{0.2f, 1f};
-        paint = new RadialGradientPaint(width / 2, height / 2,width, dist, colors);
+        paint = new RadialGradientPaint(width / 2, height / 2,width / 2, dist, colors);
         setPreferredSize(new Dimension(width, height));
         setVisible(true);
     }
@@ -29,6 +29,6 @@ public class CirclePawn extends Pawn{
                 RenderingHints.VALUE_ANTIALIAS_ON);
         paint = new RadialGradientPaint(width / 2, height / 2,width, dist, colors);
         g.setPaint(paint);
-        g.fillOval(padding, padding, height - padding, width - padding);
+        g.fillOval(padding, padding, width - padding, height - padding);
     }
 }
