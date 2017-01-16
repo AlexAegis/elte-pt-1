@@ -59,7 +59,7 @@ public class Snake extends AbstractLogic {
         });
         timer.start();
 
-        snakeColor = new Color(0,255, 89,255);
+        snakeColor = new Color(49, 218, 75,255);
         fruit = new ColorTile(Color.red, grid.getTileSize()).activate();
         tileMap.get(new Coordinate(2, 2)).setChild(fruit);
         body = new ArrayList<>();
