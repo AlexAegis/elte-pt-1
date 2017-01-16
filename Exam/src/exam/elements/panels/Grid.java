@@ -2,6 +2,7 @@ package exam.elements.panels;
 
 import exam.config.GameModes;
 import exam.config.ResizeableElement;
+import exam.logic.abstraction.GameLogic;
 import exam.utilities.GridTools;
 import exam.logic.controllers.PickupMouseController;
 import exam.config.FieldSizes;
@@ -31,6 +32,7 @@ public class Grid extends JPanel implements Iterable<Tile>, ResizeableElement {
     private int gridHeightByTiles;
     private int tileWidthByPixels;
     private int tileHeightByPixels;
+    private GameLogic gameLogic;
     private int hGap = 0;
     private int vGap = 0;
 
@@ -41,8 +43,7 @@ public class Grid extends JPanel implements Iterable<Tile>, ResizeableElement {
         setBounds(0,0, Math.min(DEFAULT_WINDOW_WIDTH, DEFAULT_WINDOW_HEIGHT), Math.min(DEFAULT_WINDOW_WIDTH, DEFAULT_WINDOW_HEIGHT));
         GridLayout gridLayout = new GridLayout(fieldSize.getN(), fieldSize.getM(), hGap, vGap);
         setLayout(gridLayout);
-        PickupMouseController pickupMouseController = new PickupMouseController(gameMode.getLogic());
-
+        gameLogic = gameMode.getLogic();
         addMouseListener(gameMode.getLogic().getMouseListener());
         addMouseMotionListener(gameMode.getLogic().getMouseMotionListener());
         gridHeightByTiles = fieldSize.getN();
@@ -54,7 +55,7 @@ public class Grid extends JPanel implements Iterable<Tile>, ResizeableElement {
         tileSize = new Dimension(tileWidthByPixels, tileHeightByPixels);
         setBackground(GAME_BG_COLOR);
 
-        Color TILE_COLOR_A = GAME_BG_COLOR.brighter();
+        Color TILE_COLOR_A = GAME_BG_COLOR;
         Color TILE_COLOR_B = GAME_BG_COLOR.darker();
 
         for (int i = 0; i < fieldSize.getN(); i++) {
@@ -76,6 +77,10 @@ public class Grid extends JPanel implements Iterable<Tile>, ResizeableElement {
         gameMode.getLogic().setGrid(this);
         gameMode.getLogic().initGame();
         setVisible(true);
+    }
+
+    public GameLogic getGameLogic() {
+        return gameLogic;
     }
 
     public Map<Coordinate, Tile> getTiles() {

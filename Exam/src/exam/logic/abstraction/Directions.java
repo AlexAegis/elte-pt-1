@@ -26,12 +26,14 @@ public enum Directions {
         return y;
     }
 
-    public Directions turnVertical() {
+    public Directions opposite() {
         switch (this) {
             case UP: return DOWN;
+            case DOWN: return UP;
+            case LEFT: return RIGHT;
+            case RIGHT: return LEFT;
             case UPLEFT: return DOWNLEFT;
             case UPRIGHT: return DOWNRIGHT;
-            case DOWN: return UP;
             case DOWNLEFT: return UPLEFT;
             case DOWNRIGHT: return UPRIGHT;
             default: return this;
@@ -50,4 +52,5 @@ public enum Directions {
     public String toString() {
         return name().substring(0, 1) + name().toLowerCase().substring(1, name().length());
     }
+
 }

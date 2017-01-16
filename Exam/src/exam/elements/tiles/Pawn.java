@@ -7,18 +7,22 @@ import java.awt.*;
 
 public class Pawn extends JComponent implements ResizeableElement {
 
-    private Color color;
-    private Color colorMuter = new Color(232, 241, 219, 30);
-    private int width;
-    private int height;
-    private int padding;
-    private Paint paint;
-    private boolean promotion = false;
+    protected Color color;
+    protected Color colorMuter = new Color(232, 241, 219, 30);
+    protected int width;
+    protected int height;
+    protected int padding;
+    protected Paint paint;
+    protected boolean promotion = false;
 
-    private int player;
+    protected int player;
 
-    private Color[] colors;
-    private float[] dist;
+    protected Color[] colors;
+    protected float[] dist;
+
+    public Pawn() {
+
+    }
 
     public Pawn(Color color, int player, int width, int height) {
         this.width = width;
@@ -51,7 +55,6 @@ public class Pawn extends JComponent implements ResizeableElement {
 
     @Override
     protected void paintComponent(Graphics graphics) {
-
         super.paintComponent(graphics);
         Graphics2D g = (Graphics2D) graphics;
         g.setRenderingHint(RenderingHints.KEY_ANTIALIASING,

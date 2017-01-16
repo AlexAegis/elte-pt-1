@@ -38,6 +38,14 @@ public interface GameLogic {
 
     boolean currentPlayersPawn(Pawn pawn);
 
+    void gameLost();
+
+    void stopTimer();
+
+    void setTimerDelay(int i);
+
+    void setDirection(Directions direction);
+
     int getActualPlayer();
 
     Coordinate getTileLocation(Tile tile);
@@ -69,4 +77,6 @@ public interface GameLogic {
     void highlight();
 
     Grid getGrid();
+
+    void resumeTimer();
 }

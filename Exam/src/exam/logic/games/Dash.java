@@ -51,7 +51,7 @@ public class Dash extends AbstractLogic implements GameLogic {
         }
         List<Directions> currentValidDirections;
         if(actualPlayer == 1) currentValidDirections = validDirections;
-        else currentValidDirections = validDirections.stream().map(Directions::turnVertical).collect(Collectors.toList());
+        else currentValidDirections = validDirections.stream().map(Directions::opposite).collect(Collectors.toList());
         return currentValidDirections
                 .stream()
                 .filter(direction -> tileMap.get(coordinate.stepInDirection(direction)) != null

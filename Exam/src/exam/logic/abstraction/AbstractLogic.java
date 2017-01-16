@@ -7,6 +7,7 @@ import exam.elements.tiles.HighLight;
 import exam.elements.tiles.Pawn;
 import exam.elements.tiles.Tile;
 
+import javax.swing.*;
 import java.awt.*;
 import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionListener;
@@ -56,6 +57,15 @@ public abstract class AbstractLogic implements GameLogic {
     protected Tile cornerDownLeft;
     protected Tile cornerDownRight;
     protected boolean firstStep;
+
+    protected Timer timer;
+
+    protected Directions direction = Directions.RIGHT;
+
+    @Override
+    public void setDirection(Directions direction) {
+        this.direction = direction;
+    }
 
     @Override
     public void partition(int padding) {
@@ -143,6 +153,39 @@ public abstract class AbstractLogic implements GameLogic {
             validStep.revalidate();
             validStep.repaint();
         });
+    }
+
+    @Override
+    public void stopTimer() {
+        if(timer != null) {
+            timer.stop();
+        }
+    }
+
+
+    @Override
+    public void resumeTimer() {
+        if(timer != null) {
+            timer.restart();
+        }
+    }
+
+
+    @Override
+    public void setTimerDelay(int i) {
+        if(timer != null) {
+            timer.setDelay(i);
+        }
+    }
+
+    @Override
+    public void gameLost() {
+        stopTimer();
+        JOptionPane.showMessageDialog(null, "GAME LOST!");
+        JPanel gp = (JPanel) grid.getParent();
+        gp.removeAll();
+        gp.revalidate();
+        gp.repaint();
     }
 
     @Override

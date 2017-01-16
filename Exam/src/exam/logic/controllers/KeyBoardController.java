@@ -52,6 +52,7 @@ public class KeyBoardController implements KeyListener {
                 direction = Optional.of(Directions.LEFT);
             }
             if(gameLogic.getActualPawn() != null && direction.isPresent()) {
+                gameLogic.setDirection(direction.get());
                 Coordinate to = ((Tile)gameLogic.getActualPawn().getParent()).getCoordinate().stepInDirection(direction.get());
                 if(gameLogic.getGrid().getTiles().containsKey(to)) {
                     gameLogic.evaluateStep((Tile) gameLogic.getActualPawn().getParent(), gameLogic.getGrid().getTiles().get(to));

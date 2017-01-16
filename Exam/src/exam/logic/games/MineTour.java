@@ -18,6 +18,7 @@ import java.util.List;
 import java.util.Random;
 import java.util.stream.Collectors;
 
+import static exam.config.Config.DEBUG_MODE;
 import static exam.config.Config.HIGHLIGHTING;
 import static exam.elements.panels.Menu.*;
 import static exam.Window.KEYBOARDCONTROLLER;
@@ -68,7 +69,7 @@ public class MineTour extends AbstractLogic { // DEFAULT PLAYER IS ALWAYS -1
         for (int i = 0; i < difficulty; i++) {
             mines.add(new Coordinate(new Random().nextInt(grid.getGridWidthByTiles() - 1), new Random().nextInt(grid.getGridHeightByTiles() - 1)));
         }
-        mines.forEach(System.out::println);
+        if(DEBUG_MODE) mines.forEach(System.out::println);
         BACKBUTTON.addActionListener(e -> {
             if(!history.isEmpty()) {
                 evaluateStep((Tile)actualPawn.getParent(), history.get(history.size() - 1));

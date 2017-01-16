@@ -21,11 +21,13 @@ public class PauseButton extends JButton {
                 if(paused) {
                     actualGrid.setVisible(true);
                     TIMER.resume();
+                    actualGrid.getGameLogic().resumeTimer();
                     paused = false;
                 } else {
                     actualGrid.setVisible(false);
                     TIMER.pause();
                     paused = true;
+                    actualGrid.getGameLogic().stopTimer();
                 }
             }
         });
